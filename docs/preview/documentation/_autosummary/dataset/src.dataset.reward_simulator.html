@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../../../_static/images/favicon.png" rel="icon" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.dataset.reward_simulator &mdash; OfflinePrompts</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../../../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html" />
+    <link rel="prev" title="src.dataset.frozen_llm" href="src.dataset.frozen_llm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            OfflinePrompts
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../opl_for_prompts.html">Off-policy learning for prompt-guided language generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview of the software</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../offline_prompts_api.html">OfflinePrompts API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../offline_prompts_api.html#synthetic-setting">Synthetic setting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../offline_prompts_api.html#semi-synthetic-setting-e-g-recipe-generation">Semi-synthetic setting (e.g., recipe generation)</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../offline_prompts_api.html#semi-synthetic-api-dataset">dataset module</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="src.dataset.base.html">src.dataset.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.dataset.benchmark.html">src.dataset.benchmark</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.dataset.frozen_llm.html">src.dataset.frozen_llm</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.dataset.reward_simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.dataset.prompt_formatter.html">src.dataset.prompt_formatter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.dataset.function.html">src.dataset.function</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../offline_prompts_api.html#id2">policy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../offline_prompts_api.html#id4">opl module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../offline_prompts_api.html#id6">others</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">See also:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/releases">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/404">Proceedings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OfflinePrompts</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../offline_prompts_api.html">OfflinePrompts API reference</a></li>
+      <li class="breadcrumb-item active">src.dataset.reward_simulator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-src.dataset.reward_simulator">
+<span id="src-dataset-reward-simulator"></span><h1>src.dataset.reward_simulator<a class="headerlink" href="#module-src.dataset.reward_simulator" title="Permalink to this heading"></a></h1>
+<p>Implementation of (fine-tuned) reward simulator.</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CollaborativeFilteringRewardSimulator</span></code></a></p></td>
+<td><p>Simple collaborative filtering based reward simulator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator" title="src.dataset.reward_simulator.TransformerRewardSimulator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransformerRewardSimulator</span></code></a></p></td>
+<td><p>Transformer-based reward simulator.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.dataset.reward_simulator.</span></span><span class="sig-name descname"><span class="pre">CollaborativeFilteringRewardSimulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_users</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_emb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/dataset/reward_simulator.html#CollaborativeFilteringRewardSimulator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator" title="Permalink to this definition"></a></dt>
+<dd><p>Simple collaborative filtering based reward simulator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_users</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of users.</p></li>
+<li><p><strong>n_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of items.</p></li>
+<li><p><strong>dim_emb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10</em>) – Dimension of user and item embeddings.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.add_module" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.add_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_module</span></code></a>(name, module)</p></td>
+<td><p>Adds a child module to the current module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.apply" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(fn)</p></td>
+<td><p>Applies <code class="docutils literal notranslate"><span class="pre">fn</span></code> recursively to every submodule (as returned by <code class="docutils literal notranslate"><span class="pre">.children()</span></code>) as well as self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.bfloat16" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.bfloat16"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfloat16</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.buffers" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.buffers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code></a>([recurse])</p></td>
+<td><p>Returns an iterator over module buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.calc_expected_reward" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.calc_expected_reward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_expected_reward</span></code></a>(user_id, item_id[, ...])</p></td>
+<td><p>Calculate expeected reward.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.children" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>()</p></td>
+<td><p>Returns an iterator over immediate children modules.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.compile" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.compile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Compile this Module's forward using <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.compile()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.cpu" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.cpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpu</span></code></a>()</p></td>
+<td><p>Moves all model parameters and buffers to the CPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.cuda" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.cuda"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cuda</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the GPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.double" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.double"><code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">double</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.eval" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>()</p></td>
+<td><p>Sets the module in evaluation mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.extra_repr" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.extra_repr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extra_repr</span></code></a>()</p></td>
+<td><p>Set the extra representation of the module</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.float" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.float"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">float</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.get_buffer" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.get_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_buffer</span></code></a>(target)</p></td>
+<td><p>Returns the buffer given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.get_extra_state" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.get_extra_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_extra_state</span></code></a>()</p></td>
+<td><p>Returns any extra state to include in the module's state_dict.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.get_parameter" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.get_parameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameter</span></code></a>(target)</p></td>
+<td><p>Returns the parameter given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.get_submodule" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.get_submodule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_submodule</span></code></a>(target)</p></td>
+<td><p>Returns the submodule given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.half" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.half"><code class="xref py py-obj docutils literal notranslate"><span class="pre">half</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">half</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.ipu" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.ipu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the IPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.load_state_dict" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.load_state_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_state_dict</span></code></a>(state_dict[, strict, assign])</p></td>
+<td><p>Copies parameters and buffers from <a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.state_dict" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.state_dict"><code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code></a> into this module and its descendants.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.modules" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>()</p></td>
+<td><p>Returns an iterator over all modules in the network.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.named_buffers" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.named_buffers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_buffers</span></code></a>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.named_children" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.named_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_children</span></code></a>()</p></td>
+<td><p>Returns an iterator over immediate children modules, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.named_modules" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.named_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_modules</span></code></a>([memo, prefix, remove_duplicate])</p></td>
+<td><p>Returns an iterator over all modules in the network, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.named_parameters" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.named_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_parameters</span></code></a>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module parameters, yielding both the name of the parameter as well as the parameter itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.parameters" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code></a>([recurse])</p></td>
+<td><p>Returns an iterator over module parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_backward_hook" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_backward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_backward_hook</span></code></a>(hook)</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_buffer" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_buffer</span></code></a>(name, tensor[, persistent])</p></td>
+<td><p>Adds a buffer to the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_forward_hook" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_forward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_hook</span></code></a>(hook, *[, prepend, ...])</p></td>
+<td><p>Registers a forward hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_forward_pre_hook" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_forward_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_pre_hook</span></code></a>(hook, *[, ...])</p></td>
+<td><p>Registers a forward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_full_backward_hook" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_full_backward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_hook</span></code></a>(hook[, prepend])</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_full_backward_pre_hook" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_full_backward_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_pre_hook</span></code></a>(hook[, prepend])</p></td>
+<td><p>Registers a backward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_load_state_dict_post_hook" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_load_state_dict_post_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_load_state_dict_post_hook</span></code></a>(hook)</p></td>
+<td><p>Registers a post hook to be run after module's <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code> is called.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_module" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_module</span></code></a>(name, module)</p></td>
+<td><p>Alias for <a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.add_module" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.add_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_module()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_parameter" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_parameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_parameter</span></code></a>(name, param)</p></td>
+<td><p>Adds a parameter to the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_state_dict_pre_hook" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.register_state_dict_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_state_dict_pre_hook</span></code></a>(hook)</p></td>
+<td><p>These hooks will be called with arguments: <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep_vars</span></code> before calling <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.requires_grad_" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.requires_grad_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad_</span></code></a>([requires_grad])</p></td>
+<td><p>Change if autograd should record operations on parameters in this module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.set_extra_state" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.set_extra_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_extra_state</span></code></a>(state)</p></td>
+<td><p>This function is called from <a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.load_state_dict" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.load_state_dict"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_state_dict()</span></code></a> to handle any extra state found within the <cite>state_dict</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.share_memory" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.share_memory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_memory</span></code></a>()</p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.Tensor.share_memory_()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.state_dict" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.state_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code></a>(*args[, destination, prefix, ...])</p></td>
+<td><p>Returns a dictionary containing references to the whole state of the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.to" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Moves and/or casts the parameters and buffers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.to_empty" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.to_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_empty</span></code></a>(*, device[, recurse])</p></td>
+<td><p>Moves the parameters and buffers to the specified device without copying storage.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.train" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>([mode])</p></td>
+<td><p>Sets the module in training mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.type" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>(dst_type)</p></td>
+<td><p>Casts all parameters and buffers to <code class="xref py py-attr docutils literal notranslate"><span class="pre">dst_type</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.xpu" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.xpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xpu</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the XPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.zero_grad" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.zero_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_grad</span></code></a>([set_to_none])</p></td>
+<td><p>Resets gradients of all model parameters.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.calc_expected_reward">
+<span class="sig-name descname"><span class="pre">calc_expected_reward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cpu_tensor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_gradient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/dataset/reward_simulator.html#CollaborativeFilteringRewardSimulator.calc_expected_reward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.calc_expected_reward" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate expeected reward.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – User id.</p></li>
+<li><p><strong>item_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – Item id.</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>expected_reward</strong> – Expected reward.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor, shape (n_samples, )</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.dataset.reward_simulator.TransformerRewardSimulator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.dataset.reward_simulator.</span></span><span class="sig-name descname"><span class="pre">TransformerRewardSimulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_users</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_emb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/dataset/reward_simulator.html#TransformerRewardSimulator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.dataset.reward_simulator.TransformerRewardSimulator" title="Permalink to this definition"></a></dt>
+<dd><p>Transformer-based reward simulator.</p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">src.dataset.BaseRewardSimulator</span></code></p>
+<p>Imported as: <code class="xref py py-class docutils literal notranslate"><span class="pre">src.dataset.TransformerRewardSimulator</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_users</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of users.</p></li>
+<li><p><strong>n_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of items.</p></li>
+<li><p><strong>dim_emb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10</em>) – Dimension of feature embeddings.</p></li>
+<li><p><strong>base_model</strong> (<em>PreTrainedModel</em><em>, </em><em>default=None</em>) – Base transformer model. When <cite>None</cite> is given, <cite>DistillBERT</cite> will be used.</p></li>
+<li><p><strong>tokenizer</strong> (<em>PreTrainedTokenizer</em><em> or </em><em>PreTrainedTokenizerFast</em><em>, </em><em>default=None</em>) – Tokenizer. When <cite>None</cite> is given, <cite>DistillBERTTokenizerFast</cite> will be used.</p></li>
+<li><p><strong>tokenizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em> of </em><em>params</em><em>, </em><em>default=None.</em>) – Dictionary containing args of tokenizer. (e.g., <cite>max_length</cite>)</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.add_module" title="src.dataset.reward_simulator.TransformerRewardSimulator.add_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_module</span></code></a>(name, module)</p></td>
+<td><p>Adds a child module to the current module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.apply" title="src.dataset.reward_simulator.TransformerRewardSimulator.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(fn)</p></td>
+<td><p>Applies <code class="docutils literal notranslate"><span class="pre">fn</span></code> recursively to every submodule (as returned by <code class="docutils literal notranslate"><span class="pre">.children()</span></code>) as well as self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.bfloat16" title="src.dataset.reward_simulator.TransformerRewardSimulator.bfloat16"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfloat16</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.buffers" title="src.dataset.reward_simulator.TransformerRewardSimulator.buffers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code></a>([recurse])</p></td>
+<td><p>Returns an iterator over module buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.calc_expected_reward" title="src.dataset.reward_simulator.TransformerRewardSimulator.calc_expected_reward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_expected_reward</span></code></a>(user_id, item_id, sentence)</p></td>
+<td><p>Calculate expeected reward.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.children" title="src.dataset.reward_simulator.TransformerRewardSimulator.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>()</p></td>
+<td><p>Returns an iterator over immediate children modules.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.compile" title="src.dataset.reward_simulator.TransformerRewardSimulator.compile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Compile this Module's forward using <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.compile()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.cpu" title="src.dataset.reward_simulator.TransformerRewardSimulator.cpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpu</span></code></a>()</p></td>
+<td><p>Moves all model parameters and buffers to the CPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.cuda" title="src.dataset.reward_simulator.TransformerRewardSimulator.cuda"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cuda</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the GPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.double" title="src.dataset.reward_simulator.TransformerRewardSimulator.double"><code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">double</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.eval" title="src.dataset.reward_simulator.TransformerRewardSimulator.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>()</p></td>
+<td><p>Sets the module in evaluation mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.extra_repr" title="src.dataset.reward_simulator.TransformerRewardSimulator.extra_repr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extra_repr</span></code></a>()</p></td>
+<td><p>Set the extra representation of the module</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.float" title="src.dataset.reward_simulator.TransformerRewardSimulator.float"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">float</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.get_buffer" title="src.dataset.reward_simulator.TransformerRewardSimulator.get_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_buffer</span></code></a>(target)</p></td>
+<td><p>Returns the buffer given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.get_extra_state" title="src.dataset.reward_simulator.TransformerRewardSimulator.get_extra_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_extra_state</span></code></a>()</p></td>
+<td><p>Returns any extra state to include in the module's state_dict.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.get_parameter" title="src.dataset.reward_simulator.TransformerRewardSimulator.get_parameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameter</span></code></a>(target)</p></td>
+<td><p>Returns the parameter given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.get_submodule" title="src.dataset.reward_simulator.TransformerRewardSimulator.get_submodule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_submodule</span></code></a>(target)</p></td>
+<td><p>Returns the submodule given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.half" title="src.dataset.reward_simulator.TransformerRewardSimulator.half"><code class="xref py py-obj docutils literal notranslate"><span class="pre">half</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">half</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.ipu" title="src.dataset.reward_simulator.TransformerRewardSimulator.ipu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the IPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.load_state_dict" title="src.dataset.reward_simulator.TransformerRewardSimulator.load_state_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_state_dict</span></code></a>(state_dict[, strict, assign])</p></td>
+<td><p>Copies parameters and buffers from <a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.state_dict" title="src.dataset.reward_simulator.TransformerRewardSimulator.state_dict"><code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code></a> into this module and its descendants.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.modules" title="src.dataset.reward_simulator.TransformerRewardSimulator.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>()</p></td>
+<td><p>Returns an iterator over all modules in the network.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.named_buffers" title="src.dataset.reward_simulator.TransformerRewardSimulator.named_buffers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_buffers</span></code></a>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.named_children" title="src.dataset.reward_simulator.TransformerRewardSimulator.named_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_children</span></code></a>()</p></td>
+<td><p>Returns an iterator over immediate children modules, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.named_modules" title="src.dataset.reward_simulator.TransformerRewardSimulator.named_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_modules</span></code></a>([memo, prefix, remove_duplicate])</p></td>
+<td><p>Returns an iterator over all modules in the network, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.named_parameters" title="src.dataset.reward_simulator.TransformerRewardSimulator.named_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_parameters</span></code></a>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module parameters, yielding both the name of the parameter as well as the parameter itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.parameters" title="src.dataset.reward_simulator.TransformerRewardSimulator.parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code></a>([recurse])</p></td>
+<td><p>Returns an iterator over module parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_backward_hook" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_backward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_backward_hook</span></code></a>(hook)</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_buffer" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_buffer</span></code></a>(name, tensor[, persistent])</p></td>
+<td><p>Adds a buffer to the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_forward_hook" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_forward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_hook</span></code></a>(hook, *[, prepend, ...])</p></td>
+<td><p>Registers a forward hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_forward_pre_hook" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_forward_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_pre_hook</span></code></a>(hook, *[, ...])</p></td>
+<td><p>Registers a forward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_full_backward_hook" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_full_backward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_hook</span></code></a>(hook[, prepend])</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_full_backward_pre_hook" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_full_backward_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_pre_hook</span></code></a>(hook[, prepend])</p></td>
+<td><p>Registers a backward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_load_state_dict_post_hook" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_load_state_dict_post_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_load_state_dict_post_hook</span></code></a>(hook)</p></td>
+<td><p>Registers a post hook to be run after module's <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code> is called.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_module" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_module</span></code></a>(name, module)</p></td>
+<td><p>Alias for <a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.add_module" title="src.dataset.reward_simulator.TransformerRewardSimulator.add_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_module()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_parameter" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_parameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_parameter</span></code></a>(name, param)</p></td>
+<td><p>Adds a parameter to the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.register_state_dict_pre_hook" title="src.dataset.reward_simulator.TransformerRewardSimulator.register_state_dict_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_state_dict_pre_hook</span></code></a>(hook)</p></td>
+<td><p>These hooks will be called with arguments: <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep_vars</span></code> before calling <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.requires_grad_" title="src.dataset.reward_simulator.TransformerRewardSimulator.requires_grad_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad_</span></code></a>([requires_grad])</p></td>
+<td><p>Change if autograd should record operations on parameters in this module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.set_extra_state" title="src.dataset.reward_simulator.TransformerRewardSimulator.set_extra_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_extra_state</span></code></a>(state)</p></td>
+<td><p>This function is called from <a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.load_state_dict" title="src.dataset.reward_simulator.TransformerRewardSimulator.load_state_dict"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_state_dict()</span></code></a> to handle any extra state found within the <cite>state_dict</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.share_memory" title="src.dataset.reward_simulator.TransformerRewardSimulator.share_memory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_memory</span></code></a>()</p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.Tensor.share_memory_()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.state_dict" title="src.dataset.reward_simulator.TransformerRewardSimulator.state_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code></a>(*args[, destination, prefix, ...])</p></td>
+<td><p>Returns a dictionary containing references to the whole state of the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.to" title="src.dataset.reward_simulator.TransformerRewardSimulator.to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Moves and/or casts the parameters and buffers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.to_empty" title="src.dataset.reward_simulator.TransformerRewardSimulator.to_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_empty</span></code></a>(*, device[, recurse])</p></td>
+<td><p>Moves the parameters and buffers to the specified device without copying storage.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.train" title="src.dataset.reward_simulator.TransformerRewardSimulator.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>([mode])</p></td>
+<td><p>Sets the module in training mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.type" title="src.dataset.reward_simulator.TransformerRewardSimulator.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>(dst_type)</p></td>
+<td><p>Casts all parameters and buffers to <code class="xref py py-attr docutils literal notranslate"><span class="pre">dst_type</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.xpu" title="src.dataset.reward_simulator.TransformerRewardSimulator.xpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xpu</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the XPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="src.dataset.reward_simulator.TransformerRewardSimulator.html#src.dataset.reward_simulator.TransformerRewardSimulator.zero_grad" title="src.dataset.reward_simulator.TransformerRewardSimulator.zero_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_grad</span></code></a>([set_to_none])</p></td>
+<td><p>Resets gradients of all model parameters.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.dataset.reward_simulator.TransformerRewardSimulator.calc_expected_reward">
+<span class="sig-name descname"><span class="pre">calc_expected_reward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cpu_tensor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_gradient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_finetuning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/dataset/reward_simulator.html#TransformerRewardSimulator.calc_expected_reward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.dataset.reward_simulator.TransformerRewardSimulator.calc_expected_reward" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate expeected reward.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – User id.</p></li>
+<li><p><strong>item_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – Item id.</p></li>
+<li><p><strong>sentence</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Sentence generated by frozen LLMs.</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
+<li><p><strong>is_finetuning</strong> (<em>bool = False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>expected_reward</strong> – Expected reward.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor, shape (n_samples, )</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.dataset.frozen_llm.html" class="btn btn-neutral float-left" title="src.dataset.frozen_llm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html" class="btn btn-neutral float-right" title="src.dataset.reward_simulator.CollaborativeFilteringRewardSimulator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Haruka Kiyohara, Yuta Saito, Daniel Cao, Thorsten Joachims.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

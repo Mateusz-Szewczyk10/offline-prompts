@@ -1,0 +1,21 @@
+setting: default
+report_logging_policy: True
+report_oracle_policy: True
+report_online_policy: True
+report_uniform_policy: True
+report_regression_based_greedy: True
+single_stage_pg:
+ - regression-based
+ - IS-based
+ - hybrid
+two_stage_pg:
+#  - IS-based
+ - hybrid
+dso_pg:
+ - IS-based
+#  - hybrid
+clustering_type:
+ - fixed-action
+reward_predictor_type: 
+ - naive
+#  - pessimistic

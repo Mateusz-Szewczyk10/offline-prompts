@@ -1,0 +1,40 @@
+OfflinePrompts: A Python library for optimizing language generation with naturally collected user feedback and prompt
+===================================
+
+(welcome sentence and/or figure)
+
+Table of Contents
+~~~~~~~~~~
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Introduction:
+
+   documentation/opl_for_prompts
+   documentation/overview
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Getting Started:
+
+   documentation/installation
+   documentation/quickstart
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Package References:
+
+   documentation/offline_prompts_api
+
+.. toctree::
+   :maxdepth: 1
+   :caption: See also:
+
+   Github <https://github.com/aiueola/opl-prompt>
+   LICENSE <https://github.com/aiueola/opl-prompt/blob/main/LICENSE>
+   frequently_asked_questions
+   News <news>
+   Release Notes <https://github.com/aiueola/opl-prompt/releases>
+   Proceedings <https://github.com/aiueola/opl-prompt/404>
+   references

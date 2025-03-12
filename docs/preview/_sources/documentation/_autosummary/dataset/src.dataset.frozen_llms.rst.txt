@@ -1,0 +1,23 @@
+﻿src.dataset.frozen\_llms
+========================
+
+.. automodule:: src.dataset.frozen_llms
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      LlamaFrozenLLMs
+   
+   
+
+
+

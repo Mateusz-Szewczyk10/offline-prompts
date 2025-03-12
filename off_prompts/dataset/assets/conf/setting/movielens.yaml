@@ -1,0 +1,11 @@
+setting: movielens
+dataset_name: movielens-10m
+dataset_dir: ml-10m
+model_id: mistralai/Mistral-7B-Instruct-v0.2
+tokenizer_id: mistralai/Mistral-7B-Instruct-v0.2
+use_tokenizer_fast: False
+keywords: 
+ - movie
+ - genre
+ - culture
+random_state: 12345

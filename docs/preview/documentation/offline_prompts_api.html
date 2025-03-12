@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../_static/images/favicon.png" rel="icon" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OfflinePrompts API reference &mdash; OfflinePrompts</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="toy.dataset.synthetic" href="_autosummary/dataset/toy.dataset.synthetic.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            OfflinePrompts
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opl_for_prompts.html">Off-policy learning for prompt-guided language generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of the software</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OfflinePrompts API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synthetic-setting">Synthetic setting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dataset-module">dataset module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/dataset/toy.dataset.synthetic.html">toy.dataset.synthetic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/dataset/toy.dataset.function.html">toy.dataset.function</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#policy-module">policy module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/toy.policy.base.html">toy.policy.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/toy.policy.model.html">toy.policy.model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/toy.policy.policy.html">toy.policy.policy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#opl-module">opl module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/toy.opl.reward_learner.html">toy.opl.reward_learner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/toy.opl.policy_learner.html">toy.opl.policy_learner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/toy.opl.marginal_learner.html">toy.opl.marginal_learner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/toy.opl.behavior_cloning.html">toy.opl.behavior_cloning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#others">others</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/toy.utils.html">toy.utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#semi-synthetic-setting-e-g-recipe-generation">Semi-synthetic setting (e.g., recipe generation)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#semi-synthetic-api-dataset">dataset module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/dataset/src.dataset.base.html">src.dataset.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/dataset/src.dataset.benchmark.html">src.dataset.benchmark</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/dataset/src.dataset.frozen_llm.html">src.dataset.frozen_llm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/dataset/src.dataset.reward_simulator.html">src.dataset.reward_simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/dataset/src.dataset.prompt_formatter.html">src.dataset.prompt_formatter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/dataset/src.dataset.function.html">src.dataset.function</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">policy module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.policy.base.html">src.policy.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.policy.model.html">src.policy.model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.policy.policy.html">src.policy.policy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">opl module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.opl.dataset.html">src.opl.dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.opl.reward_learner.html">src.opl.reward_learner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.opl.policy_learner.html">src.opl.policy_learner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.opl.marginal_learner.html">src.opl.marginal_learner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.opl.behavior_cloning.html">src.opl.behavior_cloning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">others</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/src.utils.html">src.utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">See also:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/releases">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/404">Proceedings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OfflinePrompts</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">OfflinePrompts API reference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="offlineprompts-api-reference">
+<h1>OfflinePrompts API reference<a class="headerlink" href="#offlineprompts-api-reference" title="Permalink to this heading"></a></h1>
+<section id="synthetic-setting">
+<h2>Synthetic setting<a class="headerlink" href="#synthetic-setting" title="Permalink to this heading"></a></h2>
+<section id="dataset-module">
+<span id="synthetic-api-dataset"></span><h3>dataset module<a class="headerlink" href="#dataset-module" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/dataset/toy.dataset.synthetic.html#module-toy.dataset.synthetic" title="toy.dataset.synthetic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.dataset.synthetic</span></code></a></p></td>
+<td><p>Class to handle synthetic dataset generation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/dataset/toy.dataset.function.html#module-toy.dataset.function" title="toy.dataset.function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.dataset.function</span></code></a></p></td>
+<td><p>Class to handle synthetic dataset generation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="policy-module">
+<span id="synthetic-api-policy"></span><h3>policy module<a class="headerlink" href="#policy-module" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/toy.policy.base.html#module-toy.policy.base" title="toy.policy.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.policy.base</span></code></a></p></td>
+<td><p>Abstract base class for policies and models used to define policies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/toy.policy.model.html#module-toy.policy.model" title="toy.policy.model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.policy.model</span></code></a></p></td>
+<td><p>Implementation of models.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/toy.policy.policy.html#module-toy.policy.policy" title="toy.policy.policy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.policy.policy</span></code></a></p></td>
+<td><p>Implementations of behavior and evaluation policies.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="opl-module">
+<span id="synthetic-api-opl"></span><h3>opl module<a class="headerlink" href="#opl-module" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/toy.opl.reward_learner.html#module-toy.opl.reward_learner" title="toy.opl.reward_learner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.opl.reward_learner</span></code></a></p></td>
+<td><p>Learner class for reward prediction models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/toy.opl.policy_learner.html#module-toy.opl.policy_learner" title="toy.opl.policy_learner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.opl.policy_learner</span></code></a></p></td>
+<td><p>Learner class for the first and second stage policies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/toy.opl.marginal_learner.html#module-toy.opl.marginal_learner" title="toy.opl.marginal_learner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.opl.marginal_learner</span></code></a></p></td>
+<td><p>Learner class for marginal density models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/toy.opl.behavior_cloning.html#module-toy.opl.behavior_cloning" title="toy.opl.behavior_cloning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.opl.behavior_cloning</span></code></a></p></td>
+<td><p>Learner class for reward prediction models.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="others">
+<span id="scope-rl-api-utils"></span><h3>others<a class="headerlink" href="#others" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/toy.utils.html#module-toy.utils" title="toy.utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toy.utils</span></code></a></p></td>
+<td><p>Useful tools.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="semi-synthetic-setting-e-g-recipe-generation">
+<h2>Semi-synthetic setting (e.g., recipe generation)<a class="headerlink" href="#semi-synthetic-setting-e-g-recipe-generation" title="Permalink to this heading"></a></h2>
+<section id="semi-synthetic-api-dataset">
+<span id="id1"></span><h3>dataset module<a class="headerlink" href="#semi-synthetic-api-dataset" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/dataset/src.dataset.base.html#module-src.dataset.base" title="src.dataset.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.dataset.base</span></code></a></p></td>
+<td><p>Abstract base class functions used in logged dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/dataset/src.dataset.benchmark.html#module-src.dataset.benchmark" title="src.dataset.benchmark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.dataset.benchmark</span></code></a></p></td>
+<td><p>Class to handle synthetic dataset generation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/dataset/src.dataset.frozen_llm.html#module-src.dataset.frozen_llm" title="src.dataset.frozen_llm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.dataset.frozen_llm</span></code></a></p></td>
+<td><p>Implementation of Frozen LLMs-based sentence generator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/dataset/src.dataset.reward_simulator.html#module-src.dataset.reward_simulator" title="src.dataset.reward_simulator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.dataset.reward_simulator</span></code></a></p></td>
+<td><p>Implementation of (fine-tuned) reward simulator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/dataset/src.dataset.prompt_formatter.html#module-src.dataset.prompt_formatter" title="src.dataset.prompt_formatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.dataset.prompt_formatter</span></code></a></p></td>
+<td><p>Class to format prompts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/dataset/src.dataset.function.html#module-src.dataset.function" title="src.dataset.function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.dataset.function</span></code></a></p></td>
+<td><p>Class to define function in the data generation process.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id2">
+<span id="id3"></span><h3>policy module<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/src.policy.base.html#module-src.policy.base" title="src.policy.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.policy.base</span></code></a></p></td>
+<td><p>Abstract base class for policies and models used to define policies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/src.policy.model.html#module-src.policy.model" title="src.policy.model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.policy.model</span></code></a></p></td>
+<td><p>Implementation of models.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/src.policy.policy.html#module-src.policy.policy" title="src.policy.policy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.policy.policy</span></code></a></p></td>
+<td><p>Implementations of behavior and evaluation policies.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<span id="id5"></span><h3>opl module<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/src.opl.dataset.html#module-src.opl.dataset" title="src.opl.dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.opl.dataset</span></code></a></p></td>
+<td><p>Dataset class for policy learning.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/src.opl.reward_learner.html#module-src.opl.reward_learner" title="src.opl.reward_learner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.opl.reward_learner</span></code></a></p></td>
+<td><p>Learner class for reward prediction models.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/src.opl.policy_learner.html#module-src.opl.policy_learner" title="src.opl.policy_learner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.opl.policy_learner</span></code></a></p></td>
+<td><p>Learner class for the first and second stage policies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/src.opl.marginal_learner.html#module-src.opl.marginal_learner" title="src.opl.marginal_learner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.opl.marginal_learner</span></code></a></p></td>
+<td><p>Learner class for marginal density models.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/src.opl.behavior_cloning.html#module-src.opl.behavior_cloning" title="src.opl.behavior_cloning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.opl.behavior_cloning</span></code></a></p></td>
+<td><p>Learner class for reward prediction models.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id6">
+<span id="id7"></span><h3>others<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/src.utils.html#module-src.utils" title="src.utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.utils</span></code></a></p></td>
+<td><p>Useful tools.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_autosummary/dataset/toy.dataset.synthetic.html" class="btn btn-neutral float-right" title="toy.dataset.synthetic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Haruka Kiyohara, Yuta Saito, Daniel Cao, Thorsten Joachims.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

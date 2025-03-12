@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toy.dataset.synthetic &mdash; OfflinePrompts</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/tabs.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../../../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            OfflinePrompts
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/opl_for_prompts.html">Off-policy learning for prompt-guided language generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/overview.html">Overview of the software</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/quickstart.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/offline_prompts_api.html">OfflinePrompts API reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">See also:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/releases">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/404">Proceedings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OfflinePrompts</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">toy.dataset.synthetic</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for toy.dataset.synthetic</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Class to handle synthetic dataset generation.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">check_scalar</span>
+
+<span class="kn">from</span> <span class="nn">.function</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ContextQueryGenerator</span><span class="p">,</span>
+    <span class="n">CandidateActionsGenerator</span><span class="p">,</span>
+    <span class="n">AuxiliaryOutputGenerator</span><span class="p">,</span>
+    <span class="n">RewardSimulator</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..policy.base</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BasePolicy</span><span class="p">,</span>
+    <span class="n">BaseActionPolicyModel</span><span class="p">,</span>
+    <span class="n">BaseClusterPolicyModel</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">torch_seed</span>
+
+
+<span class="n">Policy</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">BasePolicy</span><span class="p">,</span> <span class="n">BaseActionPolicyModel</span><span class="p">,</span> <span class="n">BaseClusterPolicyModel</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="SyntheticDataset"><a class="viewcode-back" href="../../../documentation/_autosummary/dataset/toy.dataset.synthetic.SyntheticDataset.html#toy.dataset.synthetic.SyntheticDataset">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">SyntheticDataset</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for logged dataset.</span>
+
+<span class="sd">    Imported as: :class:`toy.dataset.SyntheticDataset`</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    -------</span>
+<span class="sd">    This class substitute the language part of the benchmark dataset with numerical features.</span>
+
+<span class="sd">    context: x (d_x dimensional vector)</span>
+<span class="sd">    query: q   (d_q dimensional vector)</span>
+<span class="sd">    prompt (action): a  (d_a dimensional vector)</span>
+<span class="sd">    prompt (action) embedding: e (d_e dimensional vector)</span>
+
+<span class="sd">    output sentence (auxiliary output): o (d_o dimensional vector)</span>
+<span class="sd">    o = M q + N e where M is a (d_o, d_x) matrix and N is a (d_o, d_e) matrix</span>
+
+<span class="sd">    expected reward: E[r] (float)</span>
+<span class="sd">    E[r] = x Q o + q R o where Q is a (d_x, d_o) maxtrix and R is a (d_q, d_o) matrix</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -------</span>
+<span class="sd">    n_actions: int, default=1000 (&gt; 0)</span>
+<span class="sd">        Number of discrete actions.</span>
+
+<span class="sd">    dim_context: int, default=5 (&gt; 0)</span>
+<span class="sd">        Dimension of context.</span>
+
+<span class="sd">    dim_query: int, default=5 (&gt; 0)</span>
+<span class="sd">        Dimension of query.</span>
+
+<span class="sd">    dim_action_embdding: int, default=5 (&gt; 0)</span>
+<span class="sd">        Dimension of action embedding.</span>
+
+<span class="sd">    dim_auxiliary_output: int, default=5 (&gt; 0)</span>
+<span class="sd">        Dimension of auxiliary output.</span>
+
+<span class="sd">    reward_type: {&quot;binary&quot;, &quot;continuous&quot;}, default=&quot;continuous&quot;</span>
+<span class="sd">        Whether to sample binary reward or continuous reward.</span>
+
+<span class="sd">    reward_std: float, default=1.0</span>
+<span class="sd">        Standard deviation of the reward.</span>
+
+<span class="sd">    device: str, default=&quot;cuda:0&quot;</span>
+<span class="sd">        Device.</span>
+
+<span class="sd">    random_state: int, default=None</span>
+<span class="sd">        Random state.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">n_actions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">dim_context</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">dim_query</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">dim_action_embedding</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">dim_auxiliary_output</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">context_query_generator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ContextQueryGenerator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">candidate_action_generator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CandidateActionsGenerator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">auxiliary_output_generator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AuxiliaryOutputGenerator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">reward_simulator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RewardSimulator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">reward_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;continuous&quot;</span>
+    <span class="n">reward_std</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cuda:0&quot;</span>
+    <span class="n">random_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">check_scalar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_actions</span><span class="p">,</span> <span class="s2">&quot;n_actions&quot;</span><span class="p">,</span> <span class="n">target_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">check_scalar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span> <span class="s2">&quot;dim_context&quot;</span><span class="p">,</span> <span class="n">target_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">check_scalar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span> <span class="s2">&quot;dim_query&quot;</span><span class="p">,</span> <span class="n">target_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">check_scalar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dim_action_embedding</span><span class="p">,</span>
+            <span class="s2">&quot;dim_action_embedding&quot;</span><span class="p">,</span>
+            <span class="n">target_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">min_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">check_scalar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dim_auxiliary_output</span><span class="p">,</span>
+            <span class="s2">&quot;dim_auxiliary_output&quot;</span><span class="p">,</span>
+            <span class="n">target_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">min_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">check_scalar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reward_std</span><span class="p">,</span> <span class="s2">&quot;reward_std&quot;</span><span class="p">,</span> <span class="n">target_type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">torch_seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_query_generator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context_query_generator</span> <span class="o">=</span> <span class="n">ContextQueryGenerator</span><span class="p">(</span>
+                <span class="n">dim_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+                <span class="n">dim_query</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span>
+                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_query_generator</span><span class="o">.</span><span class="n">dim_context</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_context</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected context_query_generator.dim_context == self.dim_context, but found False&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_query_generator</span><span class="o">.</span><span class="n">dim_query</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_query</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected context_query_generator.dim_query == self.dim_query, but found False&quot;</span>
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_action_generator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">candidate_action_generator</span> <span class="o">=</span> <span class="n">CandidateActionsGenerator</span><span class="p">(</span>
+                <span class="n">n_actions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_actions</span><span class="p">,</span>
+                <span class="n">dim_action_embedding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_action_embedding</span><span class="p">,</span>
+                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_action_generator</span><span class="o">.</span><span class="n">n_actions</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_actions</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected candidate_action_generator.n_actions == self.n_actions, but found False&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">candidate_action_generator</span><span class="o">.</span><span class="n">dim_action_embedding</span>
+                <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_action_embedding</span>
+            <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected candidate_action_generator.dim_action_embedding == self.dim_action_embedding, but found False&quot;</span>
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span> <span class="o">=</span> <span class="n">AuxiliaryOutputGenerator</span><span class="p">(</span>
+                <span class="n">dim_query</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span>
+                <span class="n">dim_action_embedding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_action_embedding</span><span class="p">,</span>
+                <span class="n">dim_auxiliary_output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_auxiliary_output</span><span class="p">,</span>
+                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="o">.</span><span class="n">dim_query</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_query</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected auxiliary_output_generator.dim_query == self.dim_query, but found False&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="o">.</span><span class="n">dim_action_embedding</span>
+                <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_action_embedding</span>
+            <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected auxiliary_output_generator.dim_action_embedding == self.dim_action_embedding, but found False&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="o">.</span><span class="n">dim_auxiliary_output</span>
+                <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_auxiliary_output</span>
+            <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected auxiliary_output_generator.dim_auxiliary_output == self.dim_auxiliary_output, but found False&quot;</span>
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span> <span class="o">=</span> <span class="n">RewardSimulator</span><span class="p">(</span>
+                <span class="n">dim_context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+                <span class="n">dim_query</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span>
+                <span class="n">dim_auxiliary_output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_auxiliary_output</span><span class="p">,</span>
+                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span><span class="o">.</span><span class="n">dim_context</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_context</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected reward_simulator.dim_context == self.dim_context, but found False&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span><span class="o">.</span><span class="n">dim_query</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_query</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected reward_dimulator.dim_query == self.dim_query, but found False&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span><span class="o">.</span><span class="n">dim_auxiliary_output</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_auxiliary_output</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected reward_dimulator.dim_auxiliary_output == self.dim_auxiliary_output, but found False&quot;</span>
+                <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">action_list</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">candidate_action_generator</span><span class="o">.</span><span class="n">action_embedding</span>
+        <span class="p">)</span>  <span class="c1"># shape (n_actions, dim_action_embedding)</span>
+
+    <span class="k">def</span> <span class="nf">_sample_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expected_reward</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sample reward.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -------</span>
+<span class="sd">        expected_reward: torch.Tensor, shape (n_samples, )</span>
+<span class="sd">            Expected reward predicted by some frozen LLMs (i.e., reward simulator).</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        -------</span>
+<span class="sd">        reward: torch.Tensor, shape (n_samples, )</span>
+<span class="sd">            Either binary or continuous reward.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_type</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
+            <span class="n">reward</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">expected_reward</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_type</span> <span class="o">==</span> <span class="s2">&quot;continuous&quot;</span><span class="p">:</span>
+            <span class="n">reward_std</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">expected_reward</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_std</span><span class="p">)</span>
+            <span class="n">reward</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">expected_reward</span><span class="p">,</span> <span class="n">reward_std</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reward</span>
+
+<div class="viewcode-block" id="SyntheticDataset.sample_dataset"><a class="viewcode-back" href="../../../documentation/_autosummary/dataset/toy.dataset.synthetic.SyntheticDataset.html#toy.dataset.synthetic.SyntheticDataset.sample_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">sample_dataset</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">policy</span><span class="p">:</span> <span class="n">Policy</span><span class="p">,</span>
+        <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span>
+        <span class="n">is_oracle_policy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">is_oracle_clustering_logging_policy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">return_action_choice_prob</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">return_meta_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sample dataset given data collection policy.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -------</span>
+<span class="sd">        policy: Policy</span>
+<span class="sd">            Policy that chooses discrete prompt (index) as action.</span>
+
+<span class="sd">        n_samples: int, default=1000 (&gt; 0)</span>
+<span class="sd">            Number of samples.</span>
+
+<span class="sd">        is_oracle_policy: bool, default=False</span>
+<span class="sd">            Whether to use expected reward to sample action using policy.</span>
+
+<span class="sd">        is_oracle_clustering_logging_policy: bool, default=False</span>
+<span class="sd">            Whether the logging policy uses oracle expected reward.</span>
+
+<span class="sd">        return_action_choice_prob: bool, default=False</span>
+<span class="sd">            Whether to record action choice probability of the data collection policy.</span>
+
+<span class="sd">        return_meta_data: bool, default=False</span>
+<span class="sd">            Whether to record meta data including data size, type of action, etc.</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        -------</span>
+<span class="sd">        logged_dataset: dict</span>
+<span class="sd">            Dictionary containing dataset with the following keys:</span>
+
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                key: [</span>
+<span class="sd">                    context,</span>
+<span class="sd">                    query,</span>
+<span class="sd">                    action,</span>
+<span class="sd">                    auxiliary_output,</span>
+<span class="sd">                    expected_reward,</span>
+<span class="sd">                    reward,</span>
+<span class="sd">                    logging_policy,</span>
+<span class="sd">                ]</span>
+
+<span class="sd">            context: torch.Tensor, shape (n_samples, dim_context)</span>
+<span class="sd">                Feature vector of each user.</span>
+
+<span class="sd">            query: Sentence, shape (n_samples, dim_query)</span>
+<span class="sd">                Query vector given by users.</span>
+
+<span class="sd">            action: torch.Tensor, shape (n_samples, )</span>
+<span class="sd">                Discrete actions (index) chosen by the given policy.</span>
+
+<span class="sd">            auxiliary_output: Sentence, shape (n_samples, dim_auxiliary_output)</span>
+<span class="sd">                Auiliary output vector generated by query and action.</span>
+
+<span class="sd">            expected_reward: torch.Tensor, shape (n_samples, )</span>
+<span class="sd">                Expected reward simulated from context, query, auxiliary_output.</span>
+
+<span class="sd">            reward: torch.Tensor, shape (n_samples, )</span>
+<span class="sd">                Either binary or continuous reward.</span>
+
+<span class="sd">            logging_policy: Policy</span>
+<span class="sd">                Policy that chooses either discrete or continuous (soft) prompt as action.</span>
+
+<span class="sd">        meta_data: dict</span>
+<span class="sd">            Dictionary containing setting of simulation with the following keys:</span>
+
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                key: [</span>
+<span class="sd">                    size,</span>
+<span class="sd">                    reward_type,</span>
+<span class="sd">                    reward_std,</span>
+<span class="sd">                    action_list,</span>
+<span class="sd">                    dim_context,</span>
+<span class="sd">                    dim_query,</span>
+<span class="sd">                    dim_action_embedding,</span>
+<span class="sd">                    dim_auxiliary_output,</span>
+<span class="sd">                ]</span>
+
+<span class="sd">            size: int</span>
+<span class="sd">                Data size (i.e., number of samples).</span>
+
+<span class="sd">            reward_type: {&quot;binary&quot;, &quot;continuous&quot;}</span>
+<span class="sd">                Whether to sample binary or continuous rewards.</span>
+
+<span class="sd">            reward_std: float</span>
+<span class="sd">                Noise level of reward. Applicable only when `reward_type==&quot;continuous&quot;`.</span>
+
+<span class="sd">            action_list: torch.Tensor</span>
+<span class="sd">                Mapping from discrete action to embedding.</span>
+
+<span class="sd">            dim_context: int</span>
+<span class="sd">                Dimension of the context.</span>
+
+<span class="sd">            dim_query: int</span>
+<span class="sd">                Dimension of the query.</span>
+
+<span class="sd">            dim_action_embedding: int</span>
+<span class="sd">                Dimension of the action embedding.</span>
+
+<span class="sd">            dim_auxiliary_output: int</span>
+<span class="sd">                Dimension of the auxiliary output.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># self._check_policy(policy)</span>
+
+        <span class="n">context_and_query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_query_generator</span><span class="o">.</span><span class="n">sample_context_and_query</span><span class="p">(</span>
+            <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span>
+        <span class="p">)</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">context_and_query</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_context</span><span class="p">]</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">context_and_query</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_context</span> <span class="p">:]</span>
+
+        <span class="n">predicted_reward</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">clustering_logging_predicted_reward</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">is_oracle_policy</span> <span class="ow">or</span> <span class="n">is_oracle_clustering_logging_policy</span><span class="p">:</span>
+            <span class="n">expected_reward_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_expected_reward_for_all_actions</span><span class="p">(</span>
+                <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">expected_reward_all</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">is_oracle_policy</span><span class="p">:</span>
+            <span class="n">predicted_reward</span> <span class="o">=</span> <span class="n">expected_reward_all</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">predicted_reward</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">is_oracle_clustering_logging_policy</span><span class="p">:</span>
+            <span class="n">clustering_logging_predicted_reward</span> <span class="o">=</span> <span class="n">expected_reward_all</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">clustering_logging_predicted_reward</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">action</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">sample_action</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+            <span class="n">predicted_reward</span><span class="o">=</span><span class="n">predicted_reward</span><span class="p">,</span>
+            <span class="n">clustering_logging_predicted_reward</span><span class="o">=</span><span class="n">clustering_logging_predicted_reward</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">action_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_list</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
+
+        <span class="n">auxiliary_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="o">.</span><span class="n">sample_auxiliary_output</span><span class="p">(</span>
+            <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">action_embedding</span><span class="o">=</span><span class="n">action_embedding</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">expected_reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span><span class="o">.</span><span class="n">calc_expected_reward</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">auxiliary_output</span><span class="o">=</span><span class="n">auxiliary_output</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_reward</span><span class="p">(</span><span class="n">expected_reward</span><span class="o">=</span><span class="n">expected_reward</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">return_action_choice_prob</span><span class="p">:</span>
+            <span class="n">action_choice_prob</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">calc_prob_given_action</span><span class="p">(</span>
+                <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+                <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+                <span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span>
+                <span class="n">predicted_reward</span><span class="o">=</span><span class="n">expected_reward_all</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">action_choice_prob</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">logged_dataset</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+            <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span>
+            <span class="s2">&quot;action_choice_prob&quot;</span><span class="p">:</span> <span class="n">action_choice_prob</span><span class="p">,</span>
+            <span class="s2">&quot;auxiliary_output&quot;</span><span class="p">:</span> <span class="n">auxiliary_output</span><span class="p">,</span>
+            <span class="s2">&quot;expected_reward&quot;</span><span class="p">:</span> <span class="n">expected_reward</span><span class="p">,</span>
+            <span class="s2">&quot;reward&quot;</span><span class="p">:</span> <span class="n">reward</span><span class="p">,</span>
+            <span class="s2">&quot;logging_policy&quot;</span><span class="p">:</span> <span class="n">policy</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">return_meta_data</span><span class="p">:</span>
+            <span class="n">meta_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">n_samples</span><span class="p">,</span>
+                <span class="s2">&quot;reward_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_type</span><span class="p">,</span>
+                <span class="s2">&quot;reward_std&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_std</span><span class="p">,</span>
+                <span class="s2">&quot;action_list&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+                <span class="s2">&quot;dim_context&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+                <span class="s2">&quot;dim_query&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span>
+                <span class="s2">&quot;dim_action_embedding&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_action_embedding</span><span class="p">,</span>
+                <span class="s2">&quot;dim_auxiliary_output&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_auxiliary_output</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="p">(</span><span class="n">logged_dataset</span><span class="p">,</span> <span class="n">meta_data</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">logged_dataset</span>
+
+        <span class="k">return</span> <span class="n">output</span></div>
+
+<div class="viewcode-block" id="SyntheticDataset.calc_expected_reward_given_action"><a class="viewcode-back" href="../../../documentation/_autosummary/dataset/toy.dataset.synthetic.SyntheticDataset.html#toy.dataset.synthetic.SyntheticDataset.calc_expected_reward_given_action">[docs]</a>    <span class="k">def</span> <span class="nf">calc_expected_reward_given_action</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">query</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">action</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">n_outputs_to_approximate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate expected reward for the given action.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -------</span>
+<span class="sd">        context: torch.Tensor, shape (n_samples, dim_context)</span>
+<span class="sd">            Feature vector of each user.</span>
+
+<span class="sd">        query: torch.Tensor, shape (n_samples, dim_query)</span>
+<span class="sd">            Query vector given by users.</span>
+
+<span class="sd">        action: torch.Tensor, shape (n_samples, )</span>
+<span class="sd">            Action.</span>
+
+<span class="sd">        n_outputs_to_approximate: int, default=10</span>
+<span class="sd">            Number of outputs to approzimate the expected reward.</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        -------</span>
+<span class="sd">        expected_reward: torch.Tensor, shape (n_samples, n_actions)</span>
+<span class="sd">            Expected reward of all candidate actions.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="n">expected_reward</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_outputs_to_approximate</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_outputs_to_approximate</span><span class="p">):</span>
+            <span class="n">auxiliary_output_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="o">.</span><span class="n">sample_auxiliary_output</span><span class="p">(</span>
+                <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">action_embedding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">action_list</span><span class="p">[</span><span class="n">action</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="n">expected_reward</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span><span class="o">.</span><span class="n">calc_expected_reward</span><span class="p">(</span>
+                <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">auxiliary_output</span><span class="o">=</span><span class="n">auxiliary_output_</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">expected_reward</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SyntheticDataset.calc_expected_reward_for_all_actions"><a class="viewcode-back" href="../../../documentation/_autosummary/dataset/toy.dataset.synthetic.SyntheticDataset.html#toy.dataset.synthetic.SyntheticDataset.calc_expected_reward_for_all_actions">[docs]</a>    <span class="k">def</span> <span class="nf">calc_expected_reward_for_all_actions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">query</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">n_outputs_to_approximate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate expected reward for all actions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -------</span>
+<span class="sd">        context: torch.Tensor, shape (n_samples, dim_context)</span>
+<span class="sd">            Feature vector of each user.</span>
+
+<span class="sd">        query: torch.Tensor, shape (n_samples, dim_query)</span>
+<span class="sd">            Query vector given by users.</span>
+
+<span class="sd">        n_outputs_to_approximate: int, default=10</span>
+<span class="sd">            Number of outputs to approzimate the expected reward.</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        -------</span>
+<span class="sd">        expected_reward: torch.Tensor, shape (n_samples, n_actions)</span>
+<span class="sd">            Expected reward of all candidate actions.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="n">expected_reward</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_actions</span><span class="p">,</span> <span class="n">n_outputs_to_approximate</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_outputs_to_approximate</span><span class="p">):</span>
+            <span class="n">auxiliary_output_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="o">.</span><span class="n">sample_auxiliary_output</span><span class="p">(</span>
+                <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">action_embedding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span> <span class="n">enumerate_actions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_actions</span><span class="p">):</span>
+                <span class="n">expected_reward</span><span class="p">[</span>
+                    <span class="p">:,</span> <span class="n">action</span><span class="p">,</span> <span class="n">j</span>
+                <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span><span class="o">.</span><span class="n">calc_expected_reward</span><span class="p">(</span>
+                    <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+                    <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+                    <span class="n">auxiliary_output</span><span class="o">=</span><span class="n">auxiliary_output_</span><span class="p">[:,</span> <span class="n">action</span><span class="p">],</span>
+                <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">expected_reward</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SyntheticDataset.calc_expected_policy_value"><a class="viewcode-back" href="../../../documentation/_autosummary/dataset/toy.dataset.synthetic.SyntheticDataset.html#toy.dataset.synthetic.SyntheticDataset.calc_expected_policy_value">[docs]</a>    <span class="k">def</span> <span class="nf">calc_expected_policy_value</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">policy</span><span class="p">:</span> <span class="n">Policy</span><span class="p">,</span>
+        <span class="n">is_oracle_policy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">is_oracle_clustering_logging_policy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">n_samples_to_approximate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sample dataset given data collection policy.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -------</span>
+<span class="sd">        policy: Policy</span>
+<span class="sd">            Policy that chooses discrete prompt (index) as action.</span>
+
+<span class="sd">        is_oracle_policy: bool, default=False</span>
+<span class="sd">            Whether to use expected reward to sample action using policy.</span>
+
+<span class="sd">        is_oracle_clustering_logging_policy: bool, default=False</span>
+<span class="sd">            Whether the logging policy in the clustering of two-stage policy uses oracle expected reward.</span>
+
+<span class="sd">        n_samples_to_approximate: int</span>
+<span class="sd">            Number of samples to approximate the policy value.</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        -------</span>
+<span class="sd">        policy value: dict</span>
+<span class="sd">            Approximated policy value.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logged_dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_dataset</span><span class="p">(</span>
+            <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+            <span class="n">is_oracle_policy</span><span class="o">=</span><span class="n">is_oracle_policy</span><span class="p">,</span>
+            <span class="n">is_oracle_clustering_logging_policy</span><span class="o">=</span><span class="n">is_oracle_clustering_logging_policy</span><span class="p">,</span>
+            <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples_to_approximate</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">policy_value</span> <span class="o">=</span> <span class="n">logged_dataset</span><span class="p">[</span><span class="s2">&quot;expected_reward&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">policy_value</span></div>
+
+<div class="viewcode-block" id="SyntheticDataset.sample_reward_given_action"><a class="viewcode-back" href="../../../documentation/_autosummary/dataset/toy.dataset.synthetic.SyntheticDataset.html#toy.dataset.synthetic.SyntheticDataset.sample_reward_given_action">[docs]</a>    <span class="k">def</span> <span class="nf">sample_reward_given_action</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sample reward given action chosen by a policy.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -------</span>
+<span class="sd">        context: torch.Tensor, shape (n_samples, dim_context)</span>
+<span class="sd">            Feature vector of each user.</span>
+
+<span class="sd">        query: Sentence, shape (n_samples, dim_query)</span>
+<span class="sd">            Query vector given by users.</span>
+
+<span class="sd">        action: torch.Tensor, shape (n_samples, ) or (n_samples, dim_action)</span>
+<span class="sd">            Discrete or continuous (soft) actions chosen by the given policy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">action_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_list</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
+        <span class="n">auxiliary_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="o">.</span><span class="n">sample_auxiliary_output</span><span class="p">(</span>
+            <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">action_embedding</span><span class="o">=</span><span class="n">action_embedding</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">expected_reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span><span class="o">.</span><span class="n">calc_expected_reward</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">auxiliary_output</span><span class="o">=</span><span class="n">auxiliary_output</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_reward</span><span class="p">(</span><span class="n">expected_reward</span><span class="o">=</span><span class="n">expected_reward</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SyntheticDataset.sample_reward_given_output"><a class="viewcode-back" href="../../../documentation/_autosummary/dataset/toy.dataset.synthetic.SyntheticDataset.html#toy.dataset.synthetic.SyntheticDataset.sample_reward_given_output">[docs]</a>    <span class="k">def</span> <span class="nf">sample_reward_given_output</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">query</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">auxiliary_output</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sample reward given action chosen by a policy.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -------</span>
+<span class="sd">        context: torch.Tensor, shape (n_samples, dim_context)</span>
+<span class="sd">            Feature vector of each user.</span>
+
+<span class="sd">        query: Sentence, shape (n_samples, dim_query)</span>
+<span class="sd">            Query vector given by users.</span>
+
+<span class="sd">        auxiliary_output: Sentence, shape (n_samples, dim_auxiliary_output)</span>
+<span class="sd">                Auiliary output vector generated by query and action.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">expected_reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span><span class="o">.</span><span class="n">calc_expected_reward</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">auxiliary_output</span><span class="o">=</span><span class="n">auxiliary_output</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_reward</span><span class="p">(</span><span class="n">expected_reward</span><span class="o">=</span><span class="n">expected_reward</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Haruka Kiyohara, Yuta Saito, Daniel Cao, Thorsten Joachims.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

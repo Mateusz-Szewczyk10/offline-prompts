@@ -1,0 +1,21 @@
+src.dataset.base.BaseFrozenLLMs
+===============================
+
+.. currentmodule:: src.dataset.base
+
+.. autoclass:: BaseFrozenLLMs
+    :inherited-members:
+
+
+
+.. rubric:: Methods
+
+.. autosummary::
+    :nosignatures:
+
+    .. automethod:: generate_output_sentence
+
+
+
+
+

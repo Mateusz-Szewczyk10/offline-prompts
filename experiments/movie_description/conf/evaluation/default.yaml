@@ -1,0 +1,17 @@
+setting: default
+report_logging_policy: True
+report_online_policy: True
+report_uniform_policy: False
+report_regression_based_greedy: False
+report_skyline: True
+report_no_prompt_baseline: False
+single_stage_pg:
+ - regression-based
+ - IS-based
+ - hybrid
+two_stage_pg:
+ - hybrid
+dso_pg:
+ - IS-based
+val_random_state: 100
+eval_random_state: 1000

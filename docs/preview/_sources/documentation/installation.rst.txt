@@ -1,0 +1,45 @@
+Installation
+===================================
+
+``offline-prompts`` is available at `PyPI <https://pypi.org/project/offline-prompts/>`_, and can be installed from ``pip`` or source as follows.
+
+.. card::
+
+    .. tabs::
+
+        .. code-tab:: bash From :class:`pip`
+
+            pip install offline-prompts
+
+        .. code-tab:: bash From source
+
+            git clone https://github.com/aiueola/opl-prompt
+            cd opl-prompt
+            python setup.py install
+
+
+.. raw:: html
+
+    <div class="white-space-20px"></div>
+
+
+If you use our pipeline in your work, please cite our paper below.
+
+.. card::
+
+    | Haruka Kiyohara, Yuta Saito, Daniel Cao, Kiante Brantly, Thorsten Joachims.
+    | **OfflinePrompts: A Python library for optimizing language generation with naturally collected user feedback and prompt**
+    | (a preprint is coming soon..)
+
+    .. code-block::
+
+        @article{kiyohara2024xxx,
+            title={OfflinePrompts: A Python library for optimizing language generation with naturally collected user feedback and prompt},
+            author={Kiyohara, Haruka and Saito, Yuta and Cao, Daniel and Brantly, Kiante and Joachims, Thorsten},
+            journal={arXiv preprint arXiv:24xx.xxxxx},
+            year={2024}
+        }
+
+.. raw:: html
+
+    <div class="white-space-20px"></div>

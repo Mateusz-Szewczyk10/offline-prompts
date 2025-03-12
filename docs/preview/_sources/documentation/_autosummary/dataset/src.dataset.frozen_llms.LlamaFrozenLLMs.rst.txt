@@ -1,0 +1,22 @@
+src.dataset.frozen\_llms.LlamaFrozenLLMs
+========================================
+
+.. currentmodule:: src.dataset.frozen_llms
+
+.. autoclass:: LlamaFrozenLLMs
+    :inherited-members:
+
+
+
+.. rubric:: Methods
+
+.. autosummary::
+    :nosignatures:
+
+    .. automethod:: generate_output_sentence
+    .. automethod:: prompt_template
+
+
+
+
+

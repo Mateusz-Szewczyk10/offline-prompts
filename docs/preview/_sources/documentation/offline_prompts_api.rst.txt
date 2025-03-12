@@ -1,0 +1,115 @@
+OfflinePrompts API reference
+===================================
+
+Synthetic setting
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. _synthetic_api_dataset:
+
+dataset module
+----------
+.. autosummary::
+    :toctree: _autosummary/dataset
+    :recursive:
+    :nosignatures:
+
+    toy.dataset.synthetic
+    toy.dataset.function
+
+.. _synthetic_api_policy:
+
+policy module
+----------
+.. autosummary::
+    :toctree: _autosummary
+    :recursive:
+    :nosignatures:
+
+    toy.policy.base
+    toy.policy.model
+    toy.policy.policy
+
+.. _synthetic_api_opl:
+
+opl module
+----------
+.. autosummary::
+    :toctree: _autosummary
+    :recursive:
+    :nosignatures:
+
+    toy.opl.reward_learner
+    toy.opl.policy_learner
+    toy.opl.marginal_learner
+    toy.opl.behavior_cloning
+
+.. _scope_rl_api_utils:
+
+others
+----------
+.. autosummary::
+    :toctree: _autosummary
+    :recursive:
+    :nosignatures:
+
+    toy.utils
+
+
+Semi-synthetic setting (e.g., recipe generation)
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. _semi_synthetic_api_dataset:
+
+dataset module
+----------
+.. autosummary::
+    :toctree: _autosummary/dataset
+    :recursive:
+    :nosignatures:
+
+    src.dataset.base
+    src.dataset.benchmark
+    src.dataset.frozen_llm
+    src.dataset.reward_simulator
+    src.dataset.prompt_formatter
+    src.dataset.function
+
+.. _synthetic_api_policy:
+
+policy module
+----------
+.. autosummary::
+    :toctree: _autosummary
+    :recursive:
+    :nosignatures:
+
+    src.policy.base
+    src.policy.model
+    src.policy.policy
+
+.. _synthetic_api_opl:
+
+opl module
+----------
+.. autosummary::
+    :toctree: _autosummary
+    :recursive:
+    :nosignatures:
+
+    src.opl.dataset
+    src.opl.reward_learner
+    src.opl.policy_learner
+    src.opl.marginal_learner
+    src.opl.behavior_cloning
+
+.. _scope_rl_api_utils:
+
+others
+----------
+.. autosummary::
+    :toctree: _autosummary
+    :recursive:
+    :nosignatures:
+
+    src.utils
+

@@ -1,0 +1,13 @@
+defaults:
+  - setting: movielens
+  - reward_model: distilbert
+  - user_query_simulation: movielens
+  - encoding: movielens
+  - sentence_embedding: movielens
+
+hydra: 
+  run: 
+    dir: ./
+  sweep:
+    dir: ./
+    subdir: ./

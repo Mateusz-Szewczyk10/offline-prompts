@@ -1,0 +1,14 @@
+Overview of the software
+===================================
+
+(figure and implemetation pipeline/features from Appendix)
+
+.. card::
+    :width: 75%
+    :margin: auto
+    :img-background: ../_static/images/tmp.png
+    :text-align: center
+
+.. raw:: html
+
+    <div class="white-space-20px"></div>

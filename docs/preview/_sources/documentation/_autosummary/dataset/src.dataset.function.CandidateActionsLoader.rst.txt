@@ -1,0 +1,20 @@
+src.dataset.function.CandidateActionsLoader
+===========================================
+
+.. currentmodule:: src.dataset.function
+
+.. autoclass:: CandidateActionsLoader
+    :inherited-members:
+
+
+
+.. rubric:: Methods
+
+.. autosummary::
+    :nosignatures:
+
+
+
+
+
+

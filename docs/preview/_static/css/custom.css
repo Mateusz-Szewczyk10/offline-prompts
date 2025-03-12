@@ -1,0 +1,13 @@
+/* Make each footer item in-line so they stack horizontally instead of vertically */
+.footer-item {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.white-space-20px {
+  padding: 20px;
+}
+  
+.white-space-5px {
+  padding: 5px;
+}

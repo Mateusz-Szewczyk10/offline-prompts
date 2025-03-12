@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../../_static/images/favicon.png" rel="icon" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toy.opl.policy_learner.PolicyLearner &mdash; OfflinePrompts</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="toy.opl.marginal_learner" href="toy.opl.marginal_learner.html" />
+    <link rel="prev" title="toy.opl.policy_learner.KernelPolicyLearner" href="toy.opl.policy_learner.KernelPolicyLearner.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            OfflinePrompts
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../opl_for_prompts.html">Off-policy learning for prompt-guided language generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview of the software</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../offline_prompts_api.html">OfflinePrompts API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../offline_prompts_api.html#synthetic-setting">Synthetic setting</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../offline_prompts_api.html#dataset-module">dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../offline_prompts_api.html#policy-module">policy module</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../offline_prompts_api.html#opl-module">opl module</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="toy.opl.reward_learner.html">toy.opl.reward_learner</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="toy.opl.policy_learner.html">toy.opl.policy_learner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toy.opl.marginal_learner.html">toy.opl.marginal_learner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toy.opl.behavior_cloning.html">toy.opl.behavior_cloning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../offline_prompts_api.html#others">others</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../offline_prompts_api.html#semi-synthetic-setting-e-g-recipe-generation">Semi-synthetic setting (e.g., recipe generation)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">See also:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/releases">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/404">Proceedings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OfflinePrompts</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../offline_prompts_api.html">OfflinePrompts API reference</a></li>
+          <li class="breadcrumb-item"><a href="toy.opl.policy_learner.html">toy.opl.policy_learner</a></li>
+      <li class="breadcrumb-item active">toy.opl.policy_learner.PolicyLearner</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="toy-opl-policy-learner-policylearner">
+<h1>toy.opl.policy_learner.PolicyLearner<a class="headerlink" href="#toy-opl-policy-learner-policylearner" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toy.opl.policy_learner.</span></span><span class="sig-name descname"><span class="pre">PolicyLearner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model:</span> <span class="pre">Union[toy.policy.base.BaseActionPolicyModel,</span> <span class="pre">toy.policy.base.BaseClusterPolicyModel],</span> <span class="pre">action_list:</span> <span class="pre">torch.Tensor,</span> <span class="pre">second_stage_policy:</span> <span class="pre">Union[toy.policy.base.BasePolicy,</span> <span class="pre">toy.policy.base.BaseActionPolicyModel,</span> <span class="pre">toy.policy.base.BaseClusterPolicyModel,</span> <span class="pre">NoneType]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">clustering_policy:</span> <span class="pre">Optional[toy.policy.base.BaseClusteringModel]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">action_reward_predictor:</span> <span class="pre">Optional[toy.policy.base.BaseActionRewardModel]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">optimizer:</span> <span class="pre">torch.optim.optimizer.Optimizer</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'torch.optim.adam.Adam'&gt;,</span> <span class="pre">optimizer_kwargs:</span> <span class="pre">Optional[Dict[str,</span> <span class="pre">Any]]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">env:</span> <span class="pre">Optional[toy.dataset.synthetic.SyntheticDataset]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">random_state:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/opl/policy_learner.html#PolicyLearner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>action_reward_predictor</strong></dt><dd></dd>
+<dt><strong>clustering_policy</strong></dt><dd></dd>
+<dt><strong>env</strong></dt><dd></dd>
+<dt><strong>optimizer_kwargs</strong></dt><dd></dd>
+<dt><strong>random_state</strong></dt><dd></dd>
+<dt><strong>second_stage_policy</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#toy.opl.policy_learner.PolicyLearner.hybrid_policy_gradient" title="toy.opl.policy_learner.PolicyLearner.hybrid_policy_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hybrid_policy_gradient</span></code></a>(logged_feedback[, ...])</p></td>
+<td><p>Train policy from logged data via the hybrid approach.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#toy.opl.policy_learner.PolicyLearner.importance_sampling_based_policy_gradient" title="toy.opl.policy_learner.PolicyLearner.importance_sampling_based_policy_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">importance_sampling_based_policy_gradient</span></code></a>(...)</p></td>
+<td><p>Train policy from logged data via the importance sampling-based approach.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#toy.opl.policy_learner.PolicyLearner.load" title="toy.opl.policy_learner.PolicyLearner.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(path[, is_init])</p></td>
+<td><p>Load model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#toy.opl.policy_learner.PolicyLearner.model_based_policy_gradient" title="toy.opl.policy_learner.PolicyLearner.model_based_policy_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_based_policy_gradient</span></code></a>(logged_feedback)</p></td>
+<td><p>Train policy from logged data via the model-based approach.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#toy.opl.policy_learner.PolicyLearner.online_policy_gradient" title="toy.opl.policy_learner.PolicyLearner.online_policy_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">online_policy_gradient</span></code></a>([...])</p></td>
+<td><p>Train policy in an online manner.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#toy.opl.policy_learner.PolicyLearner.optimizer" title="toy.opl.policy_learner.PolicyLearner.optimizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimizer</span></code></a></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Adam</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#toy.opl.policy_learner.PolicyLearner.save" title="toy.opl.policy_learner.PolicyLearner.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(path)</p></td>
+<td><p>Save Model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#toy.opl.policy_learner.PolicyLearner.seed" title="toy.opl.policy_learner.PolicyLearner.seed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seed</span></code></a>(random_state)</p></td>
+<td><p>Fix seed.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.optimizer" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Adam</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.random_state">
+<span class="sig-name descname"><span class="pre">random_state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.random_state" title="Permalink to this definition"></a></dt>
+<dd><p>Learner class for action policy.</p>
+<p>Imported as: <code class="xref py py-class docutils literal notranslate"><span class="pre">src.opl.PolicyLearner</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference internal" href="toy.policy.base.BaseActionPolicyModel.html#toy.policy.base.BaseActionPolicyModel" title="toy.policy.base.BaseActionPolicyModel"><em>BaseActionPolicyModel</em></a><em> or </em><a class="reference internal" href="toy.policy.base.BaseClusterPolicyModel.html#toy.policy.base.BaseClusterPolicyModel" title="toy.policy.base.BaseClusterPolicyModel"><em>BaseClusterPolicyModel</em></a>) – Action or cluster policy (either first stage or single stage policy) to train.</p></li>
+<li><p><strong>action_list</strong> (<em>torch.Tensor</em>) – Mapping from action id to its embeddings.</p></li>
+<li><p><strong>second_stage_policy</strong> (<em>Policy</em><em>, </em><em>default=None</em>) – (Pre-trained) second stage policy. This must be given when training a first stage policy.</p></li>
+<li><p><strong>clustering_policy</strong> (<a class="reference internal" href="toy.policy.base.BaseClusteringModel.html#toy.policy.base.BaseClusteringModel" title="toy.policy.base.BaseClusteringModel"><em>BaseClusteringModel</em></a><em>, </em><em>default=None</em>) – (Pre-trained) clustering policy that determines the action clustering for each context. This must be given when training a first stage policy.</p></li>
+<li><p><strong>action_reward_predictor</strong> (<a class="reference internal" href="toy.policy.base.BaseActionRewardModel.html#toy.policy.base.BaseActionRewardModel" title="toy.policy.base.BaseActionRewardModel"><em>BaseActionRewardModel</em></a><em>, </em><em>default=None</em>) – (Pre-trained) action reward predictor. This must be given when using a model-based or hybrid appraoch to train a policy.</p></li>
+<li><p><strong>optimizer</strong> (<em>torch.optim.Optimizer</em><em>, </em><em>default=None</em>) – Class of optimizer (not an instance).</p></li>
+<li><p><strong>optimizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>default=None</em>) – Arguments of optimizer.</p></li>
+<li><p><strong>env</strong> (<a class="reference internal" href="dataset/toy.dataset.synthetic.SyntheticDataset.html#toy.dataset.synthetic.SyntheticDataset" title="toy.dataset.synthetic.SyntheticDataset"><em>SyntheticDataset</em></a><em>, </em><em>default=None</em>) – Online environment for evaluation.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None.</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/opl/policy_learner.html#PolicyLearner.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.load" title="Permalink to this definition"></a></dt>
+<dd><p>Load model.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/opl/policy_learner.html#PolicyLearner.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.save" title="Permalink to this definition"></a></dt>
+<dd><p>Save Model.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.seed">
+<span class="sig-name descname"><span class="pre">seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">random_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/opl/policy_learner.html#PolicyLearner.seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.seed" title="Permalink to this definition"></a></dt>
+<dd><p>Fix seed.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.online_policy_gradient">
+<span class="sig-name descname"><span class="pre">online_policy_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logging_action_choice_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_oracle_logging_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps_per_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs_per_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_training_logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/opl/policy_learner.html#PolicyLearner.online_policy_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.online_policy_gradient" title="Permalink to this definition"></a></dt>
+<dd><p>Train policy in an online manner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logging_action_choice_prob</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>logging_predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>is_oracle_logging_policy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether the logging policy uses oracle expected reward.</p></li>
+<li><p><strong>n_epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=1000.</em>) – Number of epochs to train the model.</p></li>
+<li><p><strong>n_steps_per_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10.</em>) – Number of gradient steps within an epoch.</p></li>
+<li><p><strong>n_epochs_per_log</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10.</em>) – Number of epochs in the logging interval.</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=32.</em>) – Batch size.</p></li>
+<li><p><strong>make_copy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to create copy of the model before training.</p></li>
+<li><p><strong>return_training_logs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return (true) policy value at each training epoch.</p></li>
+<li><p><strong>save_path</strong> (<em>Path</em><em>, </em><em>default=None.</em>) – Path to save the model.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None.</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.model_based_policy_gradient">
+<span class="sig-name descname"><span class="pre">model_based_policy_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logged_feedback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_action_choice_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_oracle_logging_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps_per_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs_per_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_training_logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/opl/policy_learner.html#PolicyLearner.model_based_policy_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.model_based_policy_gradient" title="Permalink to this definition"></a></dt>
+<dd><p>Train policy from logged data via the model-based approach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logged_feedback</strong> (<em>LoggedDataset</em>) – <p>Logged data, which contains the following keys.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">:</span> <span class="p">[</span>
+    <span class="n">context</span><span class="p">,</span>          <span class="c1"># (n_samples, )</span>
+    <span class="n">query</span><span class="p">,</span>            <span class="c1"># (n_samples, )</span>
+    <span class="n">action</span><span class="p">,</span>           <span class="c1">#  -</span>
+    <span class="n">output</span><span class="p">,</span>           <span class="c1">#  -</span>
+    <span class="n">reward</span><span class="p">,</span>           <span class="c1">#  -</span>
+    <span class="n">logging_policy</span><span class="p">,</span>   <span class="c1">#  -</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>See dataset/synthetic.py for the details of each key.</p>
+</p></li>
+<li><p><strong>logging_action_choice_prob</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>logging_predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – Predicted reward for all candidate actions used for the logging policy in the clustering policy.</p></li>
+<li><p><strong>is_oracle_logging_policy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether the logging policy uses oracle expected reward.</p></li>
+<li><p><strong>n_epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=1000.</em>) – Number of epochs to train the model.</p></li>
+<li><p><strong>n_steps_per_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10.</em>) – Number of gradient steps within an epoch.</p></li>
+<li><p><strong>n_epochs_per_log</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10.</em>) – Number of epochs in the logging interval.</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=32.</em>) – Batch size.</p></li>
+<li><p><strong>make_copy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to create copy of the model before training.</p></li>
+<li><p><strong>return_training_logs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return (true) policy value at each training epoch.</p></li>
+<li><p><strong>save_path</strong> (<em>Path</em><em>, </em><em>default=None.</em>) – Path to save the model.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None.</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.importance_sampling_based_policy_gradient">
+<span class="sig-name descname"><span class="pre">importance_sampling_based_policy_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logged_feedback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_action_choice_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_oracle_logging_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps_per_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs_per_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_training_logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/opl/policy_learner.html#PolicyLearner.importance_sampling_based_policy_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.importance_sampling_based_policy_gradient" title="Permalink to this definition"></a></dt>
+<dd><p>Train policy from logged data via the importance sampling-based approach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logged_feedback</strong> (<em>LoggedDataset</em>) – <p>Logged data, which contains the following keys.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">:</span> <span class="p">[</span>
+    <span class="n">context</span><span class="p">,</span>          <span class="c1"># (n_samples, )</span>
+    <span class="n">query</span><span class="p">,</span>            <span class="c1"># (n_samples, )</span>
+    <span class="n">action</span><span class="p">,</span>           <span class="c1"># (n_samples, )</span>
+    <span class="n">output</span><span class="p">,</span>           <span class="c1">#  -</span>
+    <span class="n">reward</span><span class="p">,</span>           <span class="c1"># (n_samples, )</span>
+    <span class="n">logging_policy</span><span class="p">,</span>   <span class="c1">#  -</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>See dataset/synthetic.py for the details of each key.</p>
+</p></li>
+<li><p><strong>logging_action_choice_prob</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – Action choice probability of logging policy to all candidate actions.</p></li>
+<li><p><strong>logging_predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – Predicted reward for all candidate actions used for the logging policy in the clustering policy.</p></li>
+<li><p><strong>is_oracle_logging_policy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether the logging policy uses oracle expected reward.</p></li>
+<li><p><strong>n_epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=1000.</em>) – Number of epochs to train the model.</p></li>
+<li><p><strong>n_steps_per_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10.</em>) – Number of gradient steps within an epoch.</p></li>
+<li><p><strong>n_epochs_per_log</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10.</em>) – Number of epochs in the logging interval.</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=32.</em>) – Batch size.</p></li>
+<li><p><strong>make_copy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to create copy of the model before training.</p></li>
+<li><p><strong>return_training_logs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return (true) policy value at each training epoch.</p></li>
+<li><p><strong>save_path</strong> (<em>Path</em><em>, </em><em>default=None.</em>) – Path to save the model.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None.</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.opl.policy_learner.PolicyLearner.hybrid_policy_gradient">
+<span class="sig-name descname"><span class="pre">hybrid_policy_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logged_feedback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_action_choice_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_oracle_logging_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps_per_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs_per_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_training_logs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/opl/policy_learner.html#PolicyLearner.hybrid_policy_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.opl.policy_learner.PolicyLearner.hybrid_policy_gradient" title="Permalink to this definition"></a></dt>
+<dd><p>Train policy from logged data via the hybrid approach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logged_feedback</strong> (<em>LoggedDataset</em>) – <p>Logged data, which contains the following keys.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">:</span> <span class="p">[</span>
+    <span class="n">context</span><span class="p">,</span>          <span class="c1"># (n_samples, )</span>
+    <span class="n">query</span><span class="p">,</span>            <span class="c1"># (n_samples, )</span>
+    <span class="n">action</span><span class="p">,</span>           <span class="c1"># (n_samples, )</span>
+    <span class="n">output</span><span class="p">,</span>           <span class="c1"># (n_samples, )</span>
+    <span class="n">reward</span><span class="p">,</span>           <span class="c1"># (n_samples, )</span>
+    <span class="n">logging_policy</span><span class="p">,</span>   <span class="c1">#  -</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>See dataset/synthetic.py for the details of each key.</p>
+</p></li>
+<li><p><strong>logging_action_choice_prob</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – Action choice probability of logging policy to all candidate actions.</p></li>
+<li><p><strong>logging_predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – Predicted reward for all candidate actions used for the logging policy in the clustering policy.</p></li>
+<li><p><strong>is_oracle_logging_policy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether the logging policy uses oracle expected reward.</p></li>
+<li><p><strong>n_epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=1000.</em>) – Number of epochs to train the model.</p></li>
+<li><p><strong>n_steps_per_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10.</em>) – Number of gradient steps within an epoch.</p></li>
+<li><p><strong>n_epochs_per_log</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=10.</em>) – Number of epochs in the logging interval.</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=32.</em>) – Batch size.</p></li>
+<li><p><strong>make_copy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to create copy of the model before training.</p></li>
+<li><p><strong>return_training_logs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return (true) policy value at each training epoch.</p></li>
+<li><p><strong>save_path</strong> (<em>Path</em><em>, </em><em>default=None.</em>) – Path to save the model.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None.</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="toy.opl.policy_learner.KernelPolicyLearner.html" class="btn btn-neutral float-left" title="toy.opl.policy_learner.KernelPolicyLearner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="toy.opl.marginal_learner.html" class="btn btn-neutral float-right" title="toy.opl.marginal_learner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Haruka Kiyohara, Yuta Saito, Daniel Cao, Thorsten Joachims.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

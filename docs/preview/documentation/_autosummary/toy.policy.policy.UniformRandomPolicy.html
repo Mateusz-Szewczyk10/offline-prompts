@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../../_static/images/favicon.png" rel="icon" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toy.policy.policy.UniformRandomPolicy &mdash; OfflinePrompts</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="toy.opl.reward_learner" href="toy.opl.reward_learner.html" />
+    <link rel="prev" title="toy.policy.policy.TwoStagePolicy" href="toy.policy.policy.TwoStagePolicy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            OfflinePrompts
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../opl_for_prompts.html">Off-policy learning for prompt-guided language generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview of the software</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package References:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../offline_prompts_api.html">OfflinePrompts API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../offline_prompts_api.html#synthetic-setting">Synthetic setting</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../offline_prompts_api.html#dataset-module">dataset module</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../offline_prompts_api.html#policy-module">policy module</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="toy.policy.base.html">toy.policy.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toy.policy.model.html">toy.policy.model</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="toy.policy.policy.html">toy.policy.policy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../offline_prompts_api.html#opl-module">opl module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../offline_prompts_api.html#others">others</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../offline_prompts_api.html#semi-synthetic-setting-e-g-recipe-generation">Semi-synthetic setting (e.g., recipe generation)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">See also:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/releases">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/opl-prompt/404">Proceedings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OfflinePrompts</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../offline_prompts_api.html">OfflinePrompts API reference</a></li>
+          <li class="breadcrumb-item"><a href="toy.policy.policy.html">toy.policy.policy</a></li>
+      <li class="breadcrumb-item active">toy.policy.policy.UniformRandomPolicy</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="toy-policy-policy-uniformrandompolicy">
+<h1>toy.policy.policy.UniformRandomPolicy<a class="headerlink" href="#toy-policy-policy-uniformrandompolicy" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="toy.policy.policy.UniformRandomPolicy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">toy.policy.policy.</span></span><span class="sig-name descname"><span class="pre">UniformRandomPolicy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_first_stage_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/policy/policy.html#UniformRandomPolicy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.policy.policy.UniformRandomPolicy" title="Permalink to this definition"></a></dt>
+<dd><p>Uniform random policy for discrete action.</p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">src.policy.BasePolicy</span></code></p>
+<p>Imported as: <code class="xref py py-class docutils literal notranslate"><span class="pre">src.policy.UniformRandomPolicy</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>action_list</strong> (<em>torch.Tensor</em>) – Mapping from action id to its embedding.</p></li>
+<li><p><strong>n_actions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None</em>) – Number of clusters. (referred to <cite>n_actions</cite> due to API consistency)</p></li>
+<li><p><strong>is_first_stage_policy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether the policy is the first stage policy of the two stage policy.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>n_actions</strong></dt><dd></dd>
+<dt><strong>random_state</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#toy.policy.policy.UniformRandomPolicy.calc_action_choice_probability" title="toy.policy.policy.UniformRandomPolicy.calc_action_choice_probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_action_choice_probability</span></code></a>(context, query)</p></td>
+<td><p>Calculate the action choice probabilities (within candidate actions).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#toy.policy.policy.UniformRandomPolicy.calc_prob_given_action" title="toy.policy.policy.UniformRandomPolicy.calc_prob_given_action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_prob_given_action</span></code></a>(context, query, action)</p></td>
+<td><p>Calculate the action choice probability of the given action.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#toy.policy.policy.UniformRandomPolicy.predict_policy_value" title="toy.policy.policy.UniformRandomPolicy.predict_policy_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_policy_value</span></code></a>(context, query[, ...])</p></td>
+<td><p>Calculate policy value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#toy.policy.policy.UniformRandomPolicy.sample_action" title="toy.policy.policy.UniformRandomPolicy.sample_action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_action</span></code></a>(context, query[, ...])</p></td>
+<td><p>Sample action.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#toy.policy.policy.UniformRandomPolicy.sample_action_and_output_prob" title="toy.policy.policy.UniformRandomPolicy.sample_action_and_output_prob"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_action_and_output_prob</span></code></a>(context, query)</p></td>
+<td><p>Sample an action and return the action choice probability of sampled action.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#toy.policy.policy.UniformRandomPolicy.sample_multiple_actions" title="toy.policy.policy.UniformRandomPolicy.sample_multiple_actions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_multiple_actions</span></code></a>(context, query[, ...])</p></td>
+<td><p>Sample multiple actions for each context and action.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.policy.policy.UniformRandomPolicy.sample_multiple_actions">
+<span class="sig-name descname"><span class="pre">sample_multiple_actions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">candidate_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_action_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'idx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_actions_for_each</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/policy/policy.html#UniformRandomPolicy.sample_multiple_actions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.policy.policy.UniformRandomPolicy.sample_multiple_actions" title="Permalink to this definition"></a></dt>
+<dd><p>Sample multiple actions for each context and action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em>) – User contexts (e.g., demographic features).</p></li>
+<li><p><strong>query</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_query</em><em>)</em>) – Original query.</p></li>
+<li><p><strong>predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>cluster_centers</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>candidate_actions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> of </em><em>torch.Tensor</em><em>, </em><em>default=None.</em>) – Candidate set of actions for each given context.</p></li>
+<li><p><strong>return_action_type</strong> (<em>{&quot;idx&quot;</em><em>, </em><em>&quot;prompt&quot;}</em><em>, </em><em>default=&quot;idx&quot;</em>) – Type of action to return.</p></li>
+<li><p><strong>n_actions_for_each</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>default=1</em>) – Number of actions to sample.</p></li>
+<li><p><strong>replacement</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to draw with replacement or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>action</strong> – Action (vector) indicating which prompt is sampled for each input sentence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor (n_samples, n_actions_for_each)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.policy.policy.UniformRandomPolicy.sample_action">
+<span class="sig-name descname"><span class="pre">sample_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">candidate_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_action_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'idx'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/policy/policy.html#UniformRandomPolicy.sample_action"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.policy.policy.UniformRandomPolicy.sample_action" title="Permalink to this definition"></a></dt>
+<dd><p>Sample action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em>) – User contexts (e.g., demographic features).</p></li>
+<li><p><strong>query</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_query</em><em>)</em>) – Original query.</p></li>
+<li><p><strong>predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>cluster_centers</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>candidate_actions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> of </em><em>torch.Tensor</em><em>, </em><em>default=None.</em>) – Candidate set of actions for each given context.</p></li>
+<li><p><strong>return_action_type</strong> (<em>{&quot;idx&quot;</em><em>, </em><em>&quot;onehot&quot;</em><em>, </em><em>&quot;embedding&quot;}</em><em>, </em><em>default=&quot;idx&quot;</em>) – Type of action to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>action</strong> – (Onehot) action (vector) sampled for each input.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor (n_samples, n_actions) or (n_samples, ) or (n_samples, dim_action)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.policy.policy.UniformRandomPolicy.sample_action_and_output_prob">
+<span class="sig-name descname"><span class="pre">sample_action_and_output_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">candidate_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_action_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'idx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_log_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/policy/policy.html#UniformRandomPolicy.sample_action_and_output_prob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.policy.policy.UniformRandomPolicy.sample_action_and_output_prob" title="Permalink to this definition"></a></dt>
+<dd><p>Sample an action and return the action choice probability of sampled action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em>) – User contexts (e.g., demographic features).</p></li>
+<li><p><strong>query</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_query</em><em>)</em>) – Original query.</p></li>
+<li><p><strong>predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>cluster_centers</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>candidate_actions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> of </em><em>torch.Tensor</em><em>, </em><em>default=None.</em>) – Candidate set of actions for each given context.</p></li>
+<li><p><strong>return_action_type</strong> (<em>{&quot;idx&quot;</em><em>, </em><em>&quot;onehot&quot;</em><em>, </em><em>&quot;embedding&quot;}</em><em>, </em><em>default=&quot;idx&quot;</em>) – Type of action to return.</p></li>
+<li><p><strong>is_log_prob</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return log probability or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>action</strong> (<em>torch.Tensor (n_samples, n_actions) or (n_samples, ) or (n_samples, dim_action)</em>) – (Onehot) action (vector) sampled for each input.</p></li>
+<li><p><strong>prob</strong> (<em>torch.Tensor (n_samples, )</em>) – (Log) probability of sampling the above action.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.policy.policy.UniformRandomPolicy.calc_action_choice_probability">
+<span class="sig-name descname"><span class="pre">calc_action_choice_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">candidate_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_log_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/policy/policy.html#UniformRandomPolicy.calc_action_choice_probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.policy.policy.UniformRandomPolicy.calc_action_choice_probability" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the action choice probabilities (within candidate actions).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em>) – User contexts (e.g., demographic features).</p></li>
+<li><p><strong>query</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_query</em><em>)</em>) – Original query.</p></li>
+<li><p><strong>predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>cluster_centers</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>candidate_actions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> of </em><em>torch.Tensor</em><em>, </em><em>default=None.</em>) – Candidate set of actions for each given context.</p></li>
+<li><p><strong>is_log_prob</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return log probability or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>action_choice_probability</strong> – Action choice probability of all candidate actions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor or List[torch.Tensor], shape (n_samples, n_candidate_actions[i])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.policy.policy.UniformRandomPolicy.calc_prob_given_action">
+<span class="sig-name descname"><span class="pre">calc_prob_given_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">candidate_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_log_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/policy/policy.html#UniformRandomPolicy.calc_prob_given_action"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.policy.policy.UniformRandomPolicy.calc_prob_given_action" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the action choice probability of the given action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em>) – User contexts (e.g., demographic features).</p></li>
+<li><p><strong>query</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_query</em><em>)</em>) – Original query.</p></li>
+<li><p><strong>action</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – action.</p></li>
+<li><p><strong>predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>cluster_centers</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>candidate_actions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> of </em><em>torch.Tensor</em><em>, </em><em>default=None.</em>) – Candidate set of actions for each given context.</p></li>
+<li><p><strong>is_log_prob</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return log probability or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>action_choice_probability</strong> – Action choice probability of the given action.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor, shape (n_samples, )</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="toy.policy.policy.UniformRandomPolicy.predict_policy_value">
+<span class="sig-name descname"><span class="pre">predict_policy_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted_reward</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">candidate_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward_predictor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_per_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/toy/policy/policy.html#UniformRandomPolicy.predict_policy_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#toy.policy.policy.UniformRandomPolicy.predict_policy_value" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate policy value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em>) – User contexts (e.g., demographic features).</p></li>
+<li><p><strong>query</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_query</em><em>)</em>) – Original query.</p></li>
+<li><p><strong>predicted_reward</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_actions</em><em>)</em><em>, </em><em>default=None</em>) – Predicted reward for all candidate actions.</p></li>
+<li><p><strong>cluster_centers</strong> (<em>torch.Tensor</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>candidate_actions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em> of </em><em>torch.Tensor</em><em>, </em><em>default=None.</em>) – Candidate set of actions for each given context.</p></li>
+<li><p><strong>reward_predictor</strong> (<a class="reference internal" href="toy.policy.base.BaseActionRewardModel.html#toy.policy.base.BaseActionRewardModel" title="toy.policy.base.BaseActionRewardModel"><em>BaseActionRewardModel</em></a><em>, </em><em>default=None</em>) – (Pre-trained) action reward predictor. This must be given when using logit-based model.</p></li>
+<li><p><strong>return_per_sample</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return policy value per sample or not (i.e., take mean).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>policy_value</strong> – Predicted value of the uniform random policy.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or torch.Tensor, shape (n_samples, )</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="toy.policy.policy.TwoStagePolicy.html" class="btn btn-neutral float-left" title="toy.policy.policy.TwoStagePolicy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="toy.opl.reward_learner.html" class="btn btn-neutral float-right" title="toy.opl.reward_learner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Haruka Kiyohara, Yuta Saito, Daniel Cao, Thorsten Joachims.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

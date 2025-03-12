@@ -1,0 +1,17 @@
+setting: movielens
+path_to_user_embeddings: assets/movielens_naive_cf_user_embeddings.pt
+path_to_queries: assets/movielens_query.csv
+path_to_query_embeddings: assets/movielens_query_embs.pt
+path_to_candidate_prompts: assets/movielens_benchmark_prompts.csv
+path_to_prompt_embeddings: assets/movielens_prompt_embs.pt
+path_to_query_encoder: assets/movielens_query_pca_matrix.pt
+path_to_prompt_encoder: assets/movielens_prompt_pca_matrix.pt
+path_to_sentence_encoder: assets/movielens_sentence_pca_matrix.pt
+base_frozen_llm_id: mistralai/Mistral-7B-Instruct-v0.2
+frozen_llm_tokenizer_id: mistralai/Mistral-7B-Instruct-v0.2
+base_reward_model_id: distilbert-base-uncased
+reward_model_tokenizer_id: distilbert-base-uncased
+path_to_finetuned_params: assets/movielens_distilbert_reward_simulator.pt
+is_context_dependent: False
+device: cuda
+random_state: 0
