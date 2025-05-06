@@ -1,0 +1,755 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../../../_static/images/favicon.png" rel="icon" type="image/png">
+    <title>off_prompts_syn.dataset.function.SparseRewardSimulator &#8212; OfflinePrompts</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../../../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="off_prompts_syn.dataset.function.TrigonometricAuxiliaryOutputGenerator" href="off_prompts_syn.dataset.function.TrigonometricAuxiliaryOutputGenerator.html" />
+    <link rel="prev" title="off_prompts_syn.dataset.function.SigmoidAuxiliaryOutputGenerator" href="off_prompts_syn.dataset.function.SigmoidAuxiliaryOutputGenerator.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../quickstart.html">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../../api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../quickstart.html">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../../api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.base.html">off_prompts.dataset.base</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseCandidateActionsLoader.html">off_prompts.dataset.base.BaseCandidateActionsLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseContextQueryLoader.html">off_prompts.dataset.base.BaseContextQueryLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseEncoder.html">off_prompts.dataset.base.BaseEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseFrozenLLM.html">off_prompts.dataset.base.BaseFrozenLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BasePromptFormatter.html">off_prompts.dataset.base.BasePromptFormatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseRewardSimulator.html">off_prompts.dataset.base.BaseRewardSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.benchmark.html">off_prompts.dataset.benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.benchmark.SemiSyntheticDataset.html">off_prompts.dataset.benchmark.SemiSyntheticDataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.frozen_llm.html">off_prompts.dataset.frozen_llm</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.frozen_llm.AutoFrozenLLM.html">off_prompts.dataset.frozen_llm.AutoFrozenLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.reward_simulator.html">off_prompts.dataset.reward_simulator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html">off_prompts.dataset.reward_simulator.CollaborativeFilteringRewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.reward_simulator.PromptCossimRewardSimulator.html">off_prompts.dataset.reward_simulator.PromptCossimRewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.reward_simulator.SentenceCossimRewardSimulator.html">off_prompts.dataset.reward_simulator.SentenceCossimRewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.reward_simulator.TransformerRewardSimulator.html">off_prompts.dataset.reward_simulator.TransformerRewardSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.function.html">off_prompts.dataset.function</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.function.DefaultCandidateActionsLoader.html">off_prompts.dataset.function.DefaultCandidateActionsLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.function.DefaultContextQueryLoader.html">off_prompts.dataset.function.DefaultContextQueryLoader</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.encoder.html">off_prompts.dataset.encoder</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.encoder.BatchDataset.html">off_prompts.dataset.encoder.BatchDataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html">off_prompts.dataset.encoder.NNSentenceEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html">off_prompts.dataset.encoder.TransformerEncoder</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.prompt_formatter.html">off_prompts.dataset.prompt_formatter</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.prompt_formatter.MovielensPromptFormatter.html">off_prompts.dataset.prompt_formatter.MovielensPromptFormatter</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.assets.reward_finetuner.html">off_prompts.dataset.assets.reward_finetuner</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.assets.reward_finetuner.MovielensDataset.html">off_prompts.dataset.assets.reward_finetuner.MovielensDataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.assets.reward_finetuner.RewardFinetuner.html">off_prompts.dataset.assets.reward_finetuner.RewardFinetuner</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.assets.sentence_embedding_learner.html">off_prompts.dataset.assets.sentence_embedding_learner</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.assets.sentence_embedding_learner.SentenceEmbeddingLearner.html">off_prompts.dataset.assets.sentence_embedding_learner.SentenceEmbeddingLearner</a></li>
+</ul>
+</li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts.policy.base.html">off_prompts.policy.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts.policy.model.html">off_prompts.policy.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts.policy.policy.html">off_prompts.policy.policy</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.policy_learner.html">off_prompts.opl.policy_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.policy_evaluator.html">off_prompts.opl.policy_evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.reward_learner.html">off_prompts.opl.reward_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.marginal_learner.html">off_prompts.opl.marginal_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.behavior_cloning.html">off_prompts.opl.behavior_cloning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.dataset.html">off_prompts.opl.dataset</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/off_prompts.utils.html">off_prompts.utils</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.check_logged_feedback.html">off_prompts.utils.check_logged_feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.check_tensor.html">off_prompts.utils.check_tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.defaultdict_to_dict.html">off_prompts.utils.defaultdict_to_dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.gaussian_kernel.html">off_prompts.utils.gaussian_kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.to_device.html">off_prompts.utils.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.tokenize.html">off_prompts.utils.tokenize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.torch_seed.html">off_prompts.utils.torch_seed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.uniform_kernel.html">off_prompts.utils.uniform_kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.FrozenLLMDataset.html">off_prompts.utils.FrozenLLMDataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.RewardSimulatorDataset.html">off_prompts.utils.RewardSimulatorDataset</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts_syn.dataset.synthetic.html">off_prompts_syn.dataset.synthetic</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.synthetic.SyntheticDataset.html">off_prompts_syn.dataset.synthetic.SyntheticDataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="off_prompts_syn.dataset.function.html">off_prompts_syn.dataset.function</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.AuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.AuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.CandidateActionsGenerator.html">off_prompts_syn.dataset.function.CandidateActionsGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedExponentialAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedExponentialAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedPowerAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedPowerAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedRationalAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedRationalAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedTrigonometricAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedTrigonometricAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ContextQueryGenerator.html">off_prompts_syn.dataset.function.ContextQueryGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ExponentialAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ExponentialAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.MixtureOfGaussianCandidateActionsGenerator.html">off_prompts_syn.dataset.function.MixtureOfGaussianCandidateActionsGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.PowerAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.PowerAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.RationalAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.RationalAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.RewardSimulator.html">off_prompts_syn.dataset.function.RewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.SigmoidAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.SigmoidAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">off_prompts_syn.dataset.function.SparseRewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.TrigonometricAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.TrigonometricAuxiliaryOutputGenerator</a></li>
+</ul>
+</li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts_syn.policy.base.html">off_prompts_syn.policy.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts_syn.policy.model.html">off_prompts_syn.policy.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts_syn.policy.policy.html">off_prompts_syn.policy.policy</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts_syn.opl.policy_learner.html">off_prompts_syn.opl.policy_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts_syn.opl.reward_learner.html">off_prompts_syn.opl.reward_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts_syn.opl.marginal_learner.html">off_prompts_syn.opl.marginal_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts_syn.opl.behavior_cloning.html">off_prompts_syn.opl.behavior_cloning</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/off_prompts_syn.utils.html">off_prompts_syn.utils</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.check_logged_feedback.html">off_prompts_syn.utils.check_logged_feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.check_tensor.html">off_prompts_syn.utils.check_tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.defaultdict_to_dict.html">off_prompts_syn.utils.defaultdict_to_dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.gaussian_kernel.html">off_prompts_syn.utils.gaussian_kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.torch_seed.html">off_prompts_syn.utils.torch_seed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.uniform_kernel.html">off_prompts_syn.utils.uniform_kernel</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">OfflinePrompts</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="off_prompts_syn.dataset.function.html" class="nav-link">off_prompts_syn.dataset.function</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">off_prompts_syn.dataset.function.SparseRewardSimulator</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="off-prompts-syn-dataset-function-sparserewardsimulator">
+<h1>off_prompts_syn.dataset.function.SparseRewardSimulator<a class="headerlink" href="#off-prompts-syn-dataset-function-sparserewardsimulator" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="off_prompts_syn.dataset.function.SparseRewardSimulator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">off_prompts_syn.dataset.function.</span></span><span class="sig-name descname"><span class="pre">SparseRewardSimulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim_context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_query</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_auxiliary_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_sparse_auxiliary_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context_coefficient_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_coefficient_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda:0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts_syn/dataset/function.html#SparseRewardSimulator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts_syn.dataset.function.SparseRewardSimulator" title="Permalink to this definition">#</a></dt>
+<dd><p>Simulator of expected reward.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_context</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=5</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of context.</p></li>
+<li><p><strong>dim_query</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=5</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of query.</p></li>
+<li><p><strong>dim_auxiliary_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=5</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of auxiliary output.</p></li>
+<li><p><strong>context_coefficient_matrix</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>dim_context</em><em>, </em><em>dim_auxiliary_output</em><em>)</em><em>, </em><em>default=None.</em>) – Coefficient vector of context.</p></li>
+<li><p><strong>query_coefficient_matrix</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>dim_query</em><em>, </em><em>dim_auxiliary_output</em><em>)</em><em>, </em><em>default=None.</em>) – Coefficient vector of query.</p></li>
+<li><p><strong>normalizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>default=None.</em>) – Normalization term of expected reward.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot;cuda:0&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>context_coefficient_matrix</strong></dt><dd></dd>
+<dt><strong>dim_sparse_auxiliary_output</strong></dt><dd></dd>
+<dt><strong>normalizer</strong></dt><dd></dd>
+<dt><strong>query_coefficient_matrix</strong></dt><dd></dd>
+<dt><strong>random_state</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#off_prompts_syn.dataset.function.SparseRewardSimulator.calc_expected_reward" title="off_prompts_syn.dataset.function.SparseRewardSimulator.calc_expected_reward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_expected_reward</span></code></a>(context, query, ...)</p></td>
+<td><p>Sample auxiliary output.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="off_prompts_syn.dataset.function.SparseRewardSimulator.calc_expected_reward">
+<span class="sig-name descname"><span class="pre">calc_expected_reward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auxiliary_output</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts_syn/dataset/function.html#SparseRewardSimulator.calc_expected_reward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts_syn.dataset.function.SparseRewardSimulator.calc_expected_reward" title="Permalink to this definition">#</a></dt>
+<dd><p>Sample auxiliary output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em>) – Context.</p></li>
+<li><p><strong>query</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_query</em><em>)</em>) – Query.</p></li>
+<li><p><strong>auxiliary_output</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_auxiliary_output</em><em>)</em>) – Auxiliary output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>expected_reward</strong> – Expected reward of given auxiliary output on given context.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor, shape (n_samples, )</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+</tbody>
+</table>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts_syn.dataset.function.SparseRewardSimulator"><code class="docutils literal notranslate"><span class="pre">SparseRewardSimulator</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts_syn.dataset.function.SparseRewardSimulator.calc_expected_reward"><code class="docutils literal notranslate"><span class="pre">SparseRewardSimulator.calc_expected_reward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2025, Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

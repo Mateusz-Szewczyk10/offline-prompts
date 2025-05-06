@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath("../"))
 # -- Project information -----------------------------------------------------
 
 project = "xxx"  # fix later
-copyright = "2024, Haruka Kiyohara, Yuta Saito, Daniel Cao, Thorsten Joachims"
-author = "Haruka Kiyohara, Yuta Saito, Daniel Cao, Thorsten Joachims"
+copyright = "2025, Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims"
+author = "Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims"
 
 # The full version, including alpha/beta/rc tags
 version = "latest"
@@ -76,12 +76,12 @@ html_context = {
     "default_mode": "light",
 }
 html_theme_options = {
-    "github_url": "https://github.com/aiueola/opl-prompts",
+    "github_url": "https://github.com/aiueola/offline-prompts",
     # "twitter_url": "https://twitter.com/{account}",
     "icon_links": [
         {
             "name": "Speaker Deck",
-            "url": "https://speakerdeck.com/aiueola/xxx",  # fix later
+            "url": "https://speakerdeck.com/aiueola/opl-prompts",  # fix later
             "icon": "fa-brands fa-speaker-deck",
             "type": "fontawesome",
         },
@@ -100,8 +100,8 @@ html_theme_options = {
 html_static_path = ["_static"]
 html_css_files = ["css/custom.css"]
 
-html_title = "xxx"  # fix later
-html_use_opensearch = "https://xxx.readthedocs.io/en/latest/"  # fix later
+html_title = "OfflinePrompts"  # fix later
+html_use_opensearch = "https://offline-prompts.readthedocs.io/en/latest/"  # fix later
 favicons = [{"href": "images/favicon.png"}]
 
 
@@ -177,11 +177,12 @@ intersphinx_mapping = {
 #     'gallery/thumbnail-from-conf-py': 'gallery/a-local-file.png',
 # }
 
-# # provide links for linkcode
-# def linkcode_resolve(domain, info):
-#     if domain != 'py':
-#         return None
-#     if not info['module']:
-#         return None
-#     filename = info['module'].replace('.', '/')
-#     return f"https://github.com/{repository}/tree/main/{filename}.py"
+
+# provide links for linkcode
+def linkcode_resolve(domain, info):
+    if domain != "py":
+        return None
+    if not info["module"]:
+        return None
+    filename = info["module"].replace(".", "/")
+    return f"https://github.com/aiueola/offline-prompts/tree/main/{filename}.py"

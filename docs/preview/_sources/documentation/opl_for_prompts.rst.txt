@@ -1,4 +1,0 @@
-Off-policy learning for prompt-guided language generation
-===================================
-
-(problem formulation, baselines, proposed method)

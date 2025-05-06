@@ -1,0 +1,21 @@
+off\_prompts\_syn.dataset.function.ConfoundedRationalAuxiliaryOutputGenerator
+=============================================================================
+
+.. currentmodule:: off_prompts_syn.dataset.function
+
+.. autoclass:: ConfoundedRationalAuxiliaryOutputGenerator
+    :inherited-members:
+
+
+
+.. rubric:: Methods
+
+.. autosummary::
+    :nosignatures:
+
+    .. automethod:: sample_auxiliary_output
+
+
+
+
+
