@@ -44,7 +44,7 @@ To facilitate the research and practical applications of OPL of prompt policies,
 * To provide two benchmark environments, including synthetic and full-LLM.
 * To streamline the workflow to connect OPL and sentence generation modules for smooth experimentation. 
 
-In particular, the provided full-LLM benchmark models realistic users' responses to the presented sentence in the movie recommendation settings, by training a semi-synthetic reward simulator with the sentence-augmented [MovieLens](https://grouplens.org/datasets/movielens/) dataset. The benchmark design is a remarkable contribution to the research community, as we currently lack a realistic simulator on personalized sentence generation tasks that satisfies the following four key qualifications:
+In particular, the provided full-LLM benchmark models realistic users' responses to the presented sentence in the movie recommendation settings, by training a semi-synthetic reward simulator with the sentence-augmented `MovieLens <https://grouplens.org/datasets/movielens/>`_ dataset. The benchmark design is a remarkable contribution to the research community, as we currently lack a realistic simulator on personalized sentence generation tasks that satisfies the following four key qualifications:
 
 * LLMs have knowledge about items (e.g., movies) so that they can generate descriptions.
 * Items have more than two aspects (e.g., sci-fi and romance) so that choosing a prompt makes the difference in expected rewards.
@@ -130,21 +130,21 @@ Specifically, we implement the following OPL methods and corresponding OPE estim
 
 **OPL methods**
 
-* REINFORCE (online) :citep:``
-* Actor-critic :cite:``
-* Importance Sampling (IS) :cite:`precup2000eligibility`
-* Doubly Robust (DR) :cite:``
-* POTEC :cite:``
-* DSO (our proposal) :cite:``
+* REINFORCE (online) :cite:`williams1992simple`
+* Actor-critic :cite:`konda1999actor`
+* Importance Sampling (IS) :cite:`swaminathan2015batch`
+* Doubly Robust (DR) :cite:`dudik2014doubly`
+* POTEC :cite:`saito2024potec`
+* DSO (our proposal) :cite:`kiyohara2025off`
 
 **Correponding OPE estimators**
 
 * (online)
-* Direct Method (DM) :cite:``
-* Importance Sampling (IS) :cite:`precup2000eligibility`
-* Doubly Robust (DR) :cite:``
-* OffCEM :cite:``
-* Kernel IS (our proposal) :cite:``
+* Direct Method (DM) :cite:`beygelzimer2009offset`
+* Importance Sampling (IS) :cite:`strehl2010learning`
+* Doubly Robust (DR) :cite:`dudik2014doubly`
+* OffCEM :cite:`saito2023off`
+* Kernel IS (our proposal) :cite:`kiyohara2025offline`
 
 .. raw:: html
 
@@ -174,8 +174,8 @@ Our library is also compatible to HuggingFace and multiple language models can b
 
 **Remark**
 
-Our implementations get inspirations from `OpenBanditPipeline (OBP) <https://zr-obp.readthedocs.io/en/latest/>`_ :cite:`saito2021open` and `SCOPE-RL <>`_ :cite:``, which streamlines OPE/L in the general contextual bandit and RL settings.
-Compared to these libraries, ours specializes on the prompt-guided language generation, streamlines the implementation workflow that is compatible with `HugginFace <>`_ :cipe:, and enables data-driven simulation based on real-world recommendation datasets.
+Our implementations get inspirations from `OpenBanditPipeline (OBP) <https://zr-obp.readthedocs.io/en/latest/>`_ :cite:`saito2021open` and `SCOPE-RL <https://github.com/hakuhodo-technologies/scope-rl>`_ :cite:`kiyohara2023scope`, which streamlines OPE/L in the general contextual bandit and RL settings.
+Compared to these libraries, ours specializes on the prompt-guided language generation, streamlines the implementation workflow that is compatible with `HugginFace <https://huggingface.co/>`_ :cite:`wolf2019huggingface`, and enables data-driven simulation based on real-world recommendation datasets.
 
 .. raw:: html
 

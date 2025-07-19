@@ -50,17 +50,24 @@ class DefaultCandidateActionsLoader(BaseCandidateActionsLoader):
         if len(df.columns) != 1:
             raise ValueError("DataFrame should have a single column, but found False.")
         if self.n_actions > len(df):
-            raise ValueError("n_actions must be smaller than the length of the prompt dataframe, but found False.")
+            raise ValueError(
+                "n_actions must be smaller than the length of the prompt dataframe, but found False."
+            )
 
-        idx = torch.multinomial(torch.ones((len(df),)), num_samples=self.n_actions,)
+        idx = torch.multinomial(
+            torch.ones((len(df),)),
+            num_samples=self.n_actions,
+        )
         self.prompts = df.loc[idx].values[:, 0].tolist()
         self.action_list = self.prompts
 
         if self.path_to_prompt_embeddings is not None:
             prompt_embeddings = torch.load(self.path_to_prompt_embeddings)
             if len(df) != len(prompt_embeddings):
-                raise ValueError("The number of prompts and that of prompt embeddings must be the same, but found False.")
-            
+                raise ValueError(
+                    "The number of prompts and that of prompt embeddings must be the same, but found False."
+                )
+
             self.prompt_embeddings = prompt_embeddings[idx]
 
         else:
@@ -123,7 +130,9 @@ class DefaultContextQueryLoader(BaseContextQueryLoader):
         if self.path_to_query_embeddings is not None:
             self.query_embeddings = torch.load(self.path_to_query_embeddings)
             if len(self.queries) != len(self.query_embeddings):
-                raise ValueError("The number of queries and that of query embeddings must be the same, but found False.")
+                raise ValueError(
+                    "The number of queries and that of query embeddings must be the same, but found False."
+                )
 
             self.query_embeddings_dict = {
                 query: self.query_embeddings[i] for i, query in enumerate(self.queries)
@@ -145,7 +154,10 @@ class DefaultContextQueryLoader(BaseContextQueryLoader):
                     self.test_user_embeddings
                 ) = self.user_embeddings
             else:
-                self.train_user_embeddings, self.test_user_embeddings = train_test_split(
+                (
+                    self.train_user_embeddings,
+                    self.test_user_embeddings,
+                ) = train_test_split(
                     self.user_embeddings,
                     test_size=self.test_ratio,
                     shuffle=self.shuffle,
@@ -153,10 +165,12 @@ class DefaultContextQueryLoader(BaseContextQueryLoader):
                 )
             self.n_train_users = len(self.train_user_embeddings)
             self.n_test_users = len(self.test_user_embeddings)
-            
+
         else:
             if self.test_ratio == 0:
-                self.train_data_id = self.test_data_id = torch.arange(len(self.user_ids))
+                self.train_data_id = self.test_data_id = torch.arange(
+                    len(self.user_ids)
+                )
             else:
                 self.train_data_id, self.test_data_id = train_test_split(
                     torch.arange(len(self.user_ids)),
@@ -171,9 +185,9 @@ class DefaultContextQueryLoader(BaseContextQueryLoader):
         self.n_queries = len(self.queries)
 
     def sample_context_and_query(
-        self, 
-        n_samples: int, 
-        is_test: bool = False, 
+        self,
+        n_samples: int,
+        is_test: bool = False,
         return_query_embeddings: bool = False,
     ):
         """Sample context and query.
@@ -208,7 +222,9 @@ class DefaultContextQueryLoader(BaseContextQueryLoader):
 
         """
         if return_query_embeddings and self.query_embeddings is None:
-            raise RuntimeError("query_embeddings is not given. Please initialize the class with query embeddings.")
+            raise RuntimeError(
+                "query_embeddings is not given. Please initialize the class with query embeddings."
+            )
 
         if self.path_to_interaction_data is None:
             if is_test:
@@ -223,9 +239,9 @@ class DefaultContextQueryLoader(BaseContextQueryLoader):
 
         else:
             if is_test:
-                data_id = torch.randint(self.n_test_data, (n_samples, ))
+                data_id = torch.randint(self.n_test_data, (n_samples,))
             else:
-                data_id = torch.randint(self.n_train_data, (n_samples, ))
+                data_id = torch.randint(self.n_train_data, (n_samples,))
 
             user_id = self.user_ids[data_id]
             item_id = self.item_ids[data_id]

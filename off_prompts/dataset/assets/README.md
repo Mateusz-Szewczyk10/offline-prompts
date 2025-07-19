@@ -207,12 +207,12 @@ If you use this simulator in your project or find this resource useful, please c
 (package and documentation)
 
 Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.<br>
-**OfflinePrompts: Benchmark Suites for Prompt-guided Language Personalization**<br>
+**OfflinePrompts: Benchmark Suites for Prompt-guided Text Personalization from Logged Data**<br>
 [link]()
 
 ```
 @article{kiyohara2025offline,
-  title = {OfflinePrompts: Benchmark Suites for Prompt-guided Language Personalization},
+  title = {OfflinePrompts: Benchmark Suites for Prompt-guided Text Personalization from Logged Data},
   author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
   journal = {xxx},
   pages = {xxx--xxx},
@@ -223,12 +223,12 @@ Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.<br>
 (benchmarking experiment)
 
 Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.<br>
-**Off-Policy Learning for Prompt-guided Text Personalization Using Logged Bandit Data**<br>
+**An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization**<br>
 [link]()
 
 ```
 @article{kiyohara2025off,
-  title = {Off-Policy Learning for Prompt-guided Sentence Personalization Using Logged Bandit Data},
+  title = {An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization},
   author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
   journal = {xxx},
   pages = {xxx--xxx},

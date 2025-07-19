@@ -34,7 +34,9 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=_requirements_from_text("requirements.txt"),
     license="Apache License 2.0",
-    packages=find_packages(exclude=[".github", "docs", "examples", "tests"],),
+    packages=find_packages(
+        exclude=[".github", "docs", "examples", "tests"],
+    ),
     classifiers=[
         "Intended Audience :: Science/Research",
         "Programming Language :: Python :: 3.9",

@@ -30,11 +30,11 @@ from off_prompts.types import Tokens
 
 class MovielensDataset(Dataset):
     """Torch dataset class for MovieLens.
-    
+
     Bases: :class:`torch.utils.data.Dataset`
 
     Imported as: :class:`off_prompts.dataset.assets.reward_finetuner.MovieLensDataset`
-    
+
     Parameters
     -------
     df: DataFrame
@@ -60,8 +60,9 @@ class MovielensDataset(Dataset):
 
     device: str, default="cuda"
         Device.
-    
+
     """
+
     def __init__(
         self,
         df: pd.DataFrame,
@@ -75,7 +76,9 @@ class MovielensDataset(Dataset):
     ):
         if tokenizer is None:
             self.tokenizer = DistilBertTokenizerFast.from_pretrained(
-                "distilbert-base-uncased", truncation=True, do_lower_case=True,
+                "distilbert-base-uncased",
+                truncation=True,
+                do_lower_case=True,
             )
 
         if tokenizer_kwargs is None:
@@ -120,7 +123,7 @@ class MovielensDataset(Dataset):
 @dataclass
 class RewardFinetuner:
     """Finetuner class for the reward simulator.
-    
+
     Imported as: :class:`off_prompts.dataset.assets.reward_finetuner.RewardFinetuner`
 
     Parameters
@@ -142,8 +145,9 @@ class RewardFinetuner:
 
     random_state: int, default=None.
         Random state.
-    
+
     """
+
     model: BaseRewardSimulator
     optimizer: Optimizer = Adam
     optimizer_kwargs: Optional[Dict[str, Any]] = None
@@ -156,7 +160,7 @@ class RewardFinetuner:
         self.device = self.model.device
 
         if self.random_state is None:
-            self.seed(random_state)
+            self.seed(self.random_state)
 
         if self.optimizer_kwargs is None:
             self.optimizer_kwargs = {
@@ -165,7 +169,9 @@ class RewardFinetuner:
 
         if self.tokenizer is None:
             self.tokenizer = DistilBertTokenizerFast.from_pretrained(
-                "distilbert-base-uncased", truncation=True, do_lower_case=True,
+                "distilbert-base-uncased",
+                truncation=True,
+                do_lower_case=True,
             )
 
         if self.tokenizer_kwargs is None:
@@ -178,13 +184,13 @@ class RewardFinetuner:
             }
 
     def _random_masking(
-        self, 
-        tokens: Tokens, 
+        self,
+        tokens: Tokens,
         mask_ratio: float = 0.1,
         random_token_ratio: float = 0.1,
     ):
         """Apply random mask and replacement to input tokens.
-        
+
         Parameters
         -------
         tokens: Tokens
@@ -200,10 +206,12 @@ class RewardFinetuner:
         -------
         masked_token: Tokens
             Masked and randomly replaced tokens.
-        
+
         """
         if mask_ratio + random_token_ratio > 1:
-            raise ValueError("the sum of mask_ratio and random_token_ratio must be less than 1, but found False.")
+            raise ValueError(
+                "the sum of mask_ratio and random_token_ratio must be less than 1, but found False."
+            )
 
         input_ids = tokens["input_ids"]
         n_samples, max_length = input_ids.shape
@@ -213,20 +221,28 @@ class RewardFinetuner:
         original_ratio = 1 - mask_ratio - random_token_ratio
         mask_weight = torch.tensor([original_ratio, random_token_ratio, mask_ratio])
 
-        mask = torch.multinomial(
-            mask_weight, num_samples=total_samples, replacement=True,
-        ).reshape((n_samples, max_length)).to(device)
+        mask = (
+            torch.multinomial(
+                mask_weight,
+                num_samples=total_samples,
+                replacement=True,
+            )
+            .reshape((n_samples, max_length))
+            .to(device)
+        )
         mask[:, 0] = 0
         mask[:, -1] = 0
 
-        random_words = torch.randint(len(self.tokenizer), input_ids.shape, dtype=torch.long).to(device)
+        random_words = torch.randint(
+            len(self.tokenizer), input_ids.shape, dtype=torch.long
+        ).to(device)
         input_ids[mask == 1] = random_words[mask == 1]
         input_ids[mask == 2] = self.tokenizer.mask_token_id
         return tokens
 
     def init_with_reference_model(self, parent_model: BaseRewardSimulator):
         """Initialize user and item id embeddings and biases from a parent model.
-        
+
         Parameters
         -------
         parent_model: BaseRewardSimulator
@@ -292,7 +308,7 @@ class RewardFinetuner:
         random_state: Optional[int] = None,
     ):
         """Fine-tune model.
-        
+
         Parameters
         -------
         df: DataFrame
@@ -350,7 +366,7 @@ class RewardFinetuner:
         -------
         model: BaseRewardSimulator
             Finetuned reward simulator.
-        
+
         """
         if random_state is None:
             random_state = self.random_state
@@ -364,7 +380,10 @@ class RewardFinetuner:
         optimizer = self.optimizer(model.parameters(), **self.optimizer_kwargs)
 
         train_df, val_df = train_test_split(
-            df, test_size=val_ratio, shuffle=shuffle, random_state=random_state,
+            df,
+            test_size=val_ratio,
+            shuffle=shuffle,
+            random_state=random_state,
         )
 
         train_dataset = MovielensDataset(
@@ -390,9 +409,15 @@ class RewardFinetuner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
-        val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False,)
+        val_dataloader = DataLoader(
+            val_dataset,
+            batch_size=batch_size,
+            shuffle=False,
+        )
         model, train_dataloader, val_dataloader = accelerator.prepare(
             model, train_dataloader, val_dataloader
         )
@@ -433,10 +458,14 @@ class RewardFinetuner:
                     sentence_ = to_device(batch_["sentence"], device=accelerator.device)
 
                     masked_sentence_ = self._random_masking(
-                        sentence_, mask_ratio=mask_ratio, random_token_ratio=random_token_ratio,
+                        sentence_,
+                        mask_ratio=mask_ratio,
+                        random_token_ratio=random_token_ratio,
                     )
                     prediction_ = model(
-                        user_id=user_id_, item_id=item_id_, item_tokens=masked_sentence_,
+                        user_id=user_id_,
+                        item_id=item_id_,
+                        item_tokens=masked_sentence_,
                     )
                     train_loss_ = loss_fn(prediction_, reward_)
 

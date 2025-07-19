@@ -77,7 +77,7 @@ def _process(
     **kwargs,
 ):
     fix_seed(base_random_state)
-    
+
     dataset = load_dataset(
         n_actions=n_actions,
         reward_type=reward_type,
@@ -130,15 +130,23 @@ def _process(
         )
 
         fix_seed(eval_random_state)
-        policy_value = evaluate_policy(dataset=dataset, policy=logging_policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=logging_policy,
+        )
 
     elif is_uniform_policy:
         uniform_policy = load_uniform_policy(
-            dataset=dataset, device=device, random_state=base_random_state,
+            dataset=dataset,
+            device=device,
+            random_state=base_random_state,
         )
 
         fix_seed(eval_random_state)
-        policy_value = evaluate_policy(dataset=dataset, policy=uniform_policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=uniform_policy,
+        )
 
     elif is_regression_based_greedy:
         prompt_reward_predictor = load_reward_predictor(
@@ -161,9 +169,10 @@ def _process(
 
         fix_seed(eval_random_state)
         policy_value = evaluate_policy(
-            dataset=dataset, policy=regression_based_greedy_policy,
+            dataset=dataset,
+            policy=regression_based_greedy_policy,
         )
-    
+
     elif is_no_prompt_baseline:
         fix_seed(eval_random_state)
         policy_value = get_baseline_performance(
@@ -191,7 +200,10 @@ def _process(
         )
 
         fix_seed(eval_random_state)
-        policy_value = evaluate_policy(dataset=dataset, policy=policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=policy,
+        )
 
     elif not (is_two_stage_policy or is_dso):
         if gradient_type in ["regression-based", "hybrid"]:
@@ -223,7 +235,10 @@ def _process(
         )
 
         fix_seed(eval_random_state)
-        policy_value = evaluate_policy(dataset=dataset, policy=policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=policy,
+        )
 
     elif is_two_stage_policy:
         prompt_reward_predictor = load_reward_predictor(
@@ -254,7 +269,10 @@ def _process(
         )
 
         fix_seed(eval_random_state)
-        policy_value = evaluate_policy(dataset=dataset, policy=policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=policy,
+        )
 
     elif is_dso:
         if kernel_type == "uniform":
@@ -287,7 +305,10 @@ def _process(
         )
 
         fix_seed(eval_random_state)
-        policy_value = evaluate_policy(dataset=dataset, policy=policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=policy,
+        )
 
     return policy_value
 
@@ -314,11 +335,18 @@ def process(conf: DictConfig):
         print("evaluating logging policy..")
         logging_performance = []
 
-        for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-            for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+        for dataset_random_state in range(
+            dataset_start_random_state, dataset_n_random_state
+        ):
+            for optimizer_random_state in range(
+                optimizer_start_random_state, optimizer_n_random_state
+            ):
                 conf_["dataset_random_state"] = dataset_random_state
                 conf_["optimizer_random_state"] = optimizer_random_state
-                performance_ = _process(**conf_, is_logging_policy=True,)
+                performance_ = _process(
+                    **conf_,
+                    is_logging_policy=True,
+                )
                 logging_performance.append(performance_)
 
         df["logging"] = logging_performance
@@ -327,11 +355,18 @@ def process(conf: DictConfig):
         print("evaluating uniform policy..")
         uniform_performance = []
 
-        for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-            for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+        for dataset_random_state in range(
+            dataset_start_random_state, dataset_n_random_state
+        ):
+            for optimizer_random_state in range(
+                optimizer_start_random_state, optimizer_n_random_state
+            ):
                 conf_["dataset_random_state"] = dataset_random_state
                 conf_["optimizer_random_state"] = optimizer_random_state
-                performance_ = _process(**conf_, is_uniform_policy=True,)
+                performance_ = _process(
+                    **conf_,
+                    is_uniform_policy=True,
+                )
                 uniform_performance.append(performance_)
 
         df["uniform"] = uniform_performance
@@ -340,11 +375,18 @@ def process(conf: DictConfig):
         print("evaluating no-prompt baseline..")
         no_prompt_performance = []
 
-        for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-            for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+        for dataset_random_state in range(
+            dataset_start_random_state, dataset_n_random_state
+        ):
+            for optimizer_random_state in range(
+                optimizer_start_random_state, optimizer_n_random_state
+            ):
                 conf_["dataset_random_state"] = dataset_random_state
                 conf_["optimizer_random_state"] = optimizer_random_state
-                performance_ = _process(**conf_, is_no_prompt_baseline=True,)
+                performance_ = _process(
+                    **conf_,
+                    is_no_prompt_baseline=True,
+                )
                 no_prompt_performance.append(performance_)
 
         df["no-prompt"] = no_prompt_performance
@@ -353,11 +395,18 @@ def process(conf: DictConfig):
         print("evaluating skyline..")
         skyline_performance = []
 
-        for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-            for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+        for dataset_random_state in range(
+            dataset_start_random_state, dataset_n_random_state
+        ):
+            for optimizer_random_state in range(
+                optimizer_start_random_state, optimizer_n_random_state
+            ):
                 conf_["dataset_random_state"] = dataset_random_state
                 conf_["optimizer_random_state"] = optimizer_random_state
-                performance_ = _process(**conf_, is_skyline=True,)
+                performance_ = _process(
+                    **conf_,
+                    is_skyline=True,
+                )
                 skyline_performance.append(performance_)
 
         df["skyline"] = skyline_performance
@@ -366,12 +415,22 @@ def process(conf: DictConfig):
         print("evaluating online policy..")
         online_performance = []
 
-        for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-            for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+        for dataset_random_state in range(
+            dataset_start_random_state, dataset_n_random_state
+        ):
+            for optimizer_random_state in range(
+                optimizer_start_random_state, optimizer_n_random_state
+            ):
                 conf_["dataset_random_state"] = dataset_random_state
                 conf_["optimizer_random_state"] = optimizer_random_state
-                performance_ = _process(**conf_, is_skyline=True,)
-                performance_ = _process(**conf_, is_online_policy=True,)
+                performance_ = _process(
+                    **conf_,
+                    is_skyline=True,
+                )
+                performance_ = _process(
+                    **conf_,
+                    is_online_policy=True,
+                )
                 online_performance.append(performance_)
 
         df["online"] = online_performance
@@ -380,11 +439,18 @@ def process(conf: DictConfig):
         print("evaluating regression-based greedy policy..")
         greedy_performance = []
 
-        for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-            for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+        for dataset_random_state in range(
+            dataset_start_random_state, dataset_n_random_state
+        ):
+            for optimizer_random_state in range(
+                optimizer_start_random_state, optimizer_n_random_state
+            ):
                 conf_["dataset_random_state"] = dataset_random_state
                 conf_["optimizer_random_state"] = optimizer_random_state
-                performance_ = _process(**conf_, is_skyline=True,)
+                performance_ = _process(
+                    **conf_,
+                    is_skyline=True,
+                )
                 greedy_performance.append(performance_)
 
         df["greedy"] = greedy_performance
@@ -397,11 +463,19 @@ def process(conf: DictConfig):
             conf_["gradient_type"] = gradient_type
             performance = []
 
-            for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-                for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+            for dataset_random_state in range(
+                dataset_start_random_state, dataset_n_random_state
+            ):
+                for optimizer_random_state in range(
+                    optimizer_start_random_state, optimizer_n_random_state
+                ):
                     conf_["dataset_random_state"] = dataset_random_state
                     conf_["optimizer_random_state"] = optimizer_random_state
-                    performance.append(_process(**conf_,))
+                    performance.append(
+                        _process(
+                            **conf_,
+                        )
+                    )
 
             df[f"{gradient_type} (single)"] = performance
 
@@ -412,11 +486,19 @@ def process(conf: DictConfig):
         conf_["gradient_type"] = gradient_type
         performance = []
 
-        for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-            for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+        for dataset_random_state in range(
+            dataset_start_random_state, dataset_n_random_state
+        ):
+            for optimizer_random_state in range(
+                optimizer_start_random_state, optimizer_n_random_state
+            ):
                 conf_["dataset_random_state"] = dataset_random_state
                 conf_["optimizer_random_state"] = optimizer_random_state
-                performance.append(_process(**conf_,))
+                performance.append(
+                    _process(
+                        **conf_,
+                    )
+                )
 
         df["DSO"] = performance
 
@@ -427,16 +509,24 @@ def process(conf: DictConfig):
         conf_["gradient_type"] = gradient_type
         performance = []
 
-        for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-            for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+        for dataset_random_state in range(
+            dataset_start_random_state, dataset_n_random_state
+        ):
+            for optimizer_random_state in range(
+                optimizer_start_random_state, optimizer_n_random_state
+            ):
                 conf_["dataset_random_state"] = dataset_random_state
                 conf_["optimizer_random_state"] = optimizer_random_state
-                performance.append(_process(**conf_,))
-        
+                performance.append(
+                    _process(
+                        **conf_,
+                    )
+                )
+
         df["POTEC"] = performance
 
     df["dataset_random_state"] = np.repeat(
-        np.arange(dataset_start_random_state, dataset_n_random_state), 
+        np.arange(dataset_start_random_state, dataset_n_random_state),
         optimizer_n_random_state - optimizer_start_random_state,
     )
     df["optimizer_random_state"] = np.tile(

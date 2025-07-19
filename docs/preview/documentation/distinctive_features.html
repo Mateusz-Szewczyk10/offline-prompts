@@ -181,6 +181,13 @@
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="news.html">
                         News
                       </a>
@@ -188,14 +195,14 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/releases">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
                         Release Notes
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/404">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
                         Proceedings
                       </a>
                     </li>
@@ -345,6 +352,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="news.html">
                         News
                       </a>
@@ -352,14 +366,14 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/releases">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
                         Release Notes
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/404">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
                         Proceedings
                       </a>
                     </li>
@@ -429,6 +443,7 @@ document.write(`
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Why OfflinePrompts?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Problem Formulation and Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dso.html">DSO for Data-Efficient OPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">OfflinePrompts Package Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.html">off_prompts.dataset.base</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BaseCandidateActionsLoader.html">off_prompts.dataset.base.BaseCandidateActionsLoader</a></li>
@@ -546,6 +561,7 @@ document.write(`
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl">Github</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="news.html">News</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/releases">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/404">Proceedings</a></li>
 </ul>
@@ -631,7 +647,7 @@ If the user is a sci-fi lover, the description focusing on the “sci-fi” aspe
 <li><p>To provide two benchmark environments, including synthetic and full-LLM.</p></li>
 <li><p>To streamline the workflow to connect OPL and sentence generation modules for smooth experimentation.</p></li>
 </ul>
-<p>In particular, the provided full-LLM benchmark models realistic users’ responses to the presented sentence in the movie recommendation settings, by training a semi-synthetic reward simulator with the sentence-augmented [MovieLens](<a class="reference external" href="https://grouplens.org/datasets/movielens/">https://grouplens.org/datasets/movielens/</a>) dataset. The benchmark design is a remarkable contribution to the research community, as we currently lack a realistic simulator on personalized sentence generation tasks that satisfies the following four key qualifications:</p>
+<p>In particular, the provided full-LLM benchmark models realistic users’ responses to the presented sentence in the movie recommendation settings, by training a semi-synthetic reward simulator with the sentence-augmented <a class="reference external" href="https://grouplens.org/datasets/movielens/">MovieLens</a> dataset. The benchmark design is a remarkable contribution to the research community, as we currently lack a realistic simulator on personalized sentence generation tasks that satisfies the following four key qualifications:</p>
 <ul class="simple">
 <li><p>LLMs have knowledge about items (e.g., movies) so that they can generate descriptions.</p></li>
 <li><p>Items have more than two aspects (e.g., sci-fi and romance) so that choosing a prompt makes the difference in expected rewards.</p></li>
@@ -685,21 +701,21 @@ Specifically, we implement the following OPL methods and corresponding OPE estim
 </div>
 <div class="white-space-5px"></div><p><strong>OPL methods</strong></p>
 <ul class="simple">
-<li><p>REINFORCE (online) :citep:``</p></li>
-<li><p>Actor-critic :cite:``</p></li>
-<li><p>Importance Sampling (IS) <span id="id1">[]</span></p></li>
-<li><p>Doubly Robust (DR) :cite:``</p></li>
-<li><p>POTEC :cite:``</p></li>
-<li><p>DSO (our proposal) :cite:``</p></li>
+<li><p>REINFORCE (online) <span id="id1">[]</span></p></li>
+<li><p>Actor-critic <span id="id2">[]</span></p></li>
+<li><p>Importance Sampling (IS) <span id="id3">[]</span></p></li>
+<li><p>Doubly Robust (DR) <span id="id4">[]</span></p></li>
+<li><p>POTEC <span id="id5">[]</span></p></li>
+<li><p>DSO (our proposal) <span id="id6">[]</span></p></li>
 </ul>
 <p><strong>Correponding OPE estimators</strong></p>
 <ul class="simple">
 <li><p>(online)</p></li>
-<li><p>Direct Method (DM) :cite:``</p></li>
-<li><p>Importance Sampling (IS) <span id="id2">[]</span></p></li>
-<li><p>Doubly Robust (DR) :cite:``</p></li>
-<li><p>OffCEM :cite:``</p></li>
-<li><p>Kernel IS (our proposal) :cite:``</p></li>
+<li><p>Direct Method (DM) <span id="id7">[]</span></p></li>
+<li><p>Importance Sampling (IS) <span id="id8">[]</span></p></li>
+<li><p>Doubly Robust (DR) <span id="id9">[]</span></p></li>
+<li><p>OffCEM <span id="id10">[]</span></p></li>
+<li><p>Kernel IS (our proposal) <span id="id11">[]</span></p></li>
 </ul>
 <div class="white-space-5px"></div></section>
 <section id="movie-description-personalization-using-movielens">
@@ -714,8 +730,8 @@ Our library is also compatible to HuggingFace and multiple language models can b
 </div>
 </div>
 <div class="white-space-20px"></div><p><strong>Remark</strong></p>
-<p>Our implementations get inspirations from <a class="reference external" href="https://zr-obp.readthedocs.io/en/latest/">OpenBanditPipeline (OBP)</a> <span id="id3">[]</span> and <a href="#id6"><span class="problematic" id="id7">`SCOPE-RL &lt;&gt;`_</span></a> :cite:<a href="#id4"><span class="problematic" id="id5">``</span></a>, which streamlines OPE/L in the general contextual bandit and RL settings.
-Compared to these libraries, ours specializes on the prompt-guided language generation, streamlines the implementation workflow that is compatible with <a href="#id8"><span class="problematic" id="id9">`HugginFace &lt;&gt;`_</span></a> :cipe:, and enables data-driven simulation based on real-world recommendation datasets.</p>
+<p>Our implementations get inspirations from <a class="reference external" href="https://zr-obp.readthedocs.io/en/latest/">OpenBanditPipeline (OBP)</a> <span id="id12">[]</span> and <a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl">SCOPE-RL</a> <span id="id13">[]</span>, which streamlines OPE/L in the general contextual bandit and RL settings.
+Compared to these libraries, ours specializes on the prompt-guided language generation, streamlines the implementation workflow that is compatible with <a class="reference external" href="https://huggingface.co/">HugginFace</a> <span id="id14">[]</span>, and enables data-driven simulation based on real-world recommendation datasets.</p>
 <div class="white-space-5px"></div><div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
 <div class="sd-row docutils">
 <div class="sd-col sd-d-flex-column sd-col-3 sd-col-xs-3 sd-col-sm-3 sd-col-md-3 sd-col-lg-3 sd-m-0 sd-p-0 docutils">

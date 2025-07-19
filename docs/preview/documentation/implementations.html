@@ -182,6 +182,13 @@
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="news.html">
                         News
                       </a>
@@ -189,14 +196,14 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/releases">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
                         Release Notes
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/404">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
                         Proceedings
                       </a>
                     </li>
@@ -350,6 +357,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="news.html">
                         News
                       </a>
@@ -357,14 +371,14 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/releases">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
                         Release Notes
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-external" href="https://github.com/hakuhodo-technologies/offline-prompts/404">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
                         Proceedings
                       </a>
                     </li>
@@ -434,6 +448,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="distinctive_features.html">Why OfflinePrompts?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem Formulation and Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dso.html">DSO for Data-Efficient OPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">OfflinePrompts Package Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.html">off_prompts.dataset.base</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BaseCandidateActionsLoader.html">off_prompts.dataset.base.BaseCandidateActionsLoader</a></li>
@@ -551,6 +566,7 @@ document.write(`
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl">Github</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="news.html">News</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/releases">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/404">Proceedings</a></li>
 </ul>
@@ -649,11 +665,11 @@ Thus, we need to address such <em>counterfactuals</em> and <em>distribution shif
 <h2>OPL methods<a class="headerlink" href="#opl-methods" title="Permalink to this heading">#</a></h2>
 <p>In this section, we introduce the following OPL methods:</p>
 <ul class="simple">
-<li><p>Regression :cite:``</p></li>
-<li><p>Importance Sampling (IS) :cite:``</p></li>
-<li><p>Doubly Robust (DR) :cite:``</p></li>
-<li><p>POTEC :cite:``</p></li>
-<li><p>Direct Sentence (DSO, ours) :cite:``</p></li>
+<li><p>Regression <span id="id2">[]</span></p></li>
+<li><p>Importance Sampling (IS) <span id="id3">[]</span></p></li>
+<li><p>Doubly Robust (DR) <span id="id4">[]</span></p></li>
+<li><p>POTEC <span id="id5">[]</span></p></li>
+<li><p>Direct Sentence (DSO, ours) <span id="id6">[]</span></p></li>
 </ul>
 <section id="policy-gradient-pg">
 <h3>Policy gradient (PG)<a class="headerlink" href="#policy-gradient-pg" title="Permalink to this heading">#</a></h3>
@@ -662,37 +678,37 @@ Thus, we need to address such <em>counterfactuals</em> and <em>distribution shif
 \[\nabla_{\theta} V(\pi_{\theta}) = \mathbb{E}_{p(x) \pi_{\theta}(a | x) p(r | x, a)} [\nabla_{\theta} \log \pi_{\theta}(a | x) r ].\]</div>
 <p>In the following, we denote <span class="math notranslate nohighlight">\(z \sim p(z)\)</span> as sampling a <em>single</em> random variable <span class="math notranslate nohighlight">\(z\)</span> from the probability distribution <span class="math notranslate nohighlight">\(p(z)\)</span>.</p>
 </section>
-<section id="regression-konda1999actor">
-<h3>Regression <span id="id2">[]</span>.<a class="headerlink" href="#regression-konda1999actor" title="Permalink to this heading">#</a></h3>
-<p>A typical way of using logged data is to train a reward predictor <span class="math notranslate nohighlight">\(\hat{q}\)</span> <span id="id3">[]</span>, and then use the predicted reward to estimate the policy gradient (PG).</p>
+<section id="regression">
+<h3>Regression<a class="headerlink" href="#regression" title="Permalink to this heading">#</a></h3>
+<p>A typical way of using logged data is to train a reward predictor <span class="math notranslate nohighlight">\(\hat{R}\)</span> <span id="id7">[]</span>, and then use the predicted reward to estimate the policy gradient (PG).</p>
 <div class="math notranslate nohighlight">
-\[\nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \nabla_{\theta} \log \pi_{\theta}(a | x_i) \hat{q}(x_i, a) \right],\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{q}(x, a) \approx \mathbb{E}[r|x,a]\)</span>.
+\[\nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \nabla_{\theta} \log \pi_{\theta}(a | x_i) \hat{R}(x_i, a) \right],\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{R}(x, a) \approx \mathbb{E}[r|x,a]\)</span>.
 Oftentimes, an accurate regression for OPL is difficult under complex relations between prompts and rewards.
 This is because the reward observation is partial and covariate shifts arise between the logging policy (<span class="math notranslate nohighlight">\(\pi_0\)</span>) and the target policy (<span class="math notranslate nohighlight">\(\pi_{\theta}\)</span>).
-If the learned regression model <span class="math notranslate nohighlight">\(\hat{q}\)</span> is inaccurate, the estimated PG can have a high bias <span id="id4">[]</span>.</p>
+If the learned regression model <span class="math notranslate nohighlight">\(\hat{R}\)</span> is inaccurate, the estimated PG can have a high bias <span id="id8">[]</span>.</p>
 </section>
-<section id="importance-sampling-is-swaminathan2015batch">
-<h3>Importance sampling (IS) <span id="id5">[]</span><a class="headerlink" href="#importance-sampling-is-swaminathan2015batch" title="Permalink to this heading">#</a></h3>
+<section id="importance-sampling-is">
+<h3>Importance sampling (IS)<a class="headerlink" href="#importance-sampling-is" title="Permalink to this heading">#</a></h3>
 <p>Instead of using potentially inaccurate regression, IS corrects the distribution shift between <span class="math notranslate nohighlight">\(\pi_0\)</span> and <span class="math notranslate nohighlight">\(\pi_{\theta}\)</span> by reweighing the observations:</p>
 <div class="math notranslate nohighlight">
 \[\nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) r_i.\]</div>
 <p>IS is unbiased under the textit{action support} condition, i.e., <span class="math notranslate nohighlight">\(\forall (x, a) \in \mathcal{X} \times \mathcal{A}, \, \pi_{\theta}(a | x) &gt; 0 \implies \pi_0(a | x) &gt; 0\)</span>.
-However, IS produces considerable bias due to the violation of the condition called deficient support <span id="id6">[]</span> and extremely high variance due to large importance weight <span id="id7">[]</span>, which are likely when the action space is large.</p>
+However, IS produces considerable bias due to the violation of the condition called deficient support <span id="id9">[]</span> and extremely high variance due to large importance weight <span id="id10">[]</span>, which are likely when the action space is large.</p>
 </section>
-<section id="doubly-robust-dr-dudik2011doubly">
-<h3>Doubly Robust (DR) <span id="id8">[]</span><a class="headerlink" href="#doubly-robust-dr-dudik2011doubly" title="Permalink to this heading">#</a></h3>
+<section id="doubly-robust-dr">
+<h3>Doubly Robust (DR)<a class="headerlink" href="#doubly-robust-dr" title="Permalink to this heading">#</a></h3>
 <p>DR is a hybrid approach, which effectively combines the regression and IS to exploit the benefits of the two.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\nabla_{\theta} V(\pi_{\theta})
-&amp;\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) (r_i - \hat{q}(x_i, a_i)) \\
-&amp; + \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}(a_i | x_i) \hat{q}(x_i, a)].\end{split}\]</div>
+&amp;\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) (r_i - \hat{R}(x_i, a_i)) \\
+&amp; + \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}(a_i | x_i) \hat{R}(x_i, a)].\end{split}\]</div>
 <p>By using the regressed reward as a control variate, DR often reduces the variance of IS, while remaining unbiased under the same condition as IS.
-However, when the regression is inaccurate, the variance reduction is limited and DR often suffers from high variance when the action space is large <span id="id9">[]</span>.
+However, when the regression is inaccurate, the variance reduction is limited and DR often suffers from high variance when the action space is large <span id="id11">[]</span>.
 The shortcoming of IS and DR is that these typical methods treat each prompt independently and discard the similarity among prompts and sentences.</p>
 </section>
-<section id="potec-saito2024potec">
-<h3>POTEC <span id="id10">[]</span><a class="headerlink" href="#potec-saito2024potec" title="Permalink to this heading">#</a></h3>
+<section id="potec">
+<h3>POTEC<a class="headerlink" href="#potec" title="Permalink to this heading">#</a></h3>
 <p>To deal with the variance issue of DR, POTEC considers the clustering in the action space and decomposes the policy into two stages as follows.</p>
 <div class="math notranslate nohighlight">
 \[\pi_{\theta}(a|x) = \sum_{c \in \mathcal{C}} \pi_{\theta}^{\text{1st}}(c|x) \pi^{\text{2nd}}(a|x,c),\]</div>
@@ -700,15 +716,15 @@ The shortcoming of IS and DR is that these typical methods treat each prompt ind
 Using this decomposition, POTEC chooses clusters via a DR-style approach as follows, and chooses actions within a cluster via regression.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\nabla_{\theta} V(\pi_{\theta})
-&amp;\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}^{\text{1st}}(c(a_i)|x_i)}{\pi_0^{\text{1st}}(c(a_i)|x_i)} \nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) (r_i - \hat{q}(x_i, a_i)) \\
-&amp;+ \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) \hat{q}(x_i, a)],\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\pi_0^{\text{1st}}(c(a)|x) = \sum_{a' \in \mathcal{A}, c(a')=c(a)} \pi_0(a|x)\)</span>. The second-stage policy greedily chooses action as <span class="math notranslate nohighlight">\(\pi^{\text{2nd}}(a | x, c) = \mathbb{I} \{ \hat{q}(x, a) = {\arg\max}_{a' \in \mathcal{A}, c(a') = c(a)} \hat{q}(x,a') \}\)</span>.
+&amp;\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}^{\text{1st}}(c(a_i)|x_i)}{\pi_0^{\text{1st}}(c(a_i)|x_i)} \nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) (r_i - \hat{R}(x_i, a_i)) \\
+&amp;+ \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) \hat{R}(x_i, a)],\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi_0^{\text{1st}}(c(a)|x) = \sum_{a' \in \mathcal{A}, c(a')=c(a)} \pi_0(a|x)\)</span>. The second-stage policy greedily chooses action as <span class="math notranslate nohighlight">\(\pi^{\text{2nd}}(a | x, c) = \mathbb{I} \{ \hat{R}(x, a) = {\arg\max}_{a' \in \mathcal{A}, c(a') = c(a)} \hat{R}(x,a') \}\)</span>.
 By applying IS on the clustered action space, POTEC reduces the variance of naive IS, leveraging the similarity among prompts.
 POTEC is also able to convert regression to a pair-wise regression within a cluster.
 However, especially when the relation between actions and rewards is complex, a good clustering is often hard to identify, and POTEC cannot take the rich information about generated sentences into account.</p>
 </section>
-<section id="direct-sentence-dso-kiyohara2024prompt">
-<h3>Direct Sentence (DSO) <span id="id11">[]</span><a class="headerlink" href="#direct-sentence-dso-kiyohara2024prompt" title="Permalink to this heading">#</a></h3>
+<section id="direct-sentence-dso">
+<h3>Direct Sentence (DSO)<a class="headerlink" href="#direct-sentence-dso" title="Permalink to this heading">#</a></h3>
 <p>To take the similarity among generated sentences into account, DSO calculates the policy gradient in the (marginalized) sentence space as follows.</p>
 <div class="math notranslate nohighlight">
 \[\nabla_{\theta} V(\pi_{\theta})
@@ -731,47 +747,48 @@ DSO also keeps the bias small by using similarity-based weighting on neighbors v
 <h2>OPE estimators<a class="headerlink" href="#ope-estimators" title="Permalink to this heading">#</a></h2>
 <p>In this section, we also introduce the following OPE estimators corresponding to the aforementioned OPL methods:</p>
 <ul class="simple">
-<li><p>Direct Method (DM) :cite:``</p></li>
-<li><p>Importance Sampling (IS) :cite:``</p></li>
-<li><p>Doubly Robust (DR) :cite:``</p></li>
-<li><p>OffCEM :cite:``</p></li>
-<li><p>Kernel IS (ours) :cite:``</p></li>
+<li><p>Direct Method (DM) <span id="id12">[]</span></p></li>
+<li><p>Importance Sampling (IS) <span id="id13">[]</span></p></li>
+<li><p>Doubly Robust (DR) <span id="id14">[]</span></p></li>
+<li><p>OffCEM <span id="id15">[]</span></p></li>
+<li><p>Kernel IS (our proposal) <span id="id16">[]</span></p></li>
 </ul>
-<section id="direct-method-dm-beygelzimer2009offset">
-<h3>Direct Method (DM) <span id="id12">[]</span><a class="headerlink" href="#direct-method-dm-beygelzimer2009offset" title="Permalink to this heading">#</a></h3>
+<section id="direct-method-dm">
+<h3>Direct Method (DM)<a class="headerlink" href="#direct-method-dm" title="Permalink to this heading">#</a></h3>
 <p>To enable the offline evaluation of a new policy, one can consider applying off-policy evaluation (OPE).
 DM is a prevalent method in OPE, which estimates the policy value using the regressed reward.</p>
 <div class="math notranslate nohighlight">
-\[V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \hat{q}(x_i, a) \right].\]</div>
+\[V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \hat{R}(x_i, a) \right].\]</div>
 <p>Similar to the REINFORCE policy gradient, the benefit of this estimator is not incurring high variance. However, when the regression is inaccurate due to covariate shifts, the estimation has a serious bias.</p>
 </section>
-<section id="inverse-propensity-scoring-ips-citep-strehl2010learning">
-<h3>Inverse Propensity Scoring (IPS) <a href="#id13"><span class="problematic" id="id14">:citep:`strehl2010learning`</span></a><a class="headerlink" href="#inverse-propensity-scoring-ips-citep-strehl2010learning" title="Permalink to this heading">#</a></h3>
-<p>IPS applies importance sampling to correct the reward observation probability as follows.</p>
+<section id="id17">
+<h3>Importance Sampling (IS)<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<p>IS applies importance sampling to correct the reward observation probability as follows.</p>
 <div class="math notranslate nohighlight">
 \[V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} r_i.\]</div>
-<p>As seen in the discussion of OPL, IPS suffers from high variance and deficient support, especially when the number of candidate actions (i.e., prompts) is large <span id="id15">[]</span>.</p>
+<p>As seen in the discussion of OPL, IS suffers from high variance and deficient support, especially when the number of candidate actions (i.e., prompts) is large <span id="id18">[]</span>.</p>
 </section>
-<section id="id17">
-<h3>Doubly Robust (DR) <span id="id16">[]</span><a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<section id="id19">
+<h3>Doubly Robust (DR)<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
 <p>DR uses the regressed reward as a control variate when applying importance weights as follows.</p>
 <div class="math notranslate nohighlight">
 \[V(\pi_{\theta})
-\approx \frac{1}{n} \sum_{i=1}^n \left\{ \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)}  (r_i - \hat{q}(x_i, a_i)) + \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{q}(x_i, a)] \right\}.\]</div>
-<p>DR reduces the variance of IPS when the regression is reasonably accurate (i.e., $|q(x, a) - hat{q}(x, a)| leq <a href="#id18"><span class="problematic" id="id19">|</span></a>q(x, a)|$). Also, DR is textit{<a href="#id20"><span class="problematic" id="id21">``</span></a>doubly’’ robust} in that it is unbiased either when the regression is accurate for all $(x, a) in mathcal{X} times mathcal{A}$ or $pi_0$ is accessible and do not have deficient support. However, this condition is hard to satisfy when the action space is large, and empirically, DR is known to perform similarly to IS in large action settings~citep{saito2022off, saito2023off}.</p>
+\approx \frac{1}{n} \sum_{i=1}^n \left\{ \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)}  (r_i - \hat{R}(x_i, a_i)) + \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{R}(x_i, a)] \right\}.\]</div>
+<p>DR reduces the variance of IPS when the regression is reasonably accurate (i.e., $|R(x, a) - hat{R}(x, a)| leq <a href="#id20"><span class="problematic" id="id21">|</span></a>R(x, a)|$). Also, DR is <em>``doubly’’ robust</em> in that it is unbiased either when the regression is accurate for all <span class="math notranslate nohighlight">\((x, a) \in \mathcal{X} \times \mathcal{A}\)</span> or <span class="math notranslate nohighlight">\(\pi_0\)</span> is accessible and do not have deficient support.
+However, this condition is hard to satisfy when the action space is large, and empirically, DR is known to perform similarly to IS in large action settings <span id="id22">[]</span>.</p>
 </section>
-<section id="offcem-saito2023off">
-<h3>OffCEM <span id="id22">[]</span><a class="headerlink" href="#offcem-saito2023off" title="Permalink to this heading">#</a></h3>
+<section id="offcem">
+<h3>OffCEM<a class="headerlink" href="#offcem" title="Permalink to this heading">#</a></h3>
 <p>OffCEM aggregates the reward observation among similar prompts using the clusters in the action space as follows.</p>
 <div class="math notranslate nohighlight">
 \[V(\pi_{\theta})
-\approx \frac{1}{n} \sum_{i=1}^n \left \{ \frac{\pi_{\theta}(c(a_i)|x_i)}{\pi_0(c(a_i)|x_i)} (r_i - \hat{q}(x_i, a_i))
-+ \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{q}(x_i, a)] \right \},\]</div>
+\approx \frac{1}{n} \sum_{i=1}^n \left \{ \frac{\pi_{\theta}(c(a_i)|x_i)}{\pi_0(c(a_i)|x_i)} (r_i - \hat{R}(x_i, a_i))
++ \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{R}(x_i, a)] \right \},\]</div>
 <p>where <span class="math notranslate nohighlight">\(\pi(c(a)|x) = \sum_{a' \in \mathcal{A}, c(a')=c(a)} \pi(a|x)\)</span> is the probability of choosing cluster <span class="math notranslate nohighlight">\(c\)</span> under policy <span class="math notranslate nohighlight">\(\pi\)</span> (note that, in contrast to POTEC, this estimator is applicable regardless <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\pi_0\)</span> being two-stage policies or not).
 OffCEM reduces the variance of DR by avoiding extreme importance weights. However, when there is a complex relation between prompts and rewards and a cluster contains prompts that produce different rewards, OffCEM may incur high bias in estimation.</p>
 </section>
-<section id="kernel-is-kiyohara2024prompt">
-<h3>Kernel IS <span id="id23">[]</span><a class="headerlink" href="#kernel-is-kiyohara2024prompt" title="Permalink to this heading">#</a></h3>
+<section id="kernel-is">
+<h3>Kernel IS<a class="headerlink" href="#kernel-is" title="Permalink to this heading">#</a></h3>
 <p>Kernel IS applies importance sampling on the marginalized sentence space as follows.</p>
 <div class="math notranslate nohighlight">
 \[V(\pi_{\theta})
@@ -783,8 +800,8 @@ By leveraging the similarity among sentences, which more directly affects the re
 <section id="online-evalution-and-learning">
 <h2>Online evalution and learning<a class="headerlink" href="#online-evalution-and-learning" title="Permalink to this heading">#</a></h2>
 <p>Finally, we also provide online methods as a potential skyline.</p>
-<section id="reinforce-sutton2018reinforcement-deng2022rlprompt">
-<h3>REINFORCE <span id="id24">[]</span><a class="headerlink" href="#reinforce-sutton2018reinforcement-deng2022rlprompt" title="Permalink to this heading">#</a></h3>
+<section id="reinforce">
+<h3>REINFORCE<a class="headerlink" href="#reinforce" title="Permalink to this heading">#</a></h3>
 <p>When the policy can interact with the environment, we estimate the policy gradient via Monte-Carlo (MC) estimation as follows.</p>
 <div class="math notranslate nohighlight">
 \[\nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{m} \sum_{i=1}^m \mathbb{E}_{x_i \sim p(x), a_i \sim \pi_{\theta}(a | x_i), r_i \sim p(r|x_i,a_i)}\left[ \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) r_i \right],\]</div>
@@ -798,8 +815,8 @@ While REINFORCE can calculate the gradient with an adequate number of samples, t
 <div class="math notranslate nohighlight">
 \[V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{x_i \sim p(x), a_i \sim \pi_{\theta}(a | x_i), r_i \sim p(r|x_i,a_i)}\left[ r_i \right].\]</div>
 <p>The benefit of online testing is to enable accurate estimation of the policy value.
-However, when the tested policy performs poorly, online testing may harm the user experience and even cause ethical problems <span id="id25">[]</span>.
-Also, deploying policy online requires huge implementation costs in practice <span id="id26">[]</span>.</p>
+However, when the tested policy performs poorly, online testing may harm the user experience and even cause ethical problems <span id="id23">[]</span>.
+Also, deploying policy online requires huge implementation costs in practice <span id="id24">[]</span>.</p>
 </section>
 </section>
 <section id="comparison-of-the-implemented-ope-l-methods">
@@ -878,23 +895,23 @@ DSO (and Kernel IS) implicitly consider the similarity among prompts by using th
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem Formulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opl-methods">OPL methods</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policy-gradient-pg">Policy gradient (PG)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-konda1999actor">Regression <span class="xref cite">konda1999actor</span>.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-sampling-is-swaminathan2015batch">Importance sampling (IS) <span class="xref cite">swaminathan2015batch</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doubly-robust-dr-dudik2011doubly">Doubly Robust (DR) <span class="xref cite">dudik2011doubly</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potec-saito2024potec">POTEC <span class="xref cite">saito2024potec</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-sentence-dso-kiyohara2024prompt">Direct Sentence (DSO) <span class="xref cite">kiyohara2024prompt</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-sampling-is">Importance sampling (IS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doubly-robust-dr">Doubly Robust (DR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potec">POTEC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-sentence-dso">Direct Sentence (DSO)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ope-estimators">OPE estimators</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-method-dm-beygelzimer2009offset">Direct Method (DM) <span class="xref cite">beygelzimer2009offset</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-propensity-scoring-ips-citep-strehl2010learning">Inverse Propensity Scoring (IPS) :citep:`strehl2010learning`</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Doubly Robust (DR) <span class="xref cite">dudik2011doubly</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offcem-saito2023off">OffCEM <span class="xref cite">saito2023off</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-is-kiyohara2024prompt">Kernel IS <span class="xref cite">kiyohara2024prompt</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-method-dm">Direct Method (DM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Importance Sampling (IS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Doubly Robust (DR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offcem">OffCEM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-is">Kernel IS</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#online-evalution-and-learning">Online evalution and learning</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforce-sutton2018reinforcement-deng2022rlprompt">REINFORCE <span class="xref cite">sutton2018reinforcement, deng2022rlprompt</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforce">REINFORCE</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#online-evaluation">Online evaluation</a></li>
 </ul>
 </li>

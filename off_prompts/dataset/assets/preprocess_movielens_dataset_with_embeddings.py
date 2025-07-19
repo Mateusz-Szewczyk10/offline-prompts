@@ -42,9 +42,7 @@ def process(
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        tokenizer_id, use_fast=use_tokenizer_fast
-    )
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_id, use_fast=use_tokenizer_fast)
     tokenizer.add_special_tokens({"pad_token": "[PAD]"})
 
     base_model = AutoModelForCausalLM.from_pretrained(base_model_id)

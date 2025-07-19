@@ -192,14 +192,20 @@ class BehaviorCloningLearner:
                         return_query_embeddings=True,
                     )
 
-                    teacher_action_choice_prob_ = teacher_model.calc_action_choice_probability(
-                        context=context_, query=query_embeddings_, return_cpu_tensor=False
+                    teacher_action_choice_prob_ = (
+                        teacher_model.calc_action_choice_probability(
+                            context=context_,
+                            query=query_embeddings_,
+                            return_cpu_tensor=False,
+                        )
                     )
-                    student_action_choice_prob_ = self.model.calc_action_choice_probability(
-                        context=context_,
-                        query=query_embeddings_,
-                        return_cpu_tensor=False,
-                        calc_gradient=True,
+                    student_action_choice_prob_ = (
+                        self.model.calc_action_choice_probability(
+                            context=context_,
+                            query=query_embeddings_,
+                            return_cpu_tensor=False,
+                            calc_gradient=True,
+                        )
                     )
 
                     mse_ = (
@@ -253,7 +259,7 @@ class BehaviorCloningLearner:
                     key: [
                         context,          # (n_samples, )
                         query,            # (n_samples, )
-                        user_id,          #  - 
+                        user_id,          #  -
                         item_id,          # (n_samples, )
                         action,           #  -
                         sentence,         #  -
@@ -331,24 +337,30 @@ class BehaviorCloningLearner:
         )
 
         train_dataset = TorchLoggedDataset(
-            context=context_train, 
-            query=query_train, 
+            context=context_train,
+            query=query_train,
             item_id=item_id,
             query_embeddings=self.query_embeddings,
             query_encoder=self.query_encoder,
         )
         val_dataset = TorchLoggedDataset(
-            context=context_val, 
-            query=query_val, 
+            context=context_val,
+            query=query_val,
             item_id=item_id,
             query_embeddings=self.query_embeddings,
             query_encoder=self.query_encoder,
         )
         accelerator = Accelerator()
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
-        val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False,)
+        val_dataloader = DataLoader(
+            val_dataset,
+            batch_size=batch_size,
+            shuffle=False,
+        )
         model, train_dataloader, val_dataloader = accelerator.prepare(
             model, train_dataloader, val_dataloader
         )
@@ -384,14 +396,20 @@ class BehaviorCloningLearner:
                     context_ = to_device(batch_["context"], device=accelerator.device)
                     query_ = to_device(batch_["query"], device=accelerator.device)
 
-                    teacher_action_choice_prob_ = teacher_model.calc_action_choice_probability(
-                        context=context_, query=query_, return_cpu_tensor=False,
+                    teacher_action_choice_prob_ = (
+                        teacher_model.calc_action_choice_probability(
+                            context=context_,
+                            query=query_,
+                            return_cpu_tensor=False,
+                        )
                     )
-                    student_action_choice_prob_ = self.model.calc_action_choice_probability(
-                        context=context_,
-                        query=query_,
-                        return_cpu_tensor=False,
-                        calc_gradient=True,
+                    student_action_choice_prob_ = (
+                        self.model.calc_action_choice_probability(
+                            context=context_,
+                            query=query_,
+                            return_cpu_tensor=False,
+                            calc_gradient=True,
+                        )
                     )
                     mse_ = (
                         student_action_choice_prob_ - teacher_action_choice_prob_
@@ -412,14 +430,20 @@ class BehaviorCloningLearner:
                         val_batch_["query"], device=accelerator.device
                     )
 
-                    teacher_action_choice_prob = teacher_model.calc_action_choice_probability(
-                        context=val_context_, query=val_query_, return_cpu_tensor=False,
+                    teacher_action_choice_prob = (
+                        teacher_model.calc_action_choice_probability(
+                            context=val_context_,
+                            query=val_query_,
+                            return_cpu_tensor=False,
+                        )
                     )
-                    student_action_choice_prob = self.model.calc_action_choice_probability(
-                        context=val_context_,
-                        query=val_query_,
-                        return_cpu_tensor=False,
-                        calc_gradient=True,
+                    student_action_choice_prob = (
+                        self.model.calc_action_choice_probability(
+                            context=val_context_,
+                            query=val_query_,
+                            return_cpu_tensor=False,
+                            calc_gradient=True,
+                        )
                     )
                     se = (student_action_choice_prob - teacher_action_choice_prob) ** 2
                     test_losses[i + 1] += (teacher_action_choice_prob * se).sum(

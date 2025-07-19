@@ -18,7 +18,7 @@ from ..utils import tokenize
 @dataclass
 class MovielensPromptFormatter(BasePromptFormatter):
     """Class for formatting prompt and queries to input to the frozen LLM.
-    
+
     Bases: :class:`off_prompts.dataset.BasePromptFormatter`
 
     Imported as: :class:`off_prompts.dataset.MovielensPromptFormatter`
@@ -51,8 +51,9 @@ class MovielensPromptFormatter(BasePromptFormatter):
 
     device: str, default="cuda"
         Device.
-    
+
     """
+
     tokenizer: Optional[Union[PreTrainedTokenizer, PreTrainedTokenizerFast]] = None
     tokenizer_kwargs: Optional[Dict[str, Any]] = None
     prefix_prompt: str = "Broadly describe in a sentence the genres of the movie without including the name or any specifics of the movie.\nTitle: "
@@ -104,10 +105,12 @@ class MovielensPromptFormatter(BasePromptFormatter):
         )
 
     def format_tokens(
-        self, query_tokens: Tokens, prompt_tokens: Optional[Tokens],
+        self,
+        query_tokens: Tokens,
+        prompt_tokens: Optional[Tokens],
     ):
         """Format prompt tokens.
-        
+
         Parameters
         -------
         query_tokens: Tokens
@@ -148,5 +151,5 @@ class MovielensPromptFormatter(BasePromptFormatter):
                     ],
                     dim=1,
                 )
-        
+
         return concat_tokens

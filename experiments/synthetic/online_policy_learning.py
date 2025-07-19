@@ -64,7 +64,9 @@ def _process(
     )
 
 
-def process(conf: Dict[str, Any],):
+def process(
+    conf: Dict[str, Any],
+):
     setting = conf["setting"]
     n_random_state = conf["n_random_state"]
     start_random_state = conf["start_random_state"]

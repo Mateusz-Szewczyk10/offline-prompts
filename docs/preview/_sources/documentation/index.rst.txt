@@ -53,7 +53,7 @@ To facilitate the research and practical applications of OPL of prompt policies,
 * To provide two benchmark environments, including synthetic and full-LLM.
 * To streamline the workflow to connect OPL and sentence generation modules for smooth experimentation. 
 
-In particular, the provided full-LLM benchmark models realistic users' responses to the presented sentence in the movie recommendation settings, by training a semi-synthetic reward simulator with the sentence-augmented [MovieLens](https://grouplens.org/datasets/movielens/) dataset. The benchmark design is a remarkable contribution to the research community, as we currently lack a realistic simulator on personalized sentence generation tasks that satisfies the following four key qualifications:
+In particular, the provided full-LLM benchmark models realistic users' responses to the presented sentence in the movie recommendation settings, by training a semi-synthetic reward simulator with the sentence-augmented `MovieLens <https://grouplens.org/datasets/movielens/>`_ dataset. The benchmark design is a remarkable contribution to the research community, as we currently lack a realistic simulator on personalized sentence generation tasks that satisfies the following four key qualifications:
 
 * LLMs have knowledge about items (e.g., movies) so that they can generate descriptions.
 * Items have more than two aspects (e.g., sci-fi and romance) so that choosing a prompt makes the difference in expected rewards.
@@ -65,7 +65,7 @@ We hope this work will be an important cornerstone to the real-world application
 Implementation
 ~~~~~~~~~~
 OfflinePrompts enables streamlined implementation of interaction simulation, data collection, and off-policy learning (OPL). 
-OfflinePrompts can also handle semi-synthetic experiments using recommendation datasets, such as MovieLens :citep:`` and is compatible to HuggingFace :citep:`` language models.
+OfflinePrompts can also handle semi-synthetic experiments using recommendation datasets, such as `MovieLens <https://grouplens.org/datasets/movielens/>`_ :cite:`harper2015movielens` and is compatible to `HuggingFace <https://huggingface.co/>`_ :cite:`wolf2019huggingface` language models.
 
 Simulations and Data Collection Policy
 ----------
@@ -94,21 +94,21 @@ Off-Policy Evaluation and Learning (OPE/L)
 
 Learning methods
 ^^^^^^
-* REINFORCE (online) :citep:``
-* Actor-critic :cite:``
-* Importance Sampling (IS) :cite:`precup2000eligibility`
-* Doubly Robust (DR) :cite:``
-* POTEC :cite:``
-* DSO (our proposal) :cite:``
+* REINFORCE (online) :cite:`williams1992simple`
+* Actor-critic :cite:`konda1999actor`
+* Importance Sampling (IS) :cite:`swaminathan2015batch`
+* Doubly Robust (DR) :cite:`dudik2014doubly`
+* POTEC :cite:`saito2024potec`
+* DSO (our proposal) :cite:`kiyohara2025off`
 
 Corresponding evaluation methods
 ^^^^^^
 * (online)
-* Direct Method (DM) :cite:``
-* Importance Sampling (IS) :cite:`precup2000eligibility`
-* Doubly Robust (DR) :cite:``
-* OffCEM :cite:``
-* Kernel IS (our proposal) :cite:``
+* Direct Method (DM) :cite:`beygelzimer2009offset`
+* Importance Sampling (IS) :cite:`strehl2010learning`
+* Doubly Robust (DR) :cite:`dudik2014doubly`
+* OffCEM :cite:`saito2023off`
+* Kernel IS (our proposal) :cite:`kiyohara2025offline`
 
 
 
@@ -120,16 +120,15 @@ If you use our pipeline in your work, please cite our paper below.
 .. card::
 
     | Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims
-    | **OfflinePrompts: Benchmark Suites for Prompt-guided Language Personalization**
+    | **OfflinePrompts: Benchmark Suites for Prompt-guided Text Personalization from Logged Data**
     | (a preprint is coming soon..)
 
     .. code-block::
 
         @article{kiyohara2025offline,
-            title = {OfflinePrompts: Benchmark Suites for Prompt-guided Language Personalization},
+            title = {OfflinePrompts: Benchmark Suites for Prompt-guided Text Personalization from Logged Data},
             author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
-            journal = {xxx},
-            pages = {xxx--xxx},
+            journal = {arXiv preprint arXiv:},
             year = {2025},
         }
 
@@ -138,14 +137,14 @@ If you use the proposed method (DSO) or refer to our findings in your work, plea
 .. card::
 
     | Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims
-    | **Off-Policy Learning for Prompt-Guided Sentence Personalization Using Logged Bandit Data**
+    | **An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization**
 
     .. code-block::
 
-        @article{kiyohara2025off,
-            title = {Off-Policy Learning for Prompt-Guided Sentence Personalization Using Logged Bandit Data},
+        @inproceedings{kiyohara2025off,
+            title = {An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization},
             author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
-            journal = {xxx},
+            booktitle = {Proceedings of the 19th ACM Conference on Recommender Systems},
             pages = {xxx--xxx},
             year = {2025},
         }

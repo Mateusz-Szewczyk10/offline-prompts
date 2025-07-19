@@ -17,15 +17,17 @@ class FrozenLLMDataset(Dataset):
     Bases: :class:`torch.utils.data.Dataset`
 
     Imported as: :class:`src.utils.FrozenLLMDataset`
-    
+
     Parameters
     -------
     tokens: Tokens, shape (n_samples, )
         Input tokens.
-    
+
     """
+
     def __init__(
-        self, tokens: Tokens,
+        self,
+        tokens: Tokens,
     ):
         self.tokens = tokens
 
@@ -42,7 +44,7 @@ class FrozenLLMDataset(Dataset):
 
 class RewardSimulatorDataset(Dataset):
     """Torch dataset class for the reward simulator.
-    
+
     Bases: :class:`torch.utils.data.Dataset`
 
     Imported as: :class:`src.utils.RewardSimulatorDataset`
@@ -57,10 +59,11 @@ class RewardSimulatorDataset(Dataset):
 
     sentence_tokens: Tokens, shape (n_samples, )
         Sentence tokens.
-    
+
     """
+
     def __init__(
-        self, 
+        self,
         user_id: torch.Tensor,
         item_id: torch.Tensor,
         sentence_tokens: Tokens,
@@ -86,10 +89,11 @@ class RewardSimulatorDataset(Dataset):
 
 
 def to_device(
-    inputs: Union[torch.Tensor, Dict[str, Any]], device: str = "cuda",
+    inputs: Union[torch.Tensor, Dict[str, Any]],
+    device: str = "cuda",
 ):
     """Transfer tensor to device.
-    
+
     Parameters
     -------
     inputs: dict or dict of torch.Tensor
@@ -102,7 +106,7 @@ def to_device(
     -------
     outputs: dict or dict of torch.Tensor
         Tensors loaded on the device.
-    
+
     """
     if isinstance(inputs, torch.Tensor):
         outputs = inputs.to(device)
@@ -120,7 +124,7 @@ def tokenize(
     device: str = "cuda",
 ):
     """Tokenize sentences.
-    
+
     Parameters
     -------
     inputs: Sentence, shape (n_samples, )
@@ -139,7 +143,7 @@ def tokenize(
     -------
     tokens: Tokens, shape (n_samples, )
         Tokenized sentences.
-    
+
     """
     if tokenizer_kwargs is None:
         tokenizer_kwargs = {"return_tensors": "pt"}
@@ -152,7 +156,7 @@ def tokenize(
 
 def gaussian_kernel(distance: torch.Tensor, tau: float = 1.0):
     """Gaussian kernel.
-    
+
     Parameters
     -------
     distance: torch.Tensor, shape (n_samples, )
@@ -170,14 +174,14 @@ def gaussian_kernel(distance: torch.Tensor, tau: float = 1.0):
     if tau <= 0:
         raise ValueError("tau should be a positive value, but found False.")
 
-    return torch.exp(-(distance ** 2) / (2 * tau ** 2)) / math.sqrt(
-        2 * math.pi * tau ** 2
+    return torch.exp(-(distance**2) / (2 * tau**2)) / math.sqrt(
+        2 * math.pi * tau**2
     )
 
 
 def uniform_kernel(distance: torch.Tensor, tau: float = 1.0):
     """Uniform kernel.
-    
+
     Parameters
     -------
     distance: torch.Tensor, shape (n_samples, )
@@ -190,7 +194,7 @@ def uniform_kernel(distance: torch.Tensor, tau: float = 1.0):
     -------
     weight: torch.Tensor (n_samples, )
         Weight of the uniform kernel.
-    
+
     """
     if tau <= 0:
         raise ValueError("tau should be a positive value, but found False.")
@@ -200,7 +204,7 @@ def uniform_kernel(distance: torch.Tensor, tau: float = 1.0):
 
 def torch_seed(random_state: int, device: str = "cuda:0"):
     """Set seeds of pytorch.
-    
+
     Parameters
     -------
     random_state: int
@@ -208,7 +212,7 @@ def torch_seed(random_state: int, device: str = "cuda:0"):
 
     device: str, default="cuda"
         Device.
-    
+
     """
     if device != "cpu":
         torch.cuda.manual_seed(random_state)
@@ -218,7 +222,7 @@ def torch_seed(random_state: int, device: str = "cuda:0"):
 
 def defaultdict_to_dict(dict_: Union[Dict[Any, Any], DefaultDict[Any, Any]]):
     """Transform a defaultdict into a corresponding dict.
-    
+
     Parameters
     -------
     dict_: defaultdict

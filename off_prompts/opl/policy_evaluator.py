@@ -53,6 +53,7 @@ class PolicyEvaluator:
         Random state.
 
     """
+
     env: Optional[SemiSyntheticDataset] = None
     prompt_reward_predictor: Optional[BasePromptRewardModel] = None
     clustering_policy: Optional[BaseClusteringModel] = None
@@ -100,7 +101,7 @@ class PolicyEvaluator:
 
         .. math::
 
-            V(\\pi_{\\theta}) 
+            V(\\pi_{\\theta})
             \\approx \\frac{1}{n} \\sum_{i=1}^n \\mathbb{E}_{x_i \\sim p(x), a_i \\sim \\pi_{\\theta}(a | x_i), r_i \\sim p(r|x_i,a_i)}
             \\left[ r_i \\right]
 
@@ -110,7 +111,7 @@ class PolicyEvaluator:
 
         References
         -------
-        Richard S Sutton and Andrew G Barto. 
+        Richard S Sutton and Andrew G Barto.
         "Reinforcement learning: An introduction." 2018.
 
         Parameters
@@ -125,7 +126,7 @@ class PolicyEvaluator:
         -------
         policy_value: float
             Expected reward approximated by the online rollouts.
-        
+
         """
         logged_feedback = self.env.sample_dataset(
             policy=eval_policy,
@@ -148,8 +149,8 @@ class PolicyEvaluator:
 
         .. math::
 
-            V(\\pi_{\\theta}) 
-            \\approx \\frac{1}{n} \\sum_{i=1}^n \\mathbb{E}_{a \\sim \\pi_{\\theta}(a | x_i)} 
+            V(\\pi_{\\theta})
+            \\approx \\frac{1}{n} \\sum_{i=1}^n \\mathbb{E}_{a \\sim \\pi_{\\theta}(a | x_i)}
             \\left[ \\hat{q}(x_i, a) \\right]
 
         where we parametrize the policy as :math:`\\pi_{\\theta}` using some parameters :math:`\\theta \\in \\Theta` (e.g., a neural network).
@@ -159,9 +160,9 @@ class PolicyEvaluator:
 
         References
         -------
-        Alina Beygelzimer and John Langford. 
+        Alina Beygelzimer and John Langford.
         "The offset tree for learning with partial labels." 2009.
-        
+
         Parameters
         -------
         logged_feedback: LoggedDataset
@@ -186,17 +187,17 @@ class PolicyEvaluator:
             Policy to be evaluated.
 
         prompt_reward_predictor: BasePromptRewardModel, default=None
-            (Pre-trained) action reward predictor. 
+            (Pre-trained) action reward predictor.
 
         Return
         -------
         policy_value: float
             Expected reward approximated by the regressed reward.
-        
+
         """
         if prompt_reward_predictor is None:
             prompt_reward_predictor = self.prompt_reward_predictor
-        
+
         if prompt_reward_predictor is None:
             raise RuntimeError("prompt_reward_predictor must be given.")
 
@@ -210,8 +211,8 @@ class PolicyEvaluator:
             query = query_encoder.encode(logged_feedback["query"]).to(device)
 
         action = eval_policy.sample_action(
-            context=context, 
-            query=query, 
+            context=context,
+            query=query,
             return_cpu_tensor=False,
         )
         predicted_reward = prompt_reward_predictor.predict_value(
@@ -223,7 +224,7 @@ class PolicyEvaluator:
 
         policy_value = predicted_reward.mean()
         return policy_value
-        
+
     def importance_sampling_based_policy_evaluation(
         self,
         logged_feedback: LoggedDataset,
@@ -240,7 +241,7 @@ class PolicyEvaluator:
 
         .. math::
 
-            V(\\pi_{\\theta}) 
+            V(\\pi_{\\theta})
             \\approx \\frac{1}{n} \\sum_{i=1}^n \\frac{\\pi_{\\theta}(a_i | x_i)}{\\pi_0(a_i | x_i)} r_i
 
         where we parametrize the policy as :math:`\\pi_{\\theta}` using some parameters :math:`\\theta \\in \\Theta` (e.g., a neural network).
@@ -248,9 +249,9 @@ class PolicyEvaluator:
 
         References
         -------
-        Alex Strehl, John Langford, Lihong Li, and Sham M Kakade. 
+        Alex Strehl, John Langford, Lihong Li, and Sham M Kakade.
         "Learning from logged implicit exploration data." 2010.
-        
+
         Parameters
         -------
         logged_feedback: LoggedDataset
@@ -287,7 +288,7 @@ class PolicyEvaluator:
         -------
         policy_value: float
             Expected reward approximated via importance sampling.
-        
+
         """
         device = "cuda" if torch.cuda.is_available() else "cpu"
         context = logged_feedback["context"].to(device)
@@ -303,9 +304,9 @@ class PolicyEvaluator:
         logging_policy = logged_feedback["logging_policy"]
         if logging_action_choice_prob is None:
             logging_action_choice_prob = logging_policy.calc_action_choice_probability(
-                context=context, 
-                query=query, 
-                predicted_reward=logging_predicted_reward, 
+                context=context,
+                query=query,
+                predicted_reward=logging_predicted_reward,
                 return_cpu_tensor=False,
             )
 
@@ -343,8 +344,8 @@ class PolicyEvaluator:
 
         .. math::
 
-            V(\\pi_{\\theta}) 
-            \\approx \\frac{1}{n} \\sum_{i=1}^n \\left \\{ \\frac{\\pi_{\\theta}(a_i | x_i)}{\\pi_0(a_i | x_i)}  (r_i - \\hat{q}(x_i, a_i)) 
+            V(\\pi_{\\theta})
+            \\approx \\frac{1}{n} \\sum_{i=1}^n \\left \\{ \\frac{\\pi_{\\theta}(a_i | x_i)}{\\pi_0(a_i | x_i)}  (r_i - \\hat{q}(x_i, a_i))
             + \\mathbb{E}_{a \\sim \\pi_{\\theta}(a|x_i)}[\\hat{q}(x_i, a)] \\right \\}
 
         where we parametrize the policy as :math:`\\pi_{\\theta}` using some parameters :math:`\\theta \\in \\Theta` (e.g., a neural network).
@@ -354,9 +355,9 @@ class PolicyEvaluator:
 
         References
         -------
-        Miroslav Dudík, John Langford, and Lihong Li. 
+        Miroslav Dudík, John Langford, and Lihong Li.
         "Doubly robust policy evaluation and learning." 2011.
-        
+
         Parameters
         -------
         logged_feedback: LoggedDataset
@@ -381,7 +382,7 @@ class PolicyEvaluator:
             Policy to be evaluated.
 
         prompt_reward_predictor: BasePromptRewardModel, default=None
-            (Pre-trained) action reward predictor. 
+            (Pre-trained) action reward predictor.
 
         logging_action_choice_prob: torch.Tensor, shape (n_samples, n_actions), default=None
             Action choice probability of logging policy to all candidate actions.
@@ -396,11 +397,11 @@ class PolicyEvaluator:
         -------
         policy_value: float
             Expected reward approximated by doubly robust.
-        
+
         """
         if prompt_reward_predictor is None:
             prompt_reward_predictor = self.prompt_reward_predictor
-        
+
         if prompt_reward_predictor is None:
             raise RuntimeError("prompt_reward_predictor must be given.")
 
@@ -418,7 +419,9 @@ class PolicyEvaluator:
         logging_policy = logged_feedback["logging_policy"]
         if logging_action_choice_prob is None:
             logging_action_choice_prob = logging_policy.calc_action_choice_probability(
-                context=context, query=query, predicted_reward=logging_predicted_reward,
+                context=context,
+                query=query,
+                predicted_reward=logging_predicted_reward,
             )
 
         n_samples = len(context)
@@ -443,8 +446,8 @@ class PolicyEvaluator:
         )
 
         eval_action = eval_policy.sample_action(
-            context=context, 
-            query=query, 
+            context=context,
+            query=query,
             return_cpu_tensor=False,
         )
         eval_predicted_reward = prompt_reward_predictor.predict_value(
@@ -475,22 +478,22 @@ class PolicyEvaluator:
 
         .. math::
 
-            V(\\pi_{\\theta}) 
-            \\approx \\frac{1}{n} \\sum_{i=1}^n \\left \\{ \\frac{\\pi_{\\theta}(c(a_i)|x_i)}{\\pi_0(c(a_i)|x_i)} (r_i - \\hat{q}(x_i, a_i)) 
+            V(\\pi_{\\theta})
+            \\approx \\frac{1}{n} \\sum_{i=1}^n \\left \\{ \\frac{\\pi_{\\theta}(c(a_i)|x_i)}{\\pi_0(c(a_i)|x_i)} (r_i - \\hat{q}(x_i, a_i))
             + \\mathbb{E}_{a \\sim \\pi_{\\theta}(a|x_i)}[\\hat{q}(x_i, a)] \\right \\}
 
         where we parametrize the policy as :math:`\\pi_{\\theta}` using some parameters :math:`\\theta \\in \\Theta` (e.g., a neural network).
         :math:`x` is the context, :math:`a` is the action (:math:`a_i` is chosen by the logging policy :math:`pi_0`), and :math:`r` is the reward.
         :math:`\\hat{q}(x, a) \\approx \\mathbb{E}[r|x,a]` is the predicted reward given context and action. :math:`n` is the number of the data sample.
-        :math:`\\pi(c(a)|x) = \\sum_{a' \\in \\mathcal{A}, c(a')=c(a)} \\pi(a|x)` is the probability of choosing cluster :math:`c` under policy :math:`\pi`, but because this can be calculated for arbitrary clustering, 
+        :math:`\\pi(c(a)|x) = \\sum_{a' \\in \\mathcal{A}, c(a')=c(a)} \\pi(a|x)` is the probability of choosing cluster :math:`c` under policy :math:`\pi`, but because this can be calculated for arbitrary clustering,
         this estimator is applicable to arbitrary policy which do not have two-stage structure.
         Note that we approximate the expectation :math:`\\mathbb{E}[\\cdot]` using a single monte-carlo sample for each index of data, :math:`i`.
 
         References
         -------
-        Yuta Saito, Qingyang Ren, and Thorsten Joachims. 
+        Yuta Saito, Qingyang Ren, and Thorsten Joachims.
         "Off-policy evaluation for large action spaces via conjunct effect modeling." 2023.
-        
+
         Parameters
         -------
         logged_feedback: LoggedDataset
@@ -515,7 +518,7 @@ class PolicyEvaluator:
             Policy to be evaluated.
 
         prompt_reward_predictor: BasePromptRewardModel, default=None
-            (Pre-trained) action reward predictor. 
+            (Pre-trained) action reward predictor.
 
         logging_action_choice_prob: torch.Tensor, shape (n_samples, n_actions), default=None
             Action choice probability of logging policy to all candidate actions.
@@ -533,11 +536,11 @@ class PolicyEvaluator:
         -------
         policy_value: float
             Expected reward approximated by OffCEM.
-        
+
         """
         if prompt_reward_predictor is None:
             prompt_reward_predictor = self.prompt_reward_predictor
-        
+
         if prompt_reward_predictor is None:
             raise RuntimeError("prompt_reward_predictor must be given.")
 
@@ -562,13 +565,14 @@ class PolicyEvaluator:
         logging_policy = logged_feedback["logging_policy"]
         if logging_action_choice_prob is None:
             logging_action_choice_prob = logging_policy.calc_action_choice_probability(
-                context=context, 
-                query=query, 
+                context=context,
+                query=query,
                 predicted_reward=logging_predicted_reward,
                 return_cpu_tensor=False,
             )
         eval_action_choice_prob = eval_policy.calc_action_choice_probability(
-            context=context, query=query,
+            context=context,
+            query=query,
         )
 
         cluster = self.clustering_policy.retrieve_cluster(
@@ -594,7 +598,7 @@ class PolicyEvaluator:
             action_choice_prob=eval_action_choice_prob,
             return_cpu_tensor=False,
         )
-        
+
         iw = eval_cluster_prob / logging_cluster_prob
         iw = torch.nan_to_num(iw)
         iw = torch.clip(iw, max=clip_threshold)
@@ -607,8 +611,8 @@ class PolicyEvaluator:
         )
 
         eval_action = eval_policy.sample_action(
-            context=context, 
-            query=query, 
+            context=context,
+            query=query,
             return_cpu_tensor=False,
         )
         eval_predicted_reward = prompt_reward_predictor.predict_value(
@@ -639,7 +643,7 @@ class PolicyEvaluator:
 
         .. math::
 
-            V(\\pi_{\\theta}) 
+            V(\\pi_{\\theta})
             \\approx \\frac{1}{n} \\sum_{i=1}^n \\frac{\\pi_{\\theta}(\\phi(s_i)|x_i)}{\\pi_0(\\phi(s_i)|x_i)} r_i
 
         where we parametrize the policy as :math:`\\pi_{\\theta}` using some parameters :math:`\\theta \\in \\Theta` (e.g., a neural network).
@@ -651,7 +655,7 @@ class PolicyEvaluator:
         -------
         Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, and Thorsten Joachims.
         "Off-policy learning for prompt-guided text personalization using logged bandit data". 2025.
-        
+
         Parameters
         -------
         logged_feedback: LoggedDataset
@@ -683,7 +687,7 @@ class PolicyEvaluator:
 
         frozen_llm: BaseFrozenLLM, default=None
             Frozen LLM.
-        
+
         n_samples_to_approximate: int, default=5
             Number of samples to approximate the expectation in the numerator of the DSO estimator.
 
@@ -694,7 +698,7 @@ class PolicyEvaluator:
         -------
         policy_value: float
             Expected reward approximated by the kernel (marginal) IS.
-        
+
         """
         if action_list is None:
             action_list = self.action_list
@@ -731,31 +735,40 @@ class PolicyEvaluator:
         else:
             query = query_encoder.encode(logged_feedback["query"]).to(device)
 
-        logging_marginal_density = logging_kernel_density_model.estimate_marginal_density(
-            context=context, 
-            query=query, 
-            sentence=sentence,
-            return_cpu_tensor=False,
+        logging_marginal_density = (
+            logging_kernel_density_model.estimate_marginal_density(
+                context=context,
+                query=query,
+                sentence=sentence,
+                return_cpu_tensor=False,
+            )
         )
 
-        eval_marginal_density = torch.zeros((n_samples, n_samples_to_approximate), device=device)
+        eval_marginal_density = torch.zeros(
+            (n_samples, n_samples_to_approximate), device=device
+        )
         for i in range(n_samples_to_approximate):
             sampled_action_ = model.sample_action(
-                context=context_, query=query_, return_cpu_tensor=False,
+                context=context_,
+                query=query_,
+                return_cpu_tensor=False,
             )
 
             prompt_for_frozen_llm_ = {}
             for key in self.prompt_for_frozen_llm:
-                prompt_for_frozen_llm_[key] = self.prompt_for_frozen_llm[
-                    key
-                ][sampled_action_].to(device)
+                prompt_for_frozen_llm_[key] = self.prompt_for_frozen_llm[key][
+                    sampled_action_
+                ].to(device)
 
             sampled_sentence_ = self.frozen_llm.generate_output_sentence(
-                query=query_for_frozen_llm_, prompt=prompt_for_frozen_llm_,
+                query=query_for_frozen_llm_,
+                prompt=prompt_for_frozen_llm_,
             )
 
-            eval_marginal_density[:, i] = self.kernel_marginal_estimator.calc_pairwise_weight(
-                pivot_sentence=sentence_, 
+            eval_marginal_density[
+                :, i
+            ] = self.kernel_marginal_estimator.calc_pairwise_weight(
+                pivot_sentence=sentence_,
                 sampled_sentences=sampled_sentence_,
                 context=context_,
                 query=query_,

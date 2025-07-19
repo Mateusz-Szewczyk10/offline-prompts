@@ -54,7 +54,8 @@ def main(cfg: DictConfig):
     print()
 
     process(
-        setting=cfg.setting.setting, keywords=cfg.setting.keywords,
+        setting=cfg.setting.setting,
+        keywords=cfg.setting.keywords,
     )
 
 

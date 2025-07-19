@@ -84,7 +84,9 @@ def _process(
         random_state=random_state,
     )
     logged_feedback = generate_logged_data(
-        dataset=dataset, logging_policy=logging_policy, n_samples=n_samples,
+        dataset=dataset,
+        logging_policy=logging_policy,
+        n_samples=n_samples,
     )
 
     pessimistic_indicator = "_pessimistic" if is_pessimistic_regression else ""
@@ -108,12 +110,14 @@ def _process(
         Path(
             f"logs/policy_single_{gradient_type}{pessimistic_indicator}{two_stage_indicator}/"
         ).mkdir(
-            parents=True, exist_ok=True,
+            parents=True,
+            exist_ok=True,
         )
         Path(
             f"logs/learning_process/policy_single_{gradient_type}{pessimistic_indicator}{two_stage_indicator}/"
         ).mkdir(
-            parents=True, exist_ok=True,
+            parents=True,
+            exist_ok=True,
         )
         train_and_save_single_stage_policy(
             dataset=dataset,
@@ -156,12 +160,14 @@ def _process(
         Path(
             f"logs/policy_dso_{gradient_type}{pessimistic_indicator}{two_stage_indicator}{monte_carlo_indicator}/"
         ).mkdir(
-            parents=True, exist_ok=True,
+            parents=True,
+            exist_ok=True,
         )
         Path(
             f"logs/learning_process/policy_dso_{gradient_type}{pessimistic_indicator}{two_stage_indicator}{monte_carlo_indicator}/"
         ).mkdir(
-            parents=True, exist_ok=True,
+            parents=True,
+            exist_ok=True,
         )
         train_and_save_dso_policy(
             dataset=dataset,
@@ -191,12 +197,14 @@ def _process(
         Path(
             f"logs/policy_two_{gradient_type}_{clustering_type}{pessimistic_indicator}{two_stage_indicator}/"
         ).mkdir(
-            parents=True, exist_ok=True,
+            parents=True,
+            exist_ok=True,
         )
         Path(
             f"logs/learning_process/policy_two_{gradient_type}_{clustering_type}{pessimistic_indicator}{two_stage_indicator}/"
         ).mkdir(
-            parents=True, exist_ok=True,
+            parents=True,
+            exist_ok=True,
         )
         train_and_save_two_stage_policy(
             dataset=dataset,
@@ -222,7 +230,9 @@ def _process(
         )
 
 
-def process(conf: Dict[str, Any],):
+def process(
+    conf: Dict[str, Any],
+):
     setting = conf["setting"]
     n_random_state = conf["n_random_state"]
     start_random_state = conf["start_random_state"]

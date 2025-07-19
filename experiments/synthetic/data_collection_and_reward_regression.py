@@ -69,7 +69,9 @@ def _process(
     dataset.reward_std = reward_std_for_regression
 
     logged_feedback = generate_logged_data(
-        dataset=dataset, logging_policy=logging_policy, n_samples=n_samples,
+        dataset=dataset,
+        logging_policy=logging_policy,
+        n_samples=n_samples,
     )
     logged_feedback = {
         "context": logged_feedback["context"],
@@ -106,7 +108,9 @@ def _process(
     )
 
 
-def process(conf: Dict[str, Any],):
+def process(
+    conf: Dict[str, Any],
+):
     setting = conf["setting"]
     n_random_state = conf["n_random_state"]
     start_random_state = conf["start_random_state"]

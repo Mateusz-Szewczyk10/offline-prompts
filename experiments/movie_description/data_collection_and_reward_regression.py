@@ -24,6 +24,7 @@ from function import (
 )
 from utils import fix_seed
 
+
 def _process(
     n_samples: int,
     n_actions: int,
@@ -55,9 +56,9 @@ def _process(
     random_state: Optional[int] = None,
     use_wandb: bool = False,
     **kwargs,
-):  
+):
     fix_seed(base_random_state)
-    
+
     dataset = load_dataset(
         n_actions=n_actions,
         reward_type=reward_type,
@@ -151,9 +152,7 @@ def _process(
     )
 
     # reward predictor
-    Path(
-        f"logs/prompt_reward_predictor"
-    ).mkdir(exist_ok=True, parents=True)
+    Path(f"logs/prompt_reward_predictor").mkdir(exist_ok=True, parents=True)
     fix_seed(random_state)
 
     train_and_save_reward_predictor(
@@ -175,7 +174,9 @@ def _process(
     )
 
 
-def process(conf: Dict[str, Any],):
+def process(
+    conf: Dict[str, Any],
+):
     n_random_state = conf["n_random_state"]
     start_random_state = conf["start_random_state"]
     conf_ = deepcopy(conf)

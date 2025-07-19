@@ -15,7 +15,10 @@ from off_prompts.dataset.function import DefaultContextQueryLoader
 from off_prompts.dataset.function import DefaultCandidateActionsLoader
 from off_prompts.dataset.frozen_llm import AutoFrozenLLM
 from off_prompts.dataset.reward_simulator import TransformerRewardSimulator
-from off_prompts.dataset.reward_simulator import PromptCossimRewardSimulator, SentenceCossimRewardSimulator
+from off_prompts.dataset.reward_simulator import (
+    PromptCossimRewardSimulator,
+    SentenceCossimRewardSimulator,
+)
 from off_prompts.opl import PolicyLearner, KernelPolicyLearner
 from off_prompts.opl import PromptRewardLearner, SentenceRewardLearner
 from off_prompts.opl import MarginalDensityLearner
@@ -107,9 +110,14 @@ def load_dataset(
     )
 
     if reward_simulator_type == "distilbert":
-        reward_simulator_base_model = AutoModel.from_pretrained("distilbert-base-uncased",)
+        reward_simulator_base_model = AutoModel.from_pretrained(
+            "distilbert-base-uncased",
+        )
         reward_simulator_tokenizer = AutoTokenizer.from_pretrained(
-            "distilbert-base-uncased", truncation=True, do_lower_case=True, use_fast=True,
+            "distilbert-base-uncased",
+            truncation=True,
+            do_lower_case=True,
+            use_fast=True,
         )
         reward_simulator_tokenizer_kwargs = {
             "add_special_tokens": True,
@@ -120,7 +128,9 @@ def load_dataset(
         }
 
         reward_simulator_tokenizer.add_special_tokens({"pad_token": "[PAD]"})
-        reward_simulator_base_model.resize_token_embeddings(len(reward_simulator_tokenizer))
+        reward_simulator_base_model.resize_token_embeddings(
+            len(reward_simulator_tokenizer)
+        )
         reward_simulator_base_model.to(device)
 
         reward_simulator = TransformerRewardSimulator(
@@ -296,7 +306,8 @@ def generate_and_save_logged_data(
     save_path: Path,
 ):
     logged_feedback = dataset.sample_dataset(
-        policy=logging_policy, n_samples=n_samples,
+        policy=logging_policy,
+        n_samples=n_samples,
     )
 
     with open(save_path, "wb") as f:
@@ -305,7 +316,9 @@ def generate_and_save_logged_data(
     return logged_feedback
 
 
-def load_logged_data(save_path: Path,):
+def load_logged_data(
+    save_path: Path,
+):
     with open(save_path, "rb") as f:
         logged_feedback = pickle.load(save_path)
 
@@ -385,7 +398,8 @@ def load_reward_predictor(
         random_state=random_state,
     )
     prompt_reward_predictor = prompt_reward_learner.load(
-        path=save_path, is_init=True,
+        path=save_path,
+        is_init=True,
     )
     return prompt_reward_predictor
 
@@ -435,7 +449,7 @@ def train_and_save_kernel_marginal_estimator(
     kernel_marginal_estimator = marginal_density_learner.simulation_training(
         n_epochs=n_epochs,
         n_steps_per_epoch=n_steps_per_epoch,
-        logged_feedback=logged_feedback, 
+        logged_feedback=logged_feedback,
         save_path=save_path,
         use_wandb=use_wandb,
         experiment_name=f"movielens-kernel-D{random_state}",
@@ -491,7 +505,7 @@ def train_and_save_eval_kernel_marginal_estimator(
     kernel_marginal_estimator = marginal_density_learner.simulation_training(
         n_epochs=n_epochs,
         n_steps_per_epoch=n_steps_per_epoch,
-        logged_feedback=logged_feedback, 
+        logged_feedback=logged_feedback,
         save_path=save_path,
         use_wandb=use_wandb,
         experiment_name=f"movielens-eval-kernel-D{random_state}",
@@ -534,7 +548,8 @@ def load_kernel_marginal_estimator(
         random_state=random_state,
     )
     kernel_marginal_estimator = marginal_density_learner.load(
-        path=save_path, is_init=True,
+        path=save_path,
+        is_init=True,
     )
     return kernel_marginal_estimator
 
@@ -854,7 +869,10 @@ def load_online_policy(
         env=dataset,
         random_state=random_state,
     )
-    policy = policy_learner.load(path=save_path, is_init=True,)
+    policy = policy_learner.load(
+        path=save_path,
+        is_init=True,
+    )
     return policy
 
 
@@ -885,7 +903,10 @@ def load_single_stage_policy(
         env=dataset,
         random_state=random_state,
     )
-    policy = policy_learner.load(path=save_path, is_init=True,)
+    policy = policy_learner.load(
+        path=save_path,
+        is_init=True,
+    )
     return policy
 
 
@@ -917,7 +938,10 @@ def load_dso_policy(
         env=dataset,
         random_state=random_state,
     )
-    policy = policy_learner.load(path=save_path, is_init=True,)
+    policy = policy_learner.load(
+        path=save_path,
+        is_init=True,
+    )
     return policy
 
 
@@ -967,7 +991,10 @@ def load_two_stage_policy(
         env=dataset,
         random_state=random_state,
     )
-    first_stage_policy = policy_learner.load(path=save_path, is_init=True,)
+    first_stage_policy = policy_learner.load(
+        path=save_path,
+        is_init=True,
+    )
     policy = TwoStagePolicy(
         first_stage_policy=first_stage_policy,
         second_stage_policy=second_stage_policy,
@@ -983,22 +1010,26 @@ def load_uniform_policy(
     random_state: Optional[int] = None,
 ):
     uniform_policy = UniformRandomPolicy(
-        action_list=dataset.action_list, device=device, random_state=random_state,
+        action_list=dataset.action_list,
+        device=device,
+        random_state=random_state,
     )
     return uniform_policy
 
 
 def evaluate_policy(
-    dataset: SemiSyntheticDataset, policy: Policy,
+    dataset: SemiSyntheticDataset,
+    policy: Policy,
 ):
     policy_value = dataset.calc_expected_policy_value(
-        policy=policy, n_samples_to_approximate=10000,
+        policy=policy,
+        n_samples_to_approximate=10000,
     )
     return policy_value
 
 
 def off_policy_evaluation(
-    dataset: SemiSyntheticDataset, 
+    dataset: SemiSyntheticDataset,
     logged_feedback: Dict[str, Any],
     policy: Policy,
     estimator_name: str,
@@ -1011,15 +1042,15 @@ def off_policy_evaluation(
 ):
     if estimator_name == "OffCEM":
         clustering_policy = KmeansPromptClustering(
-        n_clusters=n_clusters,
-        action_list=dataset.action_list,
-        prompt_encoder=prompt_encoder,
-        device=prompt_reward_predictor.device,
-        random_state=random_state,
-    )
+            n_clusters=n_clusters,
+            action_list=dataset.action_list,
+            prompt_encoder=prompt_encoder,
+            device=prompt_reward_predictor.device,
+            random_state=random_state,
+        )
     else:
         clustering_policy = None
-    
+
     ope = PolicyEvaluator(
         env=dataset,
         prompt_reward_predictor=prompt_reward_predictor,
@@ -1065,7 +1096,8 @@ def get_baseline_performance(
     dataset: SemiSyntheticDataset,
 ):
     policy_value = dataset.calc_expected_policy_value(
-        policy=None, n_samples_to_approximate=10000,
+        policy=None,
+        n_samples_to_approximate=10000,
     )
     return policy_value
 

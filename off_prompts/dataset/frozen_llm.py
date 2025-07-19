@@ -145,7 +145,8 @@ class AutoFrozenLLM(BaseFrozenLLM):
             prompt_tokens = prompt
 
         inputs = self.prompt_formatter.format_tokens(
-            query_tokens=query_tokens, prompt_tokens=prompt_tokens,
+            query_tokens=query_tokens,
+            prompt_tokens=prompt_tokens,
         )
 
         n_samples = len(inputs[list(inputs.keys())[0]])
@@ -164,10 +165,13 @@ class AutoFrozenLLM(BaseFrozenLLM):
 
                 with torch.no_grad():
                     encoded_ = model.generate(
-                        **batch_, max_new_tokens=max_new_tokens, num_return_sequences=1,
+                        **batch_,
+                        max_new_tokens=max_new_tokens,
+                        num_return_sequences=1,
                     )
                     decoded_ = self.tokenizer.batch_decode(
-                        encoded_, skip_special_tokens=True,
+                        encoded_,
+                        skip_special_tokens=True,
                     )
                     output_sentence_ = list(
                         map(lambda text: re.split(self.pattern, text)[-1], decoded_)
@@ -177,10 +181,13 @@ class AutoFrozenLLM(BaseFrozenLLM):
         else:
             with torch.no_grad():
                 encoded = self.model.generate(
-                    **inputs, max_new_tokens=max_new_tokens, num_return_sequences=1,
+                    **inputs,
+                    max_new_tokens=max_new_tokens,
+                    num_return_sequences=1,
                 )
                 decoded = self.tokenizer.batch_decode(
-                    encoded, skip_special_tokens=True,
+                    encoded,
+                    skip_special_tokens=True,
                 )
                 output_sentence = list(
                     map(lambda text: re.split(self.pattern, text)[-1], decoded)

@@ -56,9 +56,9 @@ def _process(
     val_random_state: Optional[int] = None,
     use_wandb: bool = False,
     **kwargs,
-):  
+):
     fix_seed(base_random_state)
-    
+
     dataset = load_dataset(
         n_actions=n_actions,
         reward_type=reward_type,
@@ -152,9 +152,7 @@ def _process(
     )
 
     # reward predictor
-    Path(
-        f"logs/val_prompt_reward_predictor"
-    ).mkdir(exist_ok=True, parents=True)
+    Path(f"logs/val_prompt_reward_predictor").mkdir(exist_ok=True, parents=True)
     fix_seed(val_random_state)
 
     train_and_save_reward_predictor(

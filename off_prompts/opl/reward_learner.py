@@ -233,7 +233,9 @@ class SentenceRewardLearner:
             for i, ch in enumerate(pbar):
                 pbar.set_description(f"[train sentence reward predictor: Epoch {i}]")
                 pbar.set_postfix(
-                    {"loss": f"{train_losses[i]:.4g}",}
+                    {
+                        "loss": f"{train_losses[i]:.4g}",
+                    }
                 )
 
                 for j in range(n_steps_per_epoch):
@@ -249,7 +251,8 @@ class SentenceRewardLearner:
                     )
 
                     action_ = logging_policy.sample_action(
-                        context=context_, action=action_,
+                        context=context_,
+                        action=action_,
                     )
 
                     if self.prompt_for_frozen_llm is not None:
@@ -264,10 +267,14 @@ class SentenceRewardLearner:
                         )
 
                     sentence_ = self.frozen_llm.generate_output_sentence(
-                        query=query_, prompt=prompt_for_frozen_llm_,
+                        query=query_,
+                        prompt=prompt_for_frozen_llm_,
                     )
                     reward_ = self.env.sample_reward_given_output(
-                        context=context_, query=query_, sentence=sentence_, action=action_,
+                        context=context_,
+                        query=query_,
+                        sentence=sentence_,
+                        action=action_,
                     )
 
                     prediction_ = model(context_, query_embeddings_, sentence_)
@@ -453,9 +460,15 @@ class SentenceRewardLearner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
-        val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False,)
+        val_dataloader = DataLoader(
+            val_dataset,
+            batch_size=batch_size,
+            shuffle=False,
+        )
         model, train_dataloader, val_dataloader = accelerator.prepare(
             model, train_dataloader, val_dataloader
         )
@@ -778,7 +791,9 @@ class PromptRewardLearner:
             for i, ch in enumerate(pbar):
                 pbar.set_description(f"[train prompt reward predictor: Epoch {i}]")
                 pbar.set_postfix(
-                    {"loss": f"{train_losses[i]:.4g}",}
+                    {
+                        "loss": f"{train_losses[i]:.4g}",
+                    }
                 )
 
                 for j in range(n_steps_per_epoch):
@@ -794,10 +809,13 @@ class PromptRewardLearner:
                     )
 
                     action_ = logging_policy.sample_action(
-                        context=context_, query=query_embeddings_,
+                        context=context_,
+                        query=query_embeddings_,
                     )
                     reward_ = self.env.sample_reward_given_action(
-                        context=context_, query=query_, action=action_,
+                        context=context_,
+                        query=query_,
+                        action=action_,
                     )
 
                     prediction_ = model.predict_value(
@@ -974,9 +992,15 @@ class PromptRewardLearner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
-        val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False,)
+        val_dataloader = DataLoader(
+            val_dataset,
+            batch_size=batch_size,
+            shuffle=False,
+        )
         model, train_dataloader, val_dataloader = accelerator.prepare(
             model, train_dataloader, val_dataloader
         )
@@ -1174,7 +1198,9 @@ class PromptRewardLearner:
                         return_query_embeddings=True,
                     )
 
-                    action_ = self.uniform_policy.sample_action(context_, query_embeddings_)
+                    action_ = self.uniform_policy.sample_action(
+                        context_, query_embeddings_
+                    )
 
                     if self.prompt_for_frozen_llm is not None:
                         prompt_for_frozen_llm_ = {}
@@ -1196,7 +1222,8 @@ class PromptRewardLearner:
                     )
 
                     sentence_ = self.frozen_llm.generate_output_sentence(
-                        query=query_, prompt=prompt_for_frozen_llm_,
+                        query=query_,
+                        prompt=prompt_for_frozen_llm_,
                     )
                     teacher_reward_ = teacher_model.predict_value(
                         context=context_,
@@ -1324,7 +1351,9 @@ class PromptRewardLearner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
         model, train_dataloader = accelerator.prepare(model, train_dataloader)
 
@@ -1377,7 +1406,8 @@ class PromptRewardLearner:
                     )
 
                     sentence_ = self.frozen_llm.generate_output_sentence(
-                        query=query_for_frozen_llm_, prompt=prompt_for_frozen_llm_,
+                        query=query_for_frozen_llm_,
+                        prompt=prompt_for_frozen_llm_,
                     )
                     teacher_reward_ = teacher_model.predict_value(
                         context=context_,

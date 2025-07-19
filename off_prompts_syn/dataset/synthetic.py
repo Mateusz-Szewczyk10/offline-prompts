@@ -1,6 +1,6 @@
 """Class to handle synthetic dataset generation."""
 from dataclasses import dataclass
-from typing import Optional, Union
+from typing import Optional, Union, Any
 
 import torch
 from sklearn.utils import check_scalar
@@ -11,15 +11,16 @@ from .function import (
     AuxiliaryOutputGenerator,
     RewardSimulator,
 )
-from ..policy.base import (
-    BasePolicy,
-    BaseActionPolicyModel,
-    BaseClusterPolicyModel,
-)
+# from ..policy.base import (
+#     BasePolicy,
+#     BaseActionPolicyModel,
+#     BaseClusterPolicyModel,
+# )
 from ..utils import torch_seed
 
 
-Policy = Union[BasePolicy, BaseActionPolicyModel, BaseClusterPolicyModel]
+# Policy = Union[BasePolicy, BaseActionPolicyModel, BaseClusterPolicyModel]
+Policy = Any  # avoid circular import
 
 
 @dataclass

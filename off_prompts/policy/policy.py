@@ -96,11 +96,13 @@ class TwoStagePolicy(BasePolicy):
 
         else:
             if candidate_actions_all is None:
-                candidate_actions_all = self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
-                    context=context,
-                    query=query,
-                    logging_predicted_reward=clustering_logging_predicted_reward,
-                    resample_clustering=resample_clustering,
+                candidate_actions_all = (
+                    self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
+                        context=context,
+                        query=query,
+                        logging_predicted_reward=clustering_logging_predicted_reward,
+                        resample_clustering=resample_clustering,
+                    )
                 )
 
             n_samples = len(candidate_actions_all)
@@ -174,7 +176,9 @@ class TwoStagePolicy(BasePolicy):
             clustering_logging_predicted_reward=clustering_logging_predicted_reward,
         )
         action = torch.multinomial(
-            action_choice_prob, num_samples=n_actions_for_each, replacement=replacement,
+            action_choice_prob,
+            num_samples=n_actions_for_each,
+            replacement=replacement,
         )
 
         if return_action_type == "prompt":
@@ -222,11 +226,13 @@ class TwoStagePolicy(BasePolicy):
         n_samples = len(context)
 
         if self.is_reward_based_first_stage_policy:
-            candidate_actions_all = self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
-                context=context,
-                query=query,
-                logging_predicted_reward=clustering_logging_predicted_reward,
-                resample_clustering=True,
+            candidate_actions_all = (
+                self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
+                    context=context,
+                    query=query,
+                    logging_predicted_reward=clustering_logging_predicted_reward,
+                    resample_clustering=True,
+                )
             )
 
             if predicted_reward is None:
@@ -241,7 +247,9 @@ class TwoStagePolicy(BasePolicy):
                 )
 
             cluster = self.first_stage_policy.sample_action(
-                context=context, query=query, predicted_reward=cluster_predicted_reward,
+                context=context,
+                query=query,
+                predicted_reward=cluster_predicted_reward,
             )
 
             candidate_actions = []
@@ -257,7 +265,9 @@ class TwoStagePolicy(BasePolicy):
                 resample_clustering=True,
             )
             cluster = self.first_stage_policy.sample_action(
-                context=context, query=query, cluster_centers=cluster_centers,
+                context=context,
+                query=query,
+                cluster_centers=cluster_centers,
             )
             candidate_actions = self.clustering_policy.retrieve_candidate_actions(
                 context=context,
@@ -319,11 +329,13 @@ class TwoStagePolicy(BasePolicy):
         n_samples = len(context)
 
         if self.is_reward_based_first_stage_policy:
-            candidate_actions_all = self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
-                context=context,
-                query=query,
-                logging_predicted_reward=clustering_logging_predicted_reward,
-                resample_clustering=True,
+            candidate_actions_all = (
+                self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
+                    context=context,
+                    query=query,
+                    logging_predicted_reward=clustering_logging_predicted_reward,
+                    resample_clustering=True,
+                )
             )
             cluster_predicted_reward = self._calc_cluster_predicted_reward(
                 context=context,
@@ -419,11 +431,13 @@ class TwoStagePolicy(BasePolicy):
             Action choice probability of all candidate actions.
 
         """
-        candidate_actions_all = self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
-            context=context,
-            query=query,
-            logging_predicted_reward=clustering_logging_predicted_reward,
-            resample_clustering=True,
+        candidate_actions_all = (
+            self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
+                context=context,
+                query=query,
+                logging_predicted_reward=clustering_logging_predicted_reward,
+                resample_clustering=True,
+            )
         )
         cluster_centers = self.clustering_policy.retrieve_cluster_centers(
             context=context,
@@ -609,14 +623,17 @@ class TwoStagePolicy(BasePolicy):
 
         if predicted_reward is None:
             predicted_reward = reward_predictor.predict_values(
-                context=context, query=query,
+                context=context,
+                query=query,
             )
 
-        candidate_actions_all = self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
-            context=context,
-            query=query,
-            logging_predicted_reward=clustering_logging_predicted_reward,
-            resample_clustering=True,
+        candidate_actions_all = (
+            self.clustering_policy.retrieve_candidate_actions_for_all_clusters(
+                context=context,
+                query=query,
+                logging_predicted_reward=clustering_logging_predicted_reward,
+                resample_clustering=True,
+            )
         )
         cluster_centers = self.clustering_policy.retrieve_cluster_centers(
             context=context,
@@ -631,8 +648,12 @@ class TwoStagePolicy(BasePolicy):
             clustering_logging_predicted_reward=clustering_logging_predicted_reward,
             candidate_actions_all=candidate_actions_all,
         )
-        cluster_choice_probability = self.first_stage_policy.calc_action_choice_probability(
-            context=context, query=query, cluster_centers=cluster_centers,
+        cluster_choice_probability = (
+            self.first_stage_policy.calc_action_choice_probability(
+                context=context,
+                query=query,
+                cluster_centers=cluster_centers,
+            )
         )
 
         policy_value = (cluster_predicted_reward * cluster_choice_probability).sum(
@@ -760,7 +781,9 @@ class SoftmaxPolicy(BasePolicy):
             candidate_actions=candidate_actions,
         )
         action = torch.multinomial(
-            action_choice_prob, num_samples=n_actions_for_each, replacement=replacement,
+            action_choice_prob,
+            num_samples=n_actions_for_each,
+            replacement=replacement,
         )
 
         if return_action_type == "prompt":
@@ -1453,7 +1476,9 @@ class EpsilonGreedyPolicy(BasePolicy):
             candidate_actions=candidate_actions,
         )
         action = torch.multinomial(
-            action_choice_prob, num_samples=n_actions_for_each, replacement=replacement,
+            action_choice_prob,
+            num_samples=n_actions_for_each,
+            replacement=replacement,
         )
 
         if return_action_type == "prompt":
@@ -1711,7 +1736,8 @@ class EpsilonGreedyPolicy(BasePolicy):
 
                 greedy_action_ = x[i][candidate_actions_].argmax()
                 random_action_ = torch.multinomial(
-                    torch.ones((n_candidate_actions_,)), num_samples=1,
+                    torch.ones((n_candidate_actions_,)),
+                    num_samples=1,
                 )
 
                 action_id_ = flg[i] * greedy_action_ + (1 - flg[i]) * random_action_
@@ -1815,7 +1841,8 @@ class EpsilonGreedyPolicy(BasePolicy):
                 x_ = x[i].to(self.device)
 
                 greedy_flg_ = F.one_hot(
-                    x_.reshape((1, -1)).argmax(dim=1), num_classes=n_candidate_actions_,
+                    x_.reshape((1, -1)).argmax(dim=1),
+                    num_classes=n_candidate_actions_,
                 )[0]
                 prob[i, candidate_actions[i]] = (
                     greedy_flg_
@@ -2039,7 +2066,9 @@ class EpsilonGreedyPolicy(BasePolicy):
 
         elif self.given_reward_model:
             x = self.base_model.predict_values(
-                context=context, query=query, calc_gradient=calc_gradient,
+                context=context,
+                query=query,
+                calc_gradient=calc_gradient,
             )
 
         else:
@@ -2086,7 +2115,8 @@ class EpsilonGreedyPolicy(BasePolicy):
                 reward_ = reward[i].to(self.device)
 
                 greedy_flg_ = F.one_hot(
-                    x_.reshape((1, -1)).argmax(dim=1), num_classes=n_candidate_actions_,
+                    x_.reshape((1, -1)).argmax(dim=1),
+                    num_classes=n_candidate_actions_,
                 )[0]
 
                 prob_ = (
@@ -2105,7 +2135,8 @@ class EpsilonGreedyPolicy(BasePolicy):
                 x_ = x[i].to(self.device)
 
                 greedy_flg_ = F.one_hot(
-                    x_.reshape((1, -1)).argmax(dim=1), num_classes=n_candidate_actions_,
+                    x_.reshape((1, -1)).argmax(dim=1),
+                    num_classes=n_candidate_actions_,
                 )[0]
 
                 prob_ = (
@@ -2334,7 +2365,9 @@ class UniformRandomPolicy(BasePolicy):
             candidate_actions=candidate_actions,
         )
         action = torch.multinomial(
-            action_choice_prob, num_samples=n_actions_for_each, replacement=replacement,
+            action_choice_prob,
+            num_samples=n_actions_for_each,
+            replacement=replacement,
         )
 
         if return_action_type == "prompt":
@@ -2397,7 +2430,8 @@ class UniformRandomPolicy(BasePolicy):
             for i in range(n_samples):
                 n_candidate_actions_ = len(candidate_actions[i])
                 action_id_ = torch.multinomial(
-                    torch.ones((n_candidate_actions_,)), num_samples=1,
+                    torch.ones((n_candidate_actions_,)),
+                    num_samples=1,
                 )
                 action[i] = candidate_actions[i][action_id_]
 
@@ -2652,7 +2686,9 @@ class UniformRandomPolicy(BasePolicy):
                 )
 
             predicted_reward = reward_predictor.predict_values(
-                context=context, query=query, candidate_actions=candidate_actions,
+                context=context,
+                query=query,
+                candidate_actions=candidate_actions,
             )
 
         if candidate_actions is None:

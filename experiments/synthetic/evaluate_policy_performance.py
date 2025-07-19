@@ -102,21 +102,33 @@ def _process(
             device=device,
             random_state=random_state,
         )
-        policy_value = evaluate_policy(dataset=dataset, policy=logging_policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=logging_policy,
+        )
 
     elif is_oracle_policy:
         oracle_policy = load_oracle_policy(
-            dataset=dataset, device=device, random_state=random_state,
+            dataset=dataset,
+            device=device,
+            random_state=random_state,
         )
         policy_value = evaluate_policy(
-            dataset=dataset, policy=oracle_policy, is_oracle_policy=True,
+            dataset=dataset,
+            policy=oracle_policy,
+            is_oracle_policy=True,
         )
 
     elif is_uniform_policy:
         uniform_policy = load_uniform_policy(
-            dataset=dataset, device=device, random_state=random_state,
+            dataset=dataset,
+            device=device,
+            random_state=random_state,
         )
-        policy_value = evaluate_policy(dataset=dataset, policy=uniform_policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=uniform_policy,
+        )
 
     elif is_regression_based_greedy:
         _, action_reward_predictor = load_reward_predictor(
@@ -139,7 +151,8 @@ def _process(
             random_state=random_state,
         )
         policy_value = evaluate_policy(
-            dataset=dataset, policy=regression_based_greedy_policy,
+            dataset=dataset,
+            policy=regression_based_greedy_policy,
         )
 
     elif is_online_policy:
@@ -152,7 +165,10 @@ def _process(
             device=device,
             random_state=random_state,
         )
-        policy_value = evaluate_policy(dataset=dataset, policy=policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=policy,
+        )
 
     elif not (is_two_stage_policy or is_dso):
         output_reward_predictor, action_reward_predictor = load_reward_predictor(
@@ -178,7 +194,10 @@ def _process(
             device=device,
             random_state=random_state,
         )
-        policy_value = evaluate_policy(dataset=dataset, policy=policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=policy,
+        )
 
     elif is_dso:
         if kernel_type == "uniform":
@@ -222,7 +241,10 @@ def _process(
             device=device,
             random_state=random_state,
         )
-        policy_value = evaluate_policy(dataset=dataset, policy=policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=policy,
+        )
 
     else:
         logging_reward_predictor = load_logging_reward_predictor(
@@ -267,7 +289,10 @@ def _process(
             device=device,
             random_state=random_state,
         )
-        policy_value = evaluate_policy(dataset=dataset, policy=policy,)
+        policy_value = evaluate_policy(
+            dataset=dataset,
+            policy=policy,
+        )
     return policy_value
 
 
@@ -331,12 +356,18 @@ def process(conf: DictConfig):
                 if "naive" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = False
                     logging_performance.append(
-                        _process(**conf_, is_logging_policy=True,)
+                        _process(
+                            **conf_,
+                            is_logging_policy=True,
+                        )
                     )
                 if "pessimistic" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = True
                     logging_performance_pssm.append(
-                        _process(**conf_, is_logging_policy=True,)
+                        _process(
+                            **conf_,
+                            is_logging_policy=True,
+                        )
                     )
         if "naive" in reward_predictor_type:
             df["logging"] = logging_performance
@@ -357,12 +388,20 @@ def process(conf: DictConfig):
 
                 if "naive" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = False
-                    oracle_performance.append(_process(**conf_, is_oracle_policy=True,))
+                    oracle_performance.append(
+                        _process(
+                            **conf_,
+                            is_oracle_policy=True,
+                        )
+                    )
 
                 if "pessimistic" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = True
                     oracle_performance_pssm.append(
-                        _process(**conf_, is_oracle_policy=True,)
+                        _process(
+                            **conf_,
+                            is_oracle_policy=True,
+                        )
                     )
 
         if "naive" in reward_predictor_type:
@@ -385,13 +424,19 @@ def process(conf: DictConfig):
                 if "naive" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = False
                     uniform_performance.append(
-                        _process(**conf_, is_uniform_policy=True,)
+                        _process(
+                            **conf_,
+                            is_uniform_policy=True,
+                        )
                     )
 
                 if "pessimistic" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = True
                     uniform_performance_pssm.append(
-                        _process(**conf_, is_uniform_policy=True,)
+                        _process(
+                            **conf_,
+                            is_uniform_policy=True,
+                        )
                     )
 
         if "naive" in reward_predictor_type:
@@ -417,12 +462,18 @@ def process(conf: DictConfig):
                 if "naive" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = False
                     greedy_performance.append(
-                        _process(**conf_, is_regression_based_greedy=True,)
+                        _process(
+                            **conf_,
+                            is_regression_based_greedy=True,
+                        )
                     )
                 if "pessimistic" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = True
                     greedy_performance_pssm.append(
-                        _process(**conf_, is_regression_based_greedy=True,)
+                        _process(
+                            **conf_,
+                            is_regression_based_greedy=True,
+                        )
                     )
 
         if "naive" in reward_predictor_type:
@@ -447,11 +498,19 @@ def process(conf: DictConfig):
 
                 if "naive" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = False
-                    online_performance.append(_process(**conf_, is_online_policy=True,))
+                    online_performance.append(
+                        _process(
+                            **conf_,
+                            is_online_policy=True,
+                        )
+                    )
                 if "pessimistic" in reward_predictor_type:
                     conf_["is_pessimistic_regression"] = True
                     online_performance_pssm.append(
-                        _process(**conf_, is_online_policy=True,)
+                        _process(
+                            **conf_,
+                            is_online_policy=True,
+                        )
                     )
 
         if "naive" in reward_predictor_type:
@@ -480,11 +539,19 @@ def process(conf: DictConfig):
 
                     if "naive" in reward_predictor_type:
                         conf_["is_pessimistic_regression"] = False
-                        performance.append(_process(**conf_,))
+                        performance.append(
+                            _process(
+                                **conf_,
+                            )
+                        )
 
                     if "pessimistic" in reward_predictor_type:
                         conf_["is_pessimistic_regression"] = True
-                        performance_pssm.append(_process(**conf_,))
+                        performance_pssm.append(
+                            _process(
+                                **conf_,
+                            )
+                        )
 
             if "naive" in reward_predictor_type:
                 df[f"{gradient_type} (single)"] = performance
@@ -512,11 +579,19 @@ def process(conf: DictConfig):
 
                     if "naive" in reward_predictor_type:
                         conf_["is_pessimistic_regression"] = False
-                        performance.append(_process(**conf_,))
+                        performance.append(
+                            _process(
+                                **conf_,
+                            )
+                        )
 
                     if "pessimistic" in reward_predictor_type:
                         conf_["is_pessimistic_regression"] = True
-                        performance_pssm.append(_process(**conf_,))
+                        performance_pssm.append(
+                            _process(
+                                **conf_,
+                            )
+                        )
 
             if "naive" in reward_predictor_type:
                 df[f"{gradient_type} (dso)"] = performance
@@ -548,10 +623,18 @@ def process(conf: DictConfig):
 
                         if "naive" in reward_predictor_type:
                             conf_["is_pessimistic_regression"] = False
-                            performance.append(_process(**conf_,))
+                            performance.append(
+                                _process(
+                                    **conf_,
+                                )
+                            )
                         if "pessimistic" in reward_predictor_type:
                             conf_["is_pessimistic_regression"] = True
-                            performance_pssm.append(_process(**conf_,))
+                            performance_pssm.append(
+                                _process(
+                                    **conf_,
+                                )
+                            )
 
                 if "naive" in reward_predictor_type:
                     df[f"{gradient_type} ({clustering_type})"] = performance

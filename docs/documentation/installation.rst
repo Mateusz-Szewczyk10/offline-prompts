@@ -32,16 +32,15 @@ If you use our pipeline in your work, please cite our paper below.
 .. card::
 
     | Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims
-    | **OfflinePrompts: Benchmark Suites for Prompt-guided Language Personalization**
+    | **OfflinePrompts: Benchmark Suites for Prompt-guided Text Personalization from Logged Data**
     | (a preprint is coming soon..)
 
     .. code-block::
 
         @article{kiyohara2025offline,
-            title = {OfflinePrompts: Benchmark Suites for Prompt-guided Language Personalization},
+            title = {OfflinePrompts: Benchmark Suites for Prompt-guided Text Personalization from Logged Data},
             author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
-            journal = {xxx},
-            pages = {xxx--xxx},
+            journal = {arXiv preprint arXiv:},
             year = {2025},
         }
 
@@ -50,14 +49,14 @@ If you use the proposed method (DSO) or refer to our findings in your work, plea
 .. card::
 
     | Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims
-    | **Off-Policy Learning for Prompt-Guided Sentence Personalization Using Logged Bandit Data**
+    | **An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization**
 
     .. code-block::
 
-        @article{kiyohara2025off,
-            title = {Off-Policy Learning for Prompt-Guided Sentence Personalization Using Logged Bandit Data},
+        @inproceedings{kiyohara2025off,
+            title = {An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization},
             author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
-            journal = {xxx},
+            booktitle = {Proceedings of the 19th ACM Conference on Recommender Systems},
             pages = {xxx--xxx},
             year = {2025},
         }

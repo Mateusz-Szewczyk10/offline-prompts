@@ -25,16 +25,17 @@ from ..utils import torch_seed, tokenize, to_device
 
 class BatchDataset(Dataset):
     """Dataset class used in the encoder models.
-    
+
     Parameters
     -------
     input: Sentence or Tokens, shape (n_samples, )
         Textual data.
-    
+
     """
 
     def __init__(
-        self, input: Union[Sentence, Tokens],
+        self,
+        input: Union[Sentence, Tokens],
     ):
         self.input = input
 
@@ -53,9 +54,8 @@ class BatchDataset(Dataset):
             input_ = {}
             for key in self.input:
                 input_[key] = self.input[key][idx]
-    
+
         return input_
-        
 
 
 class TransformerEncoder(BaseEncoder):
@@ -133,7 +133,9 @@ class TransformerEncoder(BaseEncoder):
             torch_seed(random_state, device=self.device)
 
         if base_model is None:
-            self.base_model = AutoModel.from_pretrained("mistralai/Mistral-7B-Instruct-v0.2",)
+            self.base_model = AutoModel.from_pretrained(
+                "mistralai/Mistral-7B-Instruct-v0.2",
+            )
         if tokenizer is None:
             self.tokenizer = AutoTokenizer.from_pretrained(
                 "mistralai/Mistral-7B-Instruct-v0.2",
@@ -174,10 +176,12 @@ class TransformerEncoder(BaseEncoder):
         self.pca_matrix = None
 
     def _original_embeddings(
-        self, inputs: Union[Sentence, Tokens], batch_size: int = 128,
+        self,
+        inputs: Union[Sentence, Tokens],
+        batch_size: int = 128,
     ):
         """Get original (high-dimensional) embeddings.
-        
+
         Parameters
         -------
         inputs: Sentence or Tokens, shape (n_samples, )
@@ -190,7 +194,7 @@ class TransformerEncoder(BaseEncoder):
         -------
         embeddings: torch.Tensor, shape (n_samples, dim_emb)
             Original (high dimensional) embeddings of the input texts.
-        
+
         """
         if isinstance(inputs, list):
             inputs = tokenize(
@@ -204,8 +208,8 @@ class TransformerEncoder(BaseEncoder):
 
         batch_dataset = BatchDataset(inputs)
         batch_dataloader = DataLoader(
-            batch_dataset, 
-            batch_size=batch_size, 
+            batch_dataset,
+            batch_size=batch_size,
             shuffle=False,
         )
 
@@ -213,7 +217,9 @@ class TransformerEncoder(BaseEncoder):
         model, batch_dataloader = accelerator.prepare(self.base_model, batch_dataloader)
 
         embs = []
-        for inputs_ in tqdm(batch_dataloader, desc="Encoder: Inference batches of the frozen LLM"):
+        for inputs_ in tqdm(
+            batch_dataloader, desc="Encoder: Inference batches of the frozen LLM"
+        ):
             inputs_ = to_device(inputs_, device=accelerator.device)
 
             with torch.no_grad():
@@ -224,17 +230,18 @@ class TransformerEncoder(BaseEncoder):
                     output_ = model(**inputs_)
                     emb_ = output_.last_hidden_state
 
-            embs.append(emb_.mean(dim=1)) # mean pooling
+            embs.append(emb_.mean(dim=1))  # mean pooling
 
         embs = torch.cat(embs, dim=0)
         return embs
 
-
     def fit_pca(
-        self, inputs: Union[Sentence, Tokens], batch_size: int = 128,
+        self,
+        inputs: Union[Sentence, Tokens],
+        batch_size: int = 128,
     ):
         """Fit PCA to map high-dimensional features to a low-dimensional vector.
-        
+
         Parameters
         -------
         inputs: Sentence or Tokens, shape (n_samples, )
@@ -242,22 +249,22 @@ class TransformerEncoder(BaseEncoder):
 
         batch_size: int, default=128 (> 0)
             Batch size.
-        
+
         """
         emb = self._original_embeddings(inputs, batch_size=batch_size)
         U, S, V = torch.pca_lowrank(emb, q=self.dim_emb)
         self.pca_matrix = V[:, : self.dim_emb]
 
     def encode(
-        self, 
-        inputs: Union[Sentence, Tokens], 
+        self,
+        inputs: Union[Sentence, Tokens],
         context: Optional[torch.Tensor] = None,
         query: Optional[Union[Sentence, Tokens, torch.Tensor]] = None,
         batch_size: int = 128,
         **kwargs,
     ):
         """Encode input sentence to a low-dimensional vector.
-        
+
         Parameters
         -------
         inputs: Sentence or Tokens, shape (n_samples, )
@@ -276,7 +283,7 @@ class TransformerEncoder(BaseEncoder):
         -------
         embeddings: torch.Tensor, shape (n_samples, dim_emb)
             Low dimensional embeddings of the input texts after applying PCA.
-        
+
         """
         if self.pca_matrix is None:
             raise RuntimeError("pca is not fitted. Please call `fit_pca` first.")
@@ -286,10 +293,11 @@ class TransformerEncoder(BaseEncoder):
         return emb
 
     def format_tokens(
-        self, input_tokens: Tokens,
+        self,
+        input_tokens: Tokens,
     ):
         """Format prompt tokens.
-        
+
         Parameters
         -------
         input_tokens: Tokens, shape (n_samples, )
@@ -319,7 +327,7 @@ class TransformerEncoder(BaseEncoder):
 
 class NNSentenceEncoder(nn.Module):
     """NN-based sentence encoder that is used on top of the transformer encoder.
-    
+
     Bases: :class:`off_prompts.dataset.BaseEncoder
 
     Imported as: :class:`off_prompts.dataset.NNSentenceEncoder
@@ -379,8 +387,10 @@ class NNSentenceEncoder(nn.Module):
         else:
             l2_input_dim = hidden_dim
             l2_output_dim = dim_emb
-        
-        self.l1 = nn.Linear(self.transformer_encoder.pca_matrix.shape[0], hidden_dim).to(self.device)
+
+        self.l1 = nn.Linear(
+            self.transformer_encoder.pca_matrix.shape[0], hidden_dim
+        ).to(self.device)
         self.l2 = nn.Linear(l2_input_dim, l2_output_dim).to(self.device)
         self.l3 = nn.Linear(hidden_dim, dim_emb).to(self.device)
         self.relu = nn.ReLU()
@@ -392,7 +402,7 @@ class NNSentenceEncoder(nn.Module):
         query: Optional[Union[Sentence, Tokens, torch.Tensor]] = None,
     ):
         """Produce logit values using a Transformer model.
-        
+
         Parameters
         -------
         emb: torch.Tensor, shape (n_samples, dim_emb)
@@ -416,14 +426,18 @@ class NNSentenceEncoder(nn.Module):
 
         if self.is_context_dependent:
             if context is None:
-                raise ValueError("context must be given when is_context_dependent is True.")
+                raise ValueError(
+                    "context must be given when is_context_dependent is True."
+                )
 
             if query is None:
-                raise ValueError("query must be given when is_context_dependent is True.")
+                raise ValueError(
+                    "query must be given when is_context_dependent is True."
+                )
 
             if not isinstance(query, torch.Tensor):
                 query = self.query_encoder.encode(query)
-        
+
         x = self.relu(self.l1(emb))
 
         if self.is_context_dependent:
@@ -437,8 +451,8 @@ class NNSentenceEncoder(nn.Module):
         return output
 
     def encode(
-        self, 
-        inputs: Union[Sentence, Tokens], 
+        self,
+        inputs: Union[Sentence, Tokens],
         context: Optional[torch.Tensor] = None,
         query: Optional[Union[Sentence, Tokens, torch.Tensor]] = None,
         batch_size: int = 128,
@@ -446,7 +460,7 @@ class NNSentenceEncoder(nn.Module):
         **kwargs,
     ):
         """Encode input sentence to a low-dimensional vector.
-        
+
         Parameters
         -------
         inputs: Sentence or Tokens, shape (n_samples, )
@@ -473,9 +487,10 @@ class NNSentenceEncoder(nn.Module):
         with torch.no_grad():
             # emb = self.transformer_encoder.encode(inputs, batch_size=batch_size,)
             emb = self.transformer_encoder._original_embeddings(
-                inputs, batch_size=batch_size,
+                inputs,
+                batch_size=batch_size,
             )
-        
+
         if calc_gradient:
             emb = self(emb, context, query)
 

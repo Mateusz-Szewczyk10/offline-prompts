@@ -49,7 +49,7 @@ def _process(
     **kwargs,
 ):
     fix_seed(base_random_state)
-    
+
     dataset = load_dataset(
         n_actions=n_actions,
         reward_type=reward_type,
@@ -107,7 +107,9 @@ def _process(
     )
 
 
-def process(conf: Dict[str, Any],):
+def process(
+    conf: Dict[str, Any],
+):
     _process(**conf)
 
 

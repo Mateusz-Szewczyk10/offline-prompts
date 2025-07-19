@@ -67,7 +67,7 @@ def _process(
     **kwargs,
 ):
     fix_seed(base_random_state)
-    
+
     dataset = load_dataset(
         n_actions=n_actions,
         reward_type=reward_type,
@@ -146,15 +146,13 @@ def _process(
         prompt_reward_predictor = None
 
     if not (is_two_stage_policy or is_dso):
-        Path(
-            f"logs/policy_single_{gradient_type}/"
-        ).mkdir(
-            parents=True, exist_ok=True,
+        Path(f"logs/policy_single_{gradient_type}/").mkdir(
+            parents=True,
+            exist_ok=True,
         )
-        Path(
-            f"logs/learning_process/policy_single_{gradient_type}/"
-        ).mkdir(
-            parents=True, exist_ok=True,
+        Path(f"logs/learning_process/policy_single_{gradient_type}/").mkdir(
+            parents=True,
+            exist_ok=True,
         )
         fix_seed(optimizer_random_state)
 
@@ -185,15 +183,13 @@ def _process(
         )
 
     if is_two_stage_policy:
-        Path(
-            f"logs/policy_two_stage/"
-        ).mkdir(
-            parents=True, exist_ok=True,
+        Path(f"logs/policy_two_stage/").mkdir(
+            parents=True,
+            exist_ok=True,
         )
-        Path(
-            f"logs/learning_process/policy_two_stage/"
-        ).mkdir(
-            parents=True, exist_ok=True,
+        Path(f"logs/learning_process/policy_two_stage/").mkdir(
+            parents=True,
+            exist_ok=True,
         )
         fix_seed(optimizer_random_state)
 
@@ -243,15 +239,13 @@ def _process(
             random_state=dataset_random_state,
         )
 
-        Path(
-            f"logs/policy_dso_{kernel_type}/"
-        ).mkdir(
-            parents=True, exist_ok=True,
+        Path(f"logs/policy_dso_{kernel_type}/").mkdir(
+            parents=True,
+            exist_ok=True,
         )
-        Path(
-            f"logs/learning_process/policy_dso_{kernel_type}/"
-        ).mkdir(
-            parents=True, exist_ok=True,
+        Path(f"logs/learning_process/policy_dso_{kernel_type}/").mkdir(
+            parents=True,
+            exist_ok=True,
         )
         fix_seed(optimizer_random_state)
 
@@ -282,15 +276,21 @@ def _process(
         )
 
 
-def process(conf: Dict[str, Any],):
+def process(
+    conf: Dict[str, Any],
+):
     dataset_n_random_state = conf["dataset_n_random_state"]
     dataset_start_random_state = conf["dataset_start_random_state"]
     optimizer_n_random_state = conf["optimizer_n_random_state"]
     optimizer_start_random_state = conf["optimizer_start_random_state"]
     conf_ = deepcopy(conf)
 
-    for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-        for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
+    for dataset_random_state in range(
+        dataset_start_random_state, dataset_n_random_state
+    ):
+        for optimizer_random_state in range(
+            optimizer_start_random_state, optimizer_n_random_state
+        ):
             conf_["dataset_random_state"] = dataset_random_state
             conf_["optimizer_random_state"] = optimizer_random_state
             _process(**conf_)

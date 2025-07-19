@@ -140,7 +140,9 @@ class TorchLoggedDataset(Dataset):
 
         if sentence is not None and context is not None and query is not None:
             if sentence_encoder is not None:
-                self.sentence = sentence_encoder.encode(self.sentence, self.context, self.query)
+                self.sentence = sentence_encoder.encode(
+                    self.sentence, self.context, self.query
+                )
 
     def __len__(self):
         return len(self.context)
@@ -180,7 +182,9 @@ class TorchLoggedDataset(Dataset):
             batch_prompt = self.prompt[self.action[idx]]
 
             if isinstance(self.prompt_for_frozen_llm, list):
-                batch_prompt_for_frozen_llm = self.prompt_for_frozen_llm[self.action[idx]]
+                batch_prompt_for_frozen_llm = self.prompt_for_frozen_llm[
+                    self.action[idx]
+                ]
             else:
                 batch_prompt_for_frozen_llm = {}
                 for key in self.prompt_for_frozen_llm:

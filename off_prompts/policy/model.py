@@ -586,10 +586,14 @@ class KernelMarginalDensityEstimator(BaseKernelMarginalDensityModel):
 
         """
         if not isinstance(pivot_sentence, torch.Tensor):
-            pivot_sentence = self.sentence_encoder.encode(pivot_sentence, context, query)
+            pivot_sentence = self.sentence_encoder.encode(
+                pivot_sentence, context, query
+            )
 
         if not isinstance(sampled_sentences, torch.Tensor):
-            sampled_sentences = self.sentence_encoder.encode(sampled_sentences, context, query)
+            sampled_sentences = self.sentence_encoder.encode(
+                sampled_sentences, context, query
+            )
 
         dim_sentence = pivot_sentence.shape[-1]
 

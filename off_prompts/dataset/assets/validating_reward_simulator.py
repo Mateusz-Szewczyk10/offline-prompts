@@ -27,7 +27,9 @@ from transformers import (
 )
 from transformers import set_seed
 
-from off_prompts.dataset import CollaborativeFilteringRewardSimulator as CFRewardSimulator
+from off_prompts.dataset import (
+    CollaborativeFilteringRewardSimulator as CFRewardSimulator,
+)
 from off_prompts.dataset import TransformerRewardSimulator
 from off_prompts.utils import torch_seed, tokenize, to_device
 
@@ -50,7 +52,9 @@ class MovielensDataset(Dataset):
     ):
         if tokenizer is None:
             self.tokenizer = DistilBertTokenizerFast.from_pretrained(
-                "distilbert-base-uncased", truncation=True, do_lower_case=True,
+                "distilbert-base-uncased",
+                truncation=True,
+                do_lower_case=True,
             )
 
         if tokenizer_kwargs is None:
@@ -157,7 +161,10 @@ def process(
         is_init=True,
     )
     train_df, val_df = train_test_split(
-        df, test_size=0.2, shuffle=False, random_state=random_state,
+        df,
+        test_size=0.2,
+        shuffle=False,
+        random_state=random_state,
     )
     val_df = val_df[:2000]
     val_dataset = MovielensDataset(
@@ -171,27 +178,27 @@ def process(
         device=reward_finetuner.device,
     )
     val_dataloader = DataLoader(
-        val_dataset, batch_size=2000, shuffle=False,
+        val_dataset,
+        batch_size=2000,
+        shuffle=False,
     )
     for val_batch_ in val_dataloader:
-        val_user_id_ = to_device(
-            val_batch_["user_id"], device=reward_finetuner.device
-        )
-        val_item_id_ = to_device(
-            val_batch_["item_id"], device=reward_finetuner.device
-        )
-        val_reward_ = to_device(
-            val_batch_["reward"], device=reward_finetuner.device
-        )
+        val_user_id_ = to_device(val_batch_["user_id"], device=reward_finetuner.device)
+        val_item_id_ = to_device(val_batch_["item_id"], device=reward_finetuner.device)
+        val_reward_ = to_device(val_batch_["reward"], device=reward_finetuner.device)
         val_sentence_ = to_device(
             val_batch_["sentence"], device=reward_finetuner.device
         )
 
-        val_prediction_ = transformer_reward_simulator(
-            user_id=val_user_id_,
-            item_id=val_item_id_,
-            item_tokens=val_sentence_,
-        ).cpu().detach()
+        val_prediction_ = (
+            transformer_reward_simulator(
+                user_id=val_user_id_,
+                item_id=val_item_id_,
+                item_tokens=val_sentence_,
+            )
+            .cpu()
+            .detach()
+        )
 
     pos_id = torch.where(torch.tensor((val_df["reward"] > 0).values))
     neg_id = torch.where(torch.tensor((val_df["reward"] <= 0).values))
@@ -199,8 +206,18 @@ def process(
 
     plt.style.use("ggplot")
     fig, ax = plt.subplots(1, 1, figsize=(5.0, 3.0), sharey=True)
-    ax.hist(val_prediction_[pos_id], bins=bins, alpha=0.5, label="positive", )
-    ax.hist(val_prediction_[neg_id], bins=bins, alpha=0.5, label="negative", )
+    ax.hist(
+        val_prediction_[pos_id],
+        bins=bins,
+        alpha=0.5,
+        label="positive",
+    )
+    ax.hist(
+        val_prediction_[neg_id],
+        bins=bins,
+        alpha=0.5,
+        label="negative",
+    )
     ax.set_title("reward simulation result")
     ax.set_ylabel("count")
     ax.set_xlabel("simulated reward")

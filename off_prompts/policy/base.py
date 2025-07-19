@@ -306,12 +306,16 @@ class BasePromptPolicyModel(nn.Module):
 
     """
 
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         super().__init__()
 
     @abstractmethod
     def forward(
-        self, context: torch.Tensor, query: Union[Sentence, Tokens, torch.Tensor],
+        self,
+        context: torch.Tensor,
+        query: Union[Sentence, Tokens, torch.Tensor],
     ):
         """Calculate some logit values.
 
@@ -405,10 +409,14 @@ class BasePromptPolicyModel(nn.Module):
         """
         n_samples = len(context)
         action_choice_prob = self.calc_action_choice_probability(
-            context=context, query=query, return_cpu_tensor=return_cpu_tensor,
+            context=context,
+            query=query,
+            return_cpu_tensor=return_cpu_tensor,
         )
         action = torch.multinomial(
-            action_choice_prob, num_samples=n_actions_for_each, replacement=replacement,
+            action_choice_prob,
+            num_samples=n_actions_for_each,
+            replacement=replacement,
         )
 
         if return_action_type == "prompt":
@@ -665,11 +673,15 @@ class BasePromptPolicyModel(nn.Module):
 
         if predicted_reward is None:
             predicted_reward = reward_predictor.predict_values(
-                context=context, query=query, return_cpu_tensor=return_cpu_tensor,
+                context=context,
+                query=query,
+                return_cpu_tensor=return_cpu_tensor,
             )
 
         prob = self.calc_action_choice_probability(
-            context=context, query=query, return_cpu_tensor=return_cpu_tensor,
+            context=context,
+            query=query,
+            return_cpu_tensor=return_cpu_tensor,
         )
 
         policy_value = (predicted_reward * prob).sum(dim=1)
@@ -691,7 +703,9 @@ class BaseClusterPolicyModel(nn.Module):
 
     """
 
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         super().__init__()
 
     @abstractmethod
@@ -808,7 +822,9 @@ class BaseClusterPolicyModel(nn.Module):
             return_cpu_tensor=return_cpu_tensor,
         )
         action = torch.multinomial(
-            action_choice_prob, num_samples=n_actions_for_each, replacement=replacement,
+            action_choice_prob,
+            num_samples=n_actions_for_each,
+            replacement=replacement,
         )
         return action
 
@@ -1051,7 +1067,9 @@ class BaseSentenceRewardModel(nn.Module):
 
     """
 
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         super().__init__()
 
     @abstractmethod
@@ -1194,7 +1212,8 @@ class BaseSentenceRewardModel(nn.Module):
 
         if candidate_actions is None:
             predicted_values = torch.zeros(
-                (n_samples, n_actions, n_sentences_to_approximate), device=self.device,
+                (n_samples, n_actions, n_sentences_to_approximate),
+                device=self.device,
             )
 
             for a in range(n_actions):
@@ -1202,7 +1221,8 @@ class BaseSentenceRewardModel(nn.Module):
 
                 for j in range(n_sentences_to_approximate):
                     generated_sentence_ = frozen_llm.generate_output_sentence(
-                        query=query_for_frozen_llm, prompt=prompt,
+                        query=query_for_frozen_llm,
+                        prompt=prompt,
                     )
                     predicted_values[:, a, j] = self.predict_value(
                         context=context,
@@ -1240,7 +1260,8 @@ class BaseSentenceRewardModel(nn.Module):
                     )
 
                     generated_sentence_ = frozen_llm.generate_output_sentence(
-                        query=query_for_frozen_llm_, prompt=prompt_,
+                        query=query_for_frozen_llm_,
+                        prompt=prompt_,
                     )
                     predicted_values[i][a] = self.predict_value(
                         context=context_,
@@ -1273,7 +1294,9 @@ class BasePromptRewardModel(nn.Module):
 
     """
 
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         super().__init__()
 
     @abstractmethod
@@ -1453,7 +1476,9 @@ class BaseKernelMarginalDensityModel(nn.Module):
 
     """
 
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         super().__init__()
 
     @abstractmethod
@@ -1546,13 +1571,14 @@ class BaseKernelMarginalDensityModel(nn.Module):
 
         """
         pairwise_distance = self.calc_pairwise_distance(
-            pivot_sentence=pivot_sentence, 
+            pivot_sentence=pivot_sentence,
             sampled_sentences=sampled_sentences,
             context=context,
             query=query,
         )
         pairwise_weight = self.kernel_function(
-            distance=pairwise_distance, **self.kernel_kwargs,
+            distance=pairwise_distance,
+            **self.kernel_kwargs,
         )
         return pairwise_weight
 
@@ -1614,7 +1640,9 @@ class BaseClusteringModel(nn.Module):
 
     """
 
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         super().__init__()
 
     @abstractmethod
@@ -1850,7 +1878,11 @@ class BaseClusteringModel(nn.Module):
 
         if action is not None or sentence is not None:
             cluster = self.retrieve_cluster(
-                context=context, query=query, action=action, sentence=sentence, idx=idx,
+                context=context,
+                query=query,
+                action=action,
+                sentence=sentence,
+                idx=idx,
             )
 
         n_samples = len(cluster_centers)
@@ -1914,7 +1946,11 @@ class BaseClusteringModel(nn.Module):
 
         if action is not None or sentence is not None:
             cluster = self.retrieve_cluster(
-                context=context, query=query, action=action, sentence=sentence, idx=idx,
+                context=context,
+                query=query,
+                action=action,
+                sentence=sentence,
+                idx=idx,
             )
 
         if idx is None:

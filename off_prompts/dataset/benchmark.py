@@ -1,6 +1,6 @@
 """Class to handle synthetic dataset generation."""
 from dataclasses import dataclass
-from typing import Optional, Union
+from typing import Optional, Union, Any
 from operator import itemgetter
 
 import torch
@@ -22,15 +22,16 @@ from .frozen_llm import AutoFrozenLLM
 from .reward_simulator import TransformerRewardSimulator
 from .prompt_formatter import MovielensPromptFormatter
 
-from ..policy.base import (
-    BasePolicy,
-    BasePromptPolicyModel,
-    BaseClusterPolicyModel,
-)
+# from ..policy.base import (
+#     BasePolicy,
+#     BasePromptPolicyModel,
+#     BaseClusterPolicyModel,
+# )
 from ..types import Sentence, Tokens
 from ..utils import torch_seed, to_device
 
-Policy = Union[BasePolicy, BasePromptPolicyModel, BaseClusterPolicyModel]
+# Policy = Union[BasePolicy, BasePromptPolicyModel, BaseClusterPolicyModel]
+Policy = Any  # avoid circular import
 
 
 @dataclass
@@ -162,14 +163,14 @@ class SemiSyntheticDataset:
 
         if self.frozen_llm is None:
             frozen_llm_tokenizer = AutoTokenizer.from_pretrained(
-                frozen_llm_base_tokenizer_id,
+                self.frozen_llm_base_tokenizer_id,
                 truncation=True,
                 do_lower_case=True,
                 use_fast=self.frozen_llm_use_tokenizer_fast,
             )
 
             frozen_llm_model = AutoModelForCausalLM.from_pretrained(
-                frozen_llm_base_tokenizer_id,
+                self.frozen_llm_base_model_id,
             )
 
             frozen_llm_tokenizer_kwargs = {
@@ -208,14 +209,14 @@ class SemiSyntheticDataset:
 
         if self.reward_simulator is None:
             reward_simulator_tokenizer = AutoTokenizer.from_pretrained(
-                reward_simulator_base_tokenizer_id,
+                self.reward_simulator_base_tokenizer_id,
                 truncation=True,
                 do_lower_case=True,
                 use_fast=self.reward_simulator_use_tokenizer_fast,
             )
 
             reward_simulator_base_model = AutoModel.from_pretrained(
-                reward_simulator_base_model_id,
+                self.reward_simulator_base_model_id,
             )
 
             reward_simulator_tokenizer_kwargs = {
@@ -414,21 +415,27 @@ class SemiSyntheticDataset:
             context,
             query,
         ) = self.context_query_loader.sample_context_and_query(
-            n_samples=n_samples, is_test=is_test,
+            n_samples=n_samples,
+            is_test=is_test,
         )
 
         action = policy.sample_action(
-            user_id=user_id, item_id=item_id, context=context, query=query,
+            user_id=user_id,
+            item_id=item_id,
+            context=context,
+            query=query,
         )
         prompt = list(itemgetter(*action)(self.action_list))
 
         action_ = to_device(action, device=self.device)
 
         output_sentence = self.frozen_llm.generate_output_sentence(
-            query=query, prompt=prompt,
+            query=query,
+            prompt=prompt,
         )
         baseline_sentence = self.frozen_llm.generate_output_sentence(
-            query=query, prompt=None,
+            query=query,
+            prompt=None,
         )
 
         expected_reward = self.reward_simulator.calc_expected_reward(
@@ -527,10 +534,12 @@ class SemiSyntheticDataset:
             prompt = None
 
         output_sentence = self.frozen_llm.generate_output_sentence(
-            query=query, prompt=prompt,
+            query=query,
+            prompt=prompt,
         )
         baseline_sentence = self.frozen_llm.generate_output_sentence(
-            query=query, prompt=None,
+            query=query,
+            prompt=None,
         )
 
         expected_reward = self.reward_simulator.calc_expected_reward(
@@ -634,7 +643,8 @@ class SemiSyntheticDataset:
 
         """
         baseline_sentence = self.frozen_llm.generate_output_sentence(
-            query=query, prompt=None,
+            query=query,
+            prompt=None,
         )
         expected_reward = self.reward_simulator.calc_expected_reward(
             user_id=user_id,
@@ -701,8 +711,8 @@ class SemiSyntheticDataset:
         return self._sample_reward(expected_reward)
 
     def calc_expected_policy_value(
-        self, 
-        policy: Optional[Policy], 
+        self,
+        policy: Optional[Policy],
         n_samples_to_approximate: int = 10000,
     ):
         """Sample dataset given data collection policy.
@@ -713,7 +723,7 @@ class SemiSyntheticDataset:
             Policy that chooses discrete prompt (index) as action. If None is given, the function returns the no-prompt-baseline's performance (i.e., generate sentences without prompts).
 
         n_samples_to_approximate: int, default = 10000 (> 0).
-            Number of samples to approximate the policy value. 
+            Number of samples to approximate the policy value.
 
         Return
         -------
@@ -727,13 +737,16 @@ class SemiSyntheticDataset:
             context,
             query,
         ) = self.context_query_loader.sample_context_and_query(
-            n_samples=n_samples_to_approximate, 
+            n_samples=n_samples_to_approximate,
             is_test=True,
         )
 
         if policy is not None:
             action = policy.sample_action(
-                user_id=user_id, item_id=item_id, context=context, query=query,
+                user_id=user_id,
+                item_id=item_id,
+                context=context,
+                query=query,
             )
         else:
             action = None
@@ -749,7 +762,8 @@ class SemiSyntheticDataset:
         return expected_reward.mean().item()
 
     def calc_skyline_policy_value(
-        self, n_samples_to_approximate: int = 100,
+        self,
+        n_samples_to_approximate: int = 100,
     ):
         """Sample dataset given data collection policy.
 
@@ -770,11 +784,12 @@ class SemiSyntheticDataset:
             context,
             query,
         ) = self.context_query_loader.sample_context_and_query(
-            n_samples=n_samples_to_approximate, 
+            n_samples=n_samples_to_approximate,
             is_test=True,
         )
         baseline_sentence = self.frozen_llm.generate_output_sentence(
-            query=query, prompt=None,
+            query=query,
+            prompt=None,
         )
         # baseline_sentence = None
         expected_reward = self.reward_simulator.calc_skyline_expected_reward(

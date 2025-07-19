@@ -26,14 +26,14 @@ class BaseEncoder(metaclass=ABCMeta):
 
     @abstractmethod
     def encode(
-        self, 
-        inputs: Union[Sentence, Tokens], 
+        self,
+        inputs: Union[Sentence, Tokens],
         context: Optional[torch.Tensor] = None,
         query: Optional[Union[Sentence, Tokens, torch.Tensor]] = None,
         batch_size: int = 128,
     ):
         """Encode input sentence to a low-dimensional vector.
-        
+
         Parameters
         -------
         inputs: Sentence or Tokens, shape (n_samples, )
@@ -99,10 +99,10 @@ class BaseContextQueryLoader(metaclass=ABCMeta):
     @abstractmethod
     def sample_context_and_query(
         self,
-        n_samples: int, 
+        n_samples: int,
     ):
         """Sample context and query. Examples of inputs and outputs of this fuction is as follows.
-        
+
         Parameters
         -------
         n_samples: int
@@ -121,7 +121,7 @@ class BaseContextQueryLoader(metaclass=ABCMeta):
 
         query: Sentence, shape (n_samples, )
             Query sentence given by users.
-        
+
         """
         raise NotImplementedError()
 
@@ -136,7 +136,9 @@ class BaseFrozenLLM(metaclass=ABCMeta):
 
     @abstractmethod
     def generate_output_sentence(
-        self, query: Union[Sentence, Tokens], prompt: Union[Sentence, Tokens],
+        self,
+        query: Union[Sentence, Tokens],
+        prompt: Union[Sentence, Tokens],
     ):
         """Generate sentence using frozen LLM given user-specified query and the prompt chosen by a policy.
 
@@ -166,13 +168,15 @@ class BaseRewardSimulator(nn.Module):
 
     @abstractmethod
     def forward(
-        self, **kwargs,
+        self,
+        **kwargs,
     ):
         raise NotImplementedError()
 
     @abstractmethod
     def calc_expected_reward(
-        self, **kwargs,
+        self,
+        **kwargs,
     ):
         """Calculate expected reward. Examples of inputs and outputs of this fuction is as follows.
 

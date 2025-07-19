@@ -19,7 +19,9 @@ from transformers import (
 )
 from transformers import set_seed
 
-from off_prompts.dataset import CollaborativeFilteringRewardSimulator as CFRewardSimulator
+from off_prompts.dataset import (
+    CollaborativeFilteringRewardSimulator as CFRewardSimulator,
+)
 from off_prompts.dataset import TransformerRewardSimulator
 
 from reward_finetuner import RewardFinetuner

@@ -164,7 +164,7 @@ class PolicyLearner:
 
         if dataloader is not None:
             data_iterator = iter(dataloader)
-        
+
         for j in range(n_steps_for_initialization):
             if self.env is not None:
                 (
@@ -177,7 +177,7 @@ class PolicyLearner:
                     n_samples=batch_size,
                     return_query_embeddings=True,
                 )
-            
+
             elif dataloader is not None:
                 try:
                     batch_ = next(data_iterator)
@@ -194,12 +194,14 @@ class PolicyLearner:
 
             if is_two_stage_policy:
                 cluster_centers_ = self.clustering_policy.retrieve_cluster_centers(
-                    context=context_, query=query_, resample_clustering=True,
+                    context=context_,
+                    query=query_,
+                    resample_clustering=True,
                 )
                 cluster_ = model.sample_action(
-                    context=context_, 
-                    query=query_embeddings_, 
-                    cluster_centers=cluster_centers_, 
+                    context=context_,
+                    query=query_embeddings_,
+                    cluster_centers=cluster_centers_,
                     return_cpu_tensor=False,
                 )
                 prob_ = model.calc_prob_given_action(
@@ -213,8 +215,8 @@ class PolicyLearner:
                 )
             else:
                 action_ = model.sample_action(
-                    context=context_, 
-                    query=query_embeddings_, 
+                    context=context_,
+                    query=query_embeddings_,
                     return_cpu_tensor=False,
                 )
                 prob_ = model.calc_prob_given_action(
@@ -258,7 +260,7 @@ class PolicyLearner:
 
         .. math::
 
-            \\nabla_{\\theta} V(\\pi_{\\theta}) 
+            \\nabla_{\\theta} V(\\pi_{\\theta})
             \\approx \\frac{1}{m} \\sum_{i=1}^m \\mathbb{E}_{x_i \\sim p(x), a_i \\sim \\pi_{\\theta}(a | x_i), r_i \\sim p(r|x_i,a_i)}
             \\left[ \\nabla_{\\theta} \\log \\pi_{\\theta}(a_i | x_i) r_i \\right]
 
@@ -268,10 +270,10 @@ class PolicyLearner:
 
         References
         -------
-        Richard S Sutton and Andrew G Barto. 
+        Richard S Sutton and Andrew G Barto.
         "Reinforcement learning: An introduction." 2018.
 
-        Mingkai Deng, Jianyu Wang, Cheng-Ping Hsieh, Yihan Wang, Han Guo, Tianmin Shu, Meng Song, Eric Xing, and Zhiting Hu. 
+        Mingkai Deng, Jianyu Wang, Cheng-Ping Hsieh, Yihan Wang, Han Guo, Tianmin Shu, Meng Song, Eric Xing, and Zhiting Hu.
         "RLPrompt: Optimizing discrete text prompts with reinforcement learning." 2022.
 
         Parameters
@@ -360,11 +362,12 @@ class PolicyLearner:
 
         if self.env is not None:
             policy_values[0] = self.env.calc_expected_policy_value(
-                eval_policy, n_samples_to_approximate=1000,
+                eval_policy,
+                n_samples_to_approximate=1000,
             )
             policy_value = policy_values[0].item()
         else:
-            policy_value = torch.zeros((1, ))
+            policy_value = torch.zeros((1,))
 
         with tqdm(torch.arange(n_epochs)) as pbar:
             for i, ch in enumerate(pbar):
@@ -390,7 +393,9 @@ class PolicyLearner:
 
                     if is_two_stage_policy:
                         cluster_ = model.sample_action(
-                            context=context_, query=query_embeddings_, return_cpu_tensor=False,
+                            context=context_,
+                            query=query_embeddings_,
+                            return_cpu_tensor=False,
                         )
                         log_prob_ = model.calc_prob_given_action(
                             context=context_,
@@ -408,8 +413,12 @@ class PolicyLearner:
                             is_log_prob=False,
                             calc_gradient=False,
                         )
-                        candidate_actions = self.clustering_policy.retrieve_cluster_center(
-                            context=context_, query=query_embeddings_, cluster=cluster_,
+                        candidate_actions = (
+                            self.clustering_policy.retrieve_cluster_center(
+                                context=context_,
+                                query=query_embeddings_,
+                                cluster=cluster_,
+                            )
                         )
                         action_ = self.second_stage_policy.sample_action(
                             context=context_,
@@ -418,8 +427,8 @@ class PolicyLearner:
                         )
                     else:
                         action_ = model.sample_action(
-                            context=context_, 
-                            query=query_embeddings_, 
+                            context=context_,
+                            query=query_embeddings_,
                             return_cpu_tensor=False,
                         )
                         log_prob_ = model.calc_prob_given_action(
@@ -464,7 +473,8 @@ class PolicyLearner:
                         policy_values[
                             (i + 1) // n_epochs_per_log
                         ] = self.env.calc_expected_policy_value(
-                            eval_policy, n_samples_to_approximate=1000,
+                            eval_policy,
+                            n_samples_to_approximate=1000,
                         )
                         policy_value = policy_values[(i + 1) // n_epochs_per_log].item()
                         # print(policy_value)
@@ -514,7 +524,7 @@ class PolicyLearner:
 
         .. math::
 
-            \\nabla_{\\theta} V(\\pi_{\\theta}) 
+            \\nabla_{\\theta} V(\\pi_{\\theta})
             \\approx \\frac{1}{n} \\sum_{i=1}^n \\mathbb{E}_{a \\sim \\pi_{\\theta}(a | x_i)}
             \\left[ \\nabla_{\\theta} \\log \\pi_{\\theta}(a | x_i) \\hat{q}(x_i, a) \\right]
 
@@ -525,7 +535,7 @@ class PolicyLearner:
 
         References
         -------
-        Vijay Konda and John Tsitsiklis. 
+        Vijay Konda and John Tsitsiklis.
         "Actor-critic algorithms." 1999.
 
         Parameters
@@ -620,8 +630,8 @@ class PolicyLearner:
         action = logged_feedback["action"]
 
         train_dataset = TorchLoggedDataset(
-            context=context, 
-            query=query, 
+            context=context,
+            query=query,
             item_id=item_id,
             action=action,
             query_embeddings=self.query_embeddings,
@@ -630,7 +640,9 @@ class PolicyLearner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
         model, train_dataloader = accelerator.prepare(model, train_dataloader)
 
@@ -661,11 +673,12 @@ class PolicyLearner:
 
         if self.env is not None:
             policy_values[0] = self.env.calc_expected_policy_value(
-                eval_policy, n_samples_to_approximate=1000,
+                eval_policy,
+                n_samples_to_approximate=1000,
             )
             policy_value = policy_values[0].item()
         else:
-            policy_value = torch.zeros((1, ))
+            policy_value = torch.zeros((1,))
 
         with tqdm(torch.arange(n_epochs)) as pbar:
             for i, ch in enumerate(pbar):
@@ -689,11 +702,17 @@ class PolicyLearner:
 
                     context_ = to_device(batch_["context"], device=accelerator.device)
                     query_ = to_device(batch_["query"], device=accelerator.device)
-                    logged_action_ = to_device(batch_["action"], device=accelerator.device)
+                    logged_action_ = to_device(
+                        batch_["action"], device=accelerator.device
+                    )
 
                     if is_two_stage_policy:
-                        cluster_centers_ = self.clustering_policy.retrieve_cluster_centers(
-                            context=context_, query=query_, resample_clustering=True,
+                        cluster_centers_ = (
+                            self.clustering_policy.retrieve_cluster_centers(
+                                context=context_,
+                                query=query_,
+                                resample_clustering=True,
+                            )
                         )
                         cluster_ = model.sample_action(
                             context=context_,
@@ -710,14 +729,20 @@ class PolicyLearner:
                             is_log_prob=True,
                             calc_gradient=True,
                         )
-                        candidate_actions_ = self.clustering_policy.retrieve_candidate_actions(
-                            context=context_, query=query_, cluster=cluster_,
+                        candidate_actions_ = (
+                            self.clustering_policy.retrieve_candidate_actions(
+                                context=context_,
+                                query=query_,
+                                cluster=cluster_,
+                            )
                         )
-                        predicted_reward_ = self.second_stage_policy.predict_policy_value(
-                            context=context_,
-                            query=query_,
-                            candidate_actions=candidate_actions_,
-                            return_per_sample=True,
+                        predicted_reward_ = (
+                            self.second_stage_policy.predict_policy_value(
+                                context=context_,
+                                query=query_,
+                                candidate_actions=candidate_actions_,
+                                return_per_sample=True,
+                            )
                         )
 
                         prob_ = model.calc_prob_given_action(
@@ -729,11 +754,13 @@ class PolicyLearner:
                             is_log_prob=False,
                             calc_gradient=False,
                         )
-                        imitation_prob_ = torch.zeros((1, ))
+                        imitation_prob_ = torch.zeros((1,))
 
                     else:
                         action_ = model.sample_action(
-                            context=context_, query=query_, return_cpu_tensor=False,
+                            context=context_,
+                            query=query_,
+                            return_cpu_tensor=False,
                         )
                         log_prob_ = model.calc_prob_given_action(
                             context=context_,
@@ -783,7 +810,8 @@ class PolicyLearner:
                         policy_values[
                             (i + 1) // n_epochs_per_log
                         ] = self.env.calc_expected_policy_value(
-                            eval_policy, n_samples_to_approximate=1000,
+                            eval_policy,
+                            n_samples_to_approximate=1000,
                         )
                         policy_value = policy_values[(i + 1) // n_epochs_per_log].item()
                         # print(policy_value)
@@ -835,7 +863,7 @@ class PolicyLearner:
 
         .. math::
 
-            \\nabla_{\\theta} V(\\pi_{\\theta}) 
+            \\nabla_{\\theta} V(\\pi_{\\theta})
             \\approx \\frac{1}{n} \\sum_{i=1}^n \\frac{\\pi_{\\theta}(a_i | x_i)}{\\pi_0(a_i | x_i)} \\nabla_{\\theta} \\log \\pi_{\\theta}(a_i | x_i) r_i
 
         where we parametrize the policy as :math:`\\pi_{\\theta}` using some parameters :math:`\\theta \\in \\Theta` (e.g., a neural network).
@@ -843,7 +871,7 @@ class PolicyLearner:
 
         References
         -------
-        Adith Swaminathan and Thorsten Joachims. 
+        Adith Swaminathan and Thorsten Joachims.
         "Batch learning from logged bandit feedback through counterfactual risk minimization." 2015.
 
         Parameters
@@ -941,7 +969,9 @@ class PolicyLearner:
 
         if logging_action_choice_prob is None:
             logging_action_choice_prob = logging_policy.calc_action_choice_probability(
-                context=context, query=query, predicted_reward=logging_predicted_reward,
+                context=context,
+                query=query,
+                predicted_reward=logging_predicted_reward,
             )
 
         train_dataset = TorchLoggedDataset(
@@ -959,7 +989,9 @@ class PolicyLearner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
         model, train_dataloader = accelerator.prepare(model, train_dataloader)
 
@@ -989,11 +1021,12 @@ class PolicyLearner:
 
         if self.env is not None:
             policy_values[0] = self.env.calc_expected_policy_value(
-                eval_policy, n_samples_to_approximate=1000,
+                eval_policy,
+                n_samples_to_approximate=1000,
             )
             policy_value = policy_values[0].item()
         else:
-            policy_value = torch.zeros((1, ))
+            policy_value = torch.zeros((1,))
 
         with tqdm(torch.arange(n_epochs)) as pbar:
             for i, ch in enumerate(pbar):
@@ -1031,8 +1064,12 @@ class PolicyLearner:
                     ]
 
                     if is_two_stage_policy:
-                        cluster_centers_ = self.clustering_policy.retrieve_cluster_centers(
-                            context=context_, query=query_, resample_clustering=True,
+                        cluster_centers_ = (
+                            self.clustering_policy.retrieve_cluster_centers(
+                                context=context_,
+                                query=query_,
+                                resample_clustering=True,
+                            )
                         )
                         cluster_ = self.clustering_policy.retrieve_cluster(
                             context=context_,
@@ -1056,11 +1093,13 @@ class PolicyLearner:
                             cluster_centers=cluster_centers_,
                             return_cpu_tensor=False,
                         )
-                        logging_cluster_prob_ = self.clustering_policy.calc_cluster_choice_prob(
-                            context=context_,
-                            query=query_,
-                            action_choice_prob=logging_action_choice_prob_,
-                            cluster=cluster_,
+                        logging_cluster_prob_ = (
+                            self.clustering_policy.calc_cluster_choice_prob(
+                                context=context_,
+                                query=query_,
+                                action_choice_prob=logging_action_choice_prob_,
+                                cluster=cluster_,
+                            )
                         )
                         iw_ = evaluation_cluster_prob_ / logging_cluster_prob_
                         iw_ = torch.nan_to_num(iw_)  # avoid zero division
@@ -1074,7 +1113,7 @@ class PolicyLearner:
                             is_log_prob=False,
                             calc_gradient=False,
                         )
-                        imitation_prob_ = torch.zeros((1, ))
+                        imitation_prob_ = torch.zeros((1,))
 
                     else:
                         log_prob_ = model.calc_prob_given_action(
@@ -1127,7 +1166,8 @@ class PolicyLearner:
                         policy_values[
                             (i + 1) // n_epochs_per_log
                         ] = self.env.calc_expected_policy_value(
-                            eval_policy, n_samples_to_approximate=1000,
+                            eval_policy,
+                            n_samples_to_approximate=1000,
                         )
                         policy_value = policy_values[(i + 1) // n_epochs_per_log].item()
                         # print(policy_value)
@@ -1182,8 +1222,8 @@ class PolicyLearner:
 
         .. math::
 
-            \\nabla_{\\theta} V(\\pi_{\\theta}) 
-            \\approx \\frac{1}{n} \\sum_{i=1}^n \\frac{\\pi_{\\theta}(a_i | x_i)}{\\pi_0(a_i | x_i)} \\nabla_{\\theta} \\log \\pi_{\\theta}(a_i | x_i) (r_i - \\hat{q}(x_i, a_i)) 
+            \\nabla_{\\theta} V(\\pi_{\\theta})
+            \\approx \\frac{1}{n} \\sum_{i=1}^n \\frac{\\pi_{\\theta}(a_i | x_i)}{\\pi_0(a_i | x_i)} \\nabla_{\\theta} \\log \\pi_{\\theta}(a_i | x_i) (r_i - \\hat{q}(x_i, a_i))
             + \\frac{1}{n} \\sum_{i=1}^n \\mathbb{E}_{a \\sim \\pi_{\\theta}(a|x_i)}[\\nabla_{\\theta} \\log \\pi_{\\theta}(a_i | x_i) \\hat{q}(x_i, a)]
 
         where we parametrize the policy as :math:`\\pi_{\\theta}` using some parameters :math:`\\theta \\in \\Theta` (e.g., a neural network).
@@ -1195,7 +1235,7 @@ class PolicyLearner:
 
         .. math::
 
-            \\nabla_{\\theta} V(\\pi_{\\theta}) 
+            \\nabla_{\\theta} V(\\pi_{\\theta})
             \\approx \\frac{1}{n} \\sum_{i=1}^n \\frac{\\pi_{\\theta}^{\\text{1st}}(c(a_i)|x_i)}{\\pi_0^{\\text{1st}}(c(a_i)|x_i)} \\nabla_{\\theta} \\log \\pi_{\\theta}^{\\text{1st}}(c(a_i) | x_i) (r_i - \\hat{q}(x_i, a_i))
             + \\frac{1}{n} \\sum_{i=1}^n \\mathbb{E}_{a \\sim \\pi_{\\theta}(a|x_i)}[\\nabla_{\\theta} \\log \\pi_{\\theta}^{\\text{1st}}(c(a_i) | x_i) \\hat{q}(x_i, a)]
 
@@ -1203,10 +1243,10 @@ class PolicyLearner:
 
         References
         -------
-        Miroslav Dudík, John Langford, and Lihong Li. 
+        Miroslav Dudík, John Langford, and Lihong Li.
         "Doubly robust policy evaluation and learning." 2011.
 
-        Yuta Saito, Jihan Yao, and Thorsten Joachims. 
+        Yuta Saito, Jihan Yao, and Thorsten Joachims.
         "POTEC: Off-policy learning for large action spaces via two-stage policy decomposition." 2024.
 
         Parameters
@@ -1308,7 +1348,9 @@ class PolicyLearner:
 
         if logging_action_choice_prob is None:
             logging_action_choice_prob = logging_policy.calc_action_choice_probability(
-                context=context, query=query, predicted_reward=logging_predicted_reward,
+                context=context,
+                query=query,
+                predicted_reward=logging_predicted_reward,
             )
 
         train_dataset = TorchLoggedDataset(
@@ -1326,7 +1368,9 @@ class PolicyLearner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
         model, train_dataloader = accelerator.prepare(model, train_dataloader)
 
@@ -1356,11 +1400,12 @@ class PolicyLearner:
 
         if self.env is not None:
             policy_values[0] = self.env.calc_expected_policy_value(
-                eval_policy, n_samples_to_approximate=1000,
+                eval_policy,
+                n_samples_to_approximate=1000,
             )
             policy_value = policy_values[0].item()
         else:
-            policy_value = torch.zeros((1, ))
+            policy_value = torch.zeros((1,))
 
         with tqdm(torch.arange(n_epochs)) as pbar:
             for i, ch in enumerate(pbar):
@@ -1399,8 +1444,12 @@ class PolicyLearner:
 
                     # importance sampling part
                     if is_two_stage_policy:
-                        cluster_centers_ = self.clustering_policy.retrieve_cluster_centers(
-                            context=context_, query=query_, resample_clustering=True,
+                        cluster_centers_ = (
+                            self.clustering_policy.retrieve_cluster_centers(
+                                context=context_,
+                                query=query_,
+                                resample_clustering=True,
+                            )
                         )
                         cluster_ = self.clustering_policy.retrieve_cluster(
                             context=context_,
@@ -1424,11 +1473,13 @@ class PolicyLearner:
                             cluster_centers=cluster_centers_,
                             return_cpu_tensor=False,
                         )
-                        logging_cluster_prob_ = self.clustering_policy.calc_cluster_choice_prob(
-                            context=context_,
-                            query=query_,
-                            action_choice_prob=logging_action_choice_prob_,
-                            cluster=cluster_,
+                        logging_cluster_prob_ = (
+                            self.clustering_policy.calc_cluster_choice_prob(
+                                context=context_,
+                                query=query_,
+                                action_choice_prob=logging_action_choice_prob_,
+                                cluster=cluster_,
+                            )
                         )
                         iw_ = evaluation_cluster_prob_ / logging_cluster_prob_
                         iw_ = torch.nan_to_num(iw_)  # avoid zero division
@@ -1442,7 +1493,7 @@ class PolicyLearner:
                             is_log_prob=False,
                             calc_gradient=False,
                         )
-                        imitation_prob_ = torch.zeros((1, ))
+                        imitation_prob_ = torch.zeros((1,))
 
                     else:
                         log_prob_ = model.calc_prob_given_action(
@@ -1469,7 +1520,7 @@ class PolicyLearner:
                             calc_gradient=False,
                         )
                         imitation_prob_ = evaluation_pscore_
-                        
+
                     baseline_ = self.prompt_reward_predictor.predict_value(
                         context=context_,
                         query=query_,
@@ -1497,19 +1548,27 @@ class PolicyLearner:
                             is_log_prob=True,
                             calc_gradient=True,
                         )
-                        candidate_actions_ = self.clustering_policy.retrieve_candidate_actions(
-                            context=context_, query=query_, cluster=cluster_,
+                        candidate_actions_ = (
+                            self.clustering_policy.retrieve_candidate_actions(
+                                context=context_,
+                                query=query_,
+                                cluster=cluster_,
+                            )
                         )
-                        eval_predicted_reward_ = self.second_stage_policy.predict_policy_value(
-                            context=context_,
-                            query=query_,
-                            candidate_actions=candidate_actions_,
-                            return_per_sample=True,
+                        eval_predicted_reward_ = (
+                            self.second_stage_policy.predict_policy_value(
+                                context=context_,
+                                query=query_,
+                                candidate_actions=candidate_actions_,
+                                return_per_sample=True,
+                            )
                         )
 
                     else:
                         eval_action_ = model.sample_action(
-                            context=context_, query=query_, return_cpu_tensor=False,
+                            context=context_,
+                            query=query_,
+                            return_cpu_tensor=False,
                         )
                         eval_log_prob_ = model.calc_prob_given_action(
                             context=context_,
@@ -1519,11 +1578,13 @@ class PolicyLearner:
                             is_log_prob=True,
                             calc_gradient=True,
                         )
-                        eval_predicted_reward_ = self.prompt_reward_predictor.predict_value(
-                            context=context_,
-                            query=query_,
-                            action=eval_action_,
-                            return_cpu_tensor=False,
+                        eval_predicted_reward_ = (
+                            self.prompt_reward_predictor.predict_value(
+                                context=context_,
+                                query=query_,
+                                action=eval_action_,
+                                return_cpu_tensor=False,
+                            )
                         )
 
                     model_based_loss_ = -(
@@ -1547,7 +1608,8 @@ class PolicyLearner:
                         policy_values[
                             (i + 1) // n_epochs_per_log
                         ] = self.env.calc_expected_policy_value(
-                            eval_policy, n_samples_to_approximate=1000,
+                            eval_policy,
+                            n_samples_to_approximate=1000,
                         )
                         policy_value = policy_values[(i + 1) // n_epochs_per_log].item()
                         # print(policy_value)
@@ -1560,7 +1622,9 @@ class PolicyLearner:
                             "train_loss": train_losses[i + 1],
                             "policy_value": policy_value,
                             "average_iw": iw_.mean(),
-                            "average_imitation": imitation_prob_.mean() if is_two_stage_policy else 0,
+                            "average_imitation": imitation_prob_.mean()
+                            if is_two_stage_policy
+                            else 0,
                             "average_prob": prob_.mean(),
                         }
                     )
@@ -1709,7 +1773,7 @@ class KernelPolicyLearner:
 
         if dataloader is not None:
             data_iterator = iter(dataloader)
-        
+
         for j in range(n_steps_for_initialization):
             if self.env is not None:
                 (
@@ -1722,7 +1786,7 @@ class KernelPolicyLearner:
                     n_samples=batch_size,
                     return_query_embeddings=True,
                 )
-            
+
             elif dataloader is not None:
                 try:
                     batch_ = next(data_iterator)
@@ -1739,12 +1803,14 @@ class KernelPolicyLearner:
 
             if is_two_stage_policy:
                 cluster_centers_ = self.clustering_policy.retrieve_cluster_centers(
-                    context=context_, query=query_, resample_clustering=True,
+                    context=context_,
+                    query=query_,
+                    resample_clustering=True,
                 )
                 cluster_ = model.sample_action(
-                    context=context_, 
-                    query=query_embeddings_, 
-                    cluster_centers=cluster_centers_, 
+                    context=context_,
+                    query=query_embeddings_,
+                    cluster_centers=cluster_centers_,
                     return_cpu_tensor=False,
                 )
                 prob_ = model.calc_prob_given_action(
@@ -1758,8 +1824,8 @@ class KernelPolicyLearner:
                 )
             else:
                 action_ = model.sample_action(
-                    context=context_, 
-                    query=query_embeddings_, 
+                    context=context_,
+                    query=query_embeddings_,
                     return_cpu_tensor=False,
                 )
                 prob_ = model.calc_prob_given_action(
@@ -1803,7 +1869,7 @@ class KernelPolicyLearner:
 
         .. math::
 
-            \\nabla_{\\theta} V(\\pi_{\\theta}) 
+            \\nabla_{\\theta} V(\\pi_{\\theta})
             \\approx \\frac{1}{n} \\sum_{i=1}^n \\frac{\\pi_{\\theta}(\\phi(s_i)|x_i)}{\\pi_0(\\phi(s_i)|x_i)} \\nabla_{\\theta} \\log \\pi_{\\theta}(\\phi(s_i)|x_i) \\, r_i
             \\approx \\frac{1}{n} \\sum_{i=1}^n \\mathbb{E}_{(a, s') \\sim \\pi_{\\theta}(a|x_i)p_{\\text{LLM}}(s'|x_i,a)} \\biggl[ \\frac{K(s_i, s'; \\, x_i, \\tau) \\nabla_{\\theta} \\log \\pi_{\\theta}(a | x_i)}{\\pi_{0}(\\phi(s_i)|x_i)} \\biggr] \\, r_i
 
@@ -1900,8 +1966,12 @@ class KernelPolicyLearner:
         reward = logged_feedback["reward"]
         logging_policy = logged_feedback["logging_policy"]
 
-        logging_marginal_density = self.kernel_marginal_estimator.estimate_marginal_density(
-            context=context, query=query, sentence=sentence,
+        logging_marginal_density = (
+            self.kernel_marginal_estimator.estimate_marginal_density(
+                context=context,
+                query=query,
+                sentence=sentence,
+            )
         )
 
         train_dataset = TorchLoggedDataset(
@@ -1922,7 +1992,9 @@ class KernelPolicyLearner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
         model, train_dataloader = accelerator.prepare(model, train_dataloader)
 
@@ -1944,11 +2016,12 @@ class KernelPolicyLearner:
 
         if self.env is not None:
             policy_values[0] = self.env.calc_expected_policy_value(
-                model, n_samples_to_approximate=1000,
+                model,
+                n_samples_to_approximate=1000,
             )
             policy_value = policy_values[0].item()
         else:
-            policy_value = torch.zeros((1, ))
+            policy_value = torch.zeros((1,))
 
         with tqdm(torch.arange(n_epochs)) as pbar:
             for i, ch in enumerate(pbar):
@@ -1985,7 +2058,9 @@ class KernelPolicyLearner:
                     )
 
                     sampled_action_ = model.sample_action(
-                        context=context_, query=query_, return_cpu_tensor=False,
+                        context=context_,
+                        query=query_,
+                        return_cpu_tensor=False,
                     )
 
                     if self.prompt_for_frozen_llm is not None:
@@ -2000,14 +2075,17 @@ class KernelPolicyLearner:
                         )
 
                     sampled_sentence_ = self.frozen_llm.generate_output_sentence(
-                        query=query_for_frozen_llm_, prompt=prompt_for_frozen_llm_,
+                        query=query_for_frozen_llm_,
+                        prompt=prompt_for_frozen_llm_,
                     )
 
-                    pairwise_weight_ = self.kernel_marginal_estimator.calc_pairwise_weight(
-                        pivot_sentence=sentence_, 
-                        sampled_sentences=sampled_sentence_,
-                        context=context_,
-                        query=query_,
+                    pairwise_weight_ = (
+                        self.kernel_marginal_estimator.calc_pairwise_weight(
+                            pivot_sentence=sentence_,
+                            sampled_sentences=sampled_sentence_,
+                            context=context_,
+                            query=query_,
+                        )
                     )
                     log_prob_ = model.calc_prob_given_action(
                         context=context_,
@@ -2036,12 +2114,8 @@ class KernelPolicyLearner:
 
                     marginal_iw_ = pairwise_weight_ / logging_marginal_density_
                     marginal_iw_ = torch.clip(marginal_iw_, max=clip_threshold)
-                    
-                    policy_loss_ = -(
-                        marginal_iw_
-                        * log_prob_
-                        * reward_
-                    ).sum()
+
+                    policy_loss_ = -(marginal_iw_ * log_prob_ * reward_).sum()
 
                     optimizer.zero_grad()
                     accelerator.backward(policy_loss_)
@@ -2055,7 +2129,8 @@ class KernelPolicyLearner:
                         policy_values[
                             (i + 1) // n_epochs_per_log
                         ] = self.env.calc_expected_policy_value(
-                            model, n_samples_to_approximate=1000,
+                            model,
+                            n_samples_to_approximate=1000,
                         )
                         policy_value = policy_values[(i + 1) // n_epochs_per_log].item()
                         # print(policy_value)

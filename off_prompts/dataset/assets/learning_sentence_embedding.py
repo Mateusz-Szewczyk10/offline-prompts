@@ -104,9 +104,14 @@ def process(
         random_state=random_state,
     )
 
-    reward_simulator_base_model = AutoModel.from_pretrained(base_reward_model_id,)
+    reward_simulator_base_model = AutoModel.from_pretrained(
+        base_reward_model_id,
+    )
     reward_simulator_tokenizer = AutoTokenizer.from_pretrained(
-        reward_model_tokenizer_id, truncation=True, do_lower_case=True, use_fast=True,
+        reward_model_tokenizer_id,
+        truncation=True,
+        do_lower_case=True,
+        use_fast=True,
     )
     reward_simulator_tokenizer_kwargs = {
         "add_special_tokens": True,
@@ -211,13 +216,11 @@ def process(
     prompt_encoder.load(path_to_prompt_encoder)
     sentence_encoder.load(path_to_sentence_encoder)
 
-    context_independent_indicator = "_ind" if not is_context_dependent else ""
-
     # fit NN sentence encoder
     nn_sentence_encoder = NNSentenceEncoder(
         base_transformer_encoder=sentence_encoder,
         query_encoder=query_encoder,
-        is_context_dependent=is_context_dependent,
+        is_context_dependent=False,
         dim_context=dataset.dim_context,
         dim_emb=dim_sentence,
         device=device,
@@ -232,7 +235,7 @@ def process(
     )
     nn_sentence_encoder = sentence_embedding_learner.fit_online(
         n_epochs=3,
-        save_path=f"{setting}_nn_sentence_encoder{context_independent_indicator}.pt",
+        save_path=f"{setting}_nn_sentence_encoder.pt",
         random_state=random_state,
     )
 

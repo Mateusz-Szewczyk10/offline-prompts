@@ -74,11 +74,14 @@ class CollaborativeFilteringRewardSimulator(BaseRewardSimulator):
 
         self.sigmoid = nn.Sigmoid()
 
-        nn.init.kaiming_normal_(self.l1.weight, nonlinearity='relu')
-        nn.init.kaiming_normal_(self.l2.weight, nonlinearity='relu')
+        nn.init.kaiming_normal_(self.l1.weight, nonlinearity="relu")
+        nn.init.kaiming_normal_(self.l2.weight, nonlinearity="relu")
 
     def forward(
-        self, user_id: torch.Tensor, item_id: torch.Tensor, **kwargs,
+        self,
+        user_id: torch.Tensor,
+        item_id: torch.Tensor,
+        **kwargs,
     ):
         """Produce logit values using user and item id embeddings.
 
@@ -94,7 +97,7 @@ class CollaborativeFilteringRewardSimulator(BaseRewardSimulator):
         -------
         logits: torch.Tensor, shape (n_samples, )
             Logit value.
-        
+
         """
         user_id = to_device(user_id, device=self.device)
         item_id = to_device(item_id, device=self.device)
@@ -211,7 +214,9 @@ class TransformerRewardSimulator(BaseRewardSimulator):
             torch_seed(random_state, device=self.device)
 
         if base_model is None:
-            base_model = AutoModel.from_pretrained("distilbert-base-uncased",)
+            base_model = AutoModel.from_pretrained(
+                "distilbert-base-uncased",
+            )
         if tokenizer is None:
             self.tokenizer = AutoTokenizer.from_pretrained(
                 "distilbert-base-uncased",
@@ -246,9 +251,9 @@ class TransformerRewardSimulator(BaseRewardSimulator):
 
         self.sigmoid = nn.Sigmoid()
 
-        nn.init.kaiming_normal_(self.l1.weight, nonlinearity='relu')
-        nn.init.kaiming_normal_(self.l2.weight, nonlinearity='relu')
-        nn.init.kaiming_normal_(self.item_encoder.weight, nonlinearity='relu')
+        nn.init.kaiming_normal_(self.l1.weight, nonlinearity="relu")
+        nn.init.kaiming_normal_(self.l2.weight, nonlinearity="relu")
+        nn.init.kaiming_normal_(self.item_encoder.weight, nonlinearity="relu")
 
     def _reward_function(
         self,
@@ -256,7 +261,7 @@ class TransformerRewardSimulator(BaseRewardSimulator):
         baseline_reward: torch.Tensor,
     ):
         """Reward function (normalized by "no-prompt baseline").
-        
+
         Parameters
         -------
         expected_reward: torch.Tensor, shape (n_samples, )
@@ -269,7 +274,7 @@ class TransformerRewardSimulator(BaseRewardSimulator):
         -------
         normalized_reward: torch.Tensor, shape (n_samples, )
             Expected reward of sentence generated with some prompt normalized by the no-prompt baseline.
-        
+
         """
         expected_reward = (expected_reward - baseline_reward) * 10
         return expected_reward.float()
@@ -302,7 +307,7 @@ class TransformerRewardSimulator(BaseRewardSimulator):
         -------
         logits: torch.Tensor, shape (n_samples, )
             Logit value.
-        
+
         """
         user_id = to_device(user_id, device=self.device)
         item_id = to_device(item_id, device=self.device)
@@ -557,11 +562,12 @@ class TransformerRewardSimulator(BaseRewardSimulator):
         # skyline
         expected_rewards = torch.zeros((n_samples, n_actions), device=device)
         for a_ in range(n_actions):
-            action_ = torch.full((n_samples, ), a_)
+            action_ = torch.full((n_samples,), a_)
             prompt_ = list(itemgetter(*action_)(action_list))
 
             sentence_ = frozen_llm.generate_output_sentence(
-                query=query, prompt=prompt_,
+                query=query,
+                prompt=prompt_,
             )
             tokens_ = tokenize(
                 sentence_,
@@ -583,7 +589,8 @@ class TransformerRewardSimulator(BaseRewardSimulator):
 
         # baseline
         baseline_sentence = frozen_llm.generate_output_sentence(
-            query=query, prompt=None,
+            query=query,
+            prompt=None,
         )
         baseline_tokens = tokenize(
             baseline_sentence,
@@ -655,9 +662,9 @@ class PromptCossimRewardSimulator(BaseRewardSimulator):
         self.cossim = nn.CosineSimilarity()
 
     def forward(
-        self, 
-        user_id: torch.Tensor, 
-        item_id: torch.Tensor, 
+        self,
+        user_id: torch.Tensor,
+        item_id: torch.Tensor,
         action: torch.Tensor,
         **kwargs,
     ):
@@ -678,7 +685,7 @@ class PromptCossimRewardSimulator(BaseRewardSimulator):
         -------
         logits: torch.Tensor, shape (n_samples, )
             Logit value.
-        
+
         """
         user_id = to_device(user_id, device=self.device)
         item_id = to_device(item_id, device=self.device)
@@ -774,7 +781,7 @@ class PromptCossimRewardSimulator(BaseRewardSimulator):
         expected_rewards = torch.zeros((n_samples, n_actions), device=self.device)
         for a_ in range(n_actions):
             with torch.no_grad():
-                action_ = torch.full((n_samples, ), a_, device=self.device)
+                action_ = torch.full((n_samples,), a_, device=self.device)
                 expected_rewards[:, a_] = self(user_id, item_id, action_)
 
         if return_cpu_tensor:
@@ -833,8 +840,8 @@ class SentenceCossimRewardSimulator(BaseRewardSimulator):
         self.cossim = nn.CosineSimilarity()
 
     def forward(
-        self, 
-        user_id: torch.Tensor, 
+        self,
+        user_id: torch.Tensor,
         item_id: torch.Tensor,
         sentence: Union[Sentence, Tokens],
         **kwargs,
@@ -856,7 +863,7 @@ class SentenceCossimRewardSimulator(BaseRewardSimulator):
         -------
         logits: torch.Tensor, shape (n_samples, )
             Logit value.
-        
+
         """
         user_id = to_device(user_id, device=self.device)
         user_embedding = self.user_embedding[user_id]
@@ -953,10 +960,11 @@ class SentenceCossimRewardSimulator(BaseRewardSimulator):
         expected_rewards = torch.zeros((n_samples, n_actions), device=self.device)
         for a_ in range(n_actions):
             with torch.no_grad():
-                action_ = torch.full((n_samples, ), a_)
+                action_ = torch.full((n_samples,), a_)
                 prompt_ = list(itemgetter(*action_)(action_list))
                 sentence_ = frozen_llm.generate_output_sentence(
-                    query=query, prompt=prompt_,
+                    query=query,
+                    prompt=prompt_,
                 )
                 expected_rewards[:, a_] = self(user_id, item_id, sentence_)
 

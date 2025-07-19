@@ -219,7 +219,9 @@ class MarginalDensityLearner:
         accelerator = Accelerator()
 
         train_dataloader = DataLoader(
-            train_dataset, batch_size=batch_size, shuffle=True,
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
         )
         model, train_dataloader = accelerator.prepare(model, train_dataloader)
 
@@ -234,7 +236,9 @@ class MarginalDensityLearner:
             for i, ch in enumerate(pbar):
                 pbar.set_description(f"[train marginal density estimator: Epoch {i}]")
                 pbar.set_postfix(
-                    {"loss": f"{losses[i]:.4g}",}
+                    {
+                        "loss": f"{losses[i]:.4g}",
+                    }
                 )
 
                 train_iterator = iter(train_dataloader)
@@ -254,7 +258,8 @@ class MarginalDensityLearner:
                     )
 
                     action_1_ = logging_policy.sample_action(
-                        context=context_, query=query_,
+                        context=context_,
+                        query=query_,
                     )
 
                     if self.prompt_for_frozen_llm is not None:
@@ -269,11 +274,13 @@ class MarginalDensityLearner:
                         )
 
                     sampled_sentence_1_ = self.frozen_llm.generate_output_sentence(
-                        query=query_for_frozen_llm_, prompt=prompt_1_for_frozen_llm_,
+                        query=query_for_frozen_llm_,
+                        prompt=prompt_1_for_frozen_llm_,
                     )
 
                     action_2_ = logging_policy.sample_action(
-                        context=context_, query=query_,
+                        context=context_,
+                        query=query_,
                     )
 
                     if self.prompt_for_frozen_llm is not None:
@@ -288,7 +295,8 @@ class MarginalDensityLearner:
                         )
 
                     sampled_sentence_2_ = self.frozen_llm.generate_output_sentence(
-                        query=query_for_frozen_llm_, prompt=prompt_2_for_frozen_llm_,
+                        query=query_for_frozen_llm_,
+                        prompt=prompt_2_for_frozen_llm_,
                     )
 
                     predicted_marginal_density_ = model.estimate_marginal_density(

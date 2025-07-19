@@ -19,10 +19,20 @@ from off_prompts_syn.policy import NeuralActionPolicy as ActionPolicy
 from off_prompts_syn.policy import NeuralClusterPolicy as ClusterPolicy
 from off_prompts_syn.policy import NeuralOutputRewardPredictor as OutputRewardPredictor
 from off_prompts_syn.policy import NeuralActionRewardPredictor as ActionRewardPredictor
-from off_prompts_syn.policy import NeuralMarginalDensityEstimator as KernelMarginalEstimator
+from off_prompts_syn.policy import (
+    NeuralMarginalDensityEstimator as KernelMarginalEstimator,
+)
 from off_prompts_syn.policy import KmeansActionClustering
-from off_prompts_syn.policy import BasePolicy, BaseActionPolicyModel, BaseClusterPolicyModel
-from off_prompts_syn.policy import SoftmaxPolicy, EpsilonGreedyPolicy, UniformRandomPolicy
+from off_prompts_syn.policy import (
+    BasePolicy,
+    BaseActionPolicyModel,
+    BaseClusterPolicyModel,
+)
+from off_prompts_syn.policy import (
+    SoftmaxPolicy,
+    EpsilonGreedyPolicy,
+    UniformRandomPolicy,
+)
 from off_prompts_syn.policy import TwoStagePolicy
 from off_prompts_syn.utils import gaussian_kernel, uniform_kernel
 
@@ -104,10 +114,13 @@ def train_and_save_logging_reward_predictor(
     dataset_.random_state = random_state + 1
 
     uniform_policy = UniformRandomPolicy(
-        action_list=dataset.action_list, device=device, random_state=random_state,
+        action_list=dataset.action_list,
+        device=device,
+        random_state=random_state,
     )
     logged_feedback_for_pretraining = dataset_.sample_dataset(
-        policy=uniform_policy, n_samples=10000,
+        policy=uniform_policy,
+        n_samples=10000,
     )
     action_reward_predictor = ActionRewardPredictor(
         action_list=dataset.action_list,
@@ -153,7 +166,8 @@ def load_logging_reward_predictor(
         random_state=random_state,
     )
     logging_action_reward_predictor = action_reward_learner.load(
-        path=save_path, is_init=True,
+        path=save_path,
+        is_init=True,
     )
     return logging_action_reward_predictor
 
@@ -176,10 +190,13 @@ def load_logging_policy(
 
 
 def generate_logged_data(
-    dataset: SyntheticDataset, logging_policy: BasePolicy, n_samples: int,
+    dataset: SyntheticDataset,
+    logging_policy: BasePolicy,
+    n_samples: int,
 ):
     logged_feedback = dataset.sample_dataset(
-        policy=logging_policy, n_samples=n_samples,
+        policy=logging_policy,
+        n_samples=n_samples,
     )
     return logged_feedback
 
@@ -263,7 +280,8 @@ def load_reward_predictor(
         random_state=random_state,
     )
     output_reward_predictor = output_reward_learner.load(
-        path=save_path_output_reward_predictor, is_init=True,
+        path=save_path_output_reward_predictor,
+        is_init=True,
     )
     action_reward_predictor = ActionRewardPredictor(
         action_list=dataset.action_list,
@@ -281,7 +299,8 @@ def load_reward_predictor(
         random_state=random_state,
     )
     action_reward_predictor = action_reward_learner.load(
-        path=save_path_action_reward_predictor, is_init=True,
+        path=save_path_action_reward_predictor,
+        is_init=True,
     )
     return output_reward_predictor, action_reward_predictor
 
@@ -320,7 +339,8 @@ def train_and_save_kernel_marginal_estimator(
         optimizer_kwargs={"lr": 1e-4, "weight_decay": 0.0},
     )
     kernel_marginal_estimator = marginal_density_learner.simulation_training(
-        logged_feedback=logged_feedback, save_path=save_path,
+        logged_feedback=logged_feedback,
+        save_path=save_path,
     )
 
 
@@ -357,7 +377,8 @@ def load_kernel_marginal_estimator(
         optimizer_kwargs={"lr": 1e-4, "weight_decay": 0.0},
     )
     kernel_marginal_estimator = marginal_density_learner.load(
-        path=save_path, is_init=True,
+        path=save_path,
+        is_init=True,
     )
     return kernel_marginal_estimator
 
@@ -647,7 +668,10 @@ def load_online_policy(
         env=dataset,
         random_state=random_state,
     )
-    policy = policy_learner.load(path=save_path, is_init=True,)
+    policy = policy_learner.load(
+        path=save_path,
+        is_init=True,
+    )
     return policy
 
 
@@ -673,7 +697,10 @@ def load_single_stage_policy(
         env=dataset,
         random_state=random_state,
     )
-    policy = policy_learner.load(path=save_path, is_init=True,)
+    policy = policy_learner.load(
+        path=save_path,
+        is_init=True,
+    )
     return policy
 
 
@@ -701,7 +728,10 @@ def load_dso_policy(
         env=dataset,
         random_state=random_state,
     )
-    policy = policy_learner.load(path=save_path, is_init=True,)
+    policy = policy_learner.load(
+        path=save_path,
+        is_init=True,
+    )
     return policy
 
 
@@ -746,7 +776,10 @@ def load_two_stage_policy(
         env=dataset,
         random_state=random_state,
     )
-    first_stage_policy = policy_learner.load(path=save_path, is_init=True,)
+    first_stage_policy = policy_learner.load(
+        path=save_path,
+        is_init=True,
+    )
     policy = TwoStagePolicy(
         first_stage_policy=first_stage_policy,
         second_stage_policy=second_stage_policy,
@@ -757,27 +790,38 @@ def load_two_stage_policy(
 
 
 def load_oracle_policy(
-    dataset: SyntheticDataset, device: str = "cuda", random_state: Optional[int] = None,
+    dataset: SyntheticDataset,
+    device: str = "cuda",
+    random_state: Optional[int] = None,
 ):
     optimal_policy = EpsilonGreedyPolicy(
-        action_list=dataset.action_list, device=device, random_state=random_state,
+        action_list=dataset.action_list,
+        device=device,
+        random_state=random_state,
     )
     return optimal_policy
 
 
 def load_uniform_policy(
-    dataset: SyntheticDataset, device: str = "cuda", random_state: Optional[int] = None,
+    dataset: SyntheticDataset,
+    device: str = "cuda",
+    random_state: Optional[int] = None,
 ):
     uniform_policy = UniformRandomPolicy(
-        action_list=dataset.action_list, device=device, random_state=random_state,
+        action_list=dataset.action_list,
+        device=device,
+        random_state=random_state,
     )
     return uniform_policy
 
 
 def evaluate_policy(
-    dataset: SyntheticDataset, policy: Policy, is_oracle_policy: bool = False,
+    dataset: SyntheticDataset,
+    policy: Policy,
+    is_oracle_policy: bool = False,
 ):
     policy_value = dataset.calc_expected_policy_value(
-        policy=policy, is_oracle_policy=is_oracle_policy,
+        policy=policy,
+        is_oracle_policy=is_oracle_policy,
     )
     return policy_value

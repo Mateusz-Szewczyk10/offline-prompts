@@ -13,16 +13,16 @@ from torch import nn
 from torch.nn import MSELoss
 from torch.optim import Optimizer, Adam
 
-from src.dataset import SemiSyntheticDataset
-from src.dataset import TransformerRewardSimulator
-from src.dataset import BaseEncoder
-from src.utils import torch_seed, to_device
+from off_prompts.dataset import SemiSyntheticDataset
+from off_prompts.dataset import TransformerRewardSimulator
+from off_prompts.dataset import BaseEncoder
+from off_prompts.utils import torch_seed, to_device
 
 
 @dataclass
 class SentenceEmbeddingLearner:
     """Learner class of the sentence embeddings.
-    
+
     Parameters
     -------
     model: BaseEncoder or nn.Module
@@ -39,8 +39,9 @@ class SentenceEmbeddingLearner:
 
     random_state: int, default=None
         Random state.
-    
+
     """
+
     model: Union[BaseEncoder, nn.Module]
     env: SemiSyntheticDataset
     optimizer: Optimizer = Adam
@@ -80,15 +81,15 @@ class SentenceEmbeddingLearner:
         torch_seed(random_state)
 
     def _calc_distance(
-        self, 
-        sentence_1: torch.Tensor, 
+        self,
+        sentence_1: torch.Tensor,
         sentence_2: torch.Tensor,
     ):
         """Calculate the distance between two sentences."""
-        squared_distance = torch.sum(
-            (sentence_1 - sentence_2) ** 2, dim=-1
-        ) + 1e-10  # to avoid gradient vanishing
-        
+        squared_distance = (
+            torch.sum((sentence_1 - sentence_2) ** 2, dim=-1) + 1e-10
+        )  # to avoid gradient vanishing
+
         dist = torch.sqrt(squared_distance) / self.model.dim_emb
         return dist
 
@@ -104,7 +105,7 @@ class SentenceEmbeddingLearner:
         random_state: Optional[int] = None,
     ):
         """Fine-tune model.
-        
+
         Parameters
         -------
         n_epochs: int, default=100
@@ -127,12 +128,12 @@ class SentenceEmbeddingLearner:
 
         random_state: int, default=None
             Random state.
-        
+
         Return
         -------
         model: BaseEncoder or nn.Module
             Trained sentence embedding model.
-        
+
         """
         if random_state is None:
             random_state = self.random_state
@@ -170,8 +171,8 @@ class SentenceEmbeddingLearner:
                     )
 
                     action_ = torch.multinomial(
-                        torch.ones((self.env.n_actions, ), device=self.device), 
-                        num_samples=batch_size * 2, 
+                        torch.ones((self.env.n_actions,), device=self.device),
+                        num_samples=batch_size * 2,
                         replacement=True,
                     )
                     action_1_, action_2_ = action_[:batch_size], action_[batch_size:]
@@ -180,10 +181,12 @@ class SentenceEmbeddingLearner:
                     prompt_2_ = list(itemgetter(*action_2_)(self.env.action_list))
 
                     sentence_1_ = self.env.frozen_llm.generate_output_sentence(
-                        query=query_, prompt=prompt_1_,
+                        query=query_,
+                        prompt=prompt_1_,
                     )
                     sentence_2_ = self.env.frozen_llm.generate_output_sentence(
-                        query=query_, prompt=prompt_2_,
+                        query=query_,
+                        prompt=prompt_2_,
                     )
 
                     reward_diff_ = self.env.reward_simulator.calc_expected_reward(
@@ -199,18 +202,20 @@ class SentenceEmbeddingLearner:
                     reward_dist_ = alpha * torch.abs(reward_diff_)
 
                     sentence_emb_1_ = model.encode(
-                        sentence_1_, 
+                        sentence_1_,
                         context=context_,
                         query=query_embeddings_,
                         calc_gradient=True,
                     )
                     sentence_emb_2_ = model.encode(
-                        sentence_2_, 
+                        sentence_2_,
                         context=context_,
                         query=query_embeddings_,
                         calc_gradient=True,
                     )
-                    sentence_dist_ = self._calc_distance(sentence_emb_1_, sentence_emb_2_)
+                    sentence_dist_ = self._calc_distance(
+                        sentence_emb_1_, sentence_emb_2_
+                    )
 
                     loss_ = loss_fn(sentence_dist_, reward_dist_)
 
@@ -221,7 +226,7 @@ class SentenceEmbeddingLearner:
 
                     train_losses[i + 1] += loss_.item() / n_steps_per_epoch
 
-            print(train_losses[:i+1])
+            print(train_losses[: i + 1])
 
         self.trained_model = model
 
@@ -229,6 +234,3 @@ class SentenceEmbeddingLearner:
             self.save(save_path)
 
         return model
-
-
-    

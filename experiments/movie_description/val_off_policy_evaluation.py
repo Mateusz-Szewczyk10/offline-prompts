@@ -75,7 +75,7 @@ def _process(
     **kwargs,
 ):
     fix_seed(base_random_state)
-    
+
     dataset = load_dataset(
         n_actions=n_actions,
         reward_type=reward_type,
@@ -140,9 +140,12 @@ def _process(
     )
 
     performance = []
-    for dataset_random_state in range(dataset_start_random_state, dataset_n_random_state):
-        for optimizer_random_state in range(optimizer_start_random_state, optimizer_n_random_state):
-
+    for dataset_random_state in range(
+        dataset_start_random_state, dataset_n_random_state
+    ):
+        for optimizer_random_state in range(
+            optimizer_start_random_state, optimizer_n_random_state
+        ):
             if not (is_two_stage_policy or is_dso):
                 if gradient_type in ["regression-based", "hybrid"]:
                     prompt_reward_predictor = load_reward_predictor(
@@ -186,7 +189,7 @@ def _process(
 
                 fix_seed(val_random_state)
                 policy_value = off_policy_evaluation(
-                    dataset=dataset, 
+                    dataset=dataset,
                     logged_feedback=logged_feedback,
                     policy=policy,
                     estimator_name=gradient_type,
@@ -239,7 +242,7 @@ def _process(
 
                 fix_seed(val_random_state)
                 policy_value = off_policy_evaluation(
-                    dataset=dataset, 
+                    dataset=dataset,
                     logged_feedback=logged_feedback,
                     policy=policy,
                     estimator_name="OffCEM",
@@ -297,7 +300,7 @@ def _process(
 
                 fix_seed(val_random_state)
                 policy_value = off_policy_evaluation(
-                    dataset=dataset, 
+                    dataset=dataset,
                     logged_feedback=logged_feedback,
                     policy=policy,
                     estimator_name="kernelIS",
@@ -355,7 +358,7 @@ def process(conf: DictConfig):
         df["POTEC"] = _process(**conf_)
 
     df["dataset_random_state"] = np.repeat(
-        np.arange(dataset_start_random_state, dataset_n_random_state), 
+        np.arange(dataset_start_random_state, dataset_n_random_state),
         optimizer_n_random_state - optimizer_start_random_state,
     )
     df["optimizer_random_state"] = np.tile(

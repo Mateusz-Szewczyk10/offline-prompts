@@ -56,11 +56,11 @@ OPL methods
 ----------
 In this section, we introduce the following OPL methods:
 
-* Regression :cite:``
-* Importance Sampling (IS) :cite:``
-* Doubly Robust (DR) :cite:``
-* POTEC :cite:``
-* Direct Sentence (DSO, ours) :cite:``
+* Regression :cite:`konda1999actor`
+* Importance Sampling (IS) :cite:`swaminathan2015batch`
+* Doubly Robust (DR) :cite:`dudik2014doubly`
+* POTEC :cite:`saito2024potec`
+* Direct Sentence (DSO, ours) :cite:`kiyohara2025off`
 
 Policy gradient (PG)
 ^^^^^^^^^^
@@ -73,20 +73,20 @@ In OPL, we often aim to unbiasedly estimate the following PG (estimation target)
 In the following, we denote :math:`z \sim p(z)` as sampling a *single* random variable :math:`z` from the probability distribution :math:`p(z)`.
 
 
-Regression :cite:`konda1999actor`. 
+Regression 
 ^^^^^^^^^^
-A typical way of using logged data is to train a reward predictor :math:`\hat{q}` :cite:`stiennon2020learning, jaques2017sequence, snell2022offline`, and then use the predicted reward to estimate the policy gradient (PG).
+A typical way of using logged data is to train a reward predictor :math:`\hat{R}` :cite:`stiennon2020learning, jaques2017sequence, snell2022offline`, and then use the predicted reward to estimate the policy gradient (PG).
 
 .. math::
 
-    \nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \nabla_{\theta} \log \pi_{\theta}(a | x_i) \hat{q}(x_i, a) \right],
+    \nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \nabla_{\theta} \log \pi_{\theta}(a | x_i) \hat{R}(x_i, a) \right],
 
-where :math:`\hat{q}(x, a) \approx \mathbb{E}[r|x,a]`.
+where :math:`\hat{R}(x, a) \approx \mathbb{E}[r|x,a]`.
 Oftentimes, an accurate regression for OPL is difficult under complex relations between prompts and rewards. 
 This is because the reward observation is partial and covariate shifts arise between the logging policy (:math:`\pi_0`) and the target policy (:math:`\pi_{\theta}`). 
-If the learned regression model :math:`\hat{q}` is inaccurate, the estimated PG can have a high bias :cite:`swaminathan2015batch`.
+If the learned regression model :math:`\hat{R}` is inaccurate, the estimated PG can have a high bias :cite:`swaminathan2015batch`.
 
-Importance sampling (IS) :cite:`swaminathan2015batch`
+Importance sampling (IS)
 ^^^^^^^^^^
 Instead of using potentially inaccurate regression, IS corrects the distribution shift between :math:`\pi_0` and :math:`\pi_{\theta}` by reweighing the observations:
 
@@ -97,21 +97,21 @@ Instead of using potentially inaccurate regression, IS corrects the distribution
 IS is unbiased under the \textit{action support} condition, i.e., :math:`\forall (x, a) \in \mathcal{X} \times \mathcal{A}, \, \pi_{\theta}(a | x) > 0 \implies \pi_0(a | x) > 0`. 
 However, IS produces considerable bias due to the violation of the condition called deficient support :cite:`sachdeva2020off` and extremely high variance due to large importance weight :cite:`saito2023off, saito2024potec,sachdeva2024off`, which are likely when the action space is large. 
 
-Doubly Robust (DR) :cite:`dudik2011doubly`
+Doubly Robust (DR)
 ^^^^^^^^^^
 DR is a hybrid approach, which effectively combines the regression and IS to exploit the benefits of the two.
 
 .. math::
 
     \nabla_{\theta} V(\pi_{\theta}) 
-    &\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) (r_i - \hat{q}(x_i, a_i)) \\
-    & + \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}(a_i | x_i) \hat{q}(x_i, a)].
+    &\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) (r_i - \hat{R}(x_i, a_i)) \\
+    & + \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}(a_i | x_i) \hat{R}(x_i, a)].
 
 By using the regressed reward as a control variate, DR often reduces the variance of IS, while remaining unbiased under the same condition as IS. 
 However, when the regression is inaccurate, the variance reduction is limited and DR often suffers from high variance when the action space is large :cite:`saito2022off`. 
 The shortcoming of IS and DR is that these typical methods treat each prompt independently and discard the similarity among prompts and sentences.
 
-POTEC :cite:`saito2024potec`
+POTEC
 ^^^^^^^^^^
 To deal with the variance issue of DR, POTEC considers the clustering in the action space and decomposes the policy into two stages as follows.
 
@@ -125,15 +125,15 @@ Using this decomposition, POTEC chooses clusters via a DR-style approach as foll
 .. math::
 
     \nabla_{\theta} V(\pi_{\theta}) 
-    &\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}^{\text{1st}}(c(a_i)|x_i)}{\pi_0^{\text{1st}}(c(a_i)|x_i)} \nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) (r_i - \hat{q}(x_i, a_i)) \\
-    &+ \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) \hat{q}(x_i, a)],
+    &\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}^{\text{1st}}(c(a_i)|x_i)}{\pi_0^{\text{1st}}(c(a_i)|x_i)} \nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) (r_i - \hat{R}(x_i, a_i)) \\
+    &+ \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) \hat{R}(x_i, a)],
 
-where :math:`\pi_0^{\text{1st}}(c(a)|x) = \sum_{a' \in \mathcal{A}, c(a')=c(a)} \pi_0(a|x)`. The second-stage policy greedily chooses action as :math:`\pi^{\text{2nd}}(a | x, c) = \mathbb{I} \{ \hat{q}(x, a) = {\arg\max}_{a' \in \mathcal{A}, c(a') = c(a)} \hat{q}(x,a') \}`.
+where :math:`\pi_0^{\text{1st}}(c(a)|x) = \sum_{a' \in \mathcal{A}, c(a')=c(a)} \pi_0(a|x)`. The second-stage policy greedily chooses action as :math:`\pi^{\text{2nd}}(a | x, c) = \mathbb{I} \{ \hat{R}(x, a) = {\arg\max}_{a' \in \mathcal{A}, c(a') = c(a)} \hat{R}(x,a') \}`.
 By applying IS on the clustered action space, POTEC reduces the variance of naive IS, leveraging the similarity among prompts. 
 POTEC is also able to convert regression to a pair-wise regression within a cluster. 
 However, especially when the relation between actions and rewards is complex, a good clustering is often hard to identify, and POTEC cannot take the rich information about generated sentences into account.
 
-Direct Sentence (DSO) :cite:`kiyohara2024prompt`
+Direct Sentence (DSO)
 ^^^^^^^^^^
 To take the similarity among generated sentences into account, DSO calculates the policy gradient in the (marginalized) sentence space as follows.
 
@@ -166,58 +166,59 @@ OPE estimators
 ----------
 In this section, we also introduce the following OPE estimators corresponding to the aforementioned OPL methods:
 
-* Direct Method (DM) :cite:``
-* Importance Sampling (IS) :cite:``
-* Doubly Robust (DR) :cite:``
-* OffCEM :cite:``
-* Kernel IS (ours) :cite:``
+* Direct Method (DM) :cite:`beygelzimer2009offset`
+* Importance Sampling (IS) :cite:`strehl2010learning`
+* Doubly Robust (DR) :cite:`dudik2014doubly`
+* OffCEM :cite:`saito2023off`
+* Kernel IS (our proposal) :cite:`kiyohara2025offline`
 
-Direct Method (DM) :cite:`beygelzimer2009offset`
+Direct Method (DM)
 ^^^^^^^^^^
 To enable the offline evaluation of a new policy, one can consider applying off-policy evaluation (OPE). 
 DM is a prevalent method in OPE, which estimates the policy value using the regressed reward.
 
 .. math::
 
-    V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \hat{q}(x_i, a) \right].
+    V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \hat{R}(x_i, a) \right].
 
 Similar to the REINFORCE policy gradient, the benefit of this estimator is not incurring high variance. However, when the regression is inaccurate due to covariate shifts, the estimation has a serious bias.
 
-Inverse Propensity Scoring (IPS) :citep:`strehl2010learning`
+Importance Sampling (IS)
 ^^^^^^^^^^
-IPS applies importance sampling to correct the reward observation probability as follows.
+IS applies importance sampling to correct the reward observation probability as follows.
 
 .. math::
 
     V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} r_i.
 
-As seen in the discussion of OPL, IPS suffers from high variance and deficient support, especially when the number of candidate actions (i.e., prompts) is large :cite:`sachdeva2020off, saito2022off, saito2023off`.
+As seen in the discussion of OPL, IS suffers from high variance and deficient support, especially when the number of candidate actions (i.e., prompts) is large :cite:`sachdeva2020off, saito2022off, saito2023off`.
 
-Doubly Robust (DR) :cite:`dudik2011doubly`
+Doubly Robust (DR)
 ^^^^^^^^^^
 DR uses the regressed reward as a control variate when applying importance weights as follows.
 
 .. math::
 
     V(\pi_{\theta}) 
-    \approx \frac{1}{n} \sum_{i=1}^n \left\{ \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)}  (r_i - \hat{q}(x_i, a_i)) + \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{q}(x_i, a)] \right\}.
+    \approx \frac{1}{n} \sum_{i=1}^n \left\{ \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)}  (r_i - \hat{R}(x_i, a_i)) + \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{R}(x_i, a)] \right\}.
 
-DR reduces the variance of IPS when the regression is reasonably accurate (i.e., $|q(x, a) - \hat{q}(x, a)| \leq |q(x, a)|$). Also, DR is \textit{``doubly'' robust} in that it is unbiased either when the regression is accurate for all $(x, a) \in \mathcal{X} \times \mathcal{A}$ or $\pi_0$ is accessible and do not have deficient support. However, this condition is hard to satisfy when the action space is large, and empirically, DR is known to perform similarly to IS in large action settings~\citep{saito2022off, saito2023off}.
+DR reduces the variance of IPS when the regression is reasonably accurate (i.e., $|R(x, a) - \hat{R}(x, a)| \leq |R(x, a)|$). Also, DR is *``doubly'' robust* in that it is unbiased either when the regression is accurate for all :math:`(x, a) \in \mathcal{X} \times \mathcal{A}` or :math:`\pi_0` is accessible and do not have deficient support. 
+However, this condition is hard to satisfy when the action space is large, and empirically, DR is known to perform similarly to IS in large action settings :cite:`saito2022off, saito2023off`.
 
-OffCEM :cite:`saito2023off`
+OffCEM
 ^^^^^^^^^^
 OffCEM aggregates the reward observation among similar prompts using the clusters in the action space as follows.
 
 .. math::
 
     V(\pi_{\theta}) 
-    \approx \frac{1}{n} \sum_{i=1}^n \left \{ \frac{\pi_{\theta}(c(a_i)|x_i)}{\pi_0(c(a_i)|x_i)} (r_i - \hat{q}(x_i, a_i)) 
-    + \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{q}(x_i, a)] \right \},
+    \approx \frac{1}{n} \sum_{i=1}^n \left \{ \frac{\pi_{\theta}(c(a_i)|x_i)}{\pi_0(c(a_i)|x_i)} (r_i - \hat{R}(x_i, a_i)) 
+    + \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{R}(x_i, a)] \right \},
 
 where :math:`\pi(c(a)|x) = \sum_{a' \in \mathcal{A}, c(a')=c(a)} \pi(a|x)` is the probability of choosing cluster :math:`c` under policy :math:`\pi` (note that, in contrast to POTEC, this estimator is applicable regardless :math:`\pi` and :math:`\pi_0` being two-stage policies or not). 
 OffCEM reduces the variance of DR by avoiding extreme importance weights. However, when there is a complex relation between prompts and rewards and a cluster contains prompts that produce different rewards, OffCEM may incur high bias in estimation.
 
-Kernel IS :cite:`kiyohara2024prompt`
+Kernel IS
 ^^^^^^^^^^
 Kernel IS applies importance sampling on the marginalized sentence space as follows.
 
@@ -233,7 +234,7 @@ Online evalution and learning
 ----------
 Finally, we also provide online methods as a potential skyline.
 
-REINFORCE :cite:`sutton2018reinforcement, deng2022rlprompt`
+REINFORCE
 ^^^^^^^^^^
 When the policy can interact with the environment, we estimate the policy gradient via Monte-Carlo (MC) estimation as follows.
 

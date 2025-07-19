@@ -80,7 +80,7 @@ def assert_configuration(cfg: DictConfig):
         "Adagrad",
         "SGD",
     ]
-    
+
     # predictor
     n_epochs_predictor = cfg.offline.n_epochs_predictor
     assert isinstance(n_epochs, int) and n_epochs > 0
@@ -97,7 +97,7 @@ def assert_configuration(cfg: DictConfig):
         "Adagrad",
         "SGD",
     ]
-    
+
     # other offline configs
     kernel_type = cfg.offline.kernel_type
     assert kernel_type in ["gaussian", "uniform"]
@@ -131,37 +131,55 @@ def assert_configuration(cfg: DictConfig):
 
     # path
     path_to_user_embeddings = cfg.setting.path_to_user_embeddings
-    assert isinstance(path_to_user_embeddings, str) and path_to_user_embeddings.endswith(".pt")
+    assert isinstance(
+        path_to_user_embeddings, str
+    ) and path_to_user_embeddings.endswith(".pt")
 
     path_to_queries = cfg.setting.path_to_queries
     assert isinstance(path_to_queries, str) and path_to_queries.endswith(".csv")
 
     path_to_query_embeddings = cfg.setting.path_to_query_embeddings
-    assert isinstance(path_to_query_embeddings, str) and path_to_query_embeddings.endswith(".pt")
+    assert isinstance(
+        path_to_query_embeddings, str
+    ) and path_to_query_embeddings.endswith(".pt")
 
     path_to_interaction_data = cfg.setting.path_to_interaction_data
     if path_to_interaction_data == "None":
         cfg.setting.path_to_interaction_data = None
     else:
-        assert isinstance(path_to_interaction_data, str) and path_to_interaction_data.endswith(".csv")
+        assert isinstance(
+            path_to_interaction_data, str
+        ) and path_to_interaction_data.endswith(".csv")
 
     path_to_candidate_prompts = cfg.setting.path_to_candidate_prompts
-    assert isinstance(path_to_candidate_prompts, str) and path_to_candidate_prompts.endswith(".csv")
+    assert isinstance(
+        path_to_candidate_prompts, str
+    ) and path_to_candidate_prompts.endswith(".csv")
 
     path_to_prompt_embeddings = cfg.setting.path_to_prompt_embeddings
-    assert isinstance(path_to_prompt_embeddings, str) and path_to_prompt_embeddings.endswith(".pt")
+    assert isinstance(
+        path_to_prompt_embeddings, str
+    ) and path_to_prompt_embeddings.endswith(".pt")
 
     path_to_finetuned_params = cfg.setting.path_to_finetuned_params
-    assert isinstance(path_to_finetuned_params, str) and path_to_finetuned_params.endswith(".pt")
+    assert isinstance(
+        path_to_finetuned_params, str
+    ) and path_to_finetuned_params.endswith(".pt")
 
     path_to_query_pca_matrix = cfg.setting.path_to_query_pca_matrix
-    assert isinstance(path_to_query_pca_matrix, str) and path_to_query_pca_matrix.endswith(".pt")
+    assert isinstance(
+        path_to_query_pca_matrix, str
+    ) and path_to_query_pca_matrix.endswith(".pt")
 
     path_to_prompt_pca_matrix = cfg.setting.path_to_prompt_pca_matrix
-    assert isinstance(path_to_prompt_pca_matrix, str) and path_to_prompt_pca_matrix.endswith(".pt")
-    
+    assert isinstance(
+        path_to_prompt_pca_matrix, str
+    ) and path_to_prompt_pca_matrix.endswith(".pt")
+
     path_to_sentence_pca_matrix = cfg.setting.path_to_sentence_pca_matrix
-    assert isinstance(path_to_sentence_pca_matrix, str) and path_to_sentence_pca_matrix.endswith(".pt")
+    assert isinstance(
+        path_to_sentence_pca_matrix, str
+    ) and path_to_sentence_pca_matrix.endswith(".pt")
 
     # random state
     base_random_state = cfg.setting.base_random_state
@@ -171,13 +189,18 @@ def assert_configuration(cfg: DictConfig):
     assert isinstance(dataset_n_random_state, int) and dataset_n_random_state > 0
 
     dataset_start_random_state = cfg.offline.dataset_start_random_state
-    assert isinstance(dataset_start_random_state, int) and dataset_start_random_state >= 0
+    assert (
+        isinstance(dataset_start_random_state, int) and dataset_start_random_state >= 0
+    )
 
     optimizer_n_random_state = cfg.offline.optimizer_n_random_state
     assert isinstance(optimizer_n_random_state, int) and optimizer_n_random_state > 0
 
     optimizer_start_random_state = cfg.offline.optimizer_start_random_state
-    assert isinstance(optimizer_start_random_state, int) and optimizer_start_random_state >= 0
+    assert (
+        isinstance(optimizer_start_random_state, int)
+        and optimizer_start_random_state >= 0
+    )
 
 
 def assert_configuration_for_evaluation(cfg: DictConfig):
