@@ -1,0 +1,968 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../_static/images/favicon.png" rel="icon" type="image/png">
+    <title>Problem Formulation and Implementations &#8212; OfflinePrompts</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DSO for Data-Efficient OPL" href="dso.html" />
+    <link rel="prev" title="Why OfflinePrompts?" href="distinctive_features.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="quickstart.html">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="quickstart.html">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distinctive_features.html">Why OfflinePrompts?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem Formulation and Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dso.html">DSO for Data-Efficient OPL</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">OfflinePrompts Package Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.html">off_prompts.dataset.base</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BaseCandidateActionsLoader.html">off_prompts.dataset.base.BaseCandidateActionsLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BaseContextQueryLoader.html">off_prompts.dataset.base.BaseContextQueryLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BaseEncoder.html">off_prompts.dataset.base.BaseEncoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BaseFrozenLLM.html">off_prompts.dataset.base.BaseFrozenLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BasePromptFormatter.html">off_prompts.dataset.base.BasePromptFormatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BaseRewardSimulator.html">off_prompts.dataset.base.BaseRewardSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.benchmark.html">off_prompts.dataset.benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.benchmark.SemiSyntheticDataset.html">off_prompts.dataset.benchmark.SemiSyntheticDataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.frozen_llm.html">off_prompts.dataset.frozen_llm</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.frozen_llm.AutoFrozenLLM.html">off_prompts.dataset.frozen_llm.AutoFrozenLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.reward_simulator.html">off_prompts.dataset.reward_simulator</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html">off_prompts.dataset.reward_simulator.CollaborativeFilteringRewardSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.reward_simulator.PromptCossimRewardSimulator.html">off_prompts.dataset.reward_simulator.PromptCossimRewardSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.reward_simulator.SentenceCossimRewardSimulator.html">off_prompts.dataset.reward_simulator.SentenceCossimRewardSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.reward_simulator.TransformerRewardSimulator.html">off_prompts.dataset.reward_simulator.TransformerRewardSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.function.html">off_prompts.dataset.function</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.function.DefaultCandidateActionsLoader.html">off_prompts.dataset.function.DefaultCandidateActionsLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.function.DefaultContextQueryLoader.html">off_prompts.dataset.function.DefaultContextQueryLoader</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.encoder.html">off_prompts.dataset.encoder</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.encoder.BatchDataset.html">off_prompts.dataset.encoder.BatchDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.encoder.NNSentenceEncoder.html">off_prompts.dataset.encoder.NNSentenceEncoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.encoder.TransformerEncoder.html">off_prompts.dataset.encoder.TransformerEncoder</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.prompt_formatter.html">off_prompts.dataset.prompt_formatter</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.prompt_formatter.MovielensPromptFormatter.html">off_prompts.dataset.prompt_formatter.MovielensPromptFormatter</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.assets.reward_finetuner.html">off_prompts.dataset.assets.reward_finetuner</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.assets.reward_finetuner.MovielensDataset.html">off_prompts.dataset.assets.reward_finetuner.MovielensDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.assets.reward_finetuner.RewardFinetuner.html">off_prompts.dataset.assets.reward_finetuner.RewardFinetuner</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.assets.sentence_embedding_learner.html">off_prompts.dataset.assets.sentence_embedding_learner</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.assets.sentence_embedding_learner.SentenceEmbeddingLearner.html">off_prompts.dataset.assets.sentence_embedding_learner.SentenceEmbeddingLearner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/policy/off_prompts.policy.base.html">off_prompts.policy.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/policy/off_prompts.policy.model.html">off_prompts.policy.model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/policy/off_prompts.policy.policy.html">off_prompts.policy.policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts.opl.policy_learner.html">off_prompts.opl.policy_learner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts.opl.policy_evaluator.html">off_prompts.opl.policy_evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts.opl.reward_learner.html">off_prompts.opl.reward_learner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts.opl.marginal_learner.html">off_prompts.opl.marginal_learner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts.opl.behavior_cloning.html">off_prompts.opl.behavior_cloning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts.opl.dataset.html">off_prompts.opl.dataset</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.html">off_prompts.utils</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.check_logged_feedback.html">off_prompts.utils.check_logged_feedback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.check_tensor.html">off_prompts.utils.check_tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.defaultdict_to_dict.html">off_prompts.utils.defaultdict_to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.gaussian_kernel.html">off_prompts.utils.gaussian_kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.to_device.html">off_prompts.utils.to_device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.tokenize.html">off_prompts.utils.tokenize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.torch_seed.html">off_prompts.utils.torch_seed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.uniform_kernel.html">off_prompts.utils.uniform_kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.FrozenLLMDataset.html">off_prompts.utils.FrozenLLMDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts.utils.RewardSimulatorDataset.html">off_prompts.utils.RewardSimulatorDataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.synthetic.html">off_prompts_syn.dataset.synthetic</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.synthetic.SyntheticDataset.html">off_prompts_syn.dataset.synthetic.SyntheticDataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.html">off_prompts_syn.dataset.function</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.AuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.AuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.CandidateActionsGenerator.html">off_prompts_syn.dataset.function.CandidateActionsGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.ConfoundedAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.ConfoundedExponentialAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedExponentialAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.ConfoundedPowerAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedPowerAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.ConfoundedRationalAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedRationalAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.ConfoundedTrigonometricAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedTrigonometricAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.ContextQueryGenerator.html">off_prompts_syn.dataset.function.ContextQueryGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.ExponentialAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ExponentialAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.MixtureOfGaussianCandidateActionsGenerator.html">off_prompts_syn.dataset.function.MixtureOfGaussianCandidateActionsGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.PowerAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.PowerAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.RationalAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.RationalAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.RewardSimulator.html">off_prompts_syn.dataset.function.RewardSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.SigmoidAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.SigmoidAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.SparseRewardSimulator.html">off_prompts_syn.dataset.function.SparseRewardSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts_syn.dataset.function.TrigonometricAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.TrigonometricAuxiliaryOutputGenerator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/policy/off_prompts_syn.policy.base.html">off_prompts_syn.policy.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/policy/off_prompts_syn.policy.model.html">off_prompts_syn.policy.model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/policy/off_prompts_syn.policy.policy.html">off_prompts_syn.policy.policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts_syn.opl.policy_learner.html">off_prompts_syn.opl.policy_learner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts_syn.opl.reward_learner.html">off_prompts_syn.opl.reward_learner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts_syn.opl.marginal_learner.html">off_prompts_syn.opl.marginal_learner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/opl/off_prompts_syn.opl.behavior_cloning.html">off_prompts_syn.opl.behavior_cloning</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/utils/off_prompts_syn.utils.html">off_prompts_syn.utils</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts_syn.utils.check_logged_feedback.html">off_prompts_syn.utils.check_logged_feedback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts_syn.utils.check_tensor.html">off_prompts_syn.utils.check_tensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts_syn.utils.defaultdict_to_dict.html">off_prompts_syn.utils.defaultdict_to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts_syn.utils.gaussian_kernel.html">off_prompts_syn.utils.gaussian_kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts_syn.utils.torch_seed.html">off_prompts_syn.utils.torch_seed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/utils/off_prompts_syn.utils.uniform_kernel.html">off_prompts_syn.utils.uniform_kernel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">See also:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequently_asked_questions.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="news.html">News</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/releases">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/404">Proceedings</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">OfflinePrompts</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Problem Formulation and Implementations</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="problem-formulation-and-implementations">
+<h1>Problem Formulation and Implementations<a class="headerlink" href="#problem-formulation-and-implementations" title="Permalink to this heading">#</a></h1>
+<section id="problem-formulation">
+<h2>Problem Formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this heading">#</a></h2>
+<p>We start by formulating prompt optimization as contextual bandits with <em>auxiliary outputs</em>. Let <span class="math notranslate nohighlight">\(u \in \mathcal{U} \subseteq \mathbb{R}^{d_u}\)</span> be a <span class="math notranslate nohighlight">\(d_u\)</span>-dimensional user feature vector (e.g., demographic profile or user id), sampled from an unknown distribution <span class="math notranslate nohighlight">\(p(u)\)</span>.
+Let <span class="math notranslate nohighlight">\(q \in \mathcal{Q} \subseteq \mathbb{R}^{d_q}\)</span> be a <em>query</em> (e.g., query to a frozen LLM), sampled from a conditional distribution <span class="math notranslate nohighlight">\(p(q | u)\)</span>. Let <span class="math notranslate nohighlight">\(a \in \mathcal{A}\)</span> be a (discrete) <em>prompt</em>, where each prompt is associated with some vectorial embedding, <span class="math notranslate nohighlight">\(e_a \in \mathbb{R}^{d_e}\)</span>, where <span class="math notranslate nohighlight">\(d_e\)</span> is the dimension of the embeddings.
+The prompt is used to generate a sentence via a frozen LLM.</p>
+<p>This process can be formulated as a procedure of sampling sentence <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span> as an auxiliary output from the stochastic output distribution of the LLM: <span class="math notranslate nohighlight">\(p_{\text{LLM}}(s | q, a)\)</span>.
+A user will respond to the output sentence and provide some reward <span class="math notranslate nohighlight">\(r \in \mathbb{R}\)</span> (e.g., click or purchase), where <span class="math notranslate nohighlight">\(r\)</span> follows <span class="math notranslate nohighlight">\(p(r | u, q, s)\)</span>.
+Let <span class="math notranslate nohighlight">\(\pi \in \Pi\)</span> be a <em>prompt policy</em> where <span class="math notranslate nohighlight">\(\pi(a | u, q)\)</span> is the probability of choosing <em>prompt</em> <span class="math notranslate nohighlight">\(a\)</span> for <em>context</em> <span class="math notranslate nohighlight">\(x := (u, q) \in \mathcal{X}\)</span>.
+The goal of policy learning is to optimize the prompt policy to maximize the expected reward, defined as</p>
+<div class="math notranslate nohighlight">
+\[V(\pi)
+:= \mathbb{E}_{p(u)p(q|u) \pi(a|u,q) p_{\text{LLM}}(s|q, a)p(r | u,q,s)}[r]
+= \mathbb{E}_{p(x)\pi(a | x) p(r, s | x, a)}[r].\]</div>
+<p>where <span class="math notranslate nohighlight">\(p(x) = p(u, q) = p(u)p(q|u)\)</span>, <span class="math notranslate nohighlight">\(\pi(a|x) = \pi(a|u,q)\)</span>, and <span class="math notranslate nohighlight">\(p(r,s|x,a) = p_{\text{LLM}}(s|q, a)p(r|u,q,s)\)</span>.</p>
+<p>Now, we consider the case where we naturally collect logged data through the past operation of the systems as follows.</p>
+<div class="sd-card sd-sphinx-override sd-w-75 sd-m-auto sd-shadow-sm sd-text-center docutils">
+<img alt="card-img-top" class="sd-card-img-top" src="../_images/personalized_sentence_generation.png" />
+<div class="sd-card-body docutils">
+<p class="sd-card-text">User interaction and data collection process from prompt-guided language generation. Examples are generated by ChatGPT-3.5 <span id="id1">[]</span>.</p>
+</div>
+</div>
+<div class="white-space-20px"></div><p>The key point is that, for each coming user, a policy chooses which prompt to use to generate sentences with a frozen LLM. Therefore, each user observes only the sentence generated by the chosen prompt and provides the reward for the corresponding sentence.
+This means that we cannot observe rewards for the sentences generated by prompts <em>not</em> chosen by the logging policy.</p>
+<p>Off-policy evaluation and learning (OPE/L) aims to evaluate or learn a new policy using the logged data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> collected by a <em>logging</em> policy <span class="math notranslate nohighlight">\(\pi_0\)</span> as follows.</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{D}
+:= \{ x_i, a_i, s_i, r_i \}_{i=1}^n \, \sim \prod_{i=1}^n p(x) \pi_0(a | x) p_{\text{LLM}}(s | x, a) p(r | x, s),\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the data size and <span class="math notranslate nohighlight">\(i\)</span> is its index.
+The logged data informs us whether the prompt (<span class="math notranslate nohighlight">\(a_i\)</span>) results in a high reward or not (<span class="math notranslate nohighlight">\(r_i\)</span>) for a particular context (<span class="math notranslate nohighlight">\(x_i\)</span>). However, a difficult aspect of using the logged data is that the reward observation is <em>partial</em>,
+i.e., it is observed only for the prompt chosen by the logging policy (<span class="math notranslate nohighlight">\(\pi_0\)</span>) but not for all the other actions. This can be particularly challenging when training a new policy <span class="math notranslate nohighlight">\(\pi\)</span> on the logged data, as <span class="math notranslate nohighlight">\(\pi\)</span> may choose actions that are not chosen by <span class="math notranslate nohighlight">\(\pi_0\)</span>.
+Thus, we need to address such <em>counterfactuals</em> and <em>distribution shift</em> between the logging and learning policies when using logged data for a reliable policy optimization.</p>
+<p>In the following sections, we describe the OPE/L methods implemented in <em>OfflinePrompts</em> for optimizing a prompt policy for a successful (and personalized) language generation.</p>
+</section>
+<section id="opl-methods">
+<h2>OPL methods<a class="headerlink" href="#opl-methods" title="Permalink to this heading">#</a></h2>
+<p>In this section, we introduce the following OPL methods:</p>
+<ul class="simple">
+<li><p>Regression <span id="id2">[]</span></p></li>
+<li><p>Importance Sampling (IS) <span id="id3">[]</span></p></li>
+<li><p>Doubly Robust (DR) <span id="id4">[]</span></p></li>
+<li><p>POTEC <span id="id5">[]</span></p></li>
+<li><p>Direct Sentence (DSO, ours) <span id="id6">[]</span></p></li>
+</ul>
+<section id="policy-gradient-pg">
+<h3>Policy gradient (PG)<a class="headerlink" href="#policy-gradient-pg" title="Permalink to this heading">#</a></h3>
+<p>In OPL, we often aim to unbiasedly estimate the following PG (estimation target) with a small variance, using logged data.</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\theta} V(\pi_{\theta}) = \mathbb{E}_{p(x) \pi_{\theta}(a | x) p(r | x, a)} [\nabla_{\theta} \log \pi_{\theta}(a | x) r ].\]</div>
+<p>In the following, we denote <span class="math notranslate nohighlight">\(z \sim p(z)\)</span> as sampling a <em>single</em> random variable <span class="math notranslate nohighlight">\(z\)</span> from the probability distribution <span class="math notranslate nohighlight">\(p(z)\)</span>.</p>
+</section>
+<section id="regression">
+<h3>Regression<a class="headerlink" href="#regression" title="Permalink to this heading">#</a></h3>
+<p>A typical way of using logged data is to train a reward predictor <span class="math notranslate nohighlight">\(\hat{R}\)</span> <span id="id7">[]</span>, and then use the predicted reward to estimate the policy gradient (PG).</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \nabla_{\theta} \log \pi_{\theta}(a | x_i) \hat{R}(x_i, a) \right],\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{R}(x, a) \approx \mathbb{E}[r|x,a]\)</span>.
+Oftentimes, an accurate regression for OPL is difficult under complex relations between prompts and rewards.
+This is because the reward observation is partial and covariate shifts arise between the logging policy (<span class="math notranslate nohighlight">\(\pi_0\)</span>) and the target policy (<span class="math notranslate nohighlight">\(\pi_{\theta}\)</span>).
+If the learned regression model <span class="math notranslate nohighlight">\(\hat{R}\)</span> is inaccurate, the estimated PG can have a high bias <span id="id8">[]</span>.</p>
+</section>
+<section id="importance-sampling-is">
+<h3>Importance sampling (IS)<a class="headerlink" href="#importance-sampling-is" title="Permalink to this heading">#</a></h3>
+<p>Instead of using potentially inaccurate regression, IS corrects the distribution shift between <span class="math notranslate nohighlight">\(\pi_0\)</span> and <span class="math notranslate nohighlight">\(\pi_{\theta}\)</span> by reweighing the observations:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) r_i.\]</div>
+<p>IS is unbiased under the textit{action support} condition, i.e., <span class="math notranslate nohighlight">\(\forall (x, a) \in \mathcal{X} \times \mathcal{A}, \, \pi_{\theta}(a | x) &gt; 0 \implies \pi_0(a | x) &gt; 0\)</span>.
+However, IS produces considerable bias due to the violation of the condition called deficient support <span id="id9">[]</span> and extremely high variance due to large importance weight <span id="id10">[]</span>, which are likely when the action space is large.</p>
+</section>
+<section id="doubly-robust-dr">
+<h3>Doubly Robust (DR)<a class="headerlink" href="#doubly-robust-dr" title="Permalink to this heading">#</a></h3>
+<p>DR is a hybrid approach, which effectively combines the regression and IS to exploit the benefits of the two.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla_{\theta} V(\pi_{\theta})
+&amp;\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) (r_i - \hat{R}(x_i, a_i)) \\
+&amp; + \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}(a_i | x_i) \hat{R}(x_i, a)].\end{split}\]</div>
+<p>By using the regressed reward as a control variate, DR often reduces the variance of IS, while remaining unbiased under the same condition as IS.
+However, when the regression is inaccurate, the variance reduction is limited and DR often suffers from high variance when the action space is large <span id="id11">[]</span>.
+The shortcoming of IS and DR is that these typical methods treat each prompt independently and discard the similarity among prompts and sentences.</p>
+</section>
+<section id="potec">
+<h3>POTEC<a class="headerlink" href="#potec" title="Permalink to this heading">#</a></h3>
+<p>To deal with the variance issue of DR, POTEC considers the clustering in the action space and decomposes the policy into two stages as follows.</p>
+<div class="math notranslate nohighlight">
+\[\pi_{\theta}(a|x) = \sum_{c \in \mathcal{C}} \pi_{\theta}^{\text{1st}}(c|x) \pi^{\text{2nd}}(a|x,c),\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> indicates the cluster of the action <span class="math notranslate nohighlight">\(a\)</span>, which can be learned by applying an off-the-shelf clustering method to action (i.e., prompt) embeddings.
+Using this decomposition, POTEC chooses clusters via a DR-style approach as follows, and chooses actions within a cluster via regression.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla_{\theta} V(\pi_{\theta})
+&amp;\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}^{\text{1st}}(c(a_i)|x_i)}{\pi_0^{\text{1st}}(c(a_i)|x_i)} \nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) (r_i - \hat{R}(x_i, a_i)) \\
+&amp;+ \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\nabla_{\theta} \log \pi_{\theta}^{\text{1st}}(c(a_i) | x_i) \hat{R}(x_i, a)],\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi_0^{\text{1st}}(c(a)|x) = \sum_{a' \in \mathcal{A}, c(a')=c(a)} \pi_0(a|x)\)</span>. The second-stage policy greedily chooses action as <span class="math notranslate nohighlight">\(\pi^{\text{2nd}}(a | x, c) = \mathbb{I} \{ \hat{R}(x, a) = {\arg\max}_{a' \in \mathcal{A}, c(a') = c(a)} \hat{R}(x,a') \}\)</span>.
+By applying IS on the clustered action space, POTEC reduces the variance of naive IS, leveraging the similarity among prompts.
+POTEC is also able to convert regression to a pair-wise regression within a cluster.
+However, especially when the relation between actions and rewards is complex, a good clustering is often hard to identify, and POTEC cannot take the rich information about generated sentences into account.</p>
+</section>
+<section id="direct-sentence-dso">
+<h3>Direct Sentence (DSO)<a class="headerlink" href="#direct-sentence-dso" title="Permalink to this heading">#</a></h3>
+<p>To take the similarity among generated sentences into account, DSO calculates the policy gradient in the (marginalized) sentence space as follows.</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\theta} V(\pi_{\theta})
+\approx \frac{1}{n} \sum_{i=1}^n \underbrace{\frac{\pi_{\theta}(\phi(s_i)|x_i)}{\pi_0(\phi(s_i)|x_i)}}_{:=w(\phi(s_i), x_i)} \nabla_{\theta} \log \pi_{\theta}(\phi(s_i)|x_i) \, r_i,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi(s) \in \Phi(\mathcal{S})\)</span> is the kernel-based neighbors of sentence $s$, whose probability density is defined as <span class="math notranslate nohighlight">\(\mathbb{P}(\phi(s)|\cdot):= \int_{s' \in \mathcal{S}} K(s', s; \, x, \tau) \mathbb{P}(s'|\cdot) ds', \, \forall \mathbb{P}\)</span>.
+<span class="math notranslate nohighlight">\(K(\cdot, \cdot)\)</span> is a kernel function, which must satisfy <span class="math notranslate nohighlight">\(\int_{s' \in \mathcal{S}} K(s', s; x, \tau) = 1\)</span> and <span class="math notranslate nohighlight">\(\tau\)</span> is a bandwidth hyperparameter.
+Then, using the <em>``re-sampling’’</em> technique to estimate the weighted score function (i.e., <span class="math notranslate nohighlight">\(w(\phi(s), x) \nabla_{\theta} \log \pi_{\theta}(\phi(s)|x)\)</span>), DSO estimates the policy gradient as follows:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\theta} V(\pi_{\theta})
+\approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{(a, s') \sim \pi_{\theta}(a|x_i)p_{\text{LLM}}(s'|x_i,a)} \biggl[ \frac{K(s_i, s'; \, x_i, \tau) \nabla_{\theta} \log \pi_{\theta}(a | x_i)}{\pi_{0}(\phi(s_i)|x_i)} \biggr] \, r_i.\]</div>
+<p>This means that DSO performs soft rejection sampling on the data <span class="math notranslate nohighlight">\((a, s')\)</span> augmented by <span class="math notranslate nohighlight">\(\pi_{\theta}\)</span>, while correcting the bias in the logged data by applying the inverse propensity of <span class="math notranslate nohighlight">\(\pi_0\)</span> in the marginalized sentence space.
+The logging marginal density <span class="math notranslate nohighlight">\(\pi_0(\phi(s)|x) = \mathbb{E}_{\pi_0(s'|x)}[K(s, s'; \, x, \tau)]\)</span> can be estimated by either the Monte-Carlo estimation or function approximation with the following loss.</p>
+<div class="math notranslate nohighlight">
+\[\ell(f_{\psi}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{(s,s') \sim \pi_0(s|x_i)\pi_0(s'|x_i)}[ (f_{\psi}(x_i,s) - K(s,s' ; \, x_i,\tau))^2].\]</div>
+<p>DSO reduces the variance of action-based IS by avoiding large importance weights and implicitly augmenting the data using similarity among sentences.
+DSO also keeps the bias small by using similarity-based weighting on neighbors via kernels.</p>
+</section>
+</section>
+<section id="ope-estimators">
+<h2>OPE estimators<a class="headerlink" href="#ope-estimators" title="Permalink to this heading">#</a></h2>
+<p>In this section, we also introduce the following OPE estimators corresponding to the aforementioned OPL methods:</p>
+<ul class="simple">
+<li><p>Direct Method (DM) <span id="id12">[]</span></p></li>
+<li><p>Importance Sampling (IS) <span id="id13">[]</span></p></li>
+<li><p>Doubly Robust (DR) <span id="id14">[]</span></p></li>
+<li><p>OffCEM <span id="id15">[]</span></p></li>
+<li><p>Kernel IS (our proposal) <span id="id16">[]</span></p></li>
+</ul>
+<section id="direct-method-dm">
+<h3>Direct Method (DM)<a class="headerlink" href="#direct-method-dm" title="Permalink to this heading">#</a></h3>
+<p>To enable the offline evaluation of a new policy, one can consider applying off-policy evaluation (OPE).
+DM is a prevalent method in OPE, which estimates the policy value using the regressed reward.</p>
+<div class="math notranslate nohighlight">
+\[V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{a \sim \pi_{\theta}(a | x_i)}\left[ \hat{R}(x_i, a) \right].\]</div>
+<p>Similar to the REINFORCE policy gradient, the benefit of this estimator is not incurring high variance. However, when the regression is inaccurate due to covariate shifts, the estimation has a serious bias.</p>
+</section>
+<section id="id17">
+<h3>Importance Sampling (IS)<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<p>IS applies importance sampling to correct the reward observation probability as follows.</p>
+<div class="math notranslate nohighlight">
+\[V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)} r_i.\]</div>
+<p>As seen in the discussion of OPL, IS suffers from high variance and deficient support, especially when the number of candidate actions (i.e., prompts) is large <span id="id18">[]</span>.</p>
+</section>
+<section id="id19">
+<h3>Doubly Robust (DR)<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
+<p>DR uses the regressed reward as a control variate when applying importance weights as follows.</p>
+<div class="math notranslate nohighlight">
+\[V(\pi_{\theta})
+\approx \frac{1}{n} \sum_{i=1}^n \left\{ \frac{\pi_{\theta}(a_i | x_i)}{\pi_0(a_i | x_i)}  (r_i - \hat{R}(x_i, a_i)) + \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{R}(x_i, a)] \right\}.\]</div>
+<p>DR reduces the variance of IPS when the regression is reasonably accurate (i.e., $|R(x, a) - hat{R}(x, a)| leq <a href="#id20"><span class="problematic" id="id21">|</span></a>R(x, a)|$). Also, DR is <em>``doubly’’ robust</em> in that it is unbiased either when the regression is accurate for all <span class="math notranslate nohighlight">\((x, a) \in \mathcal{X} \times \mathcal{A}\)</span> or <span class="math notranslate nohighlight">\(\pi_0\)</span> is accessible and do not have deficient support.
+However, this condition is hard to satisfy when the action space is large, and empirically, DR is known to perform similarly to IS in large action settings <span id="id22">[]</span>.</p>
+</section>
+<section id="offcem">
+<h3>OffCEM<a class="headerlink" href="#offcem" title="Permalink to this heading">#</a></h3>
+<p>OffCEM aggregates the reward observation among similar prompts using the clusters in the action space as follows.</p>
+<div class="math notranslate nohighlight">
+\[V(\pi_{\theta})
+\approx \frac{1}{n} \sum_{i=1}^n \left \{ \frac{\pi_{\theta}(c(a_i)|x_i)}{\pi_0(c(a_i)|x_i)} (r_i - \hat{R}(x_i, a_i))
++ \mathbb{E}_{a \sim \pi_{\theta}(a|x_i)}[\hat{R}(x_i, a)] \right \},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi(c(a)|x) = \sum_{a' \in \mathcal{A}, c(a')=c(a)} \pi(a|x)\)</span> is the probability of choosing cluster <span class="math notranslate nohighlight">\(c\)</span> under policy <span class="math notranslate nohighlight">\(\pi\)</span> (note that, in contrast to POTEC, this estimator is applicable regardless <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\pi_0\)</span> being two-stage policies or not).
+OffCEM reduces the variance of DR by avoiding extreme importance weights. However, when there is a complex relation between prompts and rewards and a cluster contains prompts that produce different rewards, OffCEM may incur high bias in estimation.</p>
+</section>
+<section id="kernel-is">
+<h3>Kernel IS<a class="headerlink" href="#kernel-is" title="Permalink to this heading">#</a></h3>
+<p>Kernel IS applies importance sampling on the marginalized sentence space as follows.</p>
+<div class="math notranslate nohighlight">
+\[V(\pi_{\theta})
+\approx \frac{1}{n} \sum_{i=1}^n \frac{\pi_{\theta}(\phi(s_i)|x_i)}{\pi_0(\phi(s_i)|x_i)} r_i,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi(\phi(s)|x) = \mathbb{E}_{\pi(s'|x)}[K(s, s'; \, x, \tau)]\)</span> is the marginalized importance weight under the kernel function <span class="math notranslate nohighlight">\(K(\cdot, \cdot)\)</span> and bandwidth hyperparameter <span class="math notranslate nohighlight">\(\tau\)</span>.
+By leveraging the similarity among sentences, which more directly affects the reward than prompts, kernel IS expects a smaller bias compared to action-based IS methods, while reducing the variance by using kernels.</p>
+</section>
+</section>
+<section id="online-evalution-and-learning">
+<h2>Online evalution and learning<a class="headerlink" href="#online-evalution-and-learning" title="Permalink to this heading">#</a></h2>
+<p>Finally, we also provide online methods as a potential skyline.</p>
+<section id="reinforce">
+<h3>REINFORCE<a class="headerlink" href="#reinforce" title="Permalink to this heading">#</a></h3>
+<p>When the policy can interact with the environment, we estimate the policy gradient via Monte-Carlo (MC) estimation as follows.</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\theta} V(\pi_{\theta}) \approx \frac{1}{m} \sum_{i=1}^m \mathbb{E}_{x_i \sim p(x), a_i \sim \pi_{\theta}(a | x_i), r_i \sim p(r|x_i,a_i)}\left[ \nabla_{\theta} \log \pi_{\theta}(a_i | x_i) r_i \right],\]</div>
+<p>where we parametrize the policy as <span class="math notranslate nohighlight">\(\pi_{\theta}\)</span> using some parameters <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span> (e.g., a neural network).
+<span class="math notranslate nohighlight">\(m\)</span> is the number of batched samples used in MC.
+While REINFORCE can calculate the gradient with an adequate number of samples, the policy may produce undesirable results before the policy converges to the optimal choice.</p>
+</section>
+<section id="online-evaluation">
+<h3>Online evaluation<a class="headerlink" href="#online-evaluation" title="Permalink to this heading">#</a></h3>
+<p>Corresponding to REINFORCE, this method, which is also refered to as online A/B tests, uses Monte-Carlo estimation:</p>
+<div class="math notranslate nohighlight">
+\[V(\pi_{\theta}) \approx \frac{1}{n} \sum_{i=1}^n \mathbb{E}_{x_i \sim p(x), a_i \sim \pi_{\theta}(a | x_i), r_i \sim p(r|x_i,a_i)}\left[ r_i \right].\]</div>
+<p>The benefit of online testing is to enable accurate estimation of the policy value.
+However, when the tested policy performs poorly, online testing may harm the user experience and even cause ethical problems <span id="id23">[]</span>.
+Also, deploying policy online requires huge implementation costs in practice <span id="id24">[]</span>.</p>
+</section>
+</section>
+<section id="comparison-of-the-implemented-ope-l-methods">
+<h2>Comparison of the implemented OPE/L methods<a class="headerlink" href="#comparison-of-the-implemented-ope-l-methods" title="Permalink to this heading">#</a></h2>
+<p>Finally, we provide the overview and comparison of the implemented OPE/L methods as follows.</p>
+<div class="sd-card sd-sphinx-override sd-w-75 sd-m-auto sd-shadow-sm sd-text-center docutils">
+<img alt="card-img-top" class="sd-card-img-top" src="../_images/comparison.png" />
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Comparison of the implemented OPE/L methods</p>
+</div>
+</div>
+<div class="white-space-20px"></div><p>Note that, in the table, whether the regression-based and DR approaches use the similarity among prompts depends on the way the regression model is trained.
+DSO (and Kernel IS) implicitly consider the similarity among prompts by using the similarity of <span class="math notranslate nohighlight">\(p_{\text{LLM}}(s|x, a)\)</span> via the re-sampling technique.</p>
+<div class="white-space-5px"></div><div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-column sd-col-3 sd-col-xs-3 sd-col-sm-3 sd-col-md-3 sd-col-lg-3 sd-m-0 sd-p-0 docutils">
+<div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-row sd-m-0 sd-p-0 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-none sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">&lt;&lt;&lt; Prev
+<strong>Quickstart</strong></p>
+</div>
+<a class="sd-stretched-link reference internal" href="quickstart.html"><span class="doc"></span></a></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 sd-m-0 sd-p-0 docutils">
+</div>
+<div class="sd-col sd-d-flex-column sd-col-3 sd-col-xs-3 sd-col-sm-3 sd-col-md-3 sd-col-lg-3 sd-m-0 sd-p-0 docutils">
+<div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-row sd-m-0 sd-p-0 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-none sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Next &gt;&gt;&gt;
+<strong>DSO, efficient OPL</strong></p>
+</div>
+<a class="sd-stretched-link reference internal" href="dso.html"><span class="doc"></span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row sd-m-0 sd-p-0 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-none sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Next &gt;&gt;&gt;
+<strong>API reference</strong></p>
+</div>
+<a class="sd-stretched-link reference internal" href="dso.html"><span class="doc"></span></a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opl-methods">OPL methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policy-gradient-pg">Policy gradient (PG)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-sampling-is">Importance sampling (IS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doubly-robust-dr">Doubly Robust (DR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potec">POTEC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-sentence-dso">Direct Sentence (DSO)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ope-estimators">OPE estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-method-dm">Direct Method (DM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Importance Sampling (IS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Doubly Robust (DR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offcem">OffCEM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-is">Kernel IS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#online-evalution-and-learning">Online evalution and learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforce">REINFORCE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#online-evaluation">Online evaluation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-the-implemented-ope-l-methods">Comparison of the implemented OPE/L methods</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2025, Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

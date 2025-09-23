@@ -1,0 +1,5 @@
+n_epochs: 2000
+n_steps_per_epoch: 1
+n_epochs_per_log: 100
+lr: 5e-4
+optimizer: Adam

@@ -1,0 +1,10 @@
+setting: movielens
+query_path: assets/movielens_query.csv
+prompt_path: assets/movielens_benchmark_prompts.csv
+sentence_path: assets/movielens_preprocessed_data.csv
+base_model_id: mistralai/Mistral-7B-Instruct-v0.2
+tokenizer_id: mistralai/Mistral-7B-Instruct-v0.2
+use_tokenizer_fast: False
+dim_emb: 20
+device: cuda
+random_state: 12345

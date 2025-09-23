@@ -1,0 +1,1188 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../_static/images/favicon.png" rel="icon" type="image/png">
+    <title>Quickstart &#8212; OfflinePrompts</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OfflinePrompts" href="index.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Quickstart</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">#</a></h1>
+<section id="full-llm-benchmark">
+<h2>Full-LLM benchmark<a class="headerlink" href="#full-llm-benchmark" title="Permalink to this heading">#</a></h2>
+<p>We first provide the example of running OPL on the movie-description generation task.</p>
+<section id="setting-up-a-semi-synthetic-simulation">
+<h3>Setting up a semi-synthetic simulation<a class="headerlink" href="#setting-up-a-semi-synthetic-simulation" title="Permalink to this heading">#</a></h3>
+<p>To set up the default movie description benchmark, users can follow the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.dataset</span> <span class="kn">import</span> <span class="n">SemiSyntheticDataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">SemiSyntheticDataset</span><span class="p">(</span>
+    <span class="n">path_to_user_embeddings</span><span class="o">=</span><span class="s2">&quot;assets/movielens_naive_cf_user_embeddings.pt&quot;</span><span class="p">,</span>
+    <span class="n">path_to_queries</span><span class="o">=</span><span class="s2">&quot;assets/movielens_query.csv&quot;</span><span class="p">,</span>
+    <span class="n">path_to_query_embeddings</span><span class="o">=</span><span class="s2">&quot;assets/movielens_query_embs.pt&quot;</span><span class="p">,</span>
+    <span class="n">path_to_interaction_data</span><span class="o">=</span><span class="s2">&quot;assets/movielens_preprocessed_data.csv&quot;</span><span class="p">,</span>
+    <span class="n">path_to_candidate_prompts</span><span class="o">=</span><span class="s2">&quot;assets/movielens_benchmark_prompts.csv&quot;</span><span class="p">,</span>
+    <span class="n">path_to_prompt_embeddings</span><span class="o">=</span><span class="s2">&quot;assets/movielens_prompt_embs.pt&quot;</span><span class="p">,</span>
+    <span class="n">path_to_finetuned_params</span><span class="o">=</span> <span class="s2">&quot;assets/movielens_distilbert_reward_simulator.pt&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The default datasets, candidate prompts, and finetuned parameters, PCA matrices are stored in <cite>off_prompts/dataset/assets/</cite> in the OfflinePrompts repository.
+Please also refer to this page: <a class="reference external" href="https://github.com/aiueola/offline-prompts/tree/main/off_prompts/dataset/assets/README.md">dataset/assets/README.md</a>, for the training process to obtain the default parameters.</p>
+<p>To customize the benchmark setting, it is also possible to use configurable submodules: <cite>ContextQueryLoader</cite>, <cite>CandidateActionsLoader</cite>, <cite>FrozenLLM</cite>, and <cite>RewardSimulator</cite>.
+Specifically, users can first create customized instances of these submodules and then pass them to <cite>SemiSyntheticDataset</cite> as exemplified in the following codes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.dataset</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ContextQueryLoader</span><span class="p">,</span>
+    <span class="n">CandidateActionsLoader</span><span class="p">,</span>
+    <span class="n">AutoFrozenLLM</span><span class="p">,</span>
+    <span class="n">TransformerRewardSimulator</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+
+<span class="c1"># load contexts and queries</span>
+<span class="n">context_query_loader</span> <span class="o">=</span> <span class="n">DefaultContextQueryLoader</span><span class="p">(</span>
+    <span class="n">path_to_user_embeddings</span><span class="o">=</span><span class="s2">&quot;assets/movielens_naive_cf_user_embeddings.pt&quot;</span><span class="p">,</span>
+    <span class="n">path_to_queries</span><span class="o">=</span><span class="s2">&quot;assets/movielens_query.csv&quot;</span><span class="p">,</span>
+    <span class="n">path_to_query_embeddings</span><span class="o">=</span><span class="s2">&quot;assets/movielens_query_embs.pt&quot;</span><span class="p">,</span>
+    <span class="n">path_to_interaction_data</span><span class="o">=</span><span class="s2">&quot;assets/movielens_preprocessed_data.csv&quot;</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># load candidate prompts</span>
+<span class="n">candidate_actions_loader</span> <span class="o">=</span> <span class="n">CandidateActionsLoader</span><span class="p">(</span>
+    <span class="n">n_actions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">path_to_candidate_prompts</span><span class="o">=</span><span class="s2">&quot;assets/movielens_benchmark_prompts.csv&quot;</span><span class="p">,</span>
+    <span class="n">path_to_prompt_embeddings</span><span class="o">=</span><span class="s2">&quot;assets/movielens_prompt_embs.pt&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># load frozen llm</span>
+<span class="n">frozen_llm_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="s2">&quot;mistralai/Mistral-7B-Instruct-v0.2&quot;</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_fast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">frozen_llm_model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="s2">&quot;mistralai/Mistral-7B-Instruct-v0.2&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">frozen_llm_tokenizer_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;add_special_tokens&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;truncation&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;max_length&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;return_tensors&quot;</span><span class="p">:</span> <span class="s2">&quot;pt&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">frozen_llm_prompt_formatter</span> <span class="o">=</span> <span class="n">MovielensPromptFormatter</span><span class="p">(</span>
+        <span class="n">tokenizer</span><span class="o">=</span><span class="n">frozen_llm_tokenizer</span><span class="p">,</span>
+        <span class="n">tokenizer_kwargs</span><span class="o">=</span><span class="n">frozen_llm_tokenizer_kwargs</span><span class="p">,</span>
+        <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;Broadly describe in a sentence the genres of the movie without including the name or any specifics of.*?\n\n&quot;</span>
+
+<span class="n">frozen_llm_tokenizer</span><span class="o">.</span><span class="n">add_special_tokens</span><span class="p">({</span><span class="s2">&quot;pad_token&quot;</span><span class="p">:</span> <span class="s2">&quot;[PAD]&quot;</span><span class="p">})</span>
+<span class="n">frozen_llm_model</span><span class="o">.</span><span class="n">resize_token_embeddings</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frozen_llm_tokenizer</span><span class="p">))</span>
+<span class="n">frozen_llm_model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">frozen_llm</span> <span class="o">=</span> <span class="n">AutoFrozenLLM</span><span class="p">(</span>
+    <span class="n">prompt_formatter</span><span class="o">=</span><span class="n">frozen_llm_prompt_formatter</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">frozen_llm_model</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">frozen_llm_tokenizer</span><span class="p">,</span>
+    <span class="n">tokenizer_kwargs</span><span class="o">=</span><span class="n">frozen_llm_tokenizer_kwargs</span><span class="p">,</span>
+    <span class="n">pattern</span><span class="o">=</span><span class="n">pattern</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># load reward simulator</span>
+<span class="n">reward_simulator_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="s2">&quot;distilbert-base-uncased&quot;</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_fast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">reward_simulator_base_model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="s2">&quot;distilbert-base-uncased&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">reward_simulator_tokenizer_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;add_special_tokens&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;truncation&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;max_length&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;return_tensors&quot;</span><span class="p">:</span> <span class="s2">&quot;pt&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">reward_simulator_tokenizer</span><span class="o">.</span><span class="n">add_special_tokens</span><span class="p">({</span><span class="s2">&quot;pad_token&quot;</span><span class="p">:</span> <span class="s2">&quot;[PAD]&quot;</span><span class="p">})</span>
+<span class="n">reward_simulator_base_model</span><span class="o">.</span><span class="n">resize_token_embeddings</span><span class="p">(</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">reward_simulator_tokenizer</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">reward_simulator_base_model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">reward_simulator</span> <span class="o">=</span> <span class="n">TransformerRewardSimulator</span><span class="p">(</span>
+    <span class="n">n_users</span><span class="o">=</span><span class="n">context_query_loader</span><span class="o">.</span><span class="n">n_users</span><span class="p">,</span>
+    <span class="n">n_items</span><span class="o">=</span><span class="n">context_query_loader</span><span class="o">.</span><span class="n">n_queries</span><span class="p">,</span>
+    <span class="n">base_model</span><span class="o">=</span><span class="n">reward_simulator_base_model</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">reward_simulator_tokenizer</span><span class="p">,</span>
+    <span class="n">tokenizer_kwargs</span><span class="o">=</span><span class="n">reward_simulator_tokenizer_kwargs</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">reward_simulator</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;assets/movielens_distilbert_reward_simulator.pt&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># create a custom environment with customized modules</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">SemiSyntheticDataset</span><span class="p">(</span>
+    <span class="n">context_query_loader</span><span class="o">=</span><span class="n">context_query_loader</span><span class="p">,</span>
+    <span class="n">candidate_actions_loader</span><span class="o">=</span><span class="n">candidate_actions_loader</span><span class="p">,</span>
+    <span class="n">frozen_llm</span><span class="o">=</span><span class="n">frozen_llm</span><span class="p">,</span>
+    <span class="n">reward_simulator</span><span class="o">=</span><span class="n">reward_simulator</span><span class="p">,</span>
+    <span class="n">frozen_llm_prompt_formatter</span><span class="o">=</span><span class="n">frozen_llm_prompt_formatter</span><span class="p">,</span>
+    <span class="n">reward_type</span><span class="o">=</span><span class="s2">&quot;continuous&quot;</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="logging-policy">
+<h3>Logging policy<a class="headerlink" href="#logging-policy" title="Permalink to this heading">#</a></h3>
+<p>After setting up the simulator, the next step is to define a logging policy to collect logged feedback.</p>
+<p>For this step, we first load the dimension reduction model to obtain low dimensional embeddings of <cite>query</cite>, <cite>prompt</cite>, and <cite>sentence</cite>.
+These encoders are used across various models, e.g., to define the logging policy and to define a reward preditor, etc.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.dataset</span> <span class="kn">import</span> <span class="n">TransformerEncoder</span>
+
+<span class="c1"># define and fit encoders</span>
+<span class="n">query_encoder</span> <span class="o">=</span> <span class="n">TransformerEncoder</span><span class="p">(</span>
+    <span class="n">prefix_prompt</span><span class="o">=</span><span class="s2">&quot;Broadly describe in a sentence the genres of the movie without including the name or any specifics of the movie.</span><span class="se">\n</span><span class="s2">Title: &quot;</span><span class="p">,</span>
+    <span class="n">postfix_prompt</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
+    <span class="n">prefix_tokens_max_length</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span>
+    <span class="n">postfix_tokens_max_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># max length of query</span>
+    <span class="n">dim_emb</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">prompt_encoder</span> <span class="o">=</span> <span class="n">TransformerEncoder</span><span class="p">(</span>
+    <span class="n">prefix_prompt</span><span class="o">=</span><span class="s2">&quot;Associate the word - &quot;</span><span class="p">,</span>
+    <span class="n">postfix_prompt</span><span class="o">=</span><span class="s2">&quot; - in the context of movie genres&quot;</span><span class="p">,</span>
+    <span class="n">prefix_tokens_max_length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">postfix_tokens_max_length</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># max length of prompt</span>
+    <span class="n">dim_emb</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">sentence_encoder</span> <span class="o">=</span> <span class="n">TransformerEncoder</span><span class="p">(</span>
+    <span class="n">prefix_prompt</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
+    <span class="n">postfix_prompt</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
+    <span class="n">prefix_tokens_max_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">postfix_tokens_max_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>  <span class="c1"># max length of prompt</span>
+    <span class="n">dim_emb</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># load fitted PCA matrix for dimension reduction</span>
+<span class="n">query_encoder</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;assets/movielens_query_pca_matrix.pt&quot;</span><span class="p">)</span>
+<span class="n">prompt_encoder</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;assets/movielens_prompt_pca_matrix.pt&quot;</span><span class="p">)</span>
+<span class="n">sentence_encoder</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;assets/movielens_sentence_pca_matrix.pt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, we train an online policy, which is used to define a softmax logging policy as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.opl</span> <span class="kn">import</span> <span class="n">PromptRewardLearner</span>
+<span class="kn">from</span> <span class="nn">off_prompts.policy</span> <span class="kn">import</span> <span class="n">PromptRewardPredictor</span>
+<span class="kn">from</span> <span class="nn">off_prompts.policy</span> <span class="kn">import</span> <span class="n">PromptPolicy</span>
+
+<span class="c1"># train policy online using the learner class</span>
+<span class="n">prompt_reward_predictor</span> <span class="o">=</span> <span class="n">PromptRewardPredictor</span><span class="p">(</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">prompt_encoder</span><span class="o">=</span><span class="n">prompt_encoder</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">base_policy</span> <span class="o">=</span> <span class="n">PromptPolicy</span><span class="p">(</span>
+    <span class="n">n_actions</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_actions</span><span class="p">,</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">policy_learner</span> <span class="o">=</span> <span class="n">PolicyLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">query_embeddings</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">query_embeddings</span><span class="p">,</span>
+    <span class="n">prompt_embeddings</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">prompt_embeddings</span><span class="p">,</span>
+    <span class="n">prompt_reward_predictor</span><span class="o">=</span><span class="n">prompt_reward_predictor</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">sentence_encoder</span><span class="o">=</span><span class="n">sentence_encoder</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">online_policy</span> <span class="o">=</span> <span class="n">policy_learner</span><span class="o">.</span><span class="n">online_policy_gradient</span><span class="p">(</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;logs/online=policy.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we also collect the logged data using the above softmax logging policy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.policy</span> <span class="kn">import</span> <span class="n">SoftmaxPolicy</span>
+
+<span class="c1"># softmax logging policy on top of the online policy</span>
+<span class="n">logging_policy</span> <span class="o">=</span> <span class="n">SoftmaxPolicy</span><span class="p">(</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">base_model</span><span class="o">=</span><span class="n">base_policy</span><span class="p">,</span>
+    <span class="n">beta</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># collect logged dataset</span>
+<span class="n">logged_feedback</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">sample_dataset</span><span class="p">(</span>
+    <span class="n">policy</span><span class="o">=</span><span class="n">logging_policy</span><span class="p">,</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The outputs, including <cite>logged_feedback</cite> and <cite>meta_data</cite>, contain the following keys.</p>
+<ul class="simple">
+<li><p><cite>logged_feedback`</cite>:
+* { <cite>user_id</cite>, <cite>item_id</cite>, <cite>context</cite>, <cite>query</cite>, <cite>action</cite>, <cite>action_choice_probability`*, `sentence</cite>, <cite>expected_reward`*, `reward</cite> }</p></li>
+<li><p><cite>meta_data`*:
+* { `size</cite>, <cite>reward_type</cite>, <cite>reward_std</cite>, <cite>action_list`</cite> }</p></li>
+</ul>
+<p>Note that the keys with an asterisk (*) are optional outputs, and action is returned by index.
+<cite>reward_type</cite> indicates whether the reward is binary or continuous, and <cite>action_list</cite> contains the list of candidate prompts, corresponding to each action index.</p>
+</section>
+<section id="regressions">
+<h3>Regressions<a class="headerlink" href="#regressions" title="Permalink to this heading">#</a></h3>
+<p>After obtaining the logged data, we regress the reward as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.opl</span> <span class="kn">import</span>  <span class="n">PromptRewardLearner</span>
+<span class="kn">from</span> <span class="nn">off_prompts.policy</span> <span class="kn">import</span>  <span class="n">PromptRewardPredictor</span>
+
+<span class="c1"># train regression models</span>
+<span class="n">prompt_reward_predictor</span> <span class="o">=</span> <span class="n">PromptRewardPredictor</span><span class="p">(</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">prompt_encoder</span><span class="o">=</span><span class="n">prompt_encoder</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">prompt_reward_learner</span> <span class="o">=</span> <span class="n">PromptRewardLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">prompt_reward_predictor</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">query_embeddings</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">query_embeddings</span><span class="p">,</span>
+    <span class="n">prompt_embeddings</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">prompt_embeddings</span><span class="p">,</span>
+    <span class="n">frozen_llm</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">frozen_llm</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">prompt_encoder</span><span class="o">=</span><span class="n">prompt_encoder</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="n">lr</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">prompt_reward_predictor</span> <span class="o">=</span> <span class="n">prompt_reward_learner</span><span class="o">.</span><span class="n">offline_training</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;logs/reward_predictor.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><cite>prompt_reward_predictor</cite> is used by regression-based, hybrid PG, and POTEC.</p>
+<p>Similarly, we train a logging marginal density model as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.opl</span> <span class="kn">import</span> <span class="n">MarginalDensityLearner</span>
+<span class="kn">from</span> <span class="nn">off_prompts.policy</span> <span class="kn">import</span> <span class="n">KernelMarginalDensityEstimator</span>
+<span class="kn">from</span> <span class="nn">off_prompts.utils</span> <span class="kn">import</span> <span class="n">gaussian_kernel</span>
+
+<span class="c1"># learning a marginal density model</span>
+<span class="n">kernel_marginal_estimator</span> <span class="o">=</span> <span class="n">KernelMarginalDensityEstimator</span><span class="p">(</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">frozen_llm</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">frozen_llm</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">sentence_encoder</span><span class="o">=</span><span class="n">sentence_encoder</span><span class="p">,</span>
+    <span class="n">kernel_function</span><span class="o">=</span><span class="n">gaussian</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+    <span class="n">kernel_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tau&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">marginal_density_learner</span> <span class="o">=</span> <span class="n">MarginalDensityLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">kernel_marginal_estimator</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">query_embeddings</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">query_embeddings</span><span class="p">,</span>
+    <span class="n">prompt_embeddings</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">prompt_embeddings</span><span class="p">,</span>
+    <span class="n">frozen_llm</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">frozen_llm</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="n">lr</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">kernel_marginal_estimator</span> <span class="o">=</span> <span class="n">marginal_density_learner</span><span class="o">.</span><span class="n">simulation_training</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;logs/logging_marginal_density.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><cite>marginal_density_model</cite> is used by DSO (our proposal).</p>
+</section>
+<section id="baseline-policy-gradients">
+<h3>Baseline policy gradients<a class="headerlink" href="#baseline-policy-gradients" title="Permalink to this heading">#</a></h3>
+<p>The following code shows the example codes to run naive PGs, including regression-based, IS-based, and hybrid ones (Please refer to <a class="reference internal" href="implementations.html"><span class="doc">Problem Formulation and Implementations</span></a> for the details about baseline methods).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.opl</span> <span class="kn">import</span> <span class="n">PolicyLearner</span>
+<span class="kn">from</span> <span class="nn">off_prompts.policy</span> <span class="kn">import</span> <span class="n">PromptPolicy</span>
+
+<span class="n">policy</span> <span class="o">=</span> <span class="n">PromptPolicy</span><span class="p">(</span>
+    <span class="n">n_actions</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_actions</span><span class="p">,</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">policy_learner</span> <span class="o">=</span> <span class="n">PolicyLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">prompt_reward_predictor</span><span class="o">=</span><span class="n">prompt_reward_predictor</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">sentence_encoder</span><span class="o">=</span><span class="n">sentence_encoder</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">5e-4</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># regression-based</span>
+<span class="n">policy</span> <span class="o">=</span> <span class="n">policy_learner</span><span class="o">.</span><span class="n">model_based_policy_gradient</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;logs/opl_regression.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># IS-based</span>
+<span class="n">policy</span> <span class="o">=</span> <span class="n">policy_learner</span><span class="o">.</span><span class="n">importance_sampling_based_policy_gradient</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;logs/opl_vanilla_is.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># hybrid</span>
+<span class="n">policy</span> <span class="o">=</span> <span class="n">policy_learner</span><span class="o">.</span><span class="n">hybrid_policy_gradient</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;logs/opl_hybrid.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The procedure consists of only 3 steps: (1) define a policy, (2) then setup a learner class (<cite>PolicyLearner</cite>), and (3) call one of the policy gradient methods.
+As seen in the above example code, all policy gradient methods can be called in similar formats. Researchers can also implement their own policy gradient methods in a similar way.</p>
+</section>
+<section id="direct-sentence-off-policy-gradient-dso">
+<h3>Direct Sentence Off-Policy Gradient (DSO)<a class="headerlink" href="#direct-sentence-off-policy-gradient-dso" title="Permalink to this heading">#</a></h3>
+<p>DSO is our proposal (please also refer to <a class="reference internal" href="dso.html"><span class="doc">DSO for Data-Efficient OPL</span></a> for details), which can also be run in a very similar way as the naive policy gradient.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.opl</span> <span class="kn">import</span> <span class="n">KernelPolicyLearner</span>
+
+<span class="n">policy_learner</span> <span class="o">=</span> <span class="n">KernelPolicyLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">query_embeddings</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">query_embeddings</span><span class="p">,</span>
+    <span class="n">prompt_embeddings</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">prompt_embeddings</span><span class="p">,</span>
+    <span class="n">kernel_marginal_estimator</span><span class="o">=</span><span class="n">kernel_marginal_estimator</span><span class="p">,</span>
+    <span class="n">frozen_llm</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">frozen_llm</span><span class="p">,</span>
+    <span class="n">query_encoder</span><span class="o">=</span><span class="n">query_encoder</span><span class="p">,</span>
+    <span class="n">sentence_encoder</span><span class="o">=</span><span class="n">sentence_encoder</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">5e-4</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="n">env</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">policy</span> <span class="o">=</span> <span class="n">policy_learner</span><span class="o">.</span><span class="n">importance_sampling_based_policy_gradient</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;logs/opl_kernel_is.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The key difference between the use of DSO and other methods is that DSO uses <cite>KernelPolicyLearner</cite> and <cite>logging_marginal_density_model</cite>.
+Only the IS-based policy gradient is implemented for DSO.</p>
+</section>
+<section id="online-performance-evaluation">
+<h3>(Online) performance evaluation<a class="headerlink" href="#online-performance-evaluation" title="Permalink to this heading">#</a></h3>
+<p>Finally, after learning a policy, we test its performance through online interaction.
+This can be done in a single line of code, as shown as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">policy_value</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">calc_expected_policy_value</span><span class="p">(</span>
+    <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+    <span class="n">n_samples_to_approximate</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For the use of custom dataset, please also refer to <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>.</p>
+</section>
+</section>
+<section id="synthetic-experiment">
+<h2>Synthetic experiment<a class="headerlink" href="#synthetic-experiment" title="Permalink to this heading">#</a></h2>
+<p>Next, we also provide the example of running synthetic simulation with vectorial embeddings.</p>
+<section id="setting-up-a-synthetic-simulation">
+<h3>Setting up a synthetic simulation<a class="headerlink" href="#setting-up-a-synthetic-simulation" title="Permalink to this heading">#</a></h3>
+<p>To set up the default environment, simply call the following codes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts_syn.dataset</span> <span class="kn">import</span> <span class="n">SemiSyntheticDataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">SemiSyntheticDataset</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To customize the environment, please call the following instead.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts_syn.dataset</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ContextQueryGenerator</span><span class="p">,</span>
+    <span class="n">CandidateActionsGenerator</span><span class="p">,</span>
+    <span class="n">TrigonometricAuxiliaryOutputGenerator</span><span class="p">,</span>
+    <span class="n">RewardSimulator</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">context_query_generator</span> <span class="o">=</span> <span class="n">ContextQueryGenerator</span><span class="p">(</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dim_query</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">candidate_action_generator</span> <span class="o">=</span> <span class="n">CandidateActionsGenerator</span><span class="p">(</span>
+    <span class="n">n_actions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">dim_action_embedding</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">auxiliary_output_generator</span> <span class="o">=</span> <span class="n">TrigonometricAuxiliaryOutputGenerator</span><span class="p">(</span>
+    <span class="n">dim_query</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dim_action_embedding</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dim_auxiliary_output</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">noise_level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">reward_simulator</span> <span class="o">=</span> <span class="n">RewardSimulator</span><span class="p">(</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dim_query</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dim_auxiliary_output</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">SemiSyntheticDataset</span><span class="p">(</span>
+    <span class="n">n_actions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dim_query</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dim_action_embedding</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dim_auxiliary_output</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">context_query_generator</span><span class="o">=</span><span class="n">context_query_generator</span><span class="p">,</span>
+    <span class="n">candidate_action_generator</span><span class="o">=</span><span class="n">candidate_action_generator</span><span class="p">,</span>
+    <span class="n">auxiliary_output_generator</span><span class="o">=</span><span class="n">auxiliary_output_generator</span><span class="p">,</span>
+    <span class="n">reward_simulator</span><span class="o">=</span><span class="n">reward_simulator</span><span class="p">,</span>
+    <span class="n">reward_type</span><span class="o">=</span><span class="s2">&quot;continuous&quot;</span><span class="p">,</span>
+    <span class="n">reward_std</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Logging policy<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>We define the (value-based) logging policy and collect the logged data as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">off_prompts_syn.policy</span> <span class="kn">import</span> <span class="n">UniformRandomPolicy</span><span class="p">,</span> <span class="n">SoftmaxPolicy</span>
+<span class="kn">from</span> <span class="nn">off_prompts_syn.policy</span> <span class="kn">import</span> <span class="n">ActionRewardLearner</span>
+<span class="kn">from</span> <span class="nn">off_prompts_syn.policy</span> <span class="kn">import</span> <span class="n">NeuralActionRewardPredictor</span> <span class="k">as</span> <span class="n">ActionRewardPredictor</span>
+
+<span class="c1"># fit regression model for logging policy</span>
+<span class="n">dataset_</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="n">dataset_</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">uniform_policy</span> <span class="o">=</span> <span class="n">UniformRandomPolicy</span><span class="p">(</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">logged_feedback_for_pretraining</span> <span class="o">=</span> <span class="n">dataset_</span><span class="o">.</span><span class="n">sample_dataset</span><span class="p">(</span>
+    <span class="n">policy</span><span class="o">=</span><span class="n">uniform_policy</span><span class="p">,</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">action_reward_predictor</span> <span class="o">=</span> <span class="n">ActionRewardPredictor</span><span class="p">(</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">dim_query</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">action_reward_learner</span> <span class="o">=</span> <span class="n">ActionRewardLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">action_reward_predictor</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">auxiliary_output_generator</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">logging_action_reward_predictor</span> <span class="o">=</span> <span class="n">action_reward_learner</span><span class="o">.</span><span class="n">offline_training</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback_for_pretraining</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># define logging policy</span>
+<span class="n">logging_policy</span> <span class="o">=</span> <span class="n">SoftmaxPolicy</span><span class="p">(</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">base_model</span><span class="o">=</span><span class="n">logging_action_reward_predictor</span><span class="p">,</span>
+    <span class="n">beta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># collect logged data</span>
+<span class="n">logged_feedback</span> <span class="o">=</span> <span class="n">generate_logged_data</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">logging_policy</span><span class="o">=</span><span class="n">logging_policy</span><span class="p">,</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Regressions<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>After obtaining the logged data, we regress the reward and logging marginal density as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts_syn.opl</span> <span class="kn">import</span> <span class="n">MarginalDensityLearner</span>
+<span class="kn">from</span> <span class="nn">off_prompts_syn.policy</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NeuralMarginalDensityEstimator</span> <span class="k">as</span> <span class="n">KernelMarginalEstimator</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">off_prompts_syn.utils</span> <span class="kn">import</span> <span class="n">gaussian_kernel</span>
+
+<span class="n">action_reward_predictor</span> <span class="o">=</span> <span class="n">ActionRewardPredictor</span><span class="p">(</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">dim_query</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">action_reward_learner</span> <span class="o">=</span> <span class="n">ActionRewardLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">action_reward_predictor</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">auxiliary_output_generator</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">action_reward_predictor</span> <span class="o">=</span> <span class="n">action_reward_learner</span><span class="o">.</span><span class="n">offline_training</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">is_pessimistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">kernel_marginal_estimator</span> <span class="o">=</span> <span class="n">KernelMarginalEstimator</span><span class="p">(</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">auxiliary_output_generator</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="p">,</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">dim_query</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span>
+    <span class="n">kernel_function</span><span class="o">=</span><span class="n">gaussian_kernel</span><span class="p">,</span>
+    <span class="n">kernel_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tau&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
+    <span class="n">emb_noise</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">marginal_density_learner</span> <span class="o">=</span> <span class="n">MarginalDensityLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">kernel_marginal_estimator</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">auxiliary_output_generator</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">auxiliary_output_generator</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">kernel_marginal_estimator</span> <span class="o">=</span> <span class="n">marginal_density_learner</span><span class="o">.</span><span class="n">simulation_training</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>Baseline policy gradients<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>For running the baseline policy gradient methods, please call the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">policy</span> <span class="o">=</span> <span class="n">ActionPolicy</span><span class="p">(</span>
+    <span class="n">n_actions</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_actions</span><span class="p">,</span>
+    <span class="n">dim_context</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_context</span><span class="p">,</span>
+    <span class="n">dim_query</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">dim_query</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">policy_learner</span> <span class="o">=</span> <span class="n">PolicyLearner</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+    <span class="n">action_list</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">action_list</span><span class="p">,</span>
+    <span class="n">action_reward_predictor</span><span class="o">=</span><span class="n">action_reward_predictor</span><span class="p">,</span>
+    <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">5e-4</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># regression-based</span>
+<span class="n">policy</span><span class="p">,</span> <span class="n">learning_process</span> <span class="o">=</span> <span class="n">policy_learner</span><span class="o">.</span><span class="n">model_based_policy_gradient</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">return_training_logs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;xxx.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># IS-based</span>
+<span class="n">policy</span><span class="p">,</span> <span class="n">learning_process</span> <span class="o">=</span> <span class="n">policy_learner</span><span class="o">.</span><span class="n">importance_sampling_based_policy_gradient</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">return_training_logs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;xxx.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># DR-based</span>
+<span class="n">policy</span><span class="p">,</span> <span class="n">learning_process</span> <span class="o">=</span> <span class="n">policy_learner</span><span class="o">.</span><span class="n">hybrid_policy_gradient</span><span class="p">(</span>
+    <span class="n">logged_feedback</span><span class="o">=</span><span class="n">logged_feedback</span><span class="p">,</span>
+    <span class="n">return_training_logs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
+    <span class="n">n_steps_per_epoch</span><span class="o">=</span><span class="n">n_steps_per_epoch</span><span class="p">,</span>
+    <span class="n">n_epochs_per_log</span><span class="o">=</span><span class="n">n_epochs_per_log</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;xxx.pt&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="white-space-20px"></div><div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-row sd-col-2 sd-col-xs-2 sd-col-sm-2 sd-col-md-2 sd-col-lg-2 sd-m-0 sd-p-0 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-none sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">&lt;&lt;&lt; Prev
+<strong>Installation!</strong></p>
+</div>
+<span class="sd-stretched-link"></span></div>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 sd-m-0 sd-p-0 docutils">
+</div>
+<div class="sd-col sd-d-flex-row sd-col-2 sd-col-xs-2 sd-col-sm-2 sd-col-md-2 sd-col-lg-2 sd-m-0 sd-p-0 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-none sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Next &gt;&gt;&gt;
+<strong>Why OfflinePrompts</strong></p>
+</div>
+<a class="sd-stretched-link reference internal" href="distinctive_features.html"><span class="doc"></span></a></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2025, Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

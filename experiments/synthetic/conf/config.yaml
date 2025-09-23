@@ -1,0 +1,10 @@
+defaults:
+  - setting: default
+  - evaluation: default
+
+hydra: 
+  run: 
+    dir: ./
+  sweep:
+    dir: ./
+    subdir: ./

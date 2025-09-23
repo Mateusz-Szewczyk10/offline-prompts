@@ -1,0 +1,9 @@
+- sentence_embedding.path_to_user_embeddings=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_naive_cf_user_embeddings.pt
+- sentence_embedding.path_to_queries=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_query.csv
+- sentence_embedding.path_to_query_embeddings=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_query_embs.pt
+- sentence_embedding.path_to_candidate_prompts=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_benchmark_prompts.csv
+- sentence_embedding.path_to_prompt_embeddings=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_prompt_embs.pt
+- sentence_embedding.path_to_query_encoder=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_query_pca_matrix.pt
+- sentence_embedding.path_to_prompt_encoder=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_prompt_pca_matrix.pt
+- sentence_embedding.path_to_sentence_encoder=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_sentence_pca_matrix.pt
+- sentence_embedding.path_to_finetuned_params=/share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_distilbert_reward_simulator.pt

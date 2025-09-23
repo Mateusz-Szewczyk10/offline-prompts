@@ -1,0 +1,1052 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../../../_static/images/favicon.png" rel="icon" type="image/png">
+    <title>off_prompts.dataset.encoder &#8212; OfflinePrompts</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../../../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="off_prompts.dataset.encoder.BatchDataset" href="off_prompts.dataset.encoder.BatchDataset.html" />
+    <link rel="prev" title="off_prompts.dataset.function.DefaultContextQueryLoader" href="off_prompts.dataset.function.DefaultContextQueryLoader.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../quickstart.html">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../../api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../quickstart.html">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../../api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.base.html">off_prompts.dataset.base</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseCandidateActionsLoader.html">off_prompts.dataset.base.BaseCandidateActionsLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseContextQueryLoader.html">off_prompts.dataset.base.BaseContextQueryLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseEncoder.html">off_prompts.dataset.base.BaseEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseFrozenLLM.html">off_prompts.dataset.base.BaseFrozenLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BasePromptFormatter.html">off_prompts.dataset.base.BasePromptFormatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.base.BaseRewardSimulator.html">off_prompts.dataset.base.BaseRewardSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.benchmark.html">off_prompts.dataset.benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.benchmark.SemiSyntheticDataset.html">off_prompts.dataset.benchmark.SemiSyntheticDataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.frozen_llm.html">off_prompts.dataset.frozen_llm</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.frozen_llm.AutoFrozenLLM.html">off_prompts.dataset.frozen_llm.AutoFrozenLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.reward_simulator.html">off_prompts.dataset.reward_simulator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.reward_simulator.CollaborativeFilteringRewardSimulator.html">off_prompts.dataset.reward_simulator.CollaborativeFilteringRewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.reward_simulator.PromptCossimRewardSimulator.html">off_prompts.dataset.reward_simulator.PromptCossimRewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.reward_simulator.SentenceCossimRewardSimulator.html">off_prompts.dataset.reward_simulator.SentenceCossimRewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.reward_simulator.TransformerRewardSimulator.html">off_prompts.dataset.reward_simulator.TransformerRewardSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.function.html">off_prompts.dataset.function</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.function.DefaultCandidateActionsLoader.html">off_prompts.dataset.function.DefaultCandidateActionsLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.function.DefaultContextQueryLoader.html">off_prompts.dataset.function.DefaultContextQueryLoader</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">off_prompts.dataset.encoder</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.encoder.BatchDataset.html">off_prompts.dataset.encoder.BatchDataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html">off_prompts.dataset.encoder.NNSentenceEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html">off_prompts.dataset.encoder.TransformerEncoder</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.prompt_formatter.html">off_prompts.dataset.prompt_formatter</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.prompt_formatter.MovielensPromptFormatter.html">off_prompts.dataset.prompt_formatter.MovielensPromptFormatter</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.assets.reward_finetuner.html">off_prompts.dataset.assets.reward_finetuner</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.assets.reward_finetuner.MovielensDataset.html">off_prompts.dataset.assets.reward_finetuner.MovielensDataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.assets.reward_finetuner.RewardFinetuner.html">off_prompts.dataset.assets.reward_finetuner.RewardFinetuner</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts.dataset.assets.sentence_embedding_learner.html">off_prompts.dataset.assets.sentence_embedding_learner</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts.dataset.assets.sentence_embedding_learner.SentenceEmbeddingLearner.html">off_prompts.dataset.assets.sentence_embedding_learner.SentenceEmbeddingLearner</a></li>
+</ul>
+</li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts.policy.base.html">off_prompts.policy.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts.policy.model.html">off_prompts.policy.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts.policy.policy.html">off_prompts.policy.policy</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.policy_learner.html">off_prompts.opl.policy_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.policy_evaluator.html">off_prompts.opl.policy_evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.reward_learner.html">off_prompts.opl.reward_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.marginal_learner.html">off_prompts.opl.marginal_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.behavior_cloning.html">off_prompts.opl.behavior_cloning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts.opl.dataset.html">off_prompts.opl.dataset</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/off_prompts.utils.html">off_prompts.utils</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.check_logged_feedback.html">off_prompts.utils.check_logged_feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.check_tensor.html">off_prompts.utils.check_tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.defaultdict_to_dict.html">off_prompts.utils.defaultdict_to_dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.gaussian_kernel.html">off_prompts.utils.gaussian_kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.to_device.html">off_prompts.utils.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.tokenize.html">off_prompts.utils.tokenize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.torch_seed.html">off_prompts.utils.torch_seed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.uniform_kernel.html">off_prompts.utils.uniform_kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.FrozenLLMDataset.html">off_prompts.utils.FrozenLLMDataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts.utils.RewardSimulatorDataset.html">off_prompts.utils.RewardSimulatorDataset</a></li>
+</ul>
+</li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts_syn.dataset.synthetic.html">off_prompts_syn.dataset.synthetic</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.synthetic.SyntheticDataset.html">off_prompts_syn.dataset.synthetic.SyntheticDataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="off_prompts_syn.dataset.function.html">off_prompts_syn.dataset.function</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.AuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.AuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.CandidateActionsGenerator.html">off_prompts_syn.dataset.function.CandidateActionsGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedExponentialAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedExponentialAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedPowerAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedPowerAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedRationalAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedRationalAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ConfoundedTrigonometricAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ConfoundedTrigonometricAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ContextQueryGenerator.html">off_prompts_syn.dataset.function.ContextQueryGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.ExponentialAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.ExponentialAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.MixtureOfGaussianCandidateActionsGenerator.html">off_prompts_syn.dataset.function.MixtureOfGaussianCandidateActionsGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.PowerAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.PowerAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.RationalAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.RationalAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.RewardSimulator.html">off_prompts_syn.dataset.function.RewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.SigmoidAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.SigmoidAuxiliaryOutputGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.SparseRewardSimulator.html">off_prompts_syn.dataset.function.SparseRewardSimulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="off_prompts_syn.dataset.function.TrigonometricAuxiliaryOutputGenerator.html">off_prompts_syn.dataset.function.TrigonometricAuxiliaryOutputGenerator</a></li>
+</ul>
+</li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts_syn.policy.base.html">off_prompts_syn.policy.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts_syn.policy.model.html">off_prompts_syn.policy.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy/off_prompts_syn.policy.policy.html">off_prompts_syn.policy.policy</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts_syn.opl.policy_learner.html">off_prompts_syn.opl.policy_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts_syn.opl.reward_learner.html">off_prompts_syn.opl.reward_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts_syn.opl.marginal_learner.html">off_prompts_syn.opl.marginal_learner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opl/off_prompts_syn.opl.behavior_cloning.html">off_prompts_syn.opl.behavior_cloning</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/off_prompts_syn.utils.html">off_prompts_syn.utils</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.check_logged_feedback.html">off_prompts_syn.utils.check_logged_feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.check_tensor.html">off_prompts_syn.utils.check_tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.defaultdict_to_dict.html">off_prompts_syn.utils.defaultdict_to_dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.gaussian_kernel.html">off_prompts_syn.utils.gaussian_kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.torch_seed.html">off_prompts_syn.utils.torch_seed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/off_prompts_syn.utils.uniform_kernel.html">off_prompts_syn.utils.uniform_kernel</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">OfflinePrompts</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../api.html" class="nav-link">OfflinePrompts Package Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">off_prompts.dataset.encoder</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-off_prompts.dataset.encoder">
+<span id="off-prompts-dataset-encoder"></span><h1>off_prompts.dataset.encoder<a class="headerlink" href="#module-off_prompts.dataset.encoder" title="Permalink to this heading">#</a></h1>
+<p>Implementations of the encoders of texts, e.g, sentence, query, and prompt.</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.BatchDataset.html#off_prompts.dataset.encoder.BatchDataset" title="off_prompts.dataset.encoder.BatchDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatchDataset</span></code></a></p></td>
+<td><p>Dataset class used in the encoder models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder" title="off_prompts.dataset.encoder.NNSentenceEncoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NNSentenceEncoder</span></code></a></p></td>
+<td><p>NN-based sentence encoder that is used on top of the transformer encoder.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html#off_prompts.dataset.encoder.TransformerEncoder" title="off_prompts.dataset.encoder.TransformerEncoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransformerEncoder</span></code></a></p></td>
+<td><p>Transformer based encoder.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.BatchDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">off_prompts.dataset.encoder.</span></span><span class="sig-name descname"><span class="pre">BatchDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#BatchDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.BatchDataset" title="Permalink to this definition">#</a></dt>
+<dd><p>Dataset class used in the encoder models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Textual data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.TransformerEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">off_prompts.dataset.encoder.</span></span><span class="sig-name descname"><span class="pre">TransformerEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_causal_lm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix_prompt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postfix_prompt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix_tokens_max_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postfix_tokens_max_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_emb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#TransformerEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.TransformerEncoder" title="Permalink to this definition">#</a></dt>
+<dd><p>Transformer based encoder.</p>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">off_prompts.policy.BaseEncoder</span></code></p>
+<p>Imported as: <code class="xref py py-class docutils literal notranslate"><span class="pre">off_prompts.policy.TransformerEncoder</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_model</strong> (<em>PreTrainedModel</em><em> or </em><em>Pretrained</em><em>, </em><em>default=None</em>) – Base transformer model. When <cite>None</cite> is given, “mistralai/Mistral-7B-Instruct-v0.2” will be used.</p></li>
+<li><p><strong>tokenizer</strong> (<em>PreTrainedTokenizer</em><em> or </em><em>PreTrainedTokenizerFast</em><em>, </em><em>default=None</em>) – Tokenizer. When <cite>None</cite> is given, “mistralai/Mistral-7B-Instruct-v0.2” will be used.</p></li>
+<li><p><strong>tokenizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em> of </em><em>params</em><em>, </em><em>default=None</em>) – Dictionary containing args of tokenizer. (e.g., <cite>max_length</cite>)</p></li>
+<li><p><strong>is_causal_lm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether the model is for causal LM.</p></li>
+<li><p><strong>prefix_prompt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot; &quot;</em>) – System prompt to attach to the given movie title/prompt. The format is “{prefix_prompt}{input_prompt}{postfix_prompt}”.</p></li>
+<li><p><strong>postfix_prompt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot; &quot;</em>) – System prompt to attach to the given movie title/prompt. The format is “{prefix_prompt}{input_prompt}{postfix_prompt}”.</p></li>
+<li><p><strong>prefix_tokens_max_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=1</em><em> (</em><em>&gt; 0</em><em>)</em>) – Length of the prefix prompt. (Longer prompts will be cutted off.)</p></li>
+<li><p><strong>postfix_tokens_max_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=1</em><em> (</em><em>&gt; 0</em><em>)</em>) – Length of the postfix prompt. (Longer prompts will be cutted off.)</p></li>
+<li><p><strong>max_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=20</em><em> (</em><em>&gt; 0</em><em>)</em>) – Max length of the (entire) input tokens. Required only when tokenizer_kwargs is not given.</p></li>
+<li><p><strong>dim_emb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=10</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of embeddings.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html#off_prompts.dataset.encoder.TransformerEncoder.encode" title="off_prompts.dataset.encoder.TransformerEncoder.encode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">encode</span></code></a>(inputs[, context, query, batch_size])</p></td>
+<td><p>Encode input sentence to a low-dimensional vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html#off_prompts.dataset.encoder.TransformerEncoder.fit_pca" title="off_prompts.dataset.encoder.TransformerEncoder.fit_pca"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_pca</span></code></a>(inputs[, batch_size])</p></td>
+<td><p>Fit PCA to map high-dimensional features to a low-dimensional vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html#off_prompts.dataset.encoder.TransformerEncoder.format_tokens" title="off_prompts.dataset.encoder.TransformerEncoder.format_tokens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_tokens</span></code></a>(input_tokens)</p></td>
+<td><p>Format prompt tokens.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html#off_prompts.dataset.encoder.TransformerEncoder.load" title="off_prompts.dataset.encoder.TransformerEncoder.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(path)</p></td>
+<td><p>Load PCA matrix to retrieve low-dimensional embeddiings.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html#off_prompts.dataset.encoder.TransformerEncoder.save" title="off_prompts.dataset.encoder.TransformerEncoder.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(path)</p></td>
+<td><p>Save PCA matrix used for retrieving low-dimensional embeddiings.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.TransformerEncoder.fit_pca">
+<span class="sig-name descname"><span class="pre">fit_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#TransformerEncoder.fit_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.TransformerEncoder.fit_pca" title="Permalink to this definition">#</a></dt>
+<dd><p>Fit PCA to map high-dimensional features to a low-dimensional vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Input texts, such as sentence, query, and prompt.</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=128</em><em> (</em><em>&gt; 0</em><em>)</em>) – Batch size.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.TransformerEncoder.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#TransformerEncoder.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.TransformerEncoder.encode" title="Permalink to this definition">#</a></dt>
+<dd><p>Encode input sentence to a low-dimensional vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Input texts, such as sentence, query, and prompt.</p></li>
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>query</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em> or </em><em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_sentence</em><em>)</em><em>, </em><em>default=None</em>) – For API consistency.</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=128</em><em> (</em><em>&gt; 0</em><em>)</em>) – Batch size.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>embeddings</strong> – Low dimensional embeddings of the input texts after applying PCA.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor, shape (n_samples, dim_emb)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.TransformerEncoder.format_tokens">
+<span class="sig-name descname"><span class="pre">format_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#TransformerEncoder.format_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.TransformerEncoder.format_tokens" title="Permalink to this definition">#</a></dt>
+<dd><p>Format prompt tokens.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_tokens</strong> (<em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Tokens of the query.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>concat_tokens</strong> – Tokens of the whole prompts (which is combined with the system prompt).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tokens, shape (n_samples, )</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.NNSentenceEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">off_prompts.dataset.encoder.</span></span><span class="sig-name descname"><span class="pre">NNSentenceEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_transformer_encoder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_context_dependent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_emb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#NNSentenceEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.NNSentenceEncoder" title="Permalink to this definition">#</a></dt>
+<dd><p>NN-based sentence encoder that is used on top of the transformer encoder.</p>
+<p>Bases: :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>off_prompts.dataset.BaseEncoder</p>
+<p>Imported as: :class:<a href="#id3"><span class="problematic" id="id4">`</span></a>off_prompts.dataset.NNSentenceEncoder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_transformer_encoder</strong> (<a class="reference internal" href="off_prompts.dataset.encoder.TransformerEncoder.html#off_prompts.dataset.encoder.TransformerEncoder" title="off_prompts.dataset.encoder.TransformerEncoder"><em>TransformerEncoder</em></a>) – Transformer encoder model (of sentence).</p></li>
+<li><p><strong>query_encoder</strong> (<a class="reference internal" href="off_prompts.dataset.base.BaseEncoder.html#off_prompts.dataset.base.BaseEncoder" title="off_prompts.dataset.base.BaseEncoder"><em>BaseEncoder</em></a>) – Encoder of the queries.</p></li>
+<li><p><strong>is_context_dependent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to use context dependent encoder.</p></li>
+<li><p><strong>dim_context</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=20</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of the context.</p></li>
+<li><p><strong>dim_emb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=20</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimention of the sentence embeddings.</p></li>
+<li><p><strong>hidden_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=100</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of the hidden layer of MLP.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device of the model.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None.</em>) – Random state.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.add_module" title="off_prompts.dataset.encoder.NNSentenceEncoder.add_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_module</span></code></a>(name, module)</p></td>
+<td><p>Adds a child module to the current module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.apply" title="off_prompts.dataset.encoder.NNSentenceEncoder.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(fn)</p></td>
+<td><p>Applies <code class="docutils literal notranslate"><span class="pre">fn</span></code> recursively to every submodule (as returned by <code class="docutils literal notranslate"><span class="pre">.children()</span></code>) as well as self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.bfloat16" title="off_prompts.dataset.encoder.NNSentenceEncoder.bfloat16"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfloat16</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.buffers" title="off_prompts.dataset.encoder.NNSentenceEncoder.buffers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code></a>([recurse])</p></td>
+<td><p>Returns an iterator over module buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.children" title="off_prompts.dataset.encoder.NNSentenceEncoder.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>()</p></td>
+<td><p>Returns an iterator over immediate children modules.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.compile" title="off_prompts.dataset.encoder.NNSentenceEncoder.compile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Compile this Module's forward using <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.compile()</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.cpu" title="off_prompts.dataset.encoder.NNSentenceEncoder.cpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpu</span></code></a>()</p></td>
+<td><p>Moves all model parameters and buffers to the CPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.cuda" title="off_prompts.dataset.encoder.NNSentenceEncoder.cuda"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cuda</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the GPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.double" title="off_prompts.dataset.encoder.NNSentenceEncoder.double"><code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">double</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.encode" title="off_prompts.dataset.encoder.NNSentenceEncoder.encode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">encode</span></code></a>(inputs[, context, query, batch_size, ...])</p></td>
+<td><p>Encode input sentence to a low-dimensional vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.eval" title="off_prompts.dataset.encoder.NNSentenceEncoder.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>()</p></td>
+<td><p>Sets the module in evaluation mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.extra_repr" title="off_prompts.dataset.encoder.NNSentenceEncoder.extra_repr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extra_repr</span></code></a>()</p></td>
+<td><p>Set the extra representation of the module</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.float" title="off_prompts.dataset.encoder.NNSentenceEncoder.float"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">float</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.get_buffer" title="off_prompts.dataset.encoder.NNSentenceEncoder.get_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_buffer</span></code></a>(target)</p></td>
+<td><p>Returns the buffer given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.get_extra_state" title="off_prompts.dataset.encoder.NNSentenceEncoder.get_extra_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_extra_state</span></code></a>()</p></td>
+<td><p>Returns any extra state to include in the module's state_dict.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.get_parameter" title="off_prompts.dataset.encoder.NNSentenceEncoder.get_parameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameter</span></code></a>(target)</p></td>
+<td><p>Returns the parameter given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.get_submodule" title="off_prompts.dataset.encoder.NNSentenceEncoder.get_submodule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_submodule</span></code></a>(target)</p></td>
+<td><p>Returns the submodule given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.half" title="off_prompts.dataset.encoder.NNSentenceEncoder.half"><code class="xref py py-obj docutils literal notranslate"><span class="pre">half</span></code></a>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">half</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.ipu" title="off_prompts.dataset.encoder.NNSentenceEncoder.ipu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the IPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.load" title="off_prompts.dataset.encoder.NNSentenceEncoder.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(path)</p></td>
+<td><p>Load model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.load_state_dict" title="off_prompts.dataset.encoder.NNSentenceEncoder.load_state_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_state_dict</span></code></a>(state_dict[, strict, assign])</p></td>
+<td><p>Copies parameters and buffers from <a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.state_dict" title="off_prompts.dataset.encoder.NNSentenceEncoder.state_dict"><code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code></a> into this module and its descendants.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.modules" title="off_prompts.dataset.encoder.NNSentenceEncoder.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>()</p></td>
+<td><p>Returns an iterator over all modules in the network.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.named_buffers" title="off_prompts.dataset.encoder.NNSentenceEncoder.named_buffers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_buffers</span></code></a>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.named_children" title="off_prompts.dataset.encoder.NNSentenceEncoder.named_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_children</span></code></a>()</p></td>
+<td><p>Returns an iterator over immediate children modules, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.named_modules" title="off_prompts.dataset.encoder.NNSentenceEncoder.named_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_modules</span></code></a>([memo, prefix, remove_duplicate])</p></td>
+<td><p>Returns an iterator over all modules in the network, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.named_parameters" title="off_prompts.dataset.encoder.NNSentenceEncoder.named_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_parameters</span></code></a>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module parameters, yielding both the name of the parameter as well as the parameter itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.parameters" title="off_prompts.dataset.encoder.NNSentenceEncoder.parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code></a>([recurse])</p></td>
+<td><p>Returns an iterator over module parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_backward_hook" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_backward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_backward_hook</span></code></a>(hook)</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_buffer" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_buffer</span></code></a>(name, tensor[, persistent])</p></td>
+<td><p>Adds a buffer to the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_forward_hook" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_forward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_hook</span></code></a>(hook, *[, prepend, ...])</p></td>
+<td><p>Registers a forward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_forward_pre_hook" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_forward_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_pre_hook</span></code></a>(hook, *[, ...])</p></td>
+<td><p>Registers a forward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_full_backward_hook" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_full_backward_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_hook</span></code></a>(hook[, prepend])</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_full_backward_pre_hook" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_full_backward_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_pre_hook</span></code></a>(hook[, prepend])</p></td>
+<td><p>Registers a backward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_load_state_dict_post_hook" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_load_state_dict_post_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_load_state_dict_post_hook</span></code></a>(hook)</p></td>
+<td><p>Registers a post hook to be run after module's <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code> is called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_module" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_module</span></code></a>(name, module)</p></td>
+<td><p>Alias for <a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.add_module" title="off_prompts.dataset.encoder.NNSentenceEncoder.add_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_module()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_parameter" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_parameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_parameter</span></code></a>(name, param)</p></td>
+<td><p>Adds a parameter to the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.register_state_dict_pre_hook" title="off_prompts.dataset.encoder.NNSentenceEncoder.register_state_dict_pre_hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_state_dict_pre_hook</span></code></a>(hook)</p></td>
+<td><p>These hooks will be called with arguments: <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep_vars</span></code> before calling <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.requires_grad_" title="off_prompts.dataset.encoder.NNSentenceEncoder.requires_grad_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad_</span></code></a>([requires_grad])</p></td>
+<td><p>Change if autograd should record operations on parameters in this module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.save" title="off_prompts.dataset.encoder.NNSentenceEncoder.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(path)</p></td>
+<td><p>Save model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.set_extra_state" title="off_prompts.dataset.encoder.NNSentenceEncoder.set_extra_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_extra_state</span></code></a>(state)</p></td>
+<td><p>This function is called from <a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.load_state_dict" title="off_prompts.dataset.encoder.NNSentenceEncoder.load_state_dict"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_state_dict()</span></code></a> to handle any extra state found within the <cite>state_dict</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.share_memory" title="off_prompts.dataset.encoder.NNSentenceEncoder.share_memory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_memory</span></code></a>()</p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.Tensor.share_memory_()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.state_dict" title="off_prompts.dataset.encoder.NNSentenceEncoder.state_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code></a>(*args[, destination, prefix, ...])</p></td>
+<td><p>Returns a dictionary containing references to the whole state of the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.to" title="off_prompts.dataset.encoder.NNSentenceEncoder.to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Moves and/or casts the parameters and buffers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.to_empty" title="off_prompts.dataset.encoder.NNSentenceEncoder.to_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_empty</span></code></a>(*, device[, recurse])</p></td>
+<td><p>Moves the parameters and buffers to the specified device without copying storage.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.train" title="off_prompts.dataset.encoder.NNSentenceEncoder.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>([mode])</p></td>
+<td><p>Sets the module in training mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.type" title="off_prompts.dataset.encoder.NNSentenceEncoder.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>(dst_type)</p></td>
+<td><p>Casts all parameters and buffers to <code class="xref py py-attr docutils literal notranslate"><span class="pre">dst_type</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.xpu" title="off_prompts.dataset.encoder.NNSentenceEncoder.xpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xpu</span></code></a>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the XPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="off_prompts.dataset.encoder.NNSentenceEncoder.html#off_prompts.dataset.encoder.NNSentenceEncoder.zero_grad" title="off_prompts.dataset.encoder.NNSentenceEncoder.zero_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_grad</span></code></a>([set_to_none])</p></td>
+<td><p>Resets gradients of all model parameters.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.NNSentenceEncoder.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_gradient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#NNSentenceEncoder.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.NNSentenceEncoder.encode" title="Permalink to this definition">#</a></dt>
+<dd><p>Encode input sentence to a low-dimensional vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Input texts, such as sentence, query, and prompt.</p></li>
+<li><p><strong>context</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_context</em><em>)</em><em>, </em><em>default=None</em>) – Context of each user.</p></li>
+<li><p><strong>query</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em> or </em><em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>dim_sentence</em><em>)</em><em>, </em><em>default=None</em>) – Query given by the users.</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=128</em><em> (</em><em>&gt; 0</em><em>)</em>) – Batch size.</p></li>
+<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>embeddings</strong> – Low dimensional embeddings of the input texts after passing through an MLP model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor, shape (n_samples, dim_emb)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.NNSentenceEncoder.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#NNSentenceEncoder.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.NNSentenceEncoder.load" title="Permalink to this definition">#</a></dt>
+<dd><p>Load model.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="off_prompts.dataset.encoder.NNSentenceEncoder.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/off_prompts/dataset/encoder.html#NNSentenceEncoder.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#off_prompts.dataset.encoder.NNSentenceEncoder.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Save model.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.BatchDataset"><code class="docutils literal notranslate"><span class="pre">BatchDataset</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.TransformerEncoder"><code class="docutils literal notranslate"><span class="pre">TransformerEncoder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.TransformerEncoder.fit_pca"><code class="docutils literal notranslate"><span class="pre">TransformerEncoder.fit_pca()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.TransformerEncoder.encode"><code class="docutils literal notranslate"><span class="pre">TransformerEncoder.encode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.TransformerEncoder.format_tokens"><code class="docutils literal notranslate"><span class="pre">TransformerEncoder.format_tokens()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.NNSentenceEncoder"><code class="docutils literal notranslate"><span class="pre">NNSentenceEncoder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.NNSentenceEncoder.encode"><code class="docutils literal notranslate"><span class="pre">NNSentenceEncoder.encode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.NNSentenceEncoder.load"><code class="docutils literal notranslate"><span class="pre">NNSentenceEncoder.load()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#off_prompts.dataset.encoder.NNSentenceEncoder.save"><code class="docutils literal notranslate"><span class="pre">NNSentenceEncoder.save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2025, Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

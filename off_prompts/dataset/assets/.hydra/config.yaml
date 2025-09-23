@@ -1,0 +1,62 @@
+setting:
+  setting: movielens
+  dataset_name: movielens-20m
+  dataset_dir: ml-20m
+  model_id: mistralai/Mistral-7B-Instruct-v0.2
+  tokenizer_id: mistralai/Mistral-7B-Instruct-v0.2
+  use_tokenizer_fast: false
+  keywords:
+  - movie
+  - genre
+  - culture
+  random_state: 12345
+reward_model:
+  setting: movielens
+  model_name: distilbert
+  dataset_path: assets/movielens_preprocessed_data.csv
+  base_model_id: distilbert-base-uncased
+  tokenizer_id: distilbert-base-uncased
+  use_tokenizer_fast: false
+  dim_emb: 20
+  device: cuda
+  random_state: 12345
+user_query_simulation:
+  setting: movielens
+  dataset_path: assets/movielens_preprocessed_data.csv
+  model_path: assets/movielens_naive_cf_params.pt
+  base_model_id: distilbert-base-uncased
+  tokenizer_id: distilbert-base-uncased
+  use_naive_cf_user_embs: false
+  use_tokenizer_fast: false
+  dim_emb: 20
+  device: cuda
+  random_state: 12345
+encoding:
+  setting: movielens
+  query_path: assets/movielens_query.csv
+  prompt_path: assets/movielens_benchmark_prompts.csv
+  sentence_path: assets/movielens_preprocessed_data.csv
+  base_model_id: mistralai/Mistral-7B-Instruct-v0.2
+  tokenizer_id: mistralai/Mistral-7B-Instruct-v0.2
+  use_tokenizer_fast: false
+  dim_emb: 20
+  device: cuda
+  random_state: 12345
+sentence_embedding:
+  setting: movielens
+  path_to_user_embeddings: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_naive_cf_user_embeddings.pt
+  path_to_queries: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_query.csv
+  path_to_query_embeddings: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_query_embs.pt
+  path_to_candidate_prompts: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_benchmark_prompts.csv
+  path_to_prompt_embeddings: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_prompt_embs.pt
+  path_to_query_encoder: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_query_pca_matrix.pt
+  path_to_prompt_encoder: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_prompt_pca_matrix.pt
+  path_to_sentence_encoder: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_sentence_pca_matrix.pt
+  base_frozen_llm_id: mistralai/Mistral-7B-Instruct-v0.2
+  frozen_llm_tokenizer_id: mistralai/Mistral-7B-Instruct-v0.2
+  base_reward_model_id: distilbert-base-uncased
+  reward_model_tokenizer_id: distilbert-base-uncased
+  path_to_finetuned_params: /share/thorsten/hk844/opl-prompts/src/dataset/assets/movielens_distilbert_reward_simulator.pt
+  is_context_dependent: true
+  device: cuda
+  random_state: 0

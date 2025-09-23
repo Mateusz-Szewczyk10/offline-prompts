@@ -1,0 +1,793 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <link href="../_static/images/favicon.png" rel="icon" type="image/png">
+    <title>Usage &#8212; OfflinePrompts</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within OfflinePrompts"
+          href="../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="News" href="news.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="quickstart.html">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="quickstart.html">
+                        Quickstart
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Usage
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="frequently_asked_questions.html">
+                        FAQs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="news.html">
+                        News
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/releases">
+                        Release Notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://github.com/aiueola/offline-prompts/404">
+                        Proceedings
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aiueola/offline-prompts" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://speakerdeck.com/aiueola/opl-prompts" title="Speaker Deck" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-speaker-deck"></i></span>
+            <label class="sr-only">Speaker Deck</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Usage</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>For the streamlined implementation, please refer to <a class="reference internal" href="quickstart.html"><span class="doc">Quickstart</span></a>.</p></li>
+<li><p>For the API references (i.e., classes and functions), please refer to <a class="reference internal" href="api.html"><span class="doc">OfflinePrompts Package Reference</span></a>.</p></li>
+</ul>
+</div>
+<p>This page explains how to set up the full-LLM benchmark using the MovieLens dataset :cite:`` or a custom dataset.</p>
+<section id="setting-up-the-full-llm-environment-with-movielens">
+<h2>Setting up the full-LLM environment with MovieLens<a class="headerlink" href="#setting-up-the-full-llm-environment-with-movielens" title="Permalink to this heading">#</a></h2>
+<p>To load the pre-trained simulator, make sure that the path is connected to this repository and the following files are located in a local repository. The following files are available [here]().</p>
+<ul class="simple">
+<li><p><cite>movielens_preprocessed_data.csv</cite> (preprocessed <a class="reference external" href="https://grouplens.org/datasets/movielens/">MovieLens</a> :cite:`` dataset)</p></li>
+<li><p><cite>movielens_benchmark_prompts.csv</cite> (candidate prompts)</p></li>
+<li><p><cite>movielens_naive_cf_user_embeddings.pt</cite> (user embeddings)</p></li>
+<li><p><cite>movielens_query.csv</cite> (candidate items (i.e., movies))</p></li>
+<li><p><cite>movielens_distilbert_reward_simulator.pt</cite> (params of the finetuned reward simulator)</p></li>
+<li><p><cite>movielens_prompt_pca_matrix.pt</cite> (PCA matrix which maps prompt embeddings to low-dimensional features)</p></li>
+<li><p><cite>movielens_query_pca_matrix.pt</cite> (PCA matrix which maps query embeddings to low-dimensional features)</p></li>
+<li><p><cite>movielens_sentence_pca_matrix.pt</cite> (PCA matrix which maps sentence embeddings to low-dimensional features)</p></li>
+<li><p><cite>movielens_prompt_embs.pt</cite> (low-dimensional embeddings of prompts)</p></li>
+<li><p><cite>movielens_query_embs.pt</cite> (low-dimensional embeddings of queries)</p></li>
+</ul>
+<p>Then, initialize the full-LLM environment as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">off_prompts.dataset</span> <span class="kn">import</span> <span class="n">SemiSyntheticDataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">SemiSyntheticDataset</span><span class="p">(</span>
+    <span class="n">path_to_user_embeddings</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{path_to_directory}</span><span class="s2">/movielens_naive_cf_user_embeddings.pt&quot;</span><span class="p">,</span>      <span class="c1"># required</span>
+    <span class="n">path_to_queries</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{path_to_directory}</span><span class="s2">/movielens_query.csv&quot;</span><span class="p">,</span>                                <span class="c1"># required</span>
+    <span class="n">path_to_query_embeddings</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{path_to_directory}</span><span class="s2">/movielens_query_embs.pt&quot;</span><span class="p">,</span>                   <span class="c1"># required</span>
+    <span class="n">path_to_interaction_data</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{path_to_directory}</span><span class="s2">/movielens_preprocessed_data.csv&quot;</span><span class="p">,</span>           <span class="c1"># required</span>
+    <span class="n">path_to_candidate_prompts</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{path_to_directory}</span><span class="s2">/movielens_benchmark_prompts.csv&quot;</span><span class="p">,</span>          <span class="c1"># required</span>
+    <span class="n">path_to_prompt_embeddings</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{path_to_directory}</span><span class="s2">/movielens_prompt_embs.pt&quot;</span><span class="p">,</span>                 <span class="c1"># required</span>
+    <span class="n">path_to_finetuned_params</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{path_to_directory}</span><span class="s2">/movielens_distilbert_reward_simulator.pt&quot;</span><span class="p">,</span>  <span class="c1"># required</span>
+    <span class="n">frozen_llm_base_model_id</span><span class="o">=</span><span class="s2">&quot;mistralai/Mistral-7B-Instruct-v0.2&quot;</span><span class="p">,</span>
+    <span class="n">frozen_llm_base_tokenizer_id</span><span class="o">=</span><span class="s2">&quot;mistralai/Mistral-7B-Instruct-v0.2&quot;</span><span class="p">,</span>
+    <span class="n">frozen_llm_use_tokenizer_fast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">frozen_llm_pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">reward_simulator_base_model_id</span><span class="o">=</span><span class="s2">&quot;distilbert-base-uncased&quot;</span><span class="p">,</span>
+    <span class="n">reward_simulator_base_tokenizer_id</span><span class="o">=</span><span class="s2">&quot;distilbert-base-uncased&quot;</span><span class="p">,</span>
+    <span class="n">reward_simulator_use_tokenizer_fast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">reward_type</span><span class="o">=</span><span class="s2">&quot;continuous&quot;</span><span class="p">,</span>  <span class="c1"># &quot;binary&quot; or &quot;continuous&quot;</span>
+    <span class="n">reward_std</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that, to obtain the required dataset, run the following scripts under <cite>offline-prompts/off_prompts/dataset/assets</cite>. The code exection is confirmed with a single or multiple GPUs with 64GB memory.</p>
+<section id="i-preprocess-the-movielens-dataset">
+<h3>(i) Preprocess the MovieLens dataset.<a class="headerlink" href="#i-preprocess-the-movielens-dataset" title="Permalink to this heading">#</a></h3>
+<p>Before running the code, make sure that the original dataset is downloaded in a local repository from <a class="reference external" href="https://grouplens.org/datasets/movielens/">this page</a>. The default simulation uses MovieLens-10M.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>preprocess_movielens_dataset_for_reward_simulation.py<span class="w"> </span>setting.dataset_name<span class="o">={</span>dataset_name<span class="o">}</span><span class="w"> </span>setting.dataset_dir<span class="o">={</span>path_to_movielens_dataset_directory<span class="o">}</span>
+</pre></div>
+</div>
+<p>This script saves the preprocessed data to <cite>movielens_preprocessed_data.csv</cite>. The script applies the following preprocessing:</p>
+<ul class="simple">
+<li><p>Binarize the ratings by letting 0-3 to be negative and 5 to be positive.</p></li>
+<li><p>Remove users and items that has less than 10 ratings for both positive and negative labels.</p></li>
+<li><p>Resample dataset so that the negative and positive labels have the same number of samples for each users.</p></li>
+<li><p>Attach item (movie) description generated by a Frozen LLM (<a class="reference external" href="https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2">Mistral-7B</a> :cite:<a href="#id1"><span class="problematic" id="id2">``</span></a>. Note that this description is generated without keyword prompts.</p></li>
+</ul>
+<p>To use other (frozen) LLMs, , use the following command instead. <cite>model_id</cite> and <cite>tokenizer_id</cite> should be those specified by <a class="reference external" href="https://huggingface.co/models">Huggingface</a> :cite:<a href="#id3"><span class="problematic" id="id4">``</span></a>, such as <cite>mistralai/Mistral-7B-Instruct-v0.2</cite>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>preprocess_movielens_dataset_for_reward_simulation.py<span class="w"> </span>setting.dataset_name<span class="o">={</span>dataset_name<span class="o">}</span><span class="w"> </span>setting.dataset_dir<span class="o">={</span>path_to_movielens_dataset_directory<span class="o">}</span><span class="w"> </span>setting.model_id<span class="o">={</span>model_id<span class="o">}</span><span class="w"> </span>setting.
+</pre></div>
+</div>
+</section>
+<section id="ii-retrieve-candidate-keyword-prompts">
+<h3>(ii) Retrieve candidate (keyword) prompts.<a class="headerlink" href="#ii-retrieve-candidate-keyword-prompts" title="Permalink to this heading">#</a></h3>
+<p>Before running the code, make sure that <cite>Beautiful Soup &lt;https://beautiful-soup-4.readthedocs.io/en/latest/&gt;_</cite> :cite:`` is installed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scraping_prompts.py<span class="w"> </span>setting.keywords<span class="o">=</span><span class="se">\[</span><span class="s2">&quot;movie&quot;</span>,<span class="s2">&quot;genre&quot;</span>,<span class="s2">&quot;culture&quot;</span><span class="se">\]</span>
+</pre></div>
+</div>
+<p>This scripts collects related words of “movie”, “genre”, and “culture” from <a class="reference external" href="https://relatedwords.io/">relatedwords.io</a> and save them in <cite>movielens_benchmark_prompts.csv</cite>.</p>
+</section>
+<section id="iii-finetune-a-reward-simulator">
+<h3>(iii) Finetune a reward simulator.<a class="headerlink" href="#iii-finetune-a-reward-simulator" title="Permalink to this heading">#</a></h3>
+<p>By default, we use <a class="reference external" href="https://huggingface.co/distilbert/distilbert-base-uncased">DistilBERT</a> :cite:`` as the base model.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>finetuning_reward_simulator.py<span class="w"> </span>reward_model.dataset_path<span class="o">={</span>path_to_directory<span class="o">}</span>/movielens_preprocessed_data.csv
+</pre></div>
+</div>
+<p>This script save the finetuned model params to <cite>movielens_distilbert_reward_simulator.pt</cite>.
+This model first encodes the sentence description of each item (movie) to a low-dimensional embeddings and also optimizes the user id embeddings.
+Then, this simulator predicts the binarized rating (i.e., affinity between user and item) via NN model taking the item description embeddings and user id embeddings as inputs.</p>
+<p>Note that this script additionally saves the model params of <em>naive</em> collaborative filtering (CF) model to <cite>movielens_naive_cf_params.pt</cite>.
+This naive CF model predicts the binarized rating via NN model taking the item id embeddings and user id embeddings as inputs.</p>
+<p>Finally, to use other language models to encode sentence descriptions, use the following command instead.
+<cite>based_model_id</cite> and <cite>tokenizer_id</cite> should be those specified by <a class="reference external" href="https://huggingface.co/models">Huggingface</a> :cite:<a href="#id6"><span class="problematic" id="id7">``</span></a>, such as <cite>distilbert-base-uncased</cite>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>finetuning_reward_simulator.py<span class="w"> </span>reward_model.dataset_path<span class="o">={</span>path_to_directory<span class="o">}</span>/movielens_preprocessed_data.csv<span class="w"> </span>reward_model.model_name<span class="o">={</span>model_name<span class="o">}</span><span class="w"> </span>reward_model.base_model_id<span class="o">={</span>base_model_id<span class="o">}</span><span class="w"> </span>reward_model.tokenizer_id<span class="o">={</span>tokenizer_id<span class="o">}</span>
+</pre></div>
+</div>
+<p>The model params will be saved as <cite>movielens_{model_name}_reward_simulator.pt</cite>.</p>
+<p>(iv) Retrieve lists of unique users and items (movie names).
+This code also retrieves user id embeddings for each user.</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">preprocess_movielens_dataset_for_user_query_simulation.py</span> <span class="pre">user_query_simulation.dataset_path={path_to_directory}/movielens_preprocessed_data.csv</span> <span class="pre">user_query_simulation.model_path={path_to_directory}/movielens_naive_cf_params.pt</span> <span class="pre">user_query_simulation.use_naive_cf_user_embs=True</span>
+<span class="pre">`</span></code></p>
+<p>The script saves <cite>movielens_naive_cf_user_embeddings.pt</cite> and <cite>movielens_query.csv</cite>. Note that the user id embeddings is based on the naive CF model, which is different from those used for the (sentence-based) reward simulator.</p>
+</section>
+<section id="v-retrieve-prompt-embeddings-query-embeddings-and-pca-matrix-of-sentence-encoders">
+<h3>(v) Retrieve prompt embeddings, query embeddings, and PCA matrix of sentence encoders.<a class="headerlink" href="#v-retrieve-prompt-embeddings-query-embeddings-and-pca-matrix-of-sentence-encoders" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>preprocess_movielens_dataset_with_embeddings.py<span class="w"> </span>encoding.query_path<span class="o">={</span>path_to_directory<span class="o">}</span>/movielens_query.csv<span class="w"> </span>encoding.prompt_path<span class="o">={</span>path_to_directory<span class="o">}</span>/movielens_benchmark_prompts.csv<span class="w"> </span>encoding.sentence_path<span class="o">={</span>path_to_directory<span class="o">}</span>/movielens_preprocessed_data.csv
+</pre></div>
+</div>
+<p>The scripts saves the following files.</p>
+<ul class="simple">
+<li><p><cite>movielens_prompt_pca_matrix.pt</cite> (PCA matrix which maps prompt embeddings to low-dimensional features)</p></li>
+<li><p><cite>movielens_query_pca_matrix.pt</cite> (PCA matrix which maps query embeddings to low-dimensional features)</p></li>
+<li><p><cite>movielens_sentence_pca_matrix.pt</cite> (PCA matrix which maps sentence embeddings to low-dimensional features)</p></li>
+<li><p><cite>movielens_prompt_embs.pt</cite> (low-dimensional embeddings of prompts)</p></li>
+<li><p><cite>movielens_query_embs.pt</cite> (low-dimensional embeddings of queries)</p></li>
+</ul>
+<p>The default prompt/query/sentence embedding model is the (frozen) <a class="reference external" href="https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2">Mistral-7B</a> :cite:`` model, which is different from those used for the reward simualtor (i.e., <a class="reference external" href="https://huggingface.co/distilbert/distilbert-base-uncased">DistilBERT</a> :cite:`` in the default setting.)
+To use other frozen LLMs as the embedding models, run the following command instead.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>preprocess_movielens_dataset_with_embeddings.py<span class="w"> </span>encoding.query_path<span class="o">={</span>path_to_directory<span class="o">}</span>/movielens_query.csv<span class="w"> </span>encoding.prompt_path<span class="o">={</span>path_to_directory<span class="o">}</span>/movielens_benchmark_prompts.csv<span class="w"> </span>encoding.sentence_path<span class="o">={</span>path_to_directory<span class="o">}</span>/movielens_preprocessed_data.csv<span class="w"> </span>encoding.base_model_id<span class="o">={</span>base_model_id<span class="o">}</span><span class="w"> </span>encoding.tokenizer_id<span class="o">={</span>tokenizer_id<span class="o">}</span>
+</pre></div>
+</div>
+<p>Again, <cite>base_model_id</cite> and <cite>tokenizer_id</cite> should be those specified by <a class="reference external" href="https://huggingface.co/models">Huggingface</a> :cite:<a href="#id11"><span class="problematic" id="id12">``</span></a>, such as <cite>mistralai/Mistral-7B-Instruct-v0.2</cite>.</p>
+</section>
+</section>
+<section id="setting-up-the-full-llm-environment-with-custom-dataset">
+<h2>Setting up the full-LLM environment with custom dataset<a class="headerlink" href="#setting-up-the-full-llm-environment-with-custom-dataset" title="Permalink to this heading">#</a></h2>
+<p>To use the custom dataset, we provide the data format of each file as follows.</p>
+<section id="interaction-data">
+<h3>Interaction data<a class="headerlink" href="#interaction-data" title="Permalink to this heading">#</a></h3>
+<p>This data corresponds to <cite>movielens_preprocessed_data.csv</cite> in the default simulation. The dataset should contain four columns.</p>
+<ul class="simple">
+<li><p><cite>user_id</cite> (int): index of users</p></li>
+<li><p><cite>item_id</cite> (int): index of items</p></li>
+<li><p><cite>title</cite> (str): name of items (e.g., movie title)</p></li>
+<li><p><cite>description</cite> (str): text description of items (, which is generated by frozen LLM)</p></li>
+<li><p><cite>rating</cite> (float): original or binarized ratings</p></li>
+</ul>
+</section>
+<section id="candidate-prompts">
+<h3>Candidate prompts<a class="headerlink" href="#candidate-prompts" title="Permalink to this heading">#</a></h3>
+<p>This data corresponds to <cite>movielens_benchmark_prompts.csv</cite> in the default simulation. The dataset should contain a single column.</p>
+<ul class="simple">
+<li><p><cite>vocab</cite> (str): keyword prompts</p></li>
+</ul>
+<p>While we use short keywords as the candidate prompts by default, the framework is generally applicable to longer sentence prompts.</p>
+</section>
+<section id="queries">
+<h3>Queries<a class="headerlink" href="#queries" title="Permalink to this heading">#</a></h3>
+<p>This data corresponds to <cite>movielens_benchmark_prompts.csv</cite> in the default simulation. The dataset should contain a single column.</p>
+<ul class="simple">
+<li><p><cite>query</cite> (str): name of items (e.g., movie title)</p></li>
+</ul>
+<p>Note that this file contains the list of unique items without any duplicates. This should be direct mapping between item id and the item name.</p>
+</section>
+<section id="user-query-prompt-embeddings">
+<h3>User, query, prompt embeddings<a class="headerlink" href="#user-query-prompt-embeddings" title="Permalink to this heading">#</a></h3>
+<p>These data correspond to <cite>movielens_naive_cf_user_embeddings.pt</cite>, <cite>movielens_query_embs.pt</cite>, and <cite>movielens_prompt_embs.pt</cite>. Each file contains the following shape of torch.Tensor.</p>
+<ul class="simple">
+<li><p><cite>user_id_embeddings</cite> (torch.Tensor): Mapping between user id and its embeddings. shape (n_users, dim_user_emb)`</p></li>
+<li><p><cite>query_embeddings</cite> (torch.Tensor): Mapping between item id and its embeddings. shape (n_items, dim_query_emb)</p></li>
+<li><p><cite>prompt_embeddings</cite> (torch.Tensor): Mapping between action (prompt) id and its embeddings. shape (n_actions, dim_prompt_emb)</p></li>
+</ul>
+</section>
+<section id="pca-matrices">
+<h3>PCA matrices<a class="headerlink" href="#pca-matrices" title="Permalink to this heading">#</a></h3>
+<p>These data correspond to <cite>movielens_{query/prompt/sentence}_pca_matrix.pt</cite>. Each matrix is torch.Tensor that represents mappings from high-dimensional features (obtained by the last layer of frozen LLMs) and low-dimensional features.
+Thus, the shape of each Tensor is (dim_frozen_llm_emb, dim_emb).</p>
+</section>
+<section id="reward-simulator">
+<h3>Reward simulator<a class="headerlink" href="#reward-simulator" title="Permalink to this heading">#</a></h3>
+<p>By default, the reward simulator consists of the following components:</p>
+<ul class="simple">
+<li><p><cite>sentence_embedding_layer</cite>: takes sentence description of items as inputs and outputs low-dimensional item embeddings.</p></li>
+<li><p><cite>user_embedding_layer</cite>: takes user id as inputs and outputs the corresponding user embeddings.</p></li>
+<li><p><cite>nn_layer</cite>: takes the above item embeddings and user embeddings as inputs and outputs a logit to predict ratings.</p></li>
+</ul>
+<p>When the data format satisfies the requirement of “Interaction data” (i.e., have <cite>user_id</cite>, <cite>item_id</cite>, <cite>title</cite>, <cite>description</cite>, and <cite>rating</cite>), users can learn a semi-synthetic simulator as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>finetuning_reward_simulator.py<span class="w"> </span>setting.setting<span class="o">={</span>setting<span class="o">}</span><span class="w"> </span>reward_model.dataset_path<span class="o">={</span>path_to_custom_dataset<span class="o">}</span>
+</pre></div>
+</div>
+<p>Then, the results will be saved as <cite>{setting}_distilbert_reward_simulator.pt</cite>. Note that <cite>path_to_custom_dataset</cite> should end with <cite>.csv</cite>.</p>
+</section>
+</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this heading">#</a></h2>
+<p>If you use this simulator in your project or find this resource useful, please cite the following papers.</p>
+<p>(package and documentation)</p>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="line-block">
+<div class="line">Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims</div>
+<div class="line"><strong>OfflinePrompts: Benchmark Suites for Prompt-guided Language Personalization</strong></div>
+<div class="line">(a preprint is coming soon..)</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">kiyohara2025offline</span><span class="p">,</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="p">{</span><span class="n">OfflinePrompts</span><span class="p">:</span> <span class="n">Benchmark</span> <span class="n">Suites</span> <span class="k">for</span> <span class="n">Prompt</span><span class="o">-</span><span class="n">guided</span> <span class="n">Language</span> <span class="n">Personalization</span><span class="p">},</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Kiyohara</span><span class="p">,</span> <span class="n">Haruka</span> <span class="ow">and</span> <span class="n">Cao</span><span class="p">,</span> <span class="n">Daniel</span> <span class="n">Yiming</span> <span class="ow">and</span> <span class="n">Saito</span><span class="p">,</span> <span class="n">Yuta</span> <span class="ow">and</span> <span class="n">Joachims</span><span class="p">,</span> <span class="n">Thorsten</span><span class="p">},</span>
+    <span class="n">journal</span> <span class="o">=</span> <span class="p">{</span><span class="n">xxx</span><span class="p">},</span>
+    <span class="n">pages</span> <span class="o">=</span> <span class="p">{</span><span class="n">xxx</span><span class="o">--</span><span class="n">xxx</span><span class="p">},</span>
+    <span class="n">year</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2025</span><span class="p">},</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(benchmarking experiment)</p>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="line-block">
+<div class="line">Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims</div>
+<div class="line"><strong>Off-Policy Learning for Prompt-Guided Sentence Personalization Using Logged Bandit Data</strong></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">kiyohara2025off</span><span class="p">,</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="p">{</span><span class="n">Off</span><span class="o">-</span><span class="n">Policy</span> <span class="n">Learning</span> <span class="k">for</span> <span class="n">Prompt</span><span class="o">-</span><span class="n">Guided</span> <span class="n">Sentence</span> <span class="n">Personalization</span> <span class="n">Using</span> <span class="n">Logged</span> <span class="n">Bandit</span> <span class="n">Data</span><span class="p">},</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Kiyohara</span><span class="p">,</span> <span class="n">Haruka</span> <span class="ow">and</span> <span class="n">Cao</span><span class="p">,</span> <span class="n">Daniel</span> <span class="n">Yiming</span> <span class="ow">and</span> <span class="n">Saito</span><span class="p">,</span> <span class="n">Yuta</span> <span class="ow">and</span> <span class="n">Joachims</span><span class="p">,</span> <span class="n">Thorsten</span><span class="p">},</span>
+    <span class="n">journal</span> <span class="o">=</span> <span class="p">{</span><span class="n">xxx</span><span class="p">},</span>
+    <span class="n">pages</span> <span class="o">=</span> <span class="p">{</span><span class="n">xxx</span><span class="o">--</span><span class="n">xxx</span><span class="p">},</span>
+    <span class="n">year</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2025</span><span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="white-space-20px"></div><div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-column sd-col-3 sd-col-xs-3 sd-col-sm-3 sd-col-md-3 sd-col-lg-3 sd-m-0 sd-p-0 docutils">
+<div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-row sd-m-0 sd-p-0 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-none sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">&lt;&lt;&lt; Prev
+<strong>Quickstart</strong></p>
+</div>
+<a class="sd-stretched-link reference internal" href="quickstart.html"><span class="doc"></span></a></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 sd-m-0 sd-p-0 docutils">
+</div>
+<div class="sd-col sd-d-flex-column sd-col-3 sd-col-xs-3 sd-col-sm-3 sd-col-md-3 sd-col-lg-3 sd-m-0 sd-p-0 docutils">
+<div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-row sd-m-0 sd-p-0 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-none sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Next &gt;&gt;&gt;
+<strong>API reference</strong></p>
+</div>
+<a class="sd-stretched-link reference internal" href="api.html"><span class="doc"></span></a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2025, Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+defaults:
+  - setting: default
+  - online: default
+  - offline: default
+  - evaluation: default
+
+hydra: 
+  run: 
+    dir: ./
+  sweep:
+    dir: ./
+    subdir: ./

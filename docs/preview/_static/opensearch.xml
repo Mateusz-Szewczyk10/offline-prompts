@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>xxx</ShortName>
+  <Description>Search OfflinePrompts</Description>
+  <InputEncoding>utf-8</InputEncoding>
+  <Url type="text/html" method="get"
+       template="https://offline-prompts.readthedocs.io/en/latest//search.html?q={searchTerms}"/>
+  <LongName>OfflinePrompts</LongName>
+  
+</OpenSearchDescription>

@@ -1,0 +1,14 @@
+setting: 
+ - data_size
+ - cqndidate_actions
+ - logging_policy
+ - output_confounder
+evaluation_setting: 
+ - IS-based
+#  - hybrid
+reward_predictor_type:
+ - naive
+#  - pessimistic
+mapping_function:
+ - linear-linear
+ - rational-linear

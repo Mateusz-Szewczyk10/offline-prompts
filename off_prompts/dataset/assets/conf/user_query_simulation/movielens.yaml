@@ -1,0 +1,10 @@
+setting: movielens
+dataset_path: assets/movielens_preprocessed_data.csv
+model_path: assets/movielens_naive_cf_params.pt
+base_model_id: distilbert-base-uncased
+tokenizer_id: distilbert-base-uncased
+use_naive_cf_user_embs: False
+use_tokenizer_fast: False
+dim_emb: 20
+device: cuda
+random_state: 12345
