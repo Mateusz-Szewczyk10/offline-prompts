@@ -650,14 +650,14 @@ document.write(`
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen_llm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">frozen_llm_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-                <span class="n">frozen_llm_base_tokenizer_id</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">frozen_llm_base_tokenizer_id</span><span class="p">,</span>
                 <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">use_fast</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frozen_llm_use_tokenizer_fast</span><span class="p">,</span>
             <span class="p">)</span>
 
             <span class="n">frozen_llm_model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-                <span class="n">frozen_llm_base_tokenizer_id</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">frozen_llm_base_model_id</span><span class="p">,</span>
             <span class="p">)</span>
 
             <span class="n">frozen_llm_tokenizer_kwargs</span> <span class="o">=</span> <span class="p">{</span>
@@ -696,14 +696,14 @@ document.write(`
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">reward_simulator_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-                <span class="n">reward_simulator_base_tokenizer_id</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator_base_tokenizer_id</span><span class="p">,</span>
                 <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">use_fast</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator_use_tokenizer_fast</span><span class="p">,</span>
             <span class="p">)</span>
 
             <span class="n">reward_simulator_base_model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-                <span class="n">reward_simulator_base_model_id</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">reward_simulator_base_model_id</span><span class="p">,</span>
             <span class="p">)</span>
 
             <span class="n">reward_simulator_tokenizer_kwargs</span> <span class="o">=</span> <span class="p">{</span>

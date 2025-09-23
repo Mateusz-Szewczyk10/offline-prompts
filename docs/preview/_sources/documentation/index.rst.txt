@@ -169,22 +169,22 @@ Table of Contents
    :caption: Getting Started:
 
    installation
+   quickstart
    distinctive_features
    implementations
    dso
-   quickstart
    api
 
 .. toctree::
    :maxdepth: 1
    :caption: See also:
 
-   Github <https://github.com/hakuhodo-technologies/scope-rl>
-   LICENSE <https://github.com/hakuhodo-technologies/scope-rl/blob/main/LICENSE>
+   Github <https://github.com/aiueola/offline-prompts>
+   LICENSE <https://github.com/aiueola/offline-prompts>
    frequently_asked_questions
    News <news>
    Release Notes <https://github.com/aiueola/offline-prompts/releases>
-   Proceedings <https://github.com/aiueola/offline-prompts/404>
+   Proceedings <https://dl.acm.org/doi/10.1145/3705328.3748088>
    references
 
 .. grid::

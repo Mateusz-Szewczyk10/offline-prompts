@@ -440,10 +440,10 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distinctive_features.html">Why OfflinePrompts?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementations.html">Problem Formulation and Implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dso.html">DSO for Data-Efficient OPL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">OfflinePrompts Package Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.html">off_prompts.dataset.base</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/dataset/off_prompts.dataset.base.BaseCandidateActionsLoader.html">off_prompts.dataset.base.BaseCandidateActionsLoader</a></li>
@@ -559,11 +559,12 @@ document.write(`
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">See also:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl">Github</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequently_asked_questions.html">Frequently asked questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="news.html">News</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/releases">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/404">Proceedings</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://dl.acm.org/doi/10.1145/3705328.3748088">Proceedings</a></li>
 </ul>
 </div>
 </nav></div>
@@ -776,6 +777,25 @@ Please refer to <a class="reference external" href="https://github.com/aiueola/o
 <li class="toctree-l2"><a class="reference internal" href="installation.html#citation">Citation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#full-llm-benchmark">Full-LLM benchmark</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#setting-up-a-semi-synthetic-simulation">Setting up a semi-synthetic simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#logging-policy">Logging policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#regressions">Regressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#baseline-policy-gradients">Baseline policy gradients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#direct-sentence-off-policy-gradient-dso">Direct Sentence Off-Policy Gradient (DSO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#online-performance-evaluation">(Online) performance evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#synthetic-experiment">Synthetic experiment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#setting-up-a-synthetic-simulation">Setting up a synthetic simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#id1">Logging policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#id2">Regressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickstart.html#id3">Baseline policy gradients</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="distinctive_features.html">Why OfflinePrompts?</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="distinctive_features.html#motivation">Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distinctive_features.html#key-contributions">Key contributions</a><ul>
@@ -826,7 +846,6 @@ Please refer to <a class="reference external" href="https://github.com/aiueola/o
 <li class="toctree-l2"><a class="reference internal" href="dso.html#citation">Citation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">OfflinePrompts Package Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#full-llm-benchmark">Full-LLM benchmark</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#dataset-module">Dataset module</a></li>
@@ -849,11 +868,12 @@ Please refer to <a class="reference external" href="https://github.com/aiueola/o
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">See also:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl">Github</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/hakuhodo-technologies/scope-rl/blob/main/LICENSE">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequently_asked_questions.html">Frequently asked questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="news.html">News</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/releases">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/aiueola/offline-prompts/404">Proceedings</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://dl.acm.org/doi/10.1145/3705328.3748088">Proceedings</a></li>
 </ul>
 </div>
 <div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
