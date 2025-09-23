@@ -20,7 +20,6 @@
 - [Installation](#installation)
 - [Module](#module)
 - [Usage](#usage)
-  - [xxx]()
 - [Citation](#citation)
 - [Project Team](#project-team)
 - [License](#license)
@@ -31,11 +30,11 @@
 
 **Pretrained simulator and datasets are available [here]().**
 
-**Documentation is available [here]().**
+**Documentation is available [here]() (debugging is in progress).**
 
 **Stable versions are available at [PyPI]().**
 
-**Slides are available [here]().**
+**Slides are available [here](https://drive.google.com/drive/folders/1gH9MvoNwOC1GfT1Dxb5v4cFsnw5mt1KT?usp=sharing).**
 
 **日本語は[こちら](README_ja.md)。**
 
@@ -127,6 +126,8 @@ python setup.py install
 OfflinePrompts supports Python 3.9 or newer. See [requirements.txt](./requirements.txt) for other requirements. 
 
 ## Usage
+
+Please refer to the [quickstart examples in the doc]().
 
 ## Citation
 

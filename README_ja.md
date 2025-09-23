@@ -20,7 +20,6 @@
 - [インストール](#インストール)
 - [モジュールの紹介](#モジュールの紹介)
 - [使用例](#使用例)
-  - [xxx]()
 - [引用](#引用)
 - [プロジェクトチーム](#プロジェクトチーム)
 - [ライセンス](#ライセンス)
@@ -29,15 +28,15 @@
 
 </details>
 
-**事前学習済みのベンチマーク用シミュレーションモデルとデータセットは [こちら]().**
+**事前学習済みのベンチマーク用シミュレーションモデルとデータセットは [こちら](https://drive.google.com/drive/folders/1gH9MvoNwOC1GfT1Dxb5v4cFsnw5mt1KT?usp=sharing).**
 
-**ドキュメンテーションは [こちら]().**
+**ドキュメンテーションは [こちら]() (デバッグ中).**
 
 **PyPI の stable version は [こちら]().**
 
 **解説スライドは [こちら]().**
 
-**Enligh version is [here](README.md)。**
+**Enligh version is [here](README.md).**
 
 ## 概要
 
@@ -102,7 +101,7 @@ OfflinePromptsは dataset, OPL, policy の3つのモジュールで構成され�
 
 </details>
 
-**Further details are available in the [preprint]().**
+**詳細は [プレプリント]() にて。**
 
 
 ## インストール
@@ -122,6 +121,8 @@ python setup.py install
 OfflinePrompts は Python 3.9 以降をサポートしています。 ライブラリ等の準備については [requirements.txt](./requirements.txt) を参照してください。
 
 ## 使用例
+
+ドキュメンテーションの [quickstart examples]() を参照してください。
 
 ## 引用
 
