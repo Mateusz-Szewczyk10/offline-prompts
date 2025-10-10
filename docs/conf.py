@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath("../"))
 
 # -- Project information -----------------------------------------------------
 
-project = "xxx"  # fix later
+project = "OfflinePrompts: Benchmark Suites for Prompt-guided Text Personalization from Logged Data (Python)"  # fix later
 copyright = "2025, Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims"
 author = "Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims"
 
@@ -82,7 +82,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Speaker Deck",
-            "url": "https://speakerdeck.com/aiueola/opl-prompts",  # fix later
+            "url": "https://speakerdeck.com/harukakiyohara_/opl-prompt",  # fix later
             "icon": "fa-brands fa-speaker-deck",
             "type": "fontawesome",
         },

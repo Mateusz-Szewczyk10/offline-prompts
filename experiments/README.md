@@ -3,8 +3,8 @@
 This directory includes the code to replicate the experiments done in the following paper.
 
 Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.<br>
-**Off-Policy Learning for Prompt-guided Text Personalization Using Logged Bandit Data**<br>
-[link]()
+**An Off-Policy Learning Approach for Steering Sentence Generation Towards Personalization**<br>
+[link](https://dl.acm.org/doi/10.1145/3705328.3748088)
 
 
 (Table of contents)
@@ -193,14 +193,14 @@ If you use this simulator in your project or find this resource useful, please c
 
 Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.<br>
 **An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization**<br>
-[link]()
+[link](https://dl.acm.org/doi/10.1145/3705328.3748088)
 
 ```
-@article{kiyohara2025off,
+@inproceedings{kiyohara2025off,
   title = {An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization},
   author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
-  journal = {xxx},
-  pages = {xxx--xxx},
+  booktitle = {Proceedings of the 19th ACM conference on Recommender Systems},
+  pages = {41--50},
   year = {2025},
 }
 ```

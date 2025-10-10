@@ -208,7 +208,7 @@ Welcome!
     FAQs <documentation/frequently_asked_questions>
     News <documentation/news>
     Release Notes <https://github.com/aiueola/offline-prompts/releases>
-    Proceedings <https://github.com/aiueola/offline-prompts/404>
+    Proceedings <https://dl.acm.org/doi/10.1145/3705328.3748088>
 
 .. grid::
 

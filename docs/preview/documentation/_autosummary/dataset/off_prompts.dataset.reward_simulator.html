@@ -652,12 +652,12 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_users</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of users.</p></li>
-<li><p><strong>n_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of items.</p></li>
-<li><p><strong>dim_emb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=10</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of user and item embeddings.</p></li>
-<li><p><strong>hidden_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=100</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of the hidden layer of MLP.</p></li>
-<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
-<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+<li><p><strong>n_users</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Number of users.</p></li>
+<li><p><strong>n_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Number of items.</p></li>
+<li><p><strong>dim_emb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=10</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of user and item embeddings.</p></li>
+<li><p><strong>hidden_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=100</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of the hidden layer of MLP.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
 </ul>
 </dd>
 </dl>
@@ -820,8 +820,8 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>user_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – User id.</p></li>
 <li><p><strong>item_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – Item id.</p></li>
-<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to return output as a cpu tensor.</p></li>
-<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -844,15 +844,15 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_users</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of users.</p></li>
-<li><p><strong>n_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of items.</p></li>
-<li><p><strong>dim_emb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=10</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of feature embeddings.</p></li>
-<li><p><strong>hidden_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=100</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of the hidden layer of MLP.</p></li>
+<li><p><strong>n_users</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Number of users.</p></li>
+<li><p><strong>n_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Number of items.</p></li>
+<li><p><strong>dim_emb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=10</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of feature embeddings.</p></li>
+<li><p><strong>hidden_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=100</em><em> (</em><em>&gt; 0</em><em>)</em>) – Dimension of the hidden layer of MLP.</p></li>
 <li><p><strong>base_model</strong> (<em>PreTrainedModel</em><em>, </em><em>default=None</em>) – Base transformer model. When <cite>None</cite> is given, “distilbert-base-uncased” will be used.</p></li>
 <li><p><strong>tokenizer</strong> (<em>PreTrainedTokenizer</em><em> or </em><em>PreTrainedTokenizerFast</em><em>, </em><em>default=None</em>) – Tokenizer. When <cite>None</cite> is given, “distilbert-base-uncased” will be used.</p></li>
-<li><p><strong>tokenizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em> of </em><em>params</em><em>, </em><em>default=None.</em>) – Dictionary containing args of tokenizer. (e.g., <cite>max_length</cite>)</p></li>
-<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
-<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+<li><p><strong>tokenizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em> of </em><em>params</em><em>, </em><em>default=None.</em>) – Dictionary containing args of tokenizer. (e.g., <cite>max_length</cite>)</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1020,10 +1020,10 @@ document.write(`
 <li><p><strong>item_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – Item id.</p></li>
 <li><p><strong>sentence</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Sentence generated by frozen LLMs.</p></li>
 <li><p><strong>baseline_sentence</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Baseline sentence generated by frozen LLMs (without prompts).</p></li>
-<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=10000</em><em> (</em><em>&gt; 0</em><em>)</em>) – Batch size.</p></li>
-<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return output as a cpu tensor.</p></li>
-<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
-<li><p><strong>is_finetuning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=10000</em><em> (</em><em>&gt; 0</em><em>)</em>) – Batch size.</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
+<li><p><strong>is_finetuning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1047,9 +1047,9 @@ document.write(`
 <li><p><strong>query</strong> (<em>Sentence</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Query (e.g., movie title).</p></li>
 <li><p><strong>frozen_llm</strong> (<a class="reference internal" href="off_prompts.dataset.base.BaseFrozenLLM.html#off_prompts.dataset.base.BaseFrozenLLM" title="off_prompts.dataset.base.BaseFrozenLLM"><em>BaseFrozenLLM</em></a>) – Frozen llm to simulate sentence generation.</p></li>
 <li><p><strong>action_list</strong> (<em>Sentence</em><em>, </em><em>shape</em><em> (</em><em>n_actions</em><em>, </em><em>)</em>) – Mapping from discrete action to embedding.</p></li>
-<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return output as a cpu tensor.</p></li>
-<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
-<li><p><strong>is_finetuning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
+<li><p><strong>is_finetuning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1077,8 +1077,8 @@ document.write(`
 <li><p><strong>user_embeddings</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_users</em><em>, </em><em>dim_context</em><em>)</em>) – Embeddings of users.</p></li>
 <li><p><strong>query_embeddings</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_items</em><em>, </em><em>dim_query</em><em>)</em>) – Embeddings of queries.</p></li>
 <li><p><strong>prompt_embeddings</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_actions</em><em>, </em><em>dim_prompt</em><em>)</em>) – Embeddings of prompts.</p></li>
-<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
-<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1245,7 +1245,7 @@ document.write(`
 <li><p><strong>user_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – User id.</p></li>
 <li><p><strong>item_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – Item id.</p></li>
 <li><p><strong>action</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Action.</p></li>
-<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to return output as a cpu tensor.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1267,9 +1267,9 @@ document.write(`
 <li><p><strong>user_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – User id.</p></li>
 <li><p><strong>item_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – Item id.</p></li>
 <li><p><strong>action_list</strong> (<em>Sentence</em><em>, </em><em>shape</em><em> (</em><em>n_actions</em><em>, </em><em>)</em>) – Mapping from discrete action to embedding.</p></li>
-<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return output as a cpu tensor.</p></li>
-<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
-<li><p><strong>is_finetuning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
+<li><p><strong>is_finetuning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1298,8 +1298,8 @@ document.write(`
 <li><p><strong>user_embeddings</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_users</em><em>, </em><em>dim_context</em><em>)</em>) – Embeddings of users.</p></li>
 <li><p><strong>query_embeddings</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_users</em><em>, </em><em>dim_query</em><em>)</em>) – Embeddings of queries.</p></li>
 <li><p><strong>sentence_encoder</strong> (<a class="reference internal" href="off_prompts.dataset.base.BaseEncoder.html#off_prompts.dataset.base.BaseEncoder" title="off_prompts.dataset.base.BaseEncoder"><em>BaseEncoder</em></a>) – Encoder of sentences.</p></li>
-<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
-<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default=&quot;cuda&quot;</em>) – Device.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1465,7 +1465,7 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>user_id</strong> (<em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_sample</em><em>, </em><em>)</em>) – User id.</p></li>
 <li><p><strong>sentence</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Sentence.</p></li>
-<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=True</em>) – Whether to return output as a cpu tensor.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1489,9 +1489,9 @@ document.write(`
 <li><p><strong>query</strong> (<em>Sentence</em><em> or </em><em>Tokens</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – Query.</p></li>
 <li><p><strong>frozen_llm</strong> (<a class="reference internal" href="off_prompts.dataset.base.BaseFrozenLLM.html#off_prompts.dataset.base.BaseFrozenLLM" title="off_prompts.dataset.base.BaseFrozenLLM"><em>BaseFrozenLLM</em></a>) – Frozen llm to simulate sentence generation.</p></li>
 <li><p><strong>action_list</strong> (<em>Sentence</em>) – Mapping from discrete action to embedding.</p></li>
-<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return output as a cpu tensor.</p></li>
-<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
-<li><p><strong>is_finetuning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
+<li><p><strong>return_cpu_tensor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to return output as a cpu tensor.</p></li>
+<li><p><strong>calc_gradient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to calculate the gradient or not.</p></li>
+<li><p><strong>is_finetuning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False.</em>) – Whether to finetune the base model (or to use the frozen model).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
