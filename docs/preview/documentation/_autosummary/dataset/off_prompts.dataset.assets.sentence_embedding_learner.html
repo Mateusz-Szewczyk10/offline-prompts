@@ -646,8 +646,8 @@ document.write(`
 <li><p><strong>model</strong> (<a class="reference internal" href="off_prompts.dataset.base.BaseEncoder.html#off_prompts.dataset.base.BaseEncoder" title="off_prompts.dataset.base.BaseEncoder"><em>BaseEncoder</em></a><em> or </em><em>nn.Module</em>) – Sentence embedding model to train.</p></li>
 <li><p><strong>env</strong> (<a class="reference internal" href="off_prompts.dataset.benchmark.SemiSyntheticDataset.html#off_prompts.dataset.benchmark.SemiSyntheticDataset" title="off_prompts.dataset.benchmark.SemiSyntheticDataset"><em>SemiSyntheticDataset</em></a>) – Online environment for data generation.</p></li>
 <li><p><strong>optimizer</strong> (<em>torch.optim.Optimizer</em><em>, </em><em>default=Adam</em>) – Class of optimizer (not an instance).</p></li>
-<li><p><strong>optimizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>default=None</em>) – Arguments of optimizer.</p></li>
-<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+<li><p><strong>optimizer_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>, </em><em>default=None</em>) – Arguments of optimizer.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
@@ -714,13 +714,13 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=100</em>) – Number of epochs to train the model.</p></li>
-<li><p><strong>n_steps_per_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=10</em>) – Number of gradient steps within an epoch.</p></li>
-<li><p><strong>return_training_process</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return the training logs.</p></li>
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>default=10.0</em><em> (</em><em>&gt; 0</em><em>)</em>) – Constant multiplier of the sentence distance.</p></li>
-<li><p><strong>make_copy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to create copy of the model before training.</p></li>
+<li><p><strong>n_epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=100</em>) – Number of epochs to train the model.</p></li>
+<li><p><strong>n_steps_per_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=10</em>) – Number of gradient steps within an epoch.</p></li>
+<li><p><strong>return_training_process</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to return the training logs.</p></li>
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>default=10.0</em><em> (</em><em>&gt; 0</em><em>)</em>) – Constant multiplier of the sentence distance.</p></li>
+<li><p><strong>make_copy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to create copy of the model before training.</p></li>
 <li><p><strong>save_path</strong> (<em>Path</em><em>, </em><em>default=None</em>) – Path to save the model.</p></li>
-<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
+<li><p><strong>random_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>default=None</em>) – Random state.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

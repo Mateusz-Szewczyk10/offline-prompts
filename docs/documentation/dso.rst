@@ -257,7 +257,7 @@ If you use the proposed method (DSO) or refer to our findings in your work, plea
             title = {An Off-Policy Learning for Steering Sentence Generation towards Personalization},
             author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
             booktitle = {Proceedings of the 19th ACM Conference on Recommender Systems},
-            pages = {xxx--xxx},
+            pages = {41--50},
             year = {2025},
         }
 

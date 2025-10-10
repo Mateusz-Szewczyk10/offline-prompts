@@ -2,14 +2,14 @@
 
 <div align="center"><img src="https://raw.githubusercontent.com/aiueola/offline-prompts/main/images/logo.png" width="100%"/></div>
 
-[![pypi](https://img.shields.io/pypi/v/scope-rl.svg)](https://pypi.python.org/pypi/offline-prompts)
+[![pypi](https://img.shields.io/pypi/v/offline-prompts.svg)](https://pypi.python.org/pypi/offline-prompts)
 [![Python](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11-blue)](https://www.python.org)
 [![Downloads](https://pepy.tech/badge/offline-prompts)](https://pepy.tech/project/offline-prompts)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/aiueola/offline-prompts)](https://github.com/aiueola/offline-prompts/graphs/contributors)
 [![GitHub last commit](https://img.shields.io/github/last-commit/aiueola/offline-prompts)](https://github.com/aiueola/offline-prompts/graphs/commit-activity)
 [![Documentation Status](https://readthedocs.org/projects/offline-prompts/badge/?version=latest)](https://offline-prompts.readthedocs.io/en/latest/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![arXiv](https://img.shields.io/badge/arXiv-xxxx.xxxxx-b31b1b.svg)](https://arxiv.org/abs/xxxx.xxxxx)
+[![arXiv](https://img.shields.io/badge/arXiv-2504.02646-b31b1b.svg)](https://arxiv.org/abs/2504.02646)
 [![arXiv](https://img.shields.io/badge/arXiv-xxxx.xxxxx-b31b1b.svg)](https://arxiv.org/abs/xxxx.xxxxx)
 
 <details>
@@ -28,13 +28,13 @@
 
 </details>
 
-**Pretrained simulator and datasets are available [here]().**
+**Pretrained simulator and datasets are available [here](https://drive.google.com/drive/folders/1gH9MvoNwOC1GfT1Dxb5v4cFsnw5mt1KT?usp=sharing).**
 
 **Documentation is available [here]() (debugging is in progress).**
 
 **Stable versions are available at [PyPI]().**
 
-**Slides are available [here](https://drive.google.com/drive/folders/1gH9MvoNwOC1GfT1Dxb5v4cFsnw5mt1KT?usp=sharing).**
+**Slides are available [here](https://speakerdeck.com/aiueola/opl-prompt).**
 
 **日本語は[こちら](README_ja.md)。**
 
@@ -144,7 +144,7 @@ Haruka Kiyohara, Daniel Yiming Cao, Yuta Saito, Thorsten Joachims.<br>
   title = {An Off-Policy Learning Approach for Steering Sentence Generation towards Personalization},
   author = {Kiyohara, Haruka and Cao, Daniel Yiming and Saito, Yuta and Joachims, Thorsten},
   booktitle = {Proceedings of the 19th ACM Conference on Recommender Systems},
-  pages = {xxx--xxx},
+  pages = {41--50},
   year = {2025},
 }
 ```
