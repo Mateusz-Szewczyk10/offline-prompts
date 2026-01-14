@@ -1,0 +1,56 @@
+setting:
+  setting: data_size
+  n_samples:
+  - 500
+  - 1000
+  - 2000
+  - 4000
+  - 8000
+  n_actions: 1000
+  beta: 1.0
+  dim_context: 5
+  dim_query: 5
+  dim_action_embedding: 5
+  dim_auxiliary_output: 5
+  action_output_mapping_noise: 1.0
+  mapping_function: trigonometric-linear
+  reward_std: 1.0
+  reward_std_for_regression: 1.0
+  n_epochs: 20000
+  n_steps_per_epoch: 1
+  n_steps_per_epoch_predictor: 1
+  n_epochs_per_log: 200
+  kernel_type: gaussian
+  clustering_type: fixed-action
+  gradient_type: hybrid
+  is_two_stage_policy: false
+  is_pessimistic_regression: false
+  is_two_stage_regression: false
+  is_dso: false
+  is_monte_carlo_estimation: false
+  tau: 1.0
+  output_noise: 1.0
+  n_samples_to_approximate: 100
+  n_clusters: 10
+  device: cpu
+  n_random_state: 20
+  start_random_state: 0
+evaluation:
+  setting: default
+  report_logging_policy: true
+  report_oracle_policy: true
+  report_online_policy: true
+  report_uniform_policy: true
+  report_regression_based_greedy: true
+  single_stage_pg:
+  - regression-based
+  - IS-based
+  - hybrid
+  two_stage_pg:
+  - hybrid
+  dso_pg:
+  - IS-based
+  clustering_type:
+  - fixed-action
+  reward_predictor_type:
+  - naive
