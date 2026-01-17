@@ -112,12 +112,12 @@ hydra:
     hydra:
     - hydra.mode=RUN
     task:
+    - setting=candidate_actions
     - evaluation.setting=default
-    - setting=data_size
   job:
     name: evaluate_policy_performance
     chdir: null
-    override_dirname: evaluation.setting=default,setting=data_size
+    override_dirname: evaluation.setting=default,setting=candidate_actions
     id: ???
     num: ???
     config_name: config
@@ -145,7 +145,7 @@ hydra:
     output_dir: C:\TU\WS2025\ExDEx\ResearchPaper\git_repo\experiments\synthetic
     choices:
       evaluation: default
-      setting: data_size
+      setting: candidate_actions
       hydra/env: default
       hydra/callbacks: null
       hydra/job_logging: default

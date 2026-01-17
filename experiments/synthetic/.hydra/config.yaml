@@ -1,12 +1,12 @@
 setting:
-  setting: data_size
-  n_samples:
+  setting: candidate_actions
+  n_samples: 8000
+  n_actions:
+  - 10
+  - 50
+  - 100
   - 500
   - 1000
-  - 2000
-  - 4000
-  - 8000
-  n_actions: 1000
   beta: 1.0
   dim_context: 5
   dim_query: 5
