@@ -112,12 +112,12 @@ hydra:
     hydra:
     - hydra.mode=RUN
     task:
-    - setting=candidate_actions
+    - setting=reward_noise
     - evaluation.setting=default
   job:
     name: evaluate_policy_performance
     chdir: null
-    override_dirname: evaluation.setting=default,setting=candidate_actions
+    override_dirname: evaluation.setting=default,setting=reward_noise
     id: ???
     num: ???
     config_name: config
@@ -145,7 +145,7 @@ hydra:
     output_dir: C:\TU\WS2025\ExDEx\ResearchPaper\git_repo\experiments\synthetic
     choices:
       evaluation: default
-      setting: candidate_actions
+      setting: reward_noise
       hydra/env: default
       hydra/callbacks: null
       hydra/job_logging: default

@@ -1,2 +1,2 @@
-- setting=candidate_actions
+- setting=reward_noise
 - evaluation.setting=default
